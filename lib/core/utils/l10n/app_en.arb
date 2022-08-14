@@ -1,0 +1,36 @@
+{
+  "@guestLogin": {
+    "description": "A guest login message"
+  },
+  "@language": {
+    "description": "The current Language"
+  },
+  "@helloMsg": {
+    "description": "A hello message to user",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "cancel": "Cancel",
+  "connectivityStatus": "Connectivity Status",
+  "connectivityStatusWait": "Connectivity Status: Plz wait for connection",
+  "dashboardScreen": "Dashboard Screen",
+  "errorMsg": "Error",
+  "guest": "Guest",
+  "guestLogin": "Guest Login",
+  "helloMsg": "Hello {name}",
+  "language": "English",
+  "logout": "Logout",
+  "ok": "OK",
+  "policyAcknowledge": "and acknowledging that you've read our ",
+  "policyAgree": "By Continuing, You are agreeing to our ",
+  "policyTerm": "Terms of Use ",
+  "privacyPolicy": "Privacy Policy",
+  "splashTitleText": "Flutter Boilerplate",
+  "successMsg": "Success",
+  "switchTheme": "Switch Theme",
+  "toastSample": "Sample Toast",
+  "toastShow": "Show Toast"
+}

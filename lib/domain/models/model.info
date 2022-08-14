@@ -1,0 +1,16 @@
+import 'package:freezed_annotation/freezed_annotation.dart';
+
+part '{$TM_FILENAME_BASE}.freezed.dart';
+
+@freezed
+class {$1} with _${$1} implements UIModel<{$1}ApiDto> {
+  factory {$1}({
+    //? add field here
+  }) = _{$1};
+  const {$1}._();
+
+  @override
+  {$1}ApiDto toApiDto() => {$1}ApiDto(
+        //? add field here
+      );
+}

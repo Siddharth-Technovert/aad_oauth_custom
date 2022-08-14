@@ -1,0 +1,22 @@
+{
+  "cancel": "रद्द करना",
+  "connectivityStatus": "कनेक्टिविटी स्थिति",
+  "connectivityStatusWait": "कनेक्टिविटी स्थिति: कृपया कनेक्शन के लिए प्रतीक्षा करें",
+  "dashboardScreen": " डैशबोर्ड स्क्रीन",
+  "errorMsg": "त्रुटि",
+  "guest": "मेहमान",
+  "guestLogin": "मेहमान लॉगइन करें",
+  "helloMsg": "नमस्ते {name}",
+  "language": "हिन्दी",
+  "logout": "लॉग आउट",
+  "ok": "ठीक है",
+  "policyAcknowledge": "और यह स्वीकार करते हुए कि आपने हमारा पढ़ा है ",
+  "policyAgree": "जारी रखते हुए, आप हमारी सहमति से सहमत हैं ",
+  "policyTerm": "उपयोग की शर्तें ",
+  "privacyPolicy": "गोपनीयता नीति ",
+  "splashTitleText": "Flutter बॉयलरप्लेट",
+  "successMsg": "सफलता",
+  "switchTheme": " थीम स्विच करें",
+  "toastSample": "नमूना टोस्ट",
+  "toastShow": " टोस्ट दिखाओ"
+}

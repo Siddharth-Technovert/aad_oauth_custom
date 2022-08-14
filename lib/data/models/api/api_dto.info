@@ -1,0 +1,20 @@
+import 'package:freezed_annotation/freezed_annotation.dart';
+
+part '{$TM_FILENAME_BASE}.freezed.dart';
+part '{$TM_FILENAME_BASE}.g.dart';
+
+@freezed
+class {$1}ApiDto with _${$1}ApiDto implements ApiDto<{$1}> {
+  factory {$1}ApiDto({
+    //? Required fields
+  }) = _{$1}ApiDto;
+  const {$1}ApiDto._();
+
+  factory {$1}ApiDto.fromJson(Map<String, dynamic> json) =>
+      _${$1}ApiDtoFromJson(json);
+
+  @override
+  {$1} toModel() => {$1}(
+        // Required fields
+      );
+}

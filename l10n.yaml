@@ -1,0 +1,10 @@
+arb-dir: lib/core/utils/l10n
+template-arb-file: app_en.arb
+
+# if don't want to use .dart_tools synthetic package
+# output-dir: lib/core/utils
+# synthetic-package: false
+
+output-localization-file: app_localizations.dart
+output-class: AppLocalizations
+# nullable-getter: false
