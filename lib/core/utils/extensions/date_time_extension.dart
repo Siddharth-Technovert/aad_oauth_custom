@@ -1,5 +1,7 @@
 // ignore_for_file: unused_local_variable
 
+import 'package:intl/intl.dart';
+
 extension DateTimeExtension on DateTime {
   String get timeAgo {
     const time = "";
@@ -26,4 +28,14 @@ extension DateTimeExtension on DateTime {
     }
     return suffix;
   }
+
+  String get yMMMMd {
+    return DateFormat.yMMMMd().format(this);
+  }
 }
+
+// extension DateFormatExtension on DateFormat {
+//   DateFormat get ddMMy {
+//     return DateFormat('dd mm y', 'en_US');
+//   }
+// }

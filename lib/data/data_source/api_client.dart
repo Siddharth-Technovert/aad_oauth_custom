@@ -5,7 +5,7 @@ import '../../core/utils/errors/app_exception.dart';
 import '../mappers/api_dto.dart';
 import '../mappers/ui_model.dart';
 import '../models/result/data_state.dart';
-import 'api/api_manager.dart';
+import 'api/api_manager/api_manager.dart';
 
 class ApiClient {
   final ApiManager _apiManager;

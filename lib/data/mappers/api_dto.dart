@@ -1,9 +1,17 @@
-abstract class ApiDto<UIModel> {
+import 'ui_model.dart';
+
+abstract class ToJson {
   Map<String, dynamic> toJson();
-  UIModel toModel();
 }
 
-abstract class ApiCacheDto<CacheDto> {
+abstract class ApiDto<T extends UIModel<ApiDto<T>>> implements ToJson {
+  @override
   Map<String, dynamic> toJson();
-  CacheDto toCacheDto();
+  T toModel();
+}
+
+abstract class ApiCacheDto<T> implements ToJson {
+  @override
+  Map<String, dynamic> toJson();
+  T toCacheDto();
 }

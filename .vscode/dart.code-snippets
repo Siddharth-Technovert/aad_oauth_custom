@@ -3,7 +3,7 @@
         "prefix": "apiDto",
         "body": [
             "import 'package:freezed_annotation/freezed_annotation.dart';",
-            "import '../../mappers/api_dto.dart';",
+            "import '../../../mappers/api_dto.dart';",
             "",
             "part '$TM_FILENAME_BASE.freezed.dart';",
             "part '$TM_FILENAME_BASE.g.dart';",
@@ -11,7 +11,7 @@
             "@freezed",
             "class $1ApiDto with _$$1ApiDto implements ApiDto<$1> {",
             "",
-            "\tfactory $1ApiDto({",
+            "\tconst factory $1ApiDto({",
             "\t\t// Required fields",
             "\t}) = _$1ApiDto;",
             "\tconst $1ApiDto._();",
@@ -19,7 +19,7 @@
             "\tfactory $1ApiDto.fromJson(Map<String, dynamic> json) => _$$1ApiDtoFromJson(json);",
             "",
             "\t@override",
-            "\t$1ApiDto toModel() => $1ApiDto(",
+            "\t$1 toModel() => $1(",
             "\t\t//required field here",
             "\t);",
             "}"
@@ -31,7 +31,7 @@
         "prefix": "apiDtoImplementingCache",
         "body": [
             "import 'package:freezed_annotation/freezed_annotation.dart';",
-            "import '../../mappers/api_dto.dart';",
+            "import '../../../mappers/api_dto.dart';",
             "",
             "part '$TM_FILENAME_BASE.freezed.dart';",
             "part '$TM_FILENAME_BASE.g.dart';",
@@ -39,7 +39,7 @@
             "@freezed",
             "class $1ApiDto with _$$1ApiDto implements ApiCacheDto<$1CacheDto> {",
             "",
-            "\tfactory $1ApiDto({",
+            "\ttconst factory $1ApiDto({",
             "\t\t// Required fields",
             "\t}) = _$1ApiDto;",
             "\tconst $1ApiDto._();",
@@ -59,12 +59,12 @@
         "prefix": "cacheDto",
         "body": [
             "import 'package:hive_flutter/hive_flutter.dart';",
-            "import '../../../../../core/configs/constants/app_constants.dart';",
-            "import '../../mappers/cache_dto.dart';",
+            "import '../../../../../../core/configs/constants/app_constants.dart';",
+            "import '../../../mappers/cache_dto.dart';",
             "",
             "part '$TM_FILENAME_BASE.g.dart';",
             "",
-            "@HiveType(typeId: AppConstants.$1HiveAdapterId)",
+            "@HiveType(typeId: AppConstants.$1AdapterId)",
             "class $1CacheDto with HiveObjectMixin implements CacheDto<$1, $1ApiDto> {",
             "",
             "\tstatic String boxKey = AppConstants.$1BoxKey;",
@@ -73,11 +73,11 @@
             "",
             "\t@override",
             "\t@HiveField()",
-            "\tString? syncTime",
+            "\tString? syncTime;",
             "",
             "\t@override",
             "\t@HiveField()",
-            "\tbool? isSynced",
+            "\tbool? isSynced;",
             "",
             "\t$1CacheDto({",
             "\t//required field here",
@@ -106,14 +106,14 @@
         "prefix": "uiModel",
         "body": [
             "import 'package:freezed_annotation/freezed_annotation.dart';",
-            "import '../../mappers/ui_model.dart';",
+            "import '../../../data/mappers/ui_model.dart';",
             "",
             "part '$TM_FILENAME_BASE.freezed.dart';",
             "",
             "@freezed",
             "class $1 with _$$1 implements UIModel<$1ApiDto> {",
             "",
-            "\tfactory $1({",
+            "\tconst factory $1({",
             "\t\t// Required fields",
             "\t}) = _$1;",
             "\tconst $1._();",
@@ -131,14 +131,14 @@
         "prefix": "uiModelImplementingCache",
         "body": [
             "import 'package:freezed_annotation/freezed_annotation.dart';",
-            "import '../../mappers/ui_model.dart';",
+            "import '../../../data/mappers/ui_model.dart';",
             "",
             "part '$TM_FILENAME_BASE.freezed.dart';",
             "",
             "@freezed",
             "class $1 with _$$1 implements UICacheModel<$1CacheDto> {",
             "",
-            "\tfactory $1({",
+            "\tconst factory $1({",
             "\t\t// Required fields",
             "\t}) = _$1;",
             "\tconst $1._();",
@@ -150,5 +150,34 @@
             "}"
         ],
         "description": "Creates a model class implementing UICacheModel"
+    },
+
+    "Create a Freezed Union State": {
+        "prefix": "freezedUnionState",
+        "body": [
+            "import 'package:freezed_annotation/freezed_annotation.dart';",
+            "",
+            "part '$TM_FILENAME_BASE.freezed.dart';",
+            "",
+            "@freezed",
+            "class $1State with _$$1State {",
+            "\tconst $1State._();",
+            "\tconst factory $1State.loading() = _Loading;",
+            "\t //? Add more unions here",
+            "}"
+        ],
+        "description": "Creates a freezed union state class"
+    },
+
+    "Register a hive adapater and open box": {
+        "prefix": "regHiveAdapaterOpenBox",
+        "body": [
+            " _hive.registerAdapter<$1CacheDto>($1CacheDtoAdapter());",
+            "await _hive.openBox<$1CacheDto>(",
+            "\t$1CacheDto.boxKey,",
+            "\tencryptionCipher: HiveAesCipher(encryptionKey),",
+            ");",
+        ],
+        "description": "Register a hive adapater and open box"
     },
 }

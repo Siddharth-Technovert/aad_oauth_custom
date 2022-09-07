@@ -4,22 +4,24 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../core/router/app_router.gr.dart';
 import '../../../core/utils/styles/colors.dart';
-import '../../../domain/models/user_context/user_context.dart';
+import '../../../domain/models/user/user.dart';
 import '../../../domain/states/core/theme/theme_state.dart';
 import '../../providers/core/router_provider.dart';
-import '../../providers/core/theme_provider.dart';
+import '../../providers/core/theme_state_provider.dart';
 import '../hooks/app_loc_hook.dart';
+import '../hooks/is_dark_mode_hook.dart';
 
 class AppDrawer extends HookConsumerWidget {
   const AppDrawer({
     Key? key,
-    required this.userContext,
+    required this.user,
   }) : super(key: key);
-  final UserContext userContext;
+  final User user;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final appLoc = useAppLoc();
+    final isDarkMode = useIsDarkHook();
     return Drawer(
       child: Builder(
         builder: (BuildContext buildContext) {
@@ -31,7 +33,7 @@ class AppDrawer extends HookConsumerWidget {
                 ),
                 accountName: Text(
                   appLoc.helloMsg(
-                    userContext.displayName ?? appLoc.guest,
+                    user.name,
                   ),
                   style: Theme.of(context).textTheme.headline6!.copyWith(
                         color: Colors.white,
@@ -42,8 +44,7 @@ class AppDrawer extends HookConsumerWidget {
                 accountEmail: const Text(""),
                 currentAccountPicture: Container(
                   padding: EdgeInsets.all(
-                    userContext.profileImage != null &&
-                            userContext.profileImage!.isNotEmpty
+                    user.profileImage != null && user.profileImage!.isNotEmpty
                         ? 2.0
                         : 0.0,
                   ).r,
@@ -52,10 +53,10 @@ class AppDrawer extends HookConsumerWidget {
                     borderRadius: BorderRadius.circular(40.0).r,
                   ),
                   child: ClipOval(
-                    child: userContext.profileImage != null &&
-                            userContext.profileImage!.isNotEmpty
+                    child: user.profileImage != null &&
+                            user.profileImage!.isNotEmpty
                         ? Image.network(
-                            userContext.profileImage!,
+                            user.profileImage!,
                             fit: BoxFit.cover,
                           )
                         : Icon(
@@ -74,9 +75,9 @@ class AppDrawer extends HookConsumerWidget {
                       .bodyText1!
                       .copyWith(fontSize: 18.sp),
                 ),
-                value: ref.watch(themeProvider) == const ThemeState.dark(),
+                value: isDarkMode,
                 onChanged: (val) async => ref
-                    .read(themeProvider.notifier)
+                    .read(themeStateProvider.notifier)
                     .setThemeState(
                       val ? const ThemeState.dark() : const ThemeState.light(),
                     ),

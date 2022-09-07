@@ -19,28 +19,32 @@ mixin _$AppState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
+    required TResult Function() onboarding,
     required TResult Function() unAuthenticated,
-    required TResult Function(UserContext userContext) authenticated,
+    required TResult Function(User user) authenticated,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
+    TResult Function()? onboarding,
     TResult Function()? unAuthenticated,
-    TResult Function(UserContext userContext)? authenticated,
+    TResult Function(User user)? authenticated,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
+    TResult Function()? onboarding,
     TResult Function()? unAuthenticated,
-    TResult Function(UserContext userContext)? authenticated,
+    TResult Function(User user)? authenticated,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
+    required TResult Function(_Onboarding value) onboarding,
     required TResult Function(_UnAuthenticated value) unAuthenticated,
     required TResult Function(_Authenticated value) authenticated,
   }) =>
@@ -48,6 +52,7 @@ mixin _$AppState {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
+    TResult Function(_Onboarding value)? onboarding,
     TResult Function(_UnAuthenticated value)? unAuthenticated,
     TResult Function(_Authenticated value)? authenticated,
   }) =>
@@ -55,6 +60,7 @@ mixin _$AppState {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
+    TResult Function(_Onboarding value)? onboarding,
     TResult Function(_UnAuthenticated value)? unAuthenticated,
     TResult Function(_Authenticated value)? authenticated,
     required TResult orElse(),
@@ -117,8 +123,9 @@ class _$_Initial extends _Initial {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
+    required TResult Function() onboarding,
     required TResult Function() unAuthenticated,
-    required TResult Function(UserContext userContext) authenticated,
+    required TResult Function(User user) authenticated,
   }) {
     return initial();
   }
@@ -127,8 +134,9 @@ class _$_Initial extends _Initial {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
+    TResult Function()? onboarding,
     TResult Function()? unAuthenticated,
-    TResult Function(UserContext userContext)? authenticated,
+    TResult Function(User user)? authenticated,
   }) {
     return initial?.call();
   }
@@ -137,8 +145,9 @@ class _$_Initial extends _Initial {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
+    TResult Function()? onboarding,
     TResult Function()? unAuthenticated,
-    TResult Function(UserContext userContext)? authenticated,
+    TResult Function(User user)? authenticated,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -151,6 +160,7 @@ class _$_Initial extends _Initial {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
+    required TResult Function(_Onboarding value) onboarding,
     required TResult Function(_UnAuthenticated value) unAuthenticated,
     required TResult Function(_Authenticated value) authenticated,
   }) {
@@ -161,6 +171,7 @@ class _$_Initial extends _Initial {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
+    TResult Function(_Onboarding value)? onboarding,
     TResult Function(_UnAuthenticated value)? unAuthenticated,
     TResult Function(_Authenticated value)? authenticated,
   }) {
@@ -171,6 +182,7 @@ class _$_Initial extends _Initial {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
+    TResult Function(_Onboarding value)? onboarding,
     TResult Function(_UnAuthenticated value)? unAuthenticated,
     TResult Function(_Authenticated value)? authenticated,
     required TResult orElse(),
@@ -185,6 +197,123 @@ class _$_Initial extends _Initial {
 abstract class _Initial extends AppState {
   const factory _Initial() = _$_Initial;
   const _Initial._() : super._();
+}
+
+/// @nodoc
+abstract class _$$_OnboardingCopyWith<$Res> {
+  factory _$$_OnboardingCopyWith(
+          _$_Onboarding value, $Res Function(_$_Onboarding) then) =
+      __$$_OnboardingCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$_OnboardingCopyWithImpl<$Res> extends _$AppStateCopyWithImpl<$Res>
+    implements _$$_OnboardingCopyWith<$Res> {
+  __$$_OnboardingCopyWithImpl(
+      _$_Onboarding _value, $Res Function(_$_Onboarding) _then)
+      : super(_value, (v) => _then(v as _$_Onboarding));
+
+  @override
+  _$_Onboarding get _value => super._value as _$_Onboarding;
+}
+
+/// @nodoc
+
+class _$_Onboarding extends _Onboarding {
+  const _$_Onboarding() : super._();
+
+  @override
+  String toString() {
+    return 'AppState.onboarding()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$_Onboarding);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() onboarding,
+    required TResult Function() unAuthenticated,
+    required TResult Function(User user) authenticated,
+  }) {
+    return onboarding();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? onboarding,
+    TResult Function()? unAuthenticated,
+    TResult Function(User user)? authenticated,
+  }) {
+    return onboarding?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? onboarding,
+    TResult Function()? unAuthenticated,
+    TResult Function(User user)? authenticated,
+    required TResult orElse(),
+  }) {
+    if (onboarding != null) {
+      return onboarding();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initial value) initial,
+    required TResult Function(_Onboarding value) onboarding,
+    required TResult Function(_UnAuthenticated value) unAuthenticated,
+    required TResult Function(_Authenticated value) authenticated,
+  }) {
+    return onboarding(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(_Onboarding value)? onboarding,
+    TResult Function(_UnAuthenticated value)? unAuthenticated,
+    TResult Function(_Authenticated value)? authenticated,
+  }) {
+    return onboarding?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(_Onboarding value)? onboarding,
+    TResult Function(_UnAuthenticated value)? unAuthenticated,
+    TResult Function(_Authenticated value)? authenticated,
+    required TResult orElse(),
+  }) {
+    if (onboarding != null) {
+      return onboarding(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _Onboarding extends AppState {
+  const factory _Onboarding() = _$_Onboarding;
+  const _Onboarding._() : super._();
 }
 
 /// @nodoc
@@ -229,8 +358,9 @@ class _$_UnAuthenticated extends _UnAuthenticated {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
+    required TResult Function() onboarding,
     required TResult Function() unAuthenticated,
-    required TResult Function(UserContext userContext) authenticated,
+    required TResult Function(User user) authenticated,
   }) {
     return unAuthenticated();
   }
@@ -239,8 +369,9 @@ class _$_UnAuthenticated extends _UnAuthenticated {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
+    TResult Function()? onboarding,
     TResult Function()? unAuthenticated,
-    TResult Function(UserContext userContext)? authenticated,
+    TResult Function(User user)? authenticated,
   }) {
     return unAuthenticated?.call();
   }
@@ -249,8 +380,9 @@ class _$_UnAuthenticated extends _UnAuthenticated {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
+    TResult Function()? onboarding,
     TResult Function()? unAuthenticated,
-    TResult Function(UserContext userContext)? authenticated,
+    TResult Function(User user)? authenticated,
     required TResult orElse(),
   }) {
     if (unAuthenticated != null) {
@@ -263,6 +395,7 @@ class _$_UnAuthenticated extends _UnAuthenticated {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
+    required TResult Function(_Onboarding value) onboarding,
     required TResult Function(_UnAuthenticated value) unAuthenticated,
     required TResult Function(_Authenticated value) authenticated,
   }) {
@@ -273,6 +406,7 @@ class _$_UnAuthenticated extends _UnAuthenticated {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
+    TResult Function(_Onboarding value)? onboarding,
     TResult Function(_UnAuthenticated value)? unAuthenticated,
     TResult Function(_Authenticated value)? authenticated,
   }) {
@@ -283,6 +417,7 @@ class _$_UnAuthenticated extends _UnAuthenticated {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
+    TResult Function(_Onboarding value)? onboarding,
     TResult Function(_UnAuthenticated value)? unAuthenticated,
     TResult Function(_Authenticated value)? authenticated,
     required TResult orElse(),
@@ -304,9 +439,9 @@ abstract class _$$_AuthenticatedCopyWith<$Res> {
   factory _$$_AuthenticatedCopyWith(
           _$_Authenticated value, $Res Function(_$_Authenticated) then) =
       __$$_AuthenticatedCopyWithImpl<$Res>;
-  $Res call({UserContext userContext});
+  $Res call({User user});
 
-  $UserContextCopyWith<$Res> get userContext;
+  $UserCopyWith<$Res> get user;
 }
 
 /// @nodoc
@@ -321,20 +456,20 @@ class __$$_AuthenticatedCopyWithImpl<$Res> extends _$AppStateCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object? userContext = freezed,
+    Object? user = freezed,
   }) {
     return _then(_$_Authenticated(
-      userContext == freezed
-          ? _value.userContext
-          : userContext // ignore: cast_nullable_to_non_nullable
-              as UserContext,
+      user == freezed
+          ? _value.user
+          : user // ignore: cast_nullable_to_non_nullable
+              as User,
     ));
   }
 
   @override
-  $UserContextCopyWith<$Res> get userContext {
-    return $UserContextCopyWith<$Res>(_value.userContext, (value) {
-      return _then(_value.copyWith(userContext: value));
+  $UserCopyWith<$Res> get user {
+    return $UserCopyWith<$Res>(_value.user, (value) {
+      return _then(_value.copyWith(user: value));
     });
   }
 }
@@ -342,14 +477,14 @@ class __$$_AuthenticatedCopyWithImpl<$Res> extends _$AppStateCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_Authenticated extends _Authenticated {
-  const _$_Authenticated(this.userContext) : super._();
+  const _$_Authenticated(this.user) : super._();
 
   @override
-  final UserContext userContext;
+  final User user;
 
   @override
   String toString() {
-    return 'AppState.authenticated(userContext: $userContext)';
+    return 'AppState.authenticated(user: $user)';
   }
 
   @override
@@ -357,13 +492,12 @@ class _$_Authenticated extends _Authenticated {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_Authenticated &&
-            const DeepCollectionEquality()
-                .equals(other.userContext, userContext));
+            const DeepCollectionEquality().equals(other.user, user));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType, const DeepCollectionEquality().hash(userContext));
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(user));
 
   @JsonKey(ignore: true)
   @override
@@ -374,32 +508,35 @@ class _$_Authenticated extends _Authenticated {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
+    required TResult Function() onboarding,
     required TResult Function() unAuthenticated,
-    required TResult Function(UserContext userContext) authenticated,
+    required TResult Function(User user) authenticated,
   }) {
-    return authenticated(userContext);
+    return authenticated(user);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
+    TResult Function()? onboarding,
     TResult Function()? unAuthenticated,
-    TResult Function(UserContext userContext)? authenticated,
+    TResult Function(User user)? authenticated,
   }) {
-    return authenticated?.call(userContext);
+    return authenticated?.call(user);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
+    TResult Function()? onboarding,
     TResult Function()? unAuthenticated,
-    TResult Function(UserContext userContext)? authenticated,
+    TResult Function(User user)? authenticated,
     required TResult orElse(),
   }) {
     if (authenticated != null) {
-      return authenticated(userContext);
+      return authenticated(user);
     }
     return orElse();
   }
@@ -408,6 +545,7 @@ class _$_Authenticated extends _Authenticated {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
+    required TResult Function(_Onboarding value) onboarding,
     required TResult Function(_UnAuthenticated value) unAuthenticated,
     required TResult Function(_Authenticated value) authenticated,
   }) {
@@ -418,6 +556,7 @@ class _$_Authenticated extends _Authenticated {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
+    TResult Function(_Onboarding value)? onboarding,
     TResult Function(_UnAuthenticated value)? unAuthenticated,
     TResult Function(_Authenticated value)? authenticated,
   }) {
@@ -428,6 +567,7 @@ class _$_Authenticated extends _Authenticated {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
+    TResult Function(_Onboarding value)? onboarding,
     TResult Function(_UnAuthenticated value)? unAuthenticated,
     TResult Function(_Authenticated value)? authenticated,
     required TResult orElse(),
@@ -440,11 +580,10 @@ class _$_Authenticated extends _Authenticated {
 }
 
 abstract class _Authenticated extends AppState {
-  const factory _Authenticated(final UserContext userContext) =
-      _$_Authenticated;
+  const factory _Authenticated(final User user) = _$_Authenticated;
   const _Authenticated._() : super._();
 
-  UserContext get userContext => throw _privateConstructorUsedError;
+  User get user => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   _$$_AuthenticatedCopyWith<_$_Authenticated> get copyWith =>
       throw _privateConstructorUsedError;

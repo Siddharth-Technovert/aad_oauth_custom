@@ -10,7 +10,8 @@ abstract class AppConstants {
   static const String systemDefault = "systemDefault";
 
   ///Secure storage keys
-  static const String userContextKey = "userContext";
+  static const String isOnboardingDoneKey = "isOnboardingDone";
+  static const String userKey = "user";
   static const String themeKey = "theme";
   static const String tokenKey = "token";
 

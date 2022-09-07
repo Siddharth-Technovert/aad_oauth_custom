@@ -13,10 +13,11 @@ class AppStartScreen extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return ref.watch(appStateProvider).when(
           initial: () => const SizedBox.shrink(),
+          onboarding: () => const SizedBox.shrink(),
           unAuthenticated: () => const LoginScreen(),
-          authenticated: (userContext) => HomeScreen(
+          authenticated: (user) => HomeScreen(
             key: AppConstants.homeScreenKey,
-            userContext: userContext,
+            user: user,
           ),
         );
   }

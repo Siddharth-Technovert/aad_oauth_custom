@@ -3,7 +3,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../../core/utils/styles/ui_helper.dart';
 import '../../../../domain/enums/toast_type.dart';
-import '../../../../domain/models/user_context/user_context.dart';
+import '../../../../domain/models/user/user.dart';
 import '../../../providers/core/connectivity_provider.dart';
 import '../../hooks/app_loc_hook.dart';
 import '../../modals/toasts/toast_factory.dart';
@@ -12,9 +12,9 @@ import '../../widgets/app_drawer.dart';
 class HomeScreen extends HookConsumerWidget {
   const HomeScreen({
     Key? key,
-    required this.userContext,
+    required this.user,
   }) : super(key: key);
-  final UserContext userContext;
+  final User user;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -25,7 +25,7 @@ class HomeScreen extends HookConsumerWidget {
           title: Text(appLoc.dashboardScreen),
         ),
         drawer: AppDrawer(
-          userContext: userContext,
+          user: user,
         ),
         body: Center(
           child: SingleChildScrollView(
@@ -34,7 +34,7 @@ class HomeScreen extends HookConsumerWidget {
               children: [
                 Text(
                   appLoc.helloMsg(
-                    userContext.displayName ?? appLoc.guest,
+                    user.name,
                   ),
                   style: Theme.of(context).textTheme.headline6,
                   textAlign: TextAlign.center,

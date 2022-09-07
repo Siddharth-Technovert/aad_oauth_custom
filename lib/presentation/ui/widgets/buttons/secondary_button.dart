@@ -26,7 +26,7 @@ class SecondaryButton extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    final isDark = useIsDarkMode();
+    final isDark = useIsDarkHook();
     return Container(
       width: horizontalPadding == 18.w ? double.infinity : null,
       decoration: BoxDecoration(
@@ -43,9 +43,9 @@ class SecondaryButton extends HookWidget {
             vertical: verticalPadding,
             horizontal: horizontalPadding,
           ),
-          primary: Colors.transparent,
+          backgroundColor: Colors.transparent,
           shadowColor: Colors.transparent,
-          onPrimary:
+          foregroundColor:
               isDark ? UIColors.secondaryColor : UIColors.secondaryColorDark,
           elevation: 3,
           shape: RoundedRectangleBorder(

@@ -6,10 +6,10 @@ import 'package:riverpod_boilerplate/domain/states/core/theme/theme_state.dart';
 import '../../../../mocks/storage/storage_mock.mocks.dart';
 
 void main() {
-  late MockStorageManager mockStorageManager;
+  late MockSecureStorageManager mockSecureStorageManager;
 
   setUp(() {
-    mockStorageManager = MockStorageManager();
+    mockSecureStorageManager = MockSecureStorageManager();
   });
 
   test(
@@ -18,22 +18,22 @@ void main() {
       const themeState = ThemeState.light();
       // arrange
       when(
-        mockStorageManager.readStringAsync(
+        mockSecureStorageManager.getAsync(
           key: AppConstants.themeKey,
         ),
       ).thenAnswer((_) async => themeState.val);
       // act
-      final result = await mockStorageManager.readStringAsync(
+      final result = await mockSecureStorageManager.getAsync(
         key: AppConstants.themeKey,
       );
       // assert
       expect(result, themeState.val);
       verify(
-        mockStorageManager.readStringAsync(
+        mockSecureStorageManager.getAsync(
           key: AppConstants.themeKey,
         ),
       );
-      verifyNoMoreInteractions(mockStorageManager);
+      verifyNoMoreInteractions(mockSecureStorageManager);
     },
   );
 
@@ -42,24 +42,24 @@ void main() {
     () async {
       // arrange
       when(
-        mockStorageManager.readStringAsync(
+        mockSecureStorageManager.getAsync(
           key: AppConstants.themeKey,
         ),
       ).thenAnswer(
         (_) async => null,
       );
       // act
-      final result = await mockStorageManager.readStringAsync(
+      final result = await mockSecureStorageManager.getAsync(
         key: AppConstants.themeKey,
       );
       // assert
       expect(result, null);
       verify(
-        mockStorageManager.readStringAsync(
+        mockSecureStorageManager.getAsync(
           key: AppConstants.themeKey,
         ),
       );
-      verifyNoMoreInteractions(mockStorageManager);
+      verifyNoMoreInteractions(mockSecureStorageManager);
     },
   );
 }

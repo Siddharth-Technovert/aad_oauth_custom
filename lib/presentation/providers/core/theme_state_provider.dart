@@ -6,25 +6,26 @@ import '../../../domain/states/core/theme/theme_state.dart';
 import '../../../domain/usecases/storage/theme/theme_storage_usecases.dart';
 
 final themeModeProvider = StateProvider<ThemeMode>((ref) {
-  return ref.watch(themeProvider).when(
+  return ref.watch(themeStateProvider).when(
         light: () => ThemeMode.light,
         dark: () => ThemeMode.dark,
         system: () => ThemeMode.system,
       );
 });
 
-final themeProvider = StateNotifierProvider<ThemeNotifier, ThemeState>((ref) {
-  return ThemeNotifier(ref.read);
+final themeStateProvider =
+    StateNotifierProvider<ThemeStateNotifier, ThemeState>((ref) {
+  return ThemeStateNotifier(ref.read);
 });
 
-class ThemeNotifier extends StateNotifier<ThemeState> {
+class ThemeStateNotifier extends StateNotifier<ThemeState> {
   ThemeState get currentState => state;
 
   final Reader _read;
   late final ReadTheme _readThemeUseCase = _read(readThemeUseCaseProvider);
   late final WriteTheme _writeThemeUseCase = _read(writeThemeUseCaseProvider);
 
-  ThemeNotifier(this._read) : super(const ThemeState.system()) {
+  ThemeStateNotifier(this._read) : super(const ThemeState.system()) {
     _init();
   }
 

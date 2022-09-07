@@ -1,52 +1,41 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 import 'package:riverpod_boilerplate/domain/enums/account_type.dart';
-import 'package:riverpod_boilerplate/domain/models/user_context/user_context.dart';
+import 'package:riverpod_boilerplate/domain/models/user/user.dart';
 import 'package:riverpod_boilerplate/domain/states/core/app/app_state.dart';
+import 'package:riverpod_boilerplate/domain/states/user/user_state.dart';
 import 'package:riverpod_boilerplate/domain/usecases/auth/auth_usecases.dart';
-import 'package:riverpod_boilerplate/domain/usecases/storage/user_context/user_context_usecases.dart';
+import 'package:riverpod_boilerplate/domain/usecases/user/user_usecases.dart';
 import 'package:riverpod_boilerplate/presentation/providers/core/app_state_provider.dart';
 
 import '../../../mocks/usecases/usecases_mock.mocks.dart';
 
 Future<void> main() async {
-  late MockReadUserContext mockReadUserContext;
-  late MockWriteUserContext mockWriteUserContext;
-  late MockRemoveUserContext mockRemoveUserContext;
+  WidgetsFlutterBinding.ensureInitialized();
+
+  late MockReadUser mockReadUser;
   late MockLogoutUser mockLogoutUser;
 
   setUpAll(() {
-    mockReadUserContext = MockReadUserContext();
-    mockWriteUserContext = MockWriteUserContext();
-    mockRemoveUserContext = MockRemoveUserContext();
+    mockReadUser = MockReadUser();
     mockLogoutUser = MockLogoutUser();
 
-    when(mockReadUserContext()).thenAnswer(
-      (_) async => null,
+    when(mockReadUser()).thenAnswer(
+      (_) async => const UserState.notAvailable(),
     );
   });
 
-  ProviderContainer serProviderContainer(
-    MockReadUserContext mockReadUserContext,
-    MockWriteUserContext mockWriteUserContext,
-    MockRemoveUserContext mockRemoveUserContext,
+  ProviderContainer setProviderContainer(
+    MockReadUser mockReadUser,
     MockLogoutUser mockLogoutUser,
   ) {
     return ProviderContainer(
       overrides: [
-        readUserContextUseCaseProvider.overrideWithValue(mockReadUserContext),
-        writeUserContextUseCaseProvider.overrideWithValue(mockWriteUserContext),
-        removeUserContextUseCaseProvider
-            .overrideWithValue(mockRemoveUserContext),
+        readUserUseCaseProvider.overrideWithValue(mockReadUser),
         logoutUserUseCaseProvider.overrideWithValue(mockLogoutUser),
       ],
-    );
-  }
-
-  void arrangeWriteUserContext(UserContext userContext) {
-    when(mockWriteUserContext(userContext)).thenAnswer(
-      (_) async => Future.value(),
     );
   }
 
@@ -54,10 +43,8 @@ Future<void> main() async {
     test(
       'Starting state is initial',
       () {
-        final container = serProviderContainer(
-          mockReadUserContext,
-          mockWriteUserContext,
-          mockRemoveUserContext,
+        final container = setProviderContainer(
+          mockReadUser,
           mockLogoutUser,
         );
         const appState = AppState.initial();
@@ -65,7 +52,7 @@ Future<void> main() async {
           AppStateNotifier(container.read).currentState,
           appState,
         );
-        container.dispose();
+        // container.dispose();
       },
     );
 
@@ -74,22 +61,20 @@ Future<void> main() async {
         'update app state to authenticate when user get logged in',
         () async {
           //arrange
-          const userContext = UserContext(
+          const user = User(
+            name: "",
             accountType: AccountType.google,
           );
-          arrangeWriteUserContext(userContext);
           //act
-          final container = serProviderContainer(
-            mockReadUserContext,
-            mockWriteUserContext,
-            mockRemoveUserContext,
+          final container = setProviderContainer(
+            mockReadUser,
             mockLogoutUser,
           );
           final appStateNotifier = AppStateNotifier(container.read);
-          await appStateNotifier.authenticateState(userContext);
+          await appStateNotifier.authenticateState(user);
           expect(
             appStateNotifier.currentState,
-            const AppState.authenticated(userContext),
+            const AppState.authenticated(user),
           );
           container.dispose();
         },
@@ -101,22 +86,20 @@ Future<void> main() async {
         'update app state to unAuthenticate when user get logged out',
         () async {
           //arrange
-          const userContext = UserContext(
+          const user = User(
+            name: "",
             accountType: AccountType.google,
           );
-          when(mockLogoutUser(userContext.accountType)).thenAnswer(
+          when(mockLogoutUser(user.accountType)).thenAnswer(
             (_) async => Future.value(),
           );
           //act
-          final container = serProviderContainer(
-            mockReadUserContext,
-            mockWriteUserContext,
-            mockRemoveUserContext,
+          final container = setProviderContainer(
+            mockReadUser,
             mockLogoutUser,
           );
           final appStateNotifier = AppStateNotifier(container.read);
-          appStateNotifier.currentState =
-              const AppState.authenticated(userContext);
+          appStateNotifier.currentState = const AppState.authenticated(user);
           await appStateNotifier.unAuthenticateState();
           //assert
           expect(

@@ -5,10 +5,10 @@ import 'package:riverpod_boilerplate/core/configs/constants/app_constants.dart';
 import '../../../../mocks/storage/storage_mock.mocks.dart';
 
 void main() {
-  late MockStorageManager mockStorageManager;
+  late MockSecureStorageManager mockSecureStorageManager;
 
   setUp(() {
-    mockStorageManager = MockStorageManager();
+    mockSecureStorageManager = MockSecureStorageManager();
   });
 
   test(
@@ -16,24 +16,24 @@ void main() {
     () async {
       // arrange
       when(
-        mockStorageManager.deleteAsync(
-          key: AppConstants.userContextKey,
+        mockSecureStorageManager.deleteAsync(
+          key: AppConstants.userKey,
         ),
       ).thenAnswer(
         (_) async => Future.value(),
       );
       // act
-      await mockStorageManager.deleteAsync(
-        key: AppConstants.userContextKey,
+      await mockSecureStorageManager.deleteAsync(
+        key: AppConstants.userKey,
       );
       // assert
       // expect(result, themeContext);
       verify(
-        mockStorageManager.deleteAsync(
-          key: AppConstants.userContextKey,
+        mockSecureStorageManager.deleteAsync(
+          key: AppConstants.userKey,
         ),
       );
-      verifyNoMoreInteractions(mockStorageManager);
+      verifyNoMoreInteractions(mockSecureStorageManager);
     },
   );
 }

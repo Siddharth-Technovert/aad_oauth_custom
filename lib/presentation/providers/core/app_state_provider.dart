@@ -1,10 +1,13 @@
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../../domain/models/user_context/user_context.dart';
+import '../../../core/device/background_service.dart';
+import '../../../domain/models/user/user.dart';
+import '../../../domain/service_providers.dart';
 import '../../../domain/states/core/app/app_state.dart';
-import '../../../domain/usecases/auth/auth_usecases.dart';
-import '../../../domain/usecases/storage/user_context/user_context_usecases.dart';
+// import '../../../domain/usecases/storage/jwt/jwt_usecases.dart';
+import '../../../domain/usecases/storage/onboarding/onboarding_usecases.dart';
+import '../../../domain/usecases/user/user_usecases.dart';
 
 final appStateProvider =
     StateNotifierProvider<AppStateNotifier, AppState>((ref) {
@@ -19,43 +22,63 @@ class AppStateNotifier extends StateNotifier<AppState> {
 
   final Reader _read;
 
-  late final ReadUserContext _readUserContextUseCase =
-      _read(readUserContextUseCaseProvider);
-  late final WriteUserContext _writeUserContextUseCase =
-      _read(writeUserContextUseCaseProvider);
-  late final RemoveUserContext _removeUserContextUseCase =
-      _read(removeUserContextUseCaseProvider);
+  late final ReadUser _readUserUseCase = _read(readUserUseCaseProvider);
+  // late final ReadJwt _readJwtUseCase = _read(readJwtTokenUseCaseProvider);
 
-  late final LogoutUser _logoutUserUseCase = _read(logoutUserUseCaseProvider);
+  late final ReadOnboarding _readOnboardingUseCase =
+      _read(readOnboardingUseCaseProvider);
+  late final WriteOnboarding _writeOnboardingUseCase =
+      _read(writeOnboardingUseCaseProvider);
 
   AppStateNotifier(this._read) : super(const AppState.initial()) {
     _init();
   }
 
   Future<void> _init() async {
-    final userContext = await _readUserContextUseCase();
-    Future.delayed(const Duration(milliseconds: 500), () {
-      if (userContext == null) {
-        state = const AppState.unAuthenticated();
-      } else {
-        state = AppState.authenticated(userContext);
-      }
-    });
+    final isOnboardingDone = await _readOnboardingUseCase();
+
+    if (isOnboardingDone) {
+      // final jwt = await _readJwtUseCase();
+      // if (jwt != null) {
+      final userState = await _readUserUseCase();
+      userState.when(
+        available: (user) {
+          //? is state authenticated and want to do some background task
+          // await _read(backgroundServiceProvider).registerPeriodicTask(
+          //   "periodicTask",
+          //   BackgroundService.periodicTask,
+          // );
+          state = AppState.authenticated(user);
+        },
+        notAvailable: () {
+          state = const AppState.unAuthenticated();
+        },
+      );
+    } else {
+      state = const AppState.unAuthenticated();
+    }
+    // } else {
+    //   state = const AppState.onboarding();
+    // }
+    //? For now temporary solution
+    await _read(backgroundServiceProvider).registerPeriodicTask(
+      "periodicTask",
+      BackgroundService.periodicTask,
+    );
+
     FlutterNativeSplash.remove();
   }
 
-  Future<void> authenticateState(UserContext userContext) async {
-    await _writeUserContextUseCase(userContext);
-    state = AppState.authenticated(userContext);
+  Future<void> completeOnboarding() async {
+    await _writeOnboardingUseCase(true);
+    state = const AppState.unAuthenticated();
+  }
+
+  Future<void> authenticateState(User user) async {
+    state = AppState.authenticated(user);
   }
 
   Future<void> unAuthenticateState() async {
-    state.maybeWhen(
-      authenticated: (userContext) =>
-          _logoutUserUseCase(userContext.accountType!),
-      orElse: () {},
-    );
-    await _removeUserContextUseCase();
     state = const AppState.unAuthenticated();
   }
 }

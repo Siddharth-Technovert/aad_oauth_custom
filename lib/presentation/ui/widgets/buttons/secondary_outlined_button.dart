@@ -36,7 +36,7 @@ class SecondaryOutlinedButton extends StatelessWidget {
             shape: RoundedRectangleBorder(
               borderRadius: const BorderRadius.all(Radius.circular(999)).r,
             ),
-            primary: Theme.of(context).colorScheme.secondary,
+            foregroundColor: Theme.of(context).colorScheme.secondary,
           ),
           onPressed: onPressed,
           child: Row(

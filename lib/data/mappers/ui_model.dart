@@ -1,7 +1,9 @@
-abstract class UIModel<ApiDto> {
-  ApiDto toApiDto();
+import 'api_dto.dart';
+
+abstract class UIModel<T extends ApiDto<UIModel<T>>> {
+  T toApiDto();
 }
 
-abstract class UICacheModel<CacheDto> {
-  CacheDto toCacheDto();
+abstract class UICacheModel<T> {
+  T toCacheDto();
 }

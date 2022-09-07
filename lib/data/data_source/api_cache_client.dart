@@ -9,8 +9,8 @@ import '../mappers/api_dto.dart';
 import '../mappers/cache_dto.dart';
 import '../mappers/ui_model.dart';
 import '../models/result/data_state.dart';
-import 'api/api_manager.dart';
-import 'local/cache_manager.dart';
+import 'api/api_manager/api_manager.dart';
+import 'local/cache/cache_manager.dart';
 
 //TODO: Add Support for editing of data in offline mode use SyncModel concept
 class ApiCacheClient {
@@ -46,7 +46,7 @@ class ApiCacheClient {
       return apiResponse.when(
         success: (data) async {
           final hiveDataDto = data.toCacheDto();
-          final isAdded = await _cachingManager.insertData<Model, HiveDto, Dto>(
+          final isAdded = await _cachingManager.insertData<HiveDto>(
             boxKey,
             hiveDataDto,
           );
@@ -65,7 +65,7 @@ class ApiCacheClient {
     } else {
       log("Cache hit");
 
-      final cachedData = await _cachingManager.getData<Model, HiveDto, Dto>(
+      final cachedData = await _cachingManager.getData<HiveDto>(
         boxKey,
         id,
       );
@@ -109,8 +109,7 @@ class ApiCacheClient {
         success: (dataList) async {
           final hiveDtoModeList =
               dataList.map((data) => data.toCacheDto()).toList();
-          final isAdded =
-              await _cachingManager.insertDataList<Model, HiveDto, Dto>(
+          final isAdded = await _cachingManager.insertDataList<HiveDto>(
             boxKey,
             hiveDtoModeList,
           );
@@ -131,10 +130,8 @@ class ApiCacheClient {
     } else {
       log("Cache hit");
 
-      final hasCachedData =
-          await _cachingManager.hasData<Model, HiveDto, Dto>(boxKey);
-      final cachedDataList =
-          await _cachingManager.getAll<Model, HiveDto, Dto>(boxKey);
+      final hasCachedData = await _cachingManager.hasData<HiveDto>(boxKey);
+      final cachedDataList = await _cachingManager.getAll<HiveDto>(boxKey);
 
       if (hasCachedData && cachedDataList != null) {
         return DataState.success(
@@ -168,7 +165,7 @@ class ApiCacheClient {
       );
       return apiResponse.when(
         success: (data) async {
-          final isAdded = await _cachingManager.insertData<Model, HiveDto, Dto>(
+          final isAdded = await _cachingManager.insertData<HiveDto>(
             boxKey,
             cachedData,
           );
@@ -212,8 +209,7 @@ class ApiCacheClient {
       );
       return apiResponse.when(
         success: (data) async {
-          final isAdded =
-              await _cachingManager.insertDataList<Model, HiveDto, Dto>(
+          final isAdded = await _cachingManager.insertDataList<HiveDto>(
             boxKey,
             cachedDataList,
           );
@@ -260,8 +256,7 @@ class ApiCacheClient {
         success: (data) async {
           final cachedData = data.toCacheDto();
 
-          final isUpdated =
-              await _cachingManager.updateData<Model, HiveDto, Dto>(
+          final isUpdated = await _cachingManager.updateData<HiveDto>(
             boxKey,
             cachedData,
           );
@@ -302,8 +297,7 @@ class ApiCacheClient {
       );
       return apiResponse.when(
         success: (data) async {
-          final isDeleted =
-              await _cachingManager.deleteSingle<Model, HiveDto, Dto>(
+          final isDeleted = await _cachingManager.deleteSingle<HiveDto>(
             boxKey,
             id,
           );

@@ -26,7 +26,7 @@ class PrimaryButton extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    final isDark = useIsDarkMode();
+    final isDark = useIsDarkHook();
     return Container(
       height: 56.h,
       width: horizontalPadding == 18.w ? double.infinity : null,
@@ -44,7 +44,7 @@ class PrimaryButton extends HookWidget {
             vertical: verticalPadding,
             horizontal: horizontalPadding,
           ),
-          primary: Colors.transparent,
+          backgroundColor: Colors.transparent,
           shadowColor: Colors.transparent,
           elevation: 3,
           shape: RoundedRectangleBorder(

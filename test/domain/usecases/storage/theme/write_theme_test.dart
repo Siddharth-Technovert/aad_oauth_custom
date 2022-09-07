@@ -6,10 +6,10 @@ import 'package:riverpod_boilerplate/domain/states/core/theme/theme_state.dart';
 import '../../../../mocks/storage/storage_mock.mocks.dart';
 
 void main() {
-  late MockStorageManager mockStorageManager;
+  late MockSecureStorageManager mockSecureStorageManager;
 
   setUp(() {
-    mockStorageManager = MockStorageManager();
+    mockSecureStorageManager = MockSecureStorageManager();
   });
 
   test(
@@ -18,27 +18,27 @@ void main() {
       const themeContext = ThemeState.light();
       // arrange
       when(
-        mockStorageManager.writeStringAsync(
+        mockSecureStorageManager.putAsync(
           key: AppConstants.themeKey,
           value: themeContext.val,
         ),
       ).thenAnswer(
-        (_) async => Future.value(),
+        (_) async => Future.value(true),
       );
       // act
-      await mockStorageManager.writeStringAsync(
+      await mockSecureStorageManager.putAsync(
         key: AppConstants.themeKey,
         value: themeContext.val,
       );
       // assert
       // expect(result, themeContext);
       verify(
-        mockStorageManager.writeStringAsync(
+        mockSecureStorageManager.putAsync(
           key: AppConstants.themeKey,
           value: themeContext.val,
         ),
       );
-      verifyNoMoreInteractions(mockStorageManager);
+      verifyNoMoreInteractions(mockSecureStorageManager);
     },
   );
 }

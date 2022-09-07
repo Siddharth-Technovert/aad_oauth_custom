@@ -1,55 +1,65 @@
-// ignore_for_file: avoid_dynamic_calls
-
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
-import '../../core/configs/app_configuration.dart';
-import '../../core/configs/constants/app_constants.dart';
 import '../../core/utils/errors/app_exception.dart';
 import '../../domain/enums/account_type.dart';
-import '../../domain/models/user_context/user_context.dart';
 import '../../domain/repositories/auth_repository.dart';
+import '../../domain/repositories/user_repository.dart';
 import '../../domain/states/login/login_state.dart';
-import '../data_source/local/storage_manager.dart';
-import '../models/result/data_state.dart';
+import '../data_source/api/response/api_response.dart';
 
 class AuthRepositoryImpl implements AuthRepository {
-  final StorageManager _storageManager;
-  AuthRepositoryImpl(this._storageManager);
+  final UserRepository _userRepository;
+  AuthRepositoryImpl(this._userRepository);
+
+  //TODO google client id "<ADD YOUR CLIENT ID>"
+  final GoogleSignIn googleSignIn = GoogleSignIn(
+    scopes: ['email'],
+  );
+
+  //TODO IMPLEMENT CONFIGURATIONS ON FACEBOOK DEVELOPER WEBSITE
+  final FacebookAuth facebookLogin = FacebookAuth.instance;
 
   @override
   Future<LoginState> login(AccountType accountType) async {
-    DataState<UserContext> dataState;
+    ApiResponse<String>? accessTokenState;
+
     switch (accountType) {
       case AccountType.facebook:
-        dataState = await _signInWithFacebook();
+        accessTokenState = await _signInWithFacebook();
         break;
       case AccountType.google:
-        dataState = await _signInWithGoogle();
+        accessTokenState = await _signInWithGoogle();
         break;
       case AccountType.guest:
+        return guestLogin("Guest User");
       default:
-        dataState = await _signInAsGuest();
         break;
     }
-    return dataState.when(
-      success: (data) => LoginState.success(data),
-      error: (ex) => LoginState.error(ex.msg),
-    );
+    return accessTokenState == null
+        ? const LoginState.error("Some error")
+        : accessTokenState.when(
+            success: (token) async {
+              final userState =
+                  await _userRepository.createUser(token, accountType);
+              return userState.when(
+                available: (data) => LoginState.success(data),
+                notAvailable: () =>
+                    const LoginState.error("Unable to create user"),
+              );
+            },
+            error: (ex) => LoginState.error(ex.msg),
+          );
   }
 
   @override
   Future<LoginState> guestLogin(String name) async {
     try {
-      final user = UserContext(
-        id: 'guest',
-        displayName: name,
-        accountType: AccountType.guest,
+      final userState = await _userRepository.createGuestUser(name);
+      return userState.when(
+        available: (data) => LoginState.success(data),
+        notAvailable: () => const LoginState.error("Unable to create user"),
       );
-      await _storageManager.writeStringAsync(
-        key: AppConstants.tokenKey,
-        value: "guest-token",
-      );
-      return LoginState.success(user);
     } catch (ex) {
       return LoginState.error(AppException.unknownError(ex.toString()).msg);
     }
@@ -57,66 +67,34 @@ class AuthRepositoryImpl implements AuthRepository {
 
   @override
   Future<void> logout(AccountType accountType) async {
+    await _userRepository.removeUser();
     switch (accountType) {
       case AccountType.google:
-        await AppConfiguration.googleSignIn
+        await googleSignIn
             .signOut(); // disconnects the user from app and revokes all permissions, signOut just marks the user as being in signed out stage.
         break;
       case AccountType.facebook:
-        await AppConfiguration.facebookLogin.logOut();
+        await facebookLogin.logOut();
         break;
       case AccountType.guest:
         break;
-      default:
-        break;
     }
   }
 
-  Future<DataState<UserContext>> _signInAsGuest() async {
+  Future<ApiResponse<String>> _signInWithFacebook() async {
     try {
-      const user = UserContext(
-        accountType: AccountType.guest,
-      );
-      await _storageManager.writeStringAsync(
-        key: AppConstants.tokenKey,
-        value: "guest-token",
-      );
-      return const DataState.success(user);
-    } catch (ex) {
-      return DataState.error(AppException.unknownError(ex.toString()));
-    }
-  }
-
-  Future<DataState<UserContext>> _signInWithFacebook() async {
-    try {
-      final result = await AppConfiguration.facebookLogin.login(
+      final result = await facebookLogin.login(
         loginBehavior: LoginBehavior
             .webOnly, //TODO Update this to use any login behavior (its temporary for now)
       );
       if (result.status == LoginStatus.success) {
-        final profile = await AppConfiguration.facebookLogin.getUserData();
-
-        //TODO Call server to save the credential and create session
-
-        final UserContext user = UserContext(
-          displayName: profile['name'].toString(),
-          id: profile["email"].toString(),
-          profileImage: profile['picture']['data']['url'].toString(),
-          accountType: AccountType.facebook,
-        );
-
-        await _storageManager.writeStringAsync(
-          key: AppConstants.tokenKey,
-          value: result.accessToken!.token,
-        );
-
-        return DataState.success(user);
+        return ApiResponse.success(result.accessToken!.token);
       } else if (result.status == LoginStatus.cancelled) {
-        return const DataState.error(
+        return const ApiResponse.error(
           AppException.unknownError('Login cancelled by the user.'),
         );
       } else {
-        return DataState.error(
+        return ApiResponse.error(
           AppException.unknownError(
             'Something went wrong with the login process.\n'
             "Here's the error Facebook gave us: ${result.message}",
@@ -124,45 +102,23 @@ class AuthRepositoryImpl implements AuthRepository {
         );
       }
     } catch (ex) {
-      return DataState.error(AppException.unknownError(ex.toString()));
+      return ApiResponse.error(AppException.unknownError(ex.toString()));
     }
   }
 
-  Future<DataState<UserContext>> _signInWithGoogle() async {
+  Future<ApiResponse<String>> _signInWithGoogle() async {
     try {
-      final result = await AppConfiguration.googleSignIn.signIn();
+      final result = await googleSignIn.signIn();
       if (result != null) {
         final googleKey = await result.authentication;
-        if (AppConfiguration.googleSignIn.currentUser != null) {
-          final currentUser = AppConfiguration.googleSignIn.currentUser;
-
-          //TODO Call server to save the credential and create session
-
-          final UserContext user = UserContext(
-            displayName: currentUser!.displayName,
-            id: currentUser.email,
-            profileImage: currentUser.photoUrl,
-            accountType: AccountType.google,
-          );
-
-          await _storageManager.writeStringAsync(
-            key: AppConstants.tokenKey,
-            value: googleKey.accessToken!,
-          );
-
-          return DataState.success(user);
-        } else {
-          return const DataState.error(
-            AppException.unknownError('Google sign in failed'),
-          );
-        }
+        return ApiResponse.success(googleKey.accessToken!);
       } else {
-        return const DataState.error(
+        return const ApiResponse.error(
           AppException.unknownError('Login cancelled by the user.'),
         );
       }
     } catch (ex) {
-      return DataState.error(AppException.unknownError(ex.toString()));
+      return ApiResponse.error(AppException.unknownError(ex.toString()));
     }
   }
 }

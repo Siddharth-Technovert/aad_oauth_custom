@@ -5,7 +5,7 @@
 import 'dart:async' as _i3;
 
 import 'package:mockito/mockito.dart' as _i1;
-import 'package:riverpod_boilerplate/data/data_source/local/storage_manager.dart'
+import 'package:riverpod_boilerplate/data/data_source/local/secure_storage/secure_storage_manager.dart'
     as _i2;
 
 // ignore_for_file: type=lint
@@ -18,42 +18,31 @@ import 'package:riverpod_boilerplate/data/data_source/local/storage_manager.dart
 // ignore_for_file: unnecessary_parenthesis
 // ignore_for_file: camel_case_types
 
-/// A class which mocks [StorageManager].
+/// A class which mocks [SecureStorageManager].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockStorageManager extends _i1.Mock implements _i2.StorageManager {
-  MockStorageManager() {
+class MockSecureStorageManager extends _i1.Mock
+    implements _i2.SecureStorageManager {
+  MockSecureStorageManager() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i3.Future<void> deleteAllAsync() =>
-      (super.noSuchMethod(Invocation.method(#deleteAllAsync, []),
-          returnValue: Future<void>.value(),
-          returnValueForMissingStub: Future<void>.value()) as _i3.Future<void>);
+  _i3.Future<String?> getAsync({String? key}) =>
+      (super.noSuchMethod(Invocation.method(#getAsync, [], {#key: key}),
+          returnValue: Future<String?>.value()) as _i3.Future<String?>);
+  @override
+  _i3.Future<bool> putAsync({String? key, String? value}) =>
+      (super.noSuchMethod(
+          Invocation.method(#putAsync, [], {#key: key, #value: value}),
+          returnValue: Future<bool>.value(false)) as _i3.Future<bool>);
   @override
   _i3.Future<void> deleteAsync({String? key}) =>
       (super.noSuchMethod(Invocation.method(#deleteAsync, [], {#key: key}),
           returnValue: Future<void>.value(),
           returnValueForMissingStub: Future<void>.value()) as _i3.Future<void>);
   @override
-  _i3.Future<String?> readStringAsync({String? key}) =>
-      (super.noSuchMethod(Invocation.method(#readStringAsync, [], {#key: key}),
-          returnValue: Future<String?>.value()) as _i3.Future<String?>);
-  @override
-  _i3.Future<T?> readAsync<T>({String? key}) =>
-      (super.noSuchMethod(Invocation.method(#readAsync, [], {#key: key}),
-          returnValue: Future<T?>.value()) as _i3.Future<T?>);
-  @override
-  _i3.Future<void> writeAsync({String? key, dynamic value}) =>
-      (super.noSuchMethod(
-          Invocation.method(#writeAsync, [], {#key: key, #value: value}),
-          returnValue: Future<void>.value(),
-          returnValueForMissingStub: Future<void>.value()) as _i3.Future<void>);
-  @override
-  _i3.Future<void> writeStringAsync({String? key, String? value}) =>
-      (super.noSuchMethod(
-          Invocation.method(#writeStringAsync, [], {#key: key, #value: value}),
-          returnValue: Future<void>.value(),
-          returnValueForMissingStub: Future<void>.value()) as _i3.Future<void>);
+  _i3.Future<void> clear() => (super.noSuchMethod(Invocation.method(#clear, []),
+      returnValue: Future<void>.value(),
+      returnValueForMissingStub: Future<void>.value()) as _i3.Future<void>);
 }

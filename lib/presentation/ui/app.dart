@@ -6,7 +6,7 @@ import '../../core/configs/router_log.dart';
 import '../../core/utils/l10n/app_loc.dart';
 import '../../domain/service_providers.dart';
 import '../providers/core/router_provider.dart';
-import '../providers/core/theme_provider.dart';
+import '../providers/core/theme_state_provider.dart';
 
 class App extends ConsumerWidget {
   const App({Key? key}) : super(key: key);
@@ -34,8 +34,8 @@ class App extends ConsumerWidget {
           title: "Flutter Boilerplate",
           debugShowCheckedModeBanner: false,
           themeMode: ref.watch(themeModeProvider),
-          theme: ref.watch(themeProvider.notifier).lightThemeData,
-          darkTheme: ref.watch(themeProvider.notifier).darkThemeData,
+          theme: ref.watch(themeStateProvider.notifier).lightThemeData,
+          darkTheme: ref.watch(themeStateProvider.notifier).darkThemeData,
         );
       },
     );

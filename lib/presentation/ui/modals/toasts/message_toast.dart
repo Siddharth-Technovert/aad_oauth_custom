@@ -25,7 +25,7 @@ class MessageToast extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    final bool isDark = useIsDarkMode();
+    final bool isDark = useIsDarkHook();
     return Dismissible(
       key: Key(message),
       onDismissed: (direction) {

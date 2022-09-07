@@ -19,7 +19,7 @@ class CloseButtonBottomSheet extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final bool isDarkMode = useIsDarkMode();
+    final bool isDarkMode = useIsDarkHook();
 
     return Column(
       mainAxisSize: MainAxisSize.min,

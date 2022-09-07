@@ -1,5 +1,8 @@
+import 'dart:io';
+
 import 'package:flutter/foundation.dart';
 import 'package:hive/hive.dart';
+import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
 
 //TODO: Add adapters for other types in configure function
@@ -8,7 +11,13 @@ class HiveDb {
   static Future<void> initialize() async {
     try {
       final dir = await getApplicationDocumentsDirectory();
-      Hive.init(dir.path);
+      final String path = join(dir.path, 'hive_local_storage');
+      if (!(await Directory(path).exists())) {
+        // await Directory(path).delete(recursive: true);
+        await Directory(path).create();
+      }
+      Hive.init(path);
+
       //TODO: register adapter and open box here
       // Hive.registerAdapter(UserAdapter());
     } catch (exception) {

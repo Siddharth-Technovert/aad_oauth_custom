@@ -10,16 +10,20 @@ import '../core/device/local_auth/support_state_service.dart';
 import '../core/device/local_notification_service.dart';
 import '../core/device/logger_service.dart';
 import '../core/device/permission_service.dart';
-import '../data/data_source/api/api_manager.dart';
-import '../data/data_source/api/api_manager_impl.dart';
+import '../data/data_source/api/api_manager/api_manager.dart';
+import '../data/data_source/api/api_manager/api_manager_impl.dart';
 import '../data/data_source/api_cache_client.dart';
 import '../data/data_source/api_client.dart';
-import '../data/data_source/local/cache_manager.dart';
+import '../data/data_source/local/cache/cache_manager.dart';
+import '../data/data_source/local/cache/cache_manager_impl.dart';
 import '../data/data_source/local/db/hive_db.dart';
 import '../data/data_source/local/db/sqlite_db.dart';
-import '../data/data_source/local/storage_manager.dart';
+import '../data/data_source/local/secure_storage/secure_storage_manager.dart';
+import '../data/data_source/local/secure_storage/secure_storage_manager_impl.dart';
 import '../data/repositories_impl/auth_repository_impl.dart';
+import '../data/repositories_impl/user_repository_impl.dart';
 import 'repositories/auth_repository.dart';
+import 'repositories/user_repository.dart';
 
 ///device services provider
 final backgroundServiceProvider = Provider((_) => BackgroundService());
@@ -37,17 +41,22 @@ final filePickerServiceProvider = Provider(
 );
 
 ///storage providers
-final storageManagerProvider = Provider((_) => StorageManager());
+
 final hiveDbProvider = Provider((_) => HiveDb());
 final sqlDbProvider = Provider((_) => SQLiteDb());
 
 ///data source providers
-final cachingManagerProvider = Provider((_) => CacheManager());
+final secureStorageManagerProvider = Provider<SecureStorageManager>(
+  (_) => SecureStorageManagerImpl(),
+);
+final cacheManagerProvider = Provider<CacheManager>(
+  (_) => CacheManagerImpl(),
+);
 final apiManagerProvider = Provider<ApiManager>((ref) {
   return ApiManagerImpl(
     AppConfiguration.baseUrl,
     ref.read(loggerServiceProvider),
-    ref.read(storageManagerProvider),
+    ref.read(secureStorageManagerProvider),
   );
 });
 final apiClientProvider = Provider((ref) {
@@ -58,11 +67,18 @@ final apiClientProvider = Provider((ref) {
 final apiCacheClientProvider = Provider((ref) {
   return ApiCacheClient(
     ref.read(apiManagerProvider),
-    ref.read(cachingManagerProvider),
+    ref.read(cacheManagerProvider),
   );
 });
 
 ///http repository providers
+final userRepositoryProvider = Provider<UserRepository>((ref) {
+  return UserRepositoryImpl(
+    ref.read(apiManagerProvider),
+    ref.read(secureStorageManagerProvider),
+    ref.read(cacheManagerProvider),
+  );
+});
 final authRepositoryProvider = Provider<AuthRepository>((ref) {
-  return AuthRepositoryImpl(ref.read(storageManagerProvider));
+  return AuthRepositoryImpl(ref.read(userRepositoryProvider));
 });

@@ -1,7 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 import 'package:riverpod_boilerplate/domain/enums/account_type.dart';
-import 'package:riverpod_boilerplate/domain/models/user_context/user_context.dart';
+import 'package:riverpod_boilerplate/domain/models/user/user.dart';
 import 'package:riverpod_boilerplate/domain/states/login/login_state.dart';
 
 import '../../../mocks/repositories/repositories_mock.mocks.dart';
@@ -18,7 +18,8 @@ void main() {
     () async {
       const accountType = AccountType.google; //can be any account type
       const loginState = LoginState.success(
-        UserContext(
+        User(
+          name: "any_name",
           accountType: accountType,
         ),
       );

@@ -19,24 +19,24 @@ mixin _$LoginState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function() loading,
-    required TResult Function(UserContext userContext) success,
+    required TResult Function(AccountType accountType) loading,
+    required TResult Function(User user) success,
     required TResult Function(String message) error,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function()? loading,
-    TResult Function(UserContext userContext)? success,
+    TResult Function(AccountType accountType)? loading,
+    TResult Function(User user)? success,
     TResult Function(String message)? error,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function()? loading,
-    TResult Function(UserContext userContext)? success,
+    TResult Function(AccountType accountType)? loading,
+    TResult Function(User user)? success,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) =>
@@ -124,8 +124,8 @@ class _$_Initial extends _Initial {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function() loading,
-    required TResult Function(UserContext userContext) success,
+    required TResult Function(AccountType accountType) loading,
+    required TResult Function(User user) success,
     required TResult Function(String message) error,
   }) {
     return initial();
@@ -135,8 +135,8 @@ class _$_Initial extends _Initial {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function()? loading,
-    TResult Function(UserContext userContext)? success,
+    TResult Function(AccountType accountType)? loading,
+    TResult Function(User user)? success,
     TResult Function(String message)? error,
   }) {
     return initial?.call();
@@ -146,8 +146,8 @@ class _$_Initial extends _Initial {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function()? loading,
-    TResult Function(UserContext userContext)? success,
+    TResult Function(AccountType accountType)? loading,
+    TResult Function(User user)? success,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) {
@@ -205,6 +205,7 @@ abstract class _$$_LoadingCopyWith<$Res> {
   factory _$$_LoadingCopyWith(
           _$_Loading value, $Res Function(_$_Loading) then) =
       __$$_LoadingCopyWithImpl<$Res>;
+  $Res call({AccountType accountType});
 }
 
 /// @nodoc
@@ -215,60 +216,84 @@ class __$$_LoadingCopyWithImpl<$Res> extends _$LoginStateCopyWithImpl<$Res>
 
   @override
   _$_Loading get _value => super._value as _$_Loading;
+
+  @override
+  $Res call({
+    Object? accountType = freezed,
+  }) {
+    return _then(_$_Loading(
+      accountType == freezed
+          ? _value.accountType
+          : accountType // ignore: cast_nullable_to_non_nullable
+              as AccountType,
+    ));
+  }
 }
 
 /// @nodoc
 
 class _$_Loading extends _Loading {
-  const _$_Loading() : super._();
+  const _$_Loading(this.accountType) : super._();
+
+  @override
+  final AccountType accountType;
 
   @override
   String toString() {
-    return 'LoginState.loading()';
+    return 'LoginState.loading(accountType: $accountType)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_Loading);
+        (other.runtimeType == runtimeType &&
+            other is _$_Loading &&
+            const DeepCollectionEquality()
+                .equals(other.accountType, accountType));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode => Object.hash(
+      runtimeType, const DeepCollectionEquality().hash(accountType));
+
+  @JsonKey(ignore: true)
+  @override
+  _$$_LoadingCopyWith<_$_Loading> get copyWith =>
+      __$$_LoadingCopyWithImpl<_$_Loading>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function() loading,
-    required TResult Function(UserContext userContext) success,
+    required TResult Function(AccountType accountType) loading,
+    required TResult Function(User user) success,
     required TResult Function(String message) error,
   }) {
-    return loading();
+    return loading(accountType);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function()? loading,
-    TResult Function(UserContext userContext)? success,
+    TResult Function(AccountType accountType)? loading,
+    TResult Function(User user)? success,
     TResult Function(String message)? error,
   }) {
-    return loading?.call();
+    return loading?.call(accountType);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function()? loading,
-    TResult Function(UserContext userContext)? success,
+    TResult Function(AccountType accountType)? loading,
+    TResult Function(User user)? success,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) {
     if (loading != null) {
-      return loading();
+      return loading(accountType);
     }
     return orElse();
   }
@@ -312,8 +337,13 @@ class _$_Loading extends _Loading {
 }
 
 abstract class _Loading extends LoginState {
-  const factory _Loading() = _$_Loading;
+  const factory _Loading(final AccountType accountType) = _$_Loading;
   const _Loading._() : super._();
+
+  AccountType get accountType => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  _$$_LoadingCopyWith<_$_Loading> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -321,9 +351,9 @@ abstract class _$$_SuccessCopyWith<$Res> {
   factory _$$_SuccessCopyWith(
           _$_Success value, $Res Function(_$_Success) then) =
       __$$_SuccessCopyWithImpl<$Res>;
-  $Res call({UserContext userContext});
+  $Res call({User user});
 
-  $UserContextCopyWith<$Res> get userContext;
+  $UserCopyWith<$Res> get user;
 }
 
 /// @nodoc
@@ -337,20 +367,20 @@ class __$$_SuccessCopyWithImpl<$Res> extends _$LoginStateCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object? userContext = freezed,
+    Object? user = freezed,
   }) {
     return _then(_$_Success(
-      userContext == freezed
-          ? _value.userContext
-          : userContext // ignore: cast_nullable_to_non_nullable
-              as UserContext,
+      user == freezed
+          ? _value.user
+          : user // ignore: cast_nullable_to_non_nullable
+              as User,
     ));
   }
 
   @override
-  $UserContextCopyWith<$Res> get userContext {
-    return $UserContextCopyWith<$Res>(_value.userContext, (value) {
-      return _then(_value.copyWith(userContext: value));
+  $UserCopyWith<$Res> get user {
+    return $UserCopyWith<$Res>(_value.user, (value) {
+      return _then(_value.copyWith(user: value));
     });
   }
 }
@@ -358,14 +388,14 @@ class __$$_SuccessCopyWithImpl<$Res> extends _$LoginStateCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_Success extends _Success {
-  const _$_Success(this.userContext) : super._();
+  const _$_Success(this.user) : super._();
 
   @override
-  final UserContext userContext;
+  final User user;
 
   @override
   String toString() {
-    return 'LoginState.success(userContext: $userContext)';
+    return 'LoginState.success(user: $user)';
   }
 
   @override
@@ -373,13 +403,12 @@ class _$_Success extends _Success {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_Success &&
-            const DeepCollectionEquality()
-                .equals(other.userContext, userContext));
+            const DeepCollectionEquality().equals(other.user, user));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType, const DeepCollectionEquality().hash(userContext));
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(user));
 
   @JsonKey(ignore: true)
   @override
@@ -390,35 +419,35 @@ class _$_Success extends _Success {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function() loading,
-    required TResult Function(UserContext userContext) success,
+    required TResult Function(AccountType accountType) loading,
+    required TResult Function(User user) success,
     required TResult Function(String message) error,
   }) {
-    return success(userContext);
+    return success(user);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function()? loading,
-    TResult Function(UserContext userContext)? success,
+    TResult Function(AccountType accountType)? loading,
+    TResult Function(User user)? success,
     TResult Function(String message)? error,
   }) {
-    return success?.call(userContext);
+    return success?.call(user);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function()? loading,
-    TResult Function(UserContext userContext)? success,
+    TResult Function(AccountType accountType)? loading,
+    TResult Function(User user)? success,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) {
     if (success != null) {
-      return success(userContext);
+      return success(user);
     }
     return orElse();
   }
@@ -462,10 +491,10 @@ class _$_Success extends _Success {
 }
 
 abstract class _Success extends LoginState {
-  const factory _Success(final UserContext userContext) = _$_Success;
+  const factory _Success(final User user) = _$_Success;
   const _Success._() : super._();
 
-  UserContext get userContext => throw _privateConstructorUsedError;
+  User get user => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   _$$_SuccessCopyWith<_$_Success> get copyWith =>
       throw _privateConstructorUsedError;
@@ -534,8 +563,8 @@ class _$_Error extends _Error {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function() loading,
-    required TResult Function(UserContext userContext) success,
+    required TResult Function(AccountType accountType) loading,
+    required TResult Function(User user) success,
     required TResult Function(String message) error,
   }) {
     return error(message);
@@ -545,8 +574,8 @@ class _$_Error extends _Error {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function()? loading,
-    TResult Function(UserContext userContext)? success,
+    TResult Function(AccountType accountType)? loading,
+    TResult Function(User user)? success,
     TResult Function(String message)? error,
   }) {
     return error?.call(message);
@@ -556,8 +585,8 @@ class _$_Error extends _Error {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function()? loading,
-    TResult Function(UserContext userContext)? success,
+    TResult Function(AccountType accountType)? loading,
+    TResult Function(User user)? success,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) {

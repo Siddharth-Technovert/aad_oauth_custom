@@ -1,15 +1,15 @@
 part of 'theme_storage_usecases.dart';
 
 final readThemeUseCaseProvider = Provider(
-  (ref) => ReadTheme(ref.read(storageManagerProvider)),
+  (ref) => ReadTheme(ref.read(secureStorageManagerProvider)),
 );
 
 class ReadTheme extends NoParamsUseCase<ThemeState> {
-  final StorageManager _storageManager;
-  ReadTheme(this._storageManager);
+  final SecureStorageManager _secureStorageManager;
+  ReadTheme(this._secureStorageManager);
   @override
   Future<ThemeState> call() async {
-    final themeString = await _storageManager.readStringAsync(
+    final themeString = await _secureStorageManager.getAsync(
       key: AppConstants.themeKey,
     );
     return themeString == 'light'

@@ -1,6 +1,7 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-import '../../models/user_context/user_context.dart';
+import '../../enums/account_type.dart';
+import '../../models/user/user.dart';
 
 part 'login_state.freezed.dart';
 
@@ -8,17 +9,12 @@ part 'login_state.freezed.dart';
 class LoginState with _$LoginState {
   const LoginState._();
   const factory LoginState.initial() = _Initial;
-  const factory LoginState.loading() = _Loading;
-  const factory LoginState.success(UserContext userContext) = _Success;
+  const factory LoginState.loading(AccountType accountType) = _Loading;
+  const factory LoginState.success(User user) = _Success;
   const factory LoginState.error(String message) = _Error;
 
-  bool get isLoading => maybeMap(
-        loading: (_) => true,
-        orElse: () => false,
-      );
-
-  UserContext? get userContext => maybeMap(
-        success: (_) => _.userContext,
+  User? get user => maybeWhen(
+        success: (user) => user,
         orElse: () => null,
       );
 }
