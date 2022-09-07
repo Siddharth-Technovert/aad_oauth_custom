@@ -31,7 +31,7 @@ class App extends ConsumerWidget {
           // locale: localLanguage,
           supportedLocales: AppLoc.supportedLocale,
           localizationsDelegates: AppLoc.delegates,
-          title: "Flutter Boilerplate",
+          title: "Riverpod Boilerplate",
           debugShowCheckedModeBanner: false,
           themeMode: ref.watch(themeModeProvider),
           theme: ref.watch(themeStateProvider.notifier).lightThemeData,
