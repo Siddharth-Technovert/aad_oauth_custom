@@ -201,7 +201,7 @@ abstract class _DataSuccess<T> extends DataState<T> {
   const factory _DataSuccess(final T data) = _$_DataSuccess<T>;
   const _DataSuccess._() : super._();
 
-  T get data => throw _privateConstructorUsedError;
+  T get data;
   @JsonKey(ignore: true)
   _$$_DataSuccessCopyWith<T, _$_DataSuccess<T>> get copyWith =>
       throw _privateConstructorUsedError;
@@ -345,7 +345,7 @@ abstract class _DataError<T> extends DataState<T> {
   const factory _DataError(final AppException exception) = _$_DataError<T>;
   const _DataError._() : super._();
 
-  AppException get exception => throw _privateConstructorUsedError;
+  AppException get exception;
   @JsonKey(ignore: true)
   _$$_DataErrorCopyWith<T, _$_DataError<T>> get copyWith =>
       throw _privateConstructorUsedError;

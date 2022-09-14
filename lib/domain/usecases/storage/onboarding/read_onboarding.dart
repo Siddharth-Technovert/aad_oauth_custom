@@ -1,7 +1,8 @@
 part of 'onboarding_usecases.dart';
 
-final readOnboardingUseCaseProvider =
-    Provider((ref) => ReadOnboarding(ref.read(secureStorageManagerProvider)));
+final readOnboardingUseCaseProvider = Provider(
+  (ref) => ReadOnboarding(ref.read(secureStorageManagerProvider)),
+);
 
 class ReadOnboarding extends NoParamsUseCase<bool> {
   final SecureStorageManager _secureStorageManager;

@@ -2,20 +2,18 @@
 // in riverpod_boilerplate/test/mocks/usecases/usecases_mock.dart.
 // Do not manually edit this file.
 
-import 'dart:async' as _i6;
+import 'dart:async' as _i5;
 
 import 'package:mockito/mockito.dart' as _i1;
+import 'package:riverpod_boilerplate/data/models/result/data_state.dart' as _i2;
 import 'package:riverpod_boilerplate/domain/enums/account_type.dart' as _i7;
-import 'package:riverpod_boilerplate/domain/models/user/user.dart' as _i9;
+import 'package:riverpod_boilerplate/domain/models/user/user.dart' as _i6;
 import 'package:riverpod_boilerplate/domain/states/core/theme/theme_state.dart'
-    as _i4;
-import 'package:riverpod_boilerplate/domain/states/login/login_state.dart'
-    as _i2;
-import 'package:riverpod_boilerplate/domain/states/user/user_state.dart' as _i3;
+    as _i3;
 import 'package:riverpod_boilerplate/domain/usecases/auth/auth_usecases.dart'
-    as _i5;
+    as _i4;
 import 'package:riverpod_boilerplate/domain/usecases/storage/theme/theme_storage_usecases.dart'
-    as _i10;
+    as _i9;
 import 'package:riverpod_boilerplate/domain/usecases/user/user_usecases.dart'
     as _i8;
 
@@ -29,40 +27,39 @@ import 'package:riverpod_boilerplate/domain/usecases/user/user_usecases.dart'
 // ignore_for_file: unnecessary_parenthesis
 // ignore_for_file: camel_case_types
 
-class _FakeLoginState_0 extends _i1.Fake implements _i2.LoginState {}
+class _FakeDataState_0<T> extends _i1.Fake implements _i2.DataState<T> {}
 
-class _FakeUserState_1 extends _i1.Fake implements _i3.UserState {}
-
-class _FakeThemeState_2 extends _i1.Fake implements _i4.ThemeState {}
+class _FakeThemeState_1 extends _i1.Fake implements _i3.ThemeState {}
 
 /// A class which mocks [LoginUser].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockLoginUser extends _i1.Mock implements _i5.LoginUser {
+class MockLoginUser extends _i1.Mock implements _i4.LoginUser {
   MockLoginUser() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i6.Future<_i2.LoginState> call(_i7.AccountType? accountType) =>
+  _i5.Future<_i2.DataState<_i6.User>> call(_i7.AccountType? accountType) =>
       (super.noSuchMethod(Invocation.method(#call, [accountType]),
-              returnValue: Future<_i2.LoginState>.value(_FakeLoginState_0()))
-          as _i6.Future<_i2.LoginState>);
+              returnValue: Future<_i2.DataState<_i6.User>>.value(
+                  _FakeDataState_0<_i6.User>()))
+          as _i5.Future<_i2.DataState<_i6.User>>);
 }
 
 /// A class which mocks [LogoutUser].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockLogoutUser extends _i1.Mock implements _i5.LogoutUser {
+class MockLogoutUser extends _i1.Mock implements _i4.LogoutUser {
   MockLogoutUser() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i6.Future<void> call(_i7.AccountType? accountType) =>
+  _i5.Future<void> call(_i7.AccountType? accountType) =>
       (super.noSuchMethod(Invocation.method(#call, [accountType]),
           returnValue: Future<void>.value(),
-          returnValueForMissingStub: Future<void>.value()) as _i6.Future<void>);
+          returnValueForMissingStub: Future<void>.value()) as _i5.Future<void>);
 }
 
 /// A class which mocks [ReadUser].
@@ -74,10 +71,11 @@ class MockReadUser extends _i1.Mock implements _i8.ReadUser {
   }
 
   @override
-  _i6.Future<_i3.UserState> call() =>
+  _i5.Future<_i2.DataState<_i6.User>> call() =>
       (super.noSuchMethod(Invocation.method(#call, []),
-              returnValue: Future<_i3.UserState>.value(_FakeUserState_1()))
-          as _i6.Future<_i3.UserState>);
+              returnValue: Future<_i2.DataState<_i6.User>>.value(
+                  _FakeDataState_0<_i6.User>()))
+          as _i5.Future<_i2.DataState<_i6.User>>);
 }
 
 /// A class which mocks [UpdateUser].
@@ -89,37 +87,37 @@ class MockUpdateUser extends _i1.Mock implements _i8.UpdateUser {
   }
 
   @override
-  _i6.Future<bool> call(_i9.User? user) =>
+  _i5.Future<bool> call(_i6.User? user) =>
       (super.noSuchMethod(Invocation.method(#call, [user]),
-          returnValue: Future<bool>.value(false)) as _i6.Future<bool>);
+          returnValue: Future<bool>.value(false)) as _i5.Future<bool>);
 }
 
 /// A class which mocks [ReadTheme].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockReadTheme extends _i1.Mock implements _i10.ReadTheme {
+class MockReadTheme extends _i1.Mock implements _i9.ReadTheme {
   MockReadTheme() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i6.Future<_i4.ThemeState> call() =>
+  _i5.Future<_i3.ThemeState> call() =>
       (super.noSuchMethod(Invocation.method(#call, []),
-              returnValue: Future<_i4.ThemeState>.value(_FakeThemeState_2()))
-          as _i6.Future<_i4.ThemeState>);
+              returnValue: Future<_i3.ThemeState>.value(_FakeThemeState_1()))
+          as _i5.Future<_i3.ThemeState>);
 }
 
 /// A class which mocks [WriteTheme].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockWriteTheme extends _i1.Mock implements _i10.WriteTheme {
+class MockWriteTheme extends _i1.Mock implements _i9.WriteTheme {
   MockWriteTheme() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i6.Future<void> call(_i4.ThemeState? themeState) =>
+  _i5.Future<void> call(_i3.ThemeState? themeState) =>
       (super.noSuchMethod(Invocation.method(#call, [themeState]),
           returnValue: Future<void>.value(),
-          returnValueForMissingStub: Future<void>.value()) as _i6.Future<void>);
+          returnValueForMissingStub: Future<void>.value()) as _i5.Future<void>);
 }

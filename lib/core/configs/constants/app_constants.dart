@@ -17,11 +17,11 @@ abstract class AppConstants {
 
   ///Hive Adapter Ids
   //?TODO: Add Hive Adapter Ids
-  // static const int userHiveAdapterId = 0;
+  static const int userAdapterId = 0;
 
   ///Hive Box Keys
   //?TODO: Add Box Keys
-  // static const String userBoxKey = "userBox";
+  static const String userBoxKey = "userBox";
 
   ///Error Messages
   static const String exception = "exception";

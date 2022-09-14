@@ -1,11 +1,11 @@
 import 'dart:async';
-import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'core/app_bootstrapper.dart';
-import 'core/configs/provider_log.dart';
+import 'core/configs/riverpod_observer_log.dart';
+import 'domain/service_providers.dart';
 import 'presentation/ui/app.dart';
 
 Future<void> main() async {
@@ -15,16 +15,18 @@ Future<void> main() async {
 }
 
 void _runAppInZone() {
+  final container = ProviderContainer();
+  final loggerService = container.read(loggerServiceProvider);
   runZonedGuarded(() {
     runApp(
       ProviderScope(
         observers: [
-          ProviderLog(),
+          RiverpodObserverLog(loggerService),
         ],
         child: const App(),
       ),
     );
   }, (ex, s) {
-    log("Error", error: ex, stackTrace: s);
+    loggerService.logException(ex, s);
   });
 }

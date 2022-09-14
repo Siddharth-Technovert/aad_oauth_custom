@@ -2,10 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
+import 'package:riverpod_boilerplate/core/utils/errors/app_exception.dart';
+import 'package:riverpod_boilerplate/data/models/result/data_state.dart';
 import 'package:riverpod_boilerplate/domain/enums/account_type.dart';
 import 'package:riverpod_boilerplate/domain/models/user/user.dart';
 import 'package:riverpod_boilerplate/domain/states/core/app/app_state.dart';
-import 'package:riverpod_boilerplate/domain/states/user/user_state.dart';
 import 'package:riverpod_boilerplate/domain/usecases/auth/auth_usecases.dart';
 import 'package:riverpod_boilerplate/domain/usecases/user/user_usecases.dart';
 import 'package:riverpod_boilerplate/presentation/providers/core/app_state_provider.dart';
@@ -23,7 +24,9 @@ Future<void> main() async {
     mockLogoutUser = MockLogoutUser();
 
     when(mockReadUser()).thenAnswer(
-      (_) async => const UserState.notAvailable(),
+      (_) async => const DataState.error(
+        AppException.unknownError("Some error Occurred"),
+      ),
     );
   });
 

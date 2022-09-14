@@ -7,4 +7,9 @@ class HomeState with _$HomeState {
   const HomeState._();
   const factory HomeState.initial() = _Initial;
   const factory HomeState.loggedOut() = _LoggedOut;
+
+  bool get isLoggedOut => maybeWhen(
+        loggedOut: () => true,
+        orElse: () => false,
+      );
 }

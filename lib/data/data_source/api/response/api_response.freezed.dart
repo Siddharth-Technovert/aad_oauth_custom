@@ -202,7 +202,7 @@ abstract class _ApiSuccess<T> extends ApiResponse<T> {
   const factory _ApiSuccess(final T data) = _$_ApiSuccess<T>;
   const _ApiSuccess._() : super._();
 
-  T get data => throw _privateConstructorUsedError;
+  T get data;
   @JsonKey(ignore: true)
   _$$_ApiSuccessCopyWith<T, _$_ApiSuccess<T>> get copyWith =>
       throw _privateConstructorUsedError;
@@ -346,7 +346,7 @@ abstract class _ApiError<T> extends ApiResponse<T> {
   const factory _ApiError(final AppException exception) = _$_ApiError<T>;
   const _ApiError._() : super._();
 
-  AppException get exception => throw _privateConstructorUsedError;
+  AppException get exception;
   @JsonKey(ignore: true)
   _$$_ApiErrorCopyWith<T, _$_ApiError<T>> get copyWith =>
       throw _privateConstructorUsedError;

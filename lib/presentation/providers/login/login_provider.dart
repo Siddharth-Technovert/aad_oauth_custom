@@ -30,17 +30,18 @@ class LoginNotifier extends StateNotifier<LoginState> {
     required bool isSignInButton,
   }) async {
     state = LoginState.loading(accountType);
-    state = await _loginUserUseCase(accountType);
-    await state.maybeWhen(
+    final dataState = await _loginUserUseCase(accountType);
+    await dataState.when(
       success: (user) async {
+        state = LoginState.success(user);
         await _read(appStateProvider.notifier).authenticateState(user);
         _read(loggerServiceProvider).logInfo(
           "login with $accountType account",
           className: "Login",
         );
       },
-      orElse: () => Fluttertoast.showToast(
-        msg: "Unable to login, try again",
+      error: (ex) => Fluttertoast.showToast(
+        msg: ex.msg,
       ),
     );
   }

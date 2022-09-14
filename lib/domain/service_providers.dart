@@ -1,6 +1,5 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../core/configs/app_configuration.dart';
 import '../core/device/background_service.dart';
 import '../core/device/connectivity_service.dart';
 import '../core/device/deeplink_service.dart';
@@ -42,21 +41,22 @@ final filePickerServiceProvider = Provider(
 
 ///storage providers
 
-final hiveDbProvider = Provider((_) => HiveDb());
-final sqlDbProvider = Provider((_) => SQLiteDb());
+final hiveDbProvider =
+    Provider((ref) => HiveDb(ref.read(loggerServiceProvider)));
+final sqlDbProvider =
+    Provider((ref) => SQLiteDb(ref.read(loggerServiceProvider)));
 
 ///data source providers
 final secureStorageManagerProvider = Provider<SecureStorageManager>(
-  (_) => SecureStorageManagerImpl(),
+  (ref) => SecureStorageManagerImpl(ref.read(loggerServiceProvider)),
 );
 final cacheManagerProvider = Provider<CacheManager>(
-  (_) => CacheManagerImpl(),
+  (ref) => CacheManagerImpl(ref.read(loggerServiceProvider)),
 );
 final apiManagerProvider = Provider<ApiManager>((ref) {
   return ApiManagerImpl(
-    AppConfiguration.baseUrl,
-    ref.read(loggerServiceProvider),
     ref.read(secureStorageManagerProvider),
+    ref.read(loggerServiceProvider),
   );
 });
 final apiClientProvider = Provider((ref) {
@@ -68,6 +68,7 @@ final apiCacheClientProvider = Provider((ref) {
   return ApiCacheClient(
     ref.read(apiManagerProvider),
     ref.read(cacheManagerProvider),
+    ref.read(loggerServiceProvider),
   );
 });
 

@@ -2,18 +2,16 @@
 // in riverpod_boilerplate/test/mocks/repositories/repositories_mock.dart.
 // Do not manually edit this file.
 
-import 'dart:async' as _i5;
+import 'dart:async' as _i4;
 
 import 'package:mockito/mockito.dart' as _i1;
+import 'package:riverpod_boilerplate/data/models/result/data_state.dart' as _i2;
 import 'package:riverpod_boilerplate/domain/enums/account_type.dart' as _i6;
-import 'package:riverpod_boilerplate/domain/models/user/user.dart' as _i8;
+import 'package:riverpod_boilerplate/domain/models/user/user.dart' as _i5;
 import 'package:riverpod_boilerplate/domain/repositories/auth_repository.dart'
-    as _i4;
+    as _i3;
 import 'package:riverpod_boilerplate/domain/repositories/user_repository.dart'
     as _i7;
-import 'package:riverpod_boilerplate/domain/states/login/login_state.dart'
-    as _i2;
-import 'package:riverpod_boilerplate/domain/states/user/user_state.dart' as _i3;
 
 // ignore_for_file: type=lint
 // ignore_for_file: avoid_redundant_argument_values
@@ -25,33 +23,27 @@ import 'package:riverpod_boilerplate/domain/states/user/user_state.dart' as _i3;
 // ignore_for_file: unnecessary_parenthesis
 // ignore_for_file: camel_case_types
 
-class _FakeLoginState_0 extends _i1.Fake implements _i2.LoginState {}
-
-class _FakeUserState_1 extends _i1.Fake implements _i3.UserState {}
+class _FakeDataState_0<T> extends _i1.Fake implements _i2.DataState<T> {}
 
 /// A class which mocks [AuthRepository].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockAuthRepository extends _i1.Mock implements _i4.AuthRepository {
+class MockAuthRepository extends _i1.Mock implements _i3.AuthRepository {
   MockAuthRepository() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i5.Future<_i2.LoginState> login(_i6.AccountType? accountType) =>
+  _i4.Future<_i2.DataState<_i5.User>> login(_i6.AccountType? accountType) =>
       (super.noSuchMethod(Invocation.method(#login, [accountType]),
-              returnValue: Future<_i2.LoginState>.value(_FakeLoginState_0()))
-          as _i5.Future<_i2.LoginState>);
+              returnValue: Future<_i2.DataState<_i5.User>>.value(
+                  _FakeDataState_0<_i5.User>()))
+          as _i4.Future<_i2.DataState<_i5.User>>);
   @override
-  _i5.Future<void> logout(_i6.AccountType? accountType) =>
+  _i4.Future<void> logout(_i6.AccountType? accountType) =>
       (super.noSuchMethod(Invocation.method(#logout, [accountType]),
           returnValue: Future<void>.value(),
-          returnValueForMissingStub: Future<void>.value()) as _i5.Future<void>);
-  @override
-  _i5.Future<_i2.LoginState> guestLogin(String? name) =>
-      (super.noSuchMethod(Invocation.method(#guestLogin, [name]),
-              returnValue: Future<_i2.LoginState>.value(_FakeLoginState_0()))
-          as _i5.Future<_i2.LoginState>);
+          returnValueForMissingStub: Future<void>.value()) as _i4.Future<void>);
 }
 
 /// A class which mocks [UserRepository].
@@ -63,28 +55,25 @@ class MockUserRepository extends _i1.Mock implements _i7.UserRepository {
   }
 
   @override
-  _i5.Future<_i3.UserState> readUser() =>
+  _i4.Future<_i2.DataState<_i5.User>> readUser() =>
       (super.noSuchMethod(Invocation.method(#readUser, []),
-              returnValue: Future<_i3.UserState>.value(_FakeUserState_1()))
-          as _i5.Future<_i3.UserState>);
+              returnValue: Future<_i2.DataState<_i5.User>>.value(
+                  _FakeDataState_0<_i5.User>()))
+          as _i4.Future<_i2.DataState<_i5.User>>);
   @override
-  _i5.Future<_i3.UserState> createUser(
+  _i4.Future<_i2.DataState<_i5.User>> createUser(
           String? token, _i6.AccountType? accountType) =>
       (super.noSuchMethod(Invocation.method(#createUser, [token, accountType]),
-              returnValue: Future<_i3.UserState>.value(_FakeUserState_1()))
-          as _i5.Future<_i3.UserState>);
+              returnValue: Future<_i2.DataState<_i5.User>>.value(
+                  _FakeDataState_0<_i5.User>()))
+          as _i4.Future<_i2.DataState<_i5.User>>);
   @override
-  _i5.Future<_i3.UserState> createGuestUser(String? name) =>
-      (super.noSuchMethod(Invocation.method(#createGuestUser, [name]),
-              returnValue: Future<_i3.UserState>.value(_FakeUserState_1()))
-          as _i5.Future<_i3.UserState>);
-  @override
-  _i5.Future<bool> updateUser(_i8.User? user) =>
+  _i4.Future<bool> updateUser(_i5.User? user) =>
       (super.noSuchMethod(Invocation.method(#updateUser, [user]),
-          returnValue: Future<bool>.value(false)) as _i5.Future<bool>);
+          returnValue: Future<bool>.value(false)) as _i4.Future<bool>);
   @override
-  _i5.Future<void> removeUser() =>
+  _i4.Future<void> removeUser() =>
       (super.noSuchMethod(Invocation.method(#removeUser, []),
           returnValue: Future<void>.value(),
-          returnValueForMissingStub: Future<void>.value()) as _i5.Future<void>);
+          returnValueForMissingStub: Future<void>.value()) as _i4.Future<void>);
 }

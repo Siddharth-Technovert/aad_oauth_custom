@@ -17,4 +17,9 @@ class LoginState with _$LoginState {
         success: (user) => user,
         orElse: () => null,
       );
+
+  bool get isLogged => maybeWhen(
+        success: (user) => true,
+        orElse: () => false,
+      );
 }

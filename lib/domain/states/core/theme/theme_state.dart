@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'theme_state.freezed.dart';
@@ -13,5 +14,11 @@ class ThemeState with _$ThemeState {
         light: () => 'light',
         dark: () => 'dark',
         system: () => 'system',
+      );
+
+  ThemeMode get mode => when(
+        light: () => ThemeMode.light,
+        dark: () => ThemeMode.dark,
+        system: () => ThemeMode.system,
       );
 }

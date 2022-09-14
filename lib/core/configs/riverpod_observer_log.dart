@@ -1,8 +1,18 @@
-import 'dart:developer';
-
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class ProviderLog extends ProviderObserver {
+import '../device/logger_service.dart';
+
+class RiverpodObserverLog extends ProviderObserver {
+  final LoggerService _loggerService;
+  RiverpodObserverLog(this._loggerService);
+
+  @override
+  void didAddProvider(
+    ProviderBase provider,
+    Object? value,
+    ProviderContainer container,
+  ) {}
+
   @override
   void didUpdateProvider(
     ProviderBase provider,
@@ -29,10 +39,19 @@ class ProviderLog extends ProviderObserver {
       'error': error.toString(),
       'stackTrace': stackTrace.toString(),
     };
-    log(
+    _loggerService.logInfo(
       '''
 Provider ${provider.name ?? provider.runtimeType} failed: ${errorMap.toString()}
       ''',
+      className: "",
+      methodName: "",
     );
+    _loggerService.logException(error, stackTrace);
   }
+
+  @override
+  void didDisposeProvider(
+    ProviderBase provider,
+    ProviderContainer containers,
+  ) {}
 }

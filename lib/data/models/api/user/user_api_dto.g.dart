@@ -1,19 +1,21 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'user.dart';
+part of 'user_api_dto.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_User _$$_UserFromJson(Map<String, dynamic> json) => _$_User(
+_$_UserApiDto _$$_UserApiDtoFromJson(Map<String, dynamic> json) =>
+    _$_UserApiDto(
       id: json['id'] as String?,
       name: json['name'] as String,
       profileImage: json['profileImage'] as String?,
       accountType: $enumDecode(_$AccountTypeEnumMap, json['accountType']),
     );
 
-Map<String, dynamic> _$$_UserToJson(_$_User instance) => <String, dynamic>{
+Map<String, dynamic> _$$_UserApiDtoToJson(_$_UserApiDto instance) =>
+    <String, dynamic>{
       'id': instance.id,
       'name': instance.name,
       'profileImage': instance.profileImage,

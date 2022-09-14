@@ -1,13 +1,18 @@
 import 'dart:io';
 
-import 'package:flutter/foundation.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hive/hive.dart';
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
 
+import '../../../../core/device/logger_service.dart';
+import '../../../../domain/service_providers.dart';
+
 //TODO: Add adapters for other types in configure function
 class HiveDb {
-  // ignore: avoid_void_async
+  final LoggerService _loggerService;
+  HiveDb(this._loggerService);
+
   static Future<void> initialize() async {
     try {
       final dir = await getApplicationDocumentsDirectory();
@@ -20,8 +25,8 @@ class HiveDb {
 
       //TODO: register adapter and open box here
       // Hive.registerAdapter(UserAdapter());
-    } catch (exception) {
-      if (kDebugMode) print(exception);
+    } catch (ex, s) {
+      ProviderContainer().read(loggerServiceProvider).logException(ex, s);
     }
   }
 
@@ -37,7 +42,8 @@ class HiveDb {
     try {
       final box = await _openBox<T>(boxName);
       return (box != null) ? box.values.toList() : <T>[];
-    } catch (ex) {
+    } catch (ex, s) {
+      _loggerService.logException(ex, s);
       return null;
     } finally {
       if (Hive.isBoxOpen(boxName)) await Hive.close();
@@ -48,10 +54,8 @@ class HiveDb {
     try {
       final box = await _openBox<T>(boxName);
       await box?.addAll(values);
-    } catch (ex) {
-      if (kDebugMode) {
-        print(ex);
-      }
+    } catch (ex, s) {
+      _loggerService.logException(ex, s);
     } finally {
       if (Hive.isBoxOpen(boxName)) await Hive.close();
     }
@@ -61,10 +65,8 @@ class HiveDb {
     try {
       final box = await _openBox<T>(boxName);
       await box?.clear();
-    } catch (exception) {
-      if (kDebugMode) {
-        print(exception);
-      }
+    } catch (ex, s) {
+      _loggerService.logException(ex, s);
     } finally {
       if (Hive.isBoxOpen(boxName)) await Hive.close();
     }
@@ -77,10 +79,8 @@ class HiveDb {
         await clearAll(boxName);
       });
       await Hive.close();
-    } catch (exception) {
-      if (kDebugMode) {
-        print(exception);
-      }
+    } catch (ex, s) {
+      _loggerService.logException(ex, s);
     }
   }
 }

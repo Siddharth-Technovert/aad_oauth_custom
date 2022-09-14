@@ -3,10 +3,11 @@ import 'package:google_sign_in/google_sign_in.dart';
 
 import '../../core/utils/errors/app_exception.dart';
 import '../../domain/enums/account_type.dart';
+import '../../domain/models/user/user.dart';
 import '../../domain/repositories/auth_repository.dart';
 import '../../domain/repositories/user_repository.dart';
-import '../../domain/states/login/login_state.dart';
 import '../data_source/api/response/api_response.dart';
+import '../models/result/data_state.dart';
 
 class AuthRepositoryImpl implements AuthRepository {
   final UserRepository _userRepository;
@@ -21,7 +22,7 @@ class AuthRepositoryImpl implements AuthRepository {
   final FacebookAuth facebookLogin = FacebookAuth.instance;
 
   @override
-  Future<LoginState> login(AccountType accountType) async {
+  Future<DataState<User>> login(AccountType accountType) async {
     ApiResponse<String>? accessTokenState;
 
     switch (accountType) {
@@ -32,37 +33,16 @@ class AuthRepositoryImpl implements AuthRepository {
         accessTokenState = await _signInWithGoogle();
         break;
       case AccountType.guest:
-        return guestLogin("Guest User");
+        return _userRepository.createUser("local_token", accountType);
       default:
         break;
     }
     return accessTokenState == null
-        ? const LoginState.error("Some error")
+        ? const DataState.error(AppException.unknownError("Some error"))
         : accessTokenState.when(
-            success: (token) async {
-              final userState =
-                  await _userRepository.createUser(token, accountType);
-              return userState.when(
-                available: (data) => LoginState.success(data),
-                notAvailable: () =>
-                    const LoginState.error("Unable to create user"),
-              );
-            },
-            error: (ex) => LoginState.error(ex.msg),
+            success: (token) => _userRepository.createUser(token, accountType),
+            error: (ex) => DataState.error(AppException.unknownError(ex.msg)),
           );
-  }
-
-  @override
-  Future<LoginState> guestLogin(String name) async {
-    try {
-      final userState = await _userRepository.createGuestUser(name);
-      return userState.when(
-        available: (data) => LoginState.success(data),
-        notAvailable: () => const LoginState.error("Unable to create user"),
-      );
-    } catch (ex) {
-      return LoginState.error(AppException.unknownError(ex.toString()).msg);
-    }
   }
 
   @override

@@ -1,8 +1,7 @@
-import 'dart:developer';
-
 import 'package:dio/dio.dart';
 
 import '../../core/device/connectivity_service.dart';
+import '../../core/device/logger_service.dart';
 import '../../core/utils/errors/app_exception.dart';
 import '../../core/utils/errors/cache_exception.dart';
 import '../mappers/api_dto.dart';
@@ -13,10 +12,16 @@ import 'api/api_manager/api_manager.dart';
 import 'local/cache/cache_manager.dart';
 
 //TODO: Add Support for editing of data in offline mode use SyncModel concept
+
 class ApiCacheClient {
   final ApiManager _apiManager;
   final CacheManager _cachingManager;
-  ApiCacheClient(this._apiManager, this._cachingManager);
+  final LoggerService _loggerService;
+  ApiCacheClient(
+    this._apiManager,
+    this._cachingManager,
+    this._loggerService,
+  );
 
   Future<DataState<Model>> getAsync<Model extends UICacheModel<HiveDto>,
       HiveDto extends CacheDto<Model, Dto>, Dto extends ApiCacheDto<HiveDto>>({
@@ -37,7 +42,7 @@ class ApiCacheClient {
       //   return DataState.success(hiveDataDto.toModel());
       // }
       final apiResponse = await _apiManager.getAsync<Dto>(
-        baseUrl: baseUrl,
+        newBaseUrl: baseUrl,
         endpoint: endpoint,
         queryParams: queryParams,
         headers: headers,
@@ -63,7 +68,7 @@ class ApiCacheClient {
         },
       );
     } else {
-      log("Cache hit");
+      _loggerService.logInfo("Cache hit");
 
       final cachedData = await _cachingManager.getData<HiveDto>(
         boxKey,
@@ -99,7 +104,7 @@ class ApiCacheClient {
       //   );
       // }
       final apiResponse = await _apiManager.getAsyncList<Dto>(
-        baseUrl: baseUrl,
+        newBaseUrl: baseUrl,
         endpoint: endpoint,
         queryParams: queryParams,
         headers: headers,
@@ -128,7 +133,7 @@ class ApiCacheClient {
         },
       );
     } else {
-      log("Cache hit");
+      _loggerService.logInfo("Cache hit");
 
       final hasCachedData = await _cachingManager.hasData<HiveDto>(boxKey);
       final cachedDataList = await _cachingManager.getAll<HiveDto>(boxKey);
@@ -156,7 +161,7 @@ class ApiCacheClient {
 
     if (await ConnectivityService.hasConnection()) {
       final apiResponse = await _apiManager.postAsync<Dto>(
-        baseUrl: baseUrl,
+        newBaseUrl: baseUrl,
         endpoint: endpoint,
         data: cachedData.toApiDto().toJson(),
         queryParams: queryParams,
@@ -200,7 +205,7 @@ class ApiCacheClient {
 
     if (await ConnectivityService.hasConnection()) {
       final apiResponse = await _apiManager.postAsync<Dto>(
-        baseUrl: baseUrl,
+        newBaseUrl: baseUrl,
         endpoint: endpoint,
         data: cachedDataList.map((e) => e.toApiDto().toJson()).toList(),
         queryParams: queryParams,
@@ -245,7 +250,7 @@ class ApiCacheClient {
 
     if (await ConnectivityService.hasConnection()) {
       final apiResponse = await _apiManager.putAsync<Dto>(
-        baseUrl: baseUrl,
+        newBaseUrl: baseUrl,
         endpoint: endpoint,
         data: data.toCacheDto().toApiDto().toJson(),
         queryParams: queryParams,
@@ -289,7 +294,7 @@ class ApiCacheClient {
   }) async {
     if (await ConnectivityService.hasConnection()) {
       final apiResponse = await _apiManager.deleteAsync<Dto>(
-        baseUrl: baseUrl,
+        newBaseUrl: baseUrl,
         endpoint: endpoint,
         queryParams: queryParams,
         headers: headers,

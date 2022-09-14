@@ -17,19 +17,22 @@ import 'api_manager.dart';
 typedef HttpLibraryMethod<T> = Future<ApiResponse<T>> Function();
 
 class ApiManagerImpl extends ApiManager {
-  final LoggerService _loggerService;
   final SecureStorageManager _secureStorageManager;
-  late Dio _dio;
+  final LoggerService _loggerService;
+
+  late final Dio _dio;
+  late final CancelToken _cancelToken;
 
   ApiManagerImpl(
-    String baseUrl,
-    this._loggerService,
     this._secureStorageManager,
+    this._loggerService,
   ) {
     final BaseOptions options = BaseOptions(
-      baseUrl: baseUrl,
       connectTimeout: 50000,
       receiveTimeout: 50000,
+      headers: {
+        HttpHeaders.contentTypeHeader: "application/json",
+      },
     );
 
     _dio = Dio(options);
@@ -37,38 +40,40 @@ class ApiManagerImpl extends ApiManager {
       NetworkLogInterceptor(_loggerService),
       AuthInterceptor(_secureStorageManager),
     ]);
+    _cancelToken = CancelToken();
   }
 
   String _generateUrl(String endPoint, String? newBaseUrl) {
     return newBaseUrl == null ? endPoint : "$newBaseUrl/$endPoint";
   }
 
-  Map<String, dynamic> _generateHeaders(Map<String, dynamic>? headers) {
-    final Map<String, dynamic> headersMap = {};
-    headersMap[HttpHeaders.contentTypeHeader] = "application/json";
-    if (headers != null) {
-      headersMap.addAll(headers);
-    }
-    return headersMap;
+  Map<String, dynamic> _generateHeader(
+    Map<String, dynamic>? headers,
+    bool requiresAuthToken,
+  ) {
+    final newHeaders = headers ?? {};
+    newHeaders.addAll({'requiresAuthToken': requiresAuthToken});
+    return newHeaders;
   }
 
   @override
   Future<ApiResponse<T>> getAsync<T extends ToJson>({
     required String endpoint,
-    String? baseUrl,
+    String? newBaseUrl,
     Map<String, dynamic>? queryParams,
     Map<String, dynamic>? headers,
     CancelToken? cancelToken,
+    bool requiresAuthToken = true,
   }) async {
     return _tryApiRequest<T>(
       () async {
         final response = await _dio.get(
-          _generateUrl(endpoint, baseUrl),
+          _generateUrl(endpoint, newBaseUrl),
           queryParameters: queryParams,
           options: Options(
-            headers: _generateHeaders(headers),
+            headers: _generateHeader(headers, requiresAuthToken),
           ),
-          cancelToken: cancelToken,
+          cancelToken: cancelToken ?? _cancelToken,
         );
         if (AppSerializers.serializers[T] != null) {
           return ApiResponse<T>.success(
@@ -87,20 +92,21 @@ class ApiManagerImpl extends ApiManager {
   @override
   Future<ApiResponse<List<T>>> getAsyncList<T extends ToJson>({
     required String endpoint,
-    String? baseUrl,
+    String? newBaseUrl,
     Map<String, dynamic>? queryParams,
     Map<String, dynamic>? headers,
     CancelToken? cancelToken,
+    bool requiresAuthToken = true,
   }) async {
     return _tryApiRequest<List<T>>(
       () async {
         final response = await _dio.get(
-          _generateUrl(endpoint, baseUrl),
+          _generateUrl(endpoint, newBaseUrl),
           queryParameters: queryParams,
           options: Options(
-            headers: _generateHeaders(headers),
+            headers: _generateHeader(headers, requiresAuthToken),
           ),
-          cancelToken: cancelToken,
+          cancelToken: cancelToken ?? _cancelToken,
         );
         if (AppSerializers.serializers[T] != null) {
           final listData = response.data as List;
@@ -133,21 +139,22 @@ class ApiManagerImpl extends ApiManager {
   Future<ApiResponse<bool>> postAsync<T extends ToJson>({
     required String endpoint,
     required dynamic data,
-    String? baseUrl,
+    String? newBaseUrl,
     Map<String, dynamic>? queryParams,
     Map<String, dynamic>? headers,
     CancelToken? cancelToken,
+    bool requiresAuthToken = true,
   }) async {
     return _tryApiRequest<bool>(
       () async {
         await _dio.post(
-          _generateUrl(endpoint, baseUrl),
+          _generateUrl(endpoint, newBaseUrl),
           data: data,
           queryParameters: queryParams,
           options: Options(
-            headers: _generateHeaders(headers),
+            headers: _generateHeader(headers, requiresAuthToken),
           ),
-          cancelToken: cancelToken,
+          cancelToken: cancelToken ?? _cancelToken,
         );
         return const ApiResponse<bool>.success(true);
       },
@@ -158,21 +165,22 @@ class ApiManagerImpl extends ApiManager {
   Future<ApiResponse<T>> putAsync<T extends ToJson>({
     required String endpoint,
     required dynamic data,
-    String? baseUrl,
+    String? newBaseUrl,
     Map<String, dynamic>? queryParams,
     Map<String, dynamic>? headers,
     CancelToken? cancelToken,
+    bool requiresAuthToken = true,
   }) async {
     return _tryApiRequest<T>(
       () async {
         final response = await _dio.put(
-          _generateUrl(endpoint, baseUrl),
+          _generateUrl(endpoint, newBaseUrl),
           data: data,
           queryParameters: queryParams,
           options: Options(
-            headers: _generateHeaders(headers),
+            headers: _generateHeader(headers, requiresAuthToken),
           ),
-          cancelToken: cancelToken,
+          cancelToken: cancelToken ?? _cancelToken,
         );
         if (AppSerializers.serializers[T] != null) {
           return ApiResponse<T>.success(
@@ -195,25 +203,35 @@ class ApiManagerImpl extends ApiManager {
   Future<ApiResponse<bool>> deleteAsync<T extends ToJson>({
     required String endpoint,
     dynamic data,
-    String? baseUrl,
+    String? newBaseUrl,
     Map<String, dynamic>? queryParams,
     Map<String, dynamic>? headers,
     CancelToken? cancelToken,
+    bool requiresAuthToken = true,
   }) async {
     return _tryApiRequest<bool>(
       () async {
         await _dio.delete(
-          _generateUrl(endpoint, baseUrl),
+          _generateUrl(endpoint, newBaseUrl),
           data: data,
           queryParameters: queryParams,
           options: Options(
-            headers: _generateHeaders(headers),
+            headers: _generateHeader(headers, requiresAuthToken),
           ),
-          cancelToken: cancelToken,
+          cancelToken: cancelToken ?? _cancelToken,
         );
         return const ApiResponse<bool>.success(true);
       },
     );
+  }
+
+  @override
+  void cancelRequests({CancelToken? cancelToken}) {
+    if (cancelToken == null) {
+      _cancelToken.cancel('Request Cancelled');
+    } else {
+      cancelToken.cancel();
+    }
   }
 
   Future<ApiResponse<T>> _tryApiRequest<T>(
@@ -225,14 +243,14 @@ class ApiManagerImpl extends ApiManager {
       } else {
         throw const AppException.networkError();
       }
-    } on DioError catch (error) {
-      _loggerService.logInfo(error.toString());
+    } on DioError catch (ex, s) {
+      _loggerService.logException(ex, s);
       return ApiResponse.error(
-        AppException.apiError(ApiException.getDioException(error)),
+        AppException.apiError(ApiException.getDioException(ex)),
       );
-    } catch (ex) {
-      _loggerService.logInfo(ex.toString());
-      throw ApiResponse.error(
+    } catch (ex, s) {
+      _loggerService.logException(ex, s);
+      return ApiResponse.error(
         AppException.apiError(ApiException.defaultError(ex.toString())),
       );
     }

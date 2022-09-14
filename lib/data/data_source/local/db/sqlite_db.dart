@@ -2,14 +2,17 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:flutter/foundation.dart';
 import 'package:path/path.dart' as path;
 import 'package:path_provider/path_provider.dart';
 import 'package:sqflite/sqflite.dart';
 
 import '../../../../core/configs/constants/db_constants.dart';
+import '../../../../core/device/logger_service.dart';
 
 class SQLiteDb {
+  final LoggerService _loggerService;
+  SQLiteDb(this._loggerService);
+
   // only have a single app-wide reference to the database
   static Database? _database;
   Future<Database> get database async {
@@ -40,10 +43,8 @@ class SQLiteDb {
   Future _onCreate(Database db, int version) async {
     try {
       await db.execute(UserDB.tableCreationQuery);
-    } catch (exception) {
-      if (kDebugMode) {
-        print(exception);
-      }
+    } catch (ex, s) {
+      _loggerService.logException(ex, s);
     }
   }
 
@@ -56,7 +57,8 @@ class SQLiteDb {
         jsonDecode(data.toString()) as Map<String, Object?>,
       );
       // });
-    } catch (exception) {
+    } catch (ex, s) {
+      _loggerService.logException(ex, s);
       return null;
     } finally {
       // db.close();
@@ -82,7 +84,8 @@ class SQLiteDb {
         return jsonEncode(maps.first);
       }
       // });
-    } catch (exception) {
+    } catch (ex, s) {
+      _loggerService.logException(ex, s);
       return null;
     } finally {
       // db.close();
@@ -112,7 +115,8 @@ class SQLiteDb {
         return modeledData;
       }
       // });
-    } catch (exception) {
+    } catch (ex, s) {
+      _loggerService.logException(ex, s);
       return null;
     } finally {
       // db.close();
@@ -134,7 +138,8 @@ class SQLiteDb {
         whereArgs: whereArgs,
       );
       // });
-    } catch (exception) {
+    } catch (ex, s) {
+      _loggerService.logException(ex, s);
       return 0;
     } finally {
       // db.close();
@@ -157,7 +162,8 @@ class SQLiteDb {
         whereArgs: whereArgs,
       );
       // });
-    } catch (exception) {
+    } catch (ex, s) {
+      _loggerService.logException(ex, s);
       return 0;
     } finally {
       // db.close();
@@ -169,7 +175,8 @@ class SQLiteDb {
     try {
       var count = 0;
       return count += await db.delete(UserDB.tableName);
-    } catch (exception) {
+    } catch (ex, s) {
+      _loggerService.logException(ex, s);
       return 0;
     } finally {
       // db.close();
@@ -184,8 +191,9 @@ class SQLiteDb {
       final data = Sqflite.firstIntValue(result);
       return data;
       // });
-    } catch (exception) {
-      return 0;
+    } catch (ex, s) {
+      _loggerService.logException(ex, s);
+      return null;
     } finally {
       // db.close();
     }

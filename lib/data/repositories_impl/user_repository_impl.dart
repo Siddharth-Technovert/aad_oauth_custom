@@ -1,19 +1,20 @@
-import 'dart:convert';
-
 import '../../core/configs/constants/app_constants.dart';
+import '../../core/utils/errors/app_exception.dart';
+import '../../core/utils/errors/cache_exception.dart';
 import '../../domain/enums/account_type.dart';
 import '../../domain/models/user/user.dart';
 import '../../domain/repositories/user_repository.dart';
-import '../../domain/states/user/user_state.dart';
 import '../data_source/api/api_manager/api_manager.dart';
 import '../data_source/local/cache/cache_manager.dart';
 import '../data_source/local/secure_storage/secure_storage_manager.dart';
+import '../models/api/user/user_api_dto.dart';
+import '../models/cache/user/user_cache_dto.dart';
+import '../models/result/data_state.dart';
 
 class UserRepositoryImpl implements UserRepository {
   // ignore: unused_field
   final ApiManager _apiManager;
   final SecureStorageManager _secureStorageManager;
-  // ignore: unused_field
   final CacheManager _cacheManager;
 
   UserRepositoryImpl(
@@ -23,64 +24,55 @@ class UserRepositoryImpl implements UserRepository {
   );
 
   @override
-  Future<UserState> createGuestUser(String name) async {
-    final user = User(
-      name: name,
-      accountType: AccountType.guest,
-    );
-    final bool isUserStoredLocally = await _secureStorageManager.putAsync(
-      key: AppConstants.userKey,
-      value: jsonEncode(user.toJson()),
-    );
-    if (isUserStoredLocally) {
-      return UserState.available(user);
-    } else {
-      return const UserState.notAvailable();
-    }
-  }
-
-  @override
-  Future<UserState> createUser(String token, AccountType accountType) async {
+  Future<DataState<User>> createUser(
+    String token,
+    AccountType accountType,
+  ) async {
     final bool isTokenStored = await _secureStorageManager.putAsync(
       key: AppConstants.tokenKey,
       value: token,
     );
     if (isTokenStored) {
-      final user = User(
-        name: "any_name",
-        accountType: accountType,
+      const userApiDto = UserApiDto(
+        id: "0",
+        name: "Jon Snow",
+        accountType: AccountType.guest,
       );
-      final bool isUserStoredLocally = await _secureStorageManager.putAsync(
-        key: AppConstants.userKey,
-        value: jsonEncode(user.toJson()),
+      final userCacheDto = userApiDto.toCacheDto();
+      final isUserAdded = await _cacheManager.insertData<UserCacheDto>(
+        UserCacheDto.boxKey,
+        userCacheDto,
       );
-      if (isUserStoredLocally) {
-        return UserState.available(user);
+      if (isUserAdded) {
+        return DataState.success(userCacheDto.toModel());
       } else {
-        return const UserState.notAvailable();
+        return const DataState.error(
+          AppException.cacheError(CacheException.insertError()),
+        );
       }
     } else {
-      return const UserState.notAvailable();
+      return const DataState.error(
+        AppException.cacheError(CacheException.insertError()),
+      );
     }
   }
 
   @override
-  Future<UserState> readUser() async {
-    final val = await _secureStorageManager.getAsync(
-      key: AppConstants.userKey,
-    );
-    return val == null
-        ? const UserState.notAvailable()
-        : UserState.available(
-            User.fromJson(jsonDecode(val) as Map<String, dynamic>),
+  Future<DataState<User>> readUser() async {
+    final usersCacheDto =
+        await _cacheManager.getAll<UserCacheDto>(UserCacheDto.boxKey);
+    return usersCacheDto == null || usersCacheDto.isEmpty
+        ? const DataState.error(
+            AppException.cacheError(CacheException.insertError()),
+          )
+        : DataState.success(
+            usersCacheDto.first.toModel(),
           );
   }
 
   @override
   Future<void> removeUser() async {
-    await _secureStorageManager.deleteAsync(
-      key: AppConstants.userKey,
-    );
+    await _cacheManager.clearAll<UserCacheDto>(UserCacheDto.boxKey);
     await _secureStorageManager.deleteAsync(
       key: AppConstants.tokenKey,
     );

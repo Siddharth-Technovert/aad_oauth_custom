@@ -39,7 +39,7 @@
             "@freezed",
             "class $1ApiDto with _$$1ApiDto implements ApiCacheDto<$1CacheDto> {",
             "",
-            "\ttconst factory $1ApiDto({",
+            "\t\tconst factory $1ApiDto({",
             "\t\t// Required fields",
             "\t}) = _$1ApiDto;",
             "\tconst $1ApiDto._();",

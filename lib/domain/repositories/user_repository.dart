@@ -1,11 +1,10 @@
+import '../../data/models/result/data_state.dart';
 import '../enums/account_type.dart';
 import '../models/user/user.dart';
-import '../states/user/user_state.dart';
 
 abstract class UserRepository {
-  Future<UserState> readUser();
-  Future<UserState> createUser(String token, AccountType accountType);
-  Future<UserState> createGuestUser(String name);
+  Future<DataState<User>> readUser();
+  Future<DataState<User>> createUser(String token, AccountType accountType);
   Future<bool> updateUser(User user);
   Future<void> removeUser();
 }

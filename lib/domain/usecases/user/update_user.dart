@@ -1,8 +1,7 @@
 part of 'user_usecases.dart';
 
-final updateUserUseCaseProvider = Provider(
-  (ref) => UpdateUser(ref.read(userRepositoryProvider)),
-);
+final updateUserUseCaseProvider =
+    Provider((ref) => UpdateUser(ref.read(userRepositoryProvider)));
 
 class UpdateUser extends UseCase<bool, User> {
   final UserRepository _userRepository;

@@ -40,9 +40,9 @@ class AppStateNotifier extends StateNotifier<AppState> {
     if (isOnboardingDone) {
       // final jwt = await _readJwtUseCase();
       // if (jwt != null) {
-      final userState = await _readUserUseCase();
-      userState.when(
-        available: (user) {
+      final dataState = await _readUserUseCase();
+      dataState.when(
+        success: (user) {
           //? is state authenticated and want to do some background task
           // await _read(backgroundServiceProvider).registerPeriodicTask(
           //   "periodicTask",
@@ -50,7 +50,7 @@ class AppStateNotifier extends StateNotifier<AppState> {
           // );
           state = AppState.authenticated(user);
         },
-        notAvailable: () {
+        error: (ex) {
           state = const AppState.unAuthenticated();
         },
       );

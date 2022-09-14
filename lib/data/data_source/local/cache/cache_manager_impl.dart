@@ -2,17 +2,26 @@ import 'dart:convert';
 import 'dart:io';
 import 'dart:math';
 
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
 
+import '../../../../core/device/logger_service.dart';
+import '../../../../domain/service_providers.dart';
 import '../../../mappers/cache_dto.dart';
+import '../../../models/cache/user/user_cache_dto.dart';
 import '../secure_storage/secure_storage_manager.dart';
 import '../secure_storage/secure_storage_manager_impl.dart';
 import 'cache_manager.dart';
 
+typedef CacheMethod<T> = Future<bool> Function();
+
 class CacheManagerImpl implements CacheManager {
   static final HiveInterface _hive = Hive;
+
+  final LoggerService _loggerService;
+  CacheManagerImpl(this._loggerService);
 
   //? call it in the app bootStrap
   static Future<void> init() async {
@@ -25,8 +34,9 @@ class CacheManagerImpl implements CacheManager {
     _hive.init(path);
 
     //Securing the box
-    final SecureStorageManager secureStorageManager =
-        SecureStorageManagerImpl();
+    final SecureStorageManager secureStorageManager = SecureStorageManagerImpl(
+      ProviderContainer().read(loggerServiceProvider),
+    );
     String? encryptKey = await secureStorageManager.getAsync(key: 'encryptKey');
     if (encryptKey == null) {
       final key = base64UrlEncode(Hive.generateSecureKey());
@@ -36,16 +46,16 @@ class CacheManagerImpl implements CacheManager {
       );
       encryptKey = key;
     }
-    // final encryptionKey = base64Url.decode(encryptKey);
+    final encryptionKey = base64Url.decode(encryptKey);
 
     //TODO: register adapter and open box here
-    //TODO: create snippet for this
+    // TODO: create snippet for this
     //? Register nested cache dto first so that no typeid error comes
-    // _hive.registerAdapter<UserCacheDto>(UserCacheDtoAdapter());
-    // await _hive.openBox<UserCacheDto>(
-    //   UserCacheDto.boxKey,
-    //   encryptionCipher: HiveAesCipher(encryptionKey),
-    // );
+    _hive.registerAdapter<UserCacheDto>(UserCacheDtoAdapter());
+    await _hive.openBox<UserCacheDto>(
+      UserCacheDto.boxKey,
+      encryptionCipher: HiveAesCipher(encryptionKey),
+    );
   }
 
   @override
@@ -65,7 +75,8 @@ class CacheManagerImpl implements CacheManager {
       final box = _hive.box<HiveDto>(boxKey);
       await box.put(data.number, data);
       return true;
-    } catch (e) {
+    } catch (ex, s) {
+      _loggerService.logException(ex, s);
       return false;
     }
   }
@@ -81,7 +92,8 @@ class CacheManagerImpl implements CacheManager {
       await box.clear();
       await box.putAll(dataMap);
       return true;
-    } catch (e) {
+    } catch (ex, s) {
+      _loggerService.logException(ex, s);
       return false;
     }
   }
@@ -94,7 +106,8 @@ class CacheManagerImpl implements CacheManager {
     try {
       final box = _hive.box<HiveDto>(boxKey);
       return box.get(number);
-    } catch (e) {
+    } catch (ex, s) {
+      _loggerService.logException(ex, s);
       return null;
     }
   }
@@ -109,7 +122,8 @@ class CacheManagerImpl implements CacheManager {
           .whereType<HiveDto>()
           .toList();
       return dataList;
-    } catch (e) {
+    } catch (ex, s) {
+      _loggerService.logException(ex, s);
       return null;
     }
   }
@@ -133,7 +147,8 @@ class CacheManagerImpl implements CacheManager {
       ).whereType<HiveDto>().toList();
 
       return pagedDataList;
-    } catch (e) {
+    } catch (ex, s) {
+      _loggerService.logException(ex, s);
       return null;
     }
   }
@@ -143,13 +158,11 @@ class CacheManagerImpl implements CacheManager {
     String boxKey,
     HiveDto data,
   ) async {
-    try {
+    return _tryCacheRequest<HiveDto>(() async {
       final box = _hive.box<HiveDto>(boxKey);
       await box.put(data.number, data);
       return true;
-    } catch (e) {
-      return false;
-    }
+    });
   }
 
   @override
@@ -157,24 +170,31 @@ class CacheManagerImpl implements CacheManager {
     String boxKey,
     String number,
   ) async {
-    try {
+    return _tryCacheRequest<HiveDto>(() async {
       final box = _hive.box<HiveDto>(boxKey);
       await box.delete(number);
       return true;
-    } catch (e) {
-      return false;
-    }
+    });
   }
 
   @override
   Future<bool> clearAll<HiveDto extends CacheDto>(
     String boxKey,
   ) async {
-    try {
+    return _tryCacheRequest<HiveDto>(() async {
       final box = _hive.box<HiveDto>(boxKey);
       await box.clear();
       return true;
-    } catch (e) {
+    });
+  }
+
+  Future<bool> _tryCacheRequest<T extends CacheDto>(
+    CacheMethod<T> executeMethod,
+  ) async {
+    try {
+      return await executeMethod();
+    } catch (ex, s) {
+      _loggerService.logException(ex, s);
       return false;
     }
   }
