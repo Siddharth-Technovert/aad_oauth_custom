@@ -13,13 +13,13 @@ class SupportStateService {
   }
 
   Future<List<BiometricType>> getAvailableBiometrics() async {
-    late List<BiometricType> _availableBiometrics;
+    late List<BiometricType> availableBiometrics;
     try {
-      _availableBiometrics = await auth.getAvailableBiometrics();
+      availableBiometrics = await auth.getAvailableBiometrics();
     } on PlatformException {
-      _availableBiometrics = <BiometricType>[];
+      availableBiometrics = <BiometricType>[];
     }
 
-    return _availableBiometrics;
+    return availableBiometrics;
   }
 }
