@@ -1,15 +1,15 @@
 import 'package:auth_buttons/auth_buttons.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../../../../core/utils/styles/colors.dart';
-import '../../../../core/utils/styles/ui_helper.dart';
+import '../../../../core/utils/extensions/context_extension.dart';
+import '../../../../core/utils/styles/colors/colors.dart';
+import '../../../../core/utils/styles/dimensions/ui_dimensions.dart';
 import '../../../../domain/enums/account_type.dart';
 import '../../../providers/core/theme_state_provider.dart';
 import '../../../providers/login/login_provider.dart';
 import '../../hooks/app_loc_hook.dart';
-import '../../widgets/buttons/primary_button.dart';
+import '../../widgets/buttons/secondary_button.dart';
 
 class LoginScreen extends HookConsumerWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -27,7 +27,7 @@ class LoginScreen extends HookConsumerWidget {
         body: Container(
           padding: const EdgeInsets.symmetric(horizontal: 32),
           decoration: BoxDecoration(
-            gradient: UIColors.eventBgGradients.first,
+            gradient: UIColors.primaryGradient,
           ),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -35,29 +35,28 @@ class LoginScreen extends HookConsumerWidget {
               const Spacer(),
               Text(
                 "Login",
-                style: Theme.of(context).textTheme.headline6!.copyWith(
-                      color: Colors.white,
-                      fontSize: 28.sp,
-                    ),
+                style: context.h1.copyWith(
+                  color: Colors.white,
+                ),
               ),
-              UIHelper.verticalSpace(64),
+              UIDimensions.verticalSpace(64),
               GoogleAuthButton(
                 onPressed: () async => loginNotifier.logIn(
                   AccountType.google,
                   isSignInButton: true,
                 ),
-                themeMode: ref.read(themeModeProvider),
+                themeMode: ref.watch(themeStateProvider).mode,
               ),
-              UIHelper.verticalSpaceMedium,
+              UIDimensions.verticalSpaceMedium,
               FacebookAuthButton(
                 onPressed: () async => loginNotifier.logIn(
                   AccountType.facebook,
                   isSignInButton: true,
                 ),
-                themeMode: ref.read(themeModeProvider),
+                themeMode: ref.watch(themeStateProvider).mode,
               ),
-              UIHelper.verticalSpaceMedium,
-              PrimaryButton(
+              UIDimensions.verticalSpaceMedium,
+              SecondaryButton(
                 onPressed: () async => loginNotifier.logIn(
                   AccountType.guest,
                   isSignInButton: true,
@@ -71,34 +70,34 @@ class LoginScreen extends HookConsumerWidget {
                   children: <TextSpan>[
                     TextSpan(
                       text: appLocalization.policyAgree,
-                      style: Theme.of(context).textTheme.bodyText1!.copyWith(
-                            color: Colors.white,
-                          ),
+                      style: context.bodyText1.copyWith(
+                        color: Colors.white,
+                      ),
                     ),
                     TextSpan(
                       text: appLocalization.policyTerm,
-                      style: Theme.of(context).textTheme.bodyText1!.copyWith(
-                            decoration: TextDecoration.underline,
-                            color: Colors.white,
-                          ),
+                      style: context.bodyText1.copyWith(
+                        decoration: TextDecoration.underline,
+                        color: Colors.white,
+                      ),
                     ),
                     TextSpan(
                       text: appLocalization.policyAcknowledge,
-                      style: Theme.of(context).textTheme.bodyText1!.copyWith(
-                            color: Colors.white,
-                          ),
+                      style: context.bodyText1.copyWith(
+                        color: Colors.white,
+                      ),
                     ),
                     TextSpan(
                       text: appLocalization.privacyPolicy,
-                      style: Theme.of(context).textTheme.bodyText1!.copyWith(
-                            decoration: TextDecoration.underline,
-                            color: Colors.white,
-                          ),
+                      style: context.bodyText1.copyWith(
+                        decoration: TextDecoration.underline,
+                        color: Colors.white,
+                      ),
                     )
                   ],
                 ),
               ),
-              UIHelper.verticalSpace(64),
+              UIDimensions.verticalSpace(64),
             ],
           ),
         ),

@@ -3,7 +3,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../../../../core/utils/styles/colors.dart';
+import '../../../../core/utils/styles/colors/colors.dart';
 import '../../../providers/core/router_provider.dart';
 import '../../hooks/is_dark_mode_hook.dart';
 
@@ -62,8 +62,8 @@ class CloseButtonBottomSheet extends HookConsumerWidget {
                       },
                       style: ButtonStyle(
                         backgroundColor: isDarkMode
-                            ? UIColors.buttonColorDark
-                            : UIColors.buttonColorLight,
+                            ? UIColors.dark.button
+                            : UIColors.light.button,
                         shape: MaterialStateProperty.all(
                           const CircleBorder(),
                         ),

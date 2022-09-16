@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class UIHelper {
+class UIDimensions {
   static const Widget verticalSpaceSmall = RSizedBox(height: 8);
   static const Widget verticalSpaceMedium = RSizedBox(height: 16);
   static const Widget verticalSpaceLarge = RSizedBox(height: 32);

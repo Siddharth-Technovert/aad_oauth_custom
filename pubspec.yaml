@@ -77,12 +77,9 @@ dependencies:
 
     #Bottom Sheets
     modal_bottom_sheet: ^2.1.2
+    rubber: ^1.0.1
 
     #Animation
-    lottie: ^1.4.2
-
-    #Fonts
-    google_fonts: ^3.0.1
 
     #Background
     workmanager: ^0.5.0
@@ -98,7 +95,6 @@ dependencies:
     path: ^1.8.2
     device_apps: ^2.2.0
     shimmer: ^2.0.0
-    rubber: ^1.0.1
     auth_buttons: ^3.0.0
 
 dev_dependencies:

@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../../core/utils/styles/colors.dart';
-import '../../../../core/utils/styles/ui_helper.dart';
+import '../../../../core/utils/extensions/context_extension.dart';
+import '../../../../core/utils/styles/colors/colors.dart';
+import '../../../../core/utils/styles/dimensions/ui_dimensions.dart';
 import '../../hooks/is_dark_mode_hook.dart';
 
 class SecondaryButton extends HookWidget {
@@ -33,8 +34,8 @@ class SecondaryButton extends HookWidget {
         borderRadius: BorderRadius.circular(100).r,
         gradient: UIColors.secondaryGradient,
         boxShadow: isDark
-            ? UIColors.secondaryBoxShadowDark
-            : UIColors.secondaryBoxShadowLight,
+            ? UIColors.dark.secondaryBoxShadow
+            : UIColors.light.secondaryBoxShadow,
       ),
       child: ElevatedButton(
         onPressed: onPressed,
@@ -46,7 +47,7 @@ class SecondaryButton extends HookWidget {
           backgroundColor: Colors.transparent,
           shadowColor: Colors.transparent,
           foregroundColor:
-              isDark ? UIColors.secondaryColor : UIColors.secondaryColorDark,
+              isDark ? UIColors.light.secondary : UIColors.dark.secondary,
           elevation: 3,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(100).r,
@@ -62,16 +63,14 @@ class SecondaryButton extends HookWidget {
                   color: Colors.white,
                   size: 20.sm,
                 ),
-              if (prefixIconData != null) UIHelper.horizontalSpace(6),
+              if (prefixIconData != null) UIDimensions.horizontalSpace(6),
               Text(
                 text,
-                style: Theme.of(context).textTheme.bodyText2!.copyWith(
-                      fontWeight: FontWeight.w600,
-                      fontSize: 16.sp,
-                      color: Colors.white,
-                    ),
+                style: context.h5.copyWith(
+                  color: Colors.white,
+                ),
               ),
-              if (suffixIconData != null) UIHelper.horizontalSpace(6),
+              if (suffixIconData != null) UIDimensions.horizontalSpace(6),
               if (suffixIconData != null)
                 Icon(
                   suffixIconData,

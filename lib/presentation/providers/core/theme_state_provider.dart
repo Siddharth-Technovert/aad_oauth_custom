@@ -1,17 +1,7 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../../core/configs/app_theme.dart';
 import '../../../domain/states/core/theme/theme_state.dart';
 import '../../../domain/usecases/storage/theme/theme_storage_usecases.dart';
-
-final themeModeProvider = StateProvider<ThemeMode>((ref) {
-  return ref.watch(themeStateProvider).when(
-        light: () => ThemeMode.light,
-        dark: () => ThemeMode.dark,
-        system: () => ThemeMode.system,
-      );
-});
 
 final themeStateProvider =
     StateNotifierProvider<ThemeStateNotifier, ThemeState>((ref) {
@@ -37,7 +27,4 @@ class ThemeStateNotifier extends StateNotifier<ThemeState> {
     await _writeThemeUseCase(themeState);
     state = themeState;
   }
-
-  ThemeData get lightThemeData => AppTheme.lightTheme;
-  ThemeData get darkThemeData => AppTheme.darkTheme;
 }

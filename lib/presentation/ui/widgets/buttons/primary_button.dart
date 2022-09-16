@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../../core/utils/styles/colors.dart';
-import '../../../../core/utils/styles/ui_helper.dart';
+import '../../../../core/utils/extensions/context_extension.dart';
+import '../../../../core/utils/styles/colors/colors.dart';
+import '../../../../core/utils/styles/dimensions/ui_dimensions.dart';
 import '../../hooks/is_dark_mode_hook.dart';
 
 class PrimaryButton extends HookWidget {
@@ -34,8 +35,8 @@ class PrimaryButton extends HookWidget {
         borderRadius: BorderRadius.circular(100).r,
         gradient: UIColors.primaryGradient,
         boxShadow: isDark
-            ? UIColors.primaryBoxShadowLDark
-            : UIColors.primaryBoxShadowLight,
+            ? UIColors.dark.primaryBoxShadow
+            : UIColors.light.primaryBoxShadow,
       ),
       child: ElevatedButton(
         onPressed: onPressed,
@@ -61,16 +62,14 @@ class PrimaryButton extends HookWidget {
                   color: Colors.white,
                   size: 28.sm,
                 ),
-              if (prefixIconData != null) UIHelper.horizontalSpace(6),
+              if (prefixIconData != null) UIDimensions.horizontalSpace(6),
               Text(
                 text,
-                style: Theme.of(context).textTheme.bodyText2!.copyWith(
-                      fontWeight: FontWeight.w600,
-                      fontSize: 16.sp,
-                      color: Colors.white,
-                    ),
+                style: context.h5.copyWith(
+                  color: Colors.white,
+                ),
               ),
-              if (suffixIconData != null) UIHelper.horizontalSpace(6),
+              if (suffixIconData != null) UIDimensions.horizontalSpace(6),
               if (suffixIconData != null)
                 Icon(
                   suffixIconData,

@@ -3,7 +3,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../core/router/app_router.gr.dart';
-import '../../../core/utils/styles/colors.dart';
+import '../../../core/utils/extensions/context_extension.dart';
+import '../../../core/utils/styles/colors/colors.dart';
 import '../../../domain/models/user/user.dart';
 import '../../../domain/states/core/theme/theme_state.dart';
 import '../../providers/core/router_provider.dart';
@@ -28,18 +29,14 @@ class AppDrawer extends HookConsumerWidget {
           return ListView(
             children: [
               UserAccountsDrawerHeader(
-                decoration: const BoxDecoration(
+                decoration: BoxDecoration(
                   gradient: UIColors.primaryGradient,
                 ),
                 accountName: Text(
                   appLoc.helloMsg(
                     user.name,
                   ),
-                  style: Theme.of(context).textTheme.headline6!.copyWith(
-                        color: Colors.white,
-                        fontSize: 20.0.sp,
-                        fontWeight: FontWeight.w500,
-                      ),
+                  style: context.h3.copyWith(color: Colors.white),
                 ),
                 accountEmail: const Text(""),
                 currentAccountPicture: Container(
@@ -70,10 +67,7 @@ class AppDrawer extends HookConsumerWidget {
               SwitchListTile(
                 title: Text(
                   appLoc.switchTheme,
-                  style: Theme.of(context)
-                      .textTheme
-                      .bodyText1!
-                      .copyWith(fontSize: 18.sp),
+                  style: context.h5,
                 ),
                 value: isDarkMode,
                 onChanged: (val) async => ref
