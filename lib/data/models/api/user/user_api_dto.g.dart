@@ -19,7 +19,7 @@ Map<String, dynamic> _$$_UserApiDtoToJson(_$_UserApiDto instance) =>
       'id': instance.id,
       'name': instance.name,
       'profileImage': instance.profileImage,
-      'accountType': _$AccountTypeEnumMap[instance.accountType],
+      'accountType': _$AccountTypeEnumMap[instance.accountType]!,
     };
 
 const _$AccountTypeEnumMap = {

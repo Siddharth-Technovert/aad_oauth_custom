@@ -369,7 +369,7 @@ abstract class _CacheError extends AppException {
   const factory _CacheError(final CacheException error) = _$_CacheError;
   const _CacheError._() : super._();
 
-  CacheException get error => throw _privateConstructorUsedError;
+  CacheException get error;
   @JsonKey(ignore: true)
   _$$_CacheErrorCopyWith<_$_CacheError> get copyWith =>
       throw _privateConstructorUsedError;
@@ -654,7 +654,7 @@ abstract class _ApiError extends AppException {
   const factory _ApiError(final ApiException error) = _$_ApiError;
   const _ApiError._() : super._();
 
-  ApiException get error => throw _privateConstructorUsedError;
+  ApiException get error;
   @JsonKey(ignore: true)
   _$$_ApiErrorCopyWith<_$_ApiError> get copyWith =>
       throw _privateConstructorUsedError;
@@ -807,7 +807,7 @@ abstract class _UnknownError extends AppException {
   const factory _UnknownError(final dynamic error) = _$_UnknownError;
   const _UnknownError._() : super._();
 
-  dynamic get error => throw _privateConstructorUsedError;
+  dynamic get error;
   @JsonKey(ignore: true)
   _$$_UnknownErrorCopyWith<_$_UnknownError> get copyWith =>
       throw _privateConstructorUsedError;

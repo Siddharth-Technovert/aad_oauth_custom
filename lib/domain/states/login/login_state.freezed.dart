@@ -340,7 +340,7 @@ abstract class _Loading extends LoginState {
   const factory _Loading(final AccountType accountType) = _$_Loading;
   const _Loading._() : super._();
 
-  AccountType get accountType => throw _privateConstructorUsedError;
+  AccountType get accountType;
   @JsonKey(ignore: true)
   _$$_LoadingCopyWith<_$_Loading> get copyWith =>
       throw _privateConstructorUsedError;
@@ -494,7 +494,7 @@ abstract class _Success extends LoginState {
   const factory _Success(final User user) = _$_Success;
   const _Success._() : super._();
 
-  User get user => throw _privateConstructorUsedError;
+  User get user;
   @JsonKey(ignore: true)
   _$$_SuccessCopyWith<_$_Success> get copyWith =>
       throw _privateConstructorUsedError;
@@ -638,7 +638,7 @@ abstract class _Error extends LoginState {
   const factory _Error(final String message) = _$_Error;
   const _Error._() : super._();
 
-  String get message => throw _privateConstructorUsedError;
+  String get message;
   @JsonKey(ignore: true)
   _$$_ErrorCopyWith<_$_Error> get copyWith =>
       throw _privateConstructorUsedError;

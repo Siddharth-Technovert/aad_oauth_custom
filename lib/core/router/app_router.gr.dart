@@ -10,6 +10,7 @@
 //
 // ignore_for_file: type=lint
 
+// ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:auto_route/auto_route.dart' as _i3;
 import 'package:flutter/material.dart' as _i4;
 
@@ -27,32 +28,48 @@ class AppRouter extends _i3.RootStackRouter {
   final Map<String, _i3.PageFactory> pagesMap = {
     AppStartRoute.name: (routeData) {
       return _i3.MaterialPageX<dynamic>(
-          routeData: routeData, child: const _i1.AppStartScreen());
+        routeData: routeData,
+        child: const _i1.AppStartScreen(),
+      );
     },
     LogoutBottomSheetRoute.name: (routeData) {
       return _i3.CustomPage<dynamic>(
-          routeData: routeData,
-          child: const _i2.LogoutBottomSheet(),
-          customRouteBuilder: _i5.BottomSheetFactory.modalSheetBuilder,
-          opaque: true,
-          barrierDismissible: false);
-    }
+        routeData: routeData,
+        child: const _i2.LogoutBottomSheet(),
+        customRouteBuilder: _i5.BottomSheetFactory.modalSheetBuilder,
+        opaque: true,
+        barrierDismissible: false,
+      );
+    },
   };
 
   @override
   List<_i3.RouteConfig> get routes => [
-        _i3.RouteConfig(AppStartRoute.name, path: '/'),
-        _i3.RouteConfig(LogoutBottomSheetRoute.name,
-            path: '/logout-bottom-sheet'),
-        _i3.RouteConfig('*#redirect',
-            path: '*', redirectTo: '/', fullMatch: true)
+        _i3.RouteConfig(
+          AppStartRoute.name,
+          path: '/',
+        ),
+        _i3.RouteConfig(
+          LogoutBottomSheetRoute.name,
+          path: '/logout-bottom-sheet',
+        ),
+        _i3.RouteConfig(
+          '*#redirect',
+          path: '*',
+          redirectTo: '/',
+          fullMatch: true,
+        ),
       ];
 }
 
 /// generated route for
 /// [_i1.AppStartScreen]
 class AppStartRoute extends _i3.PageRouteInfo<void> {
-  const AppStartRoute() : super(AppStartRoute.name, path: '/');
+  const AppStartRoute()
+      : super(
+          AppStartRoute.name,
+          path: '/',
+        );
 
   static const String name = 'AppStartRoute';
 }
@@ -61,7 +78,10 @@ class AppStartRoute extends _i3.PageRouteInfo<void> {
 /// [_i2.LogoutBottomSheet]
 class LogoutBottomSheetRoute extends _i3.PageRouteInfo<void> {
   const LogoutBottomSheetRoute()
-      : super(LogoutBottomSheetRoute.name, path: '/logout-bottom-sheet');
+      : super(
+          LogoutBottomSheetRoute.name,
+          path: '/logout-bottom-sheet',
+        );
 
   static const String name = 'LogoutBottomSheetRoute';
 }

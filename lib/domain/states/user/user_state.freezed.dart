@@ -208,7 +208,7 @@ abstract class _Available extends UserState {
   const factory _Available(final User user) = _$_Available;
   const _Available._() : super._();
 
-  User get user => throw _privateConstructorUsedError;
+  User get user;
   @JsonKey(ignore: true)
   _$$_AvailableCopyWith<_$_Available> get copyWith =>
       throw _privateConstructorUsedError;

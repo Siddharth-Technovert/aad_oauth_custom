@@ -583,7 +583,7 @@ abstract class _Authenticated extends AppState {
   const factory _Authenticated(final User user) = _$_Authenticated;
   const _Authenticated._() : super._();
 
-  User get user => throw _privateConstructorUsedError;
+  User get user;
   @JsonKey(ignore: true)
   _$$_AuthenticatedCopyWith<_$_Authenticated> get copyWith =>
       throw _privateConstructorUsedError;

@@ -181,7 +181,9 @@ class _$_UserApiDto extends _UserApiDto {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_UserApiDtoToJson(this);
+    return _$$_UserApiDtoToJson(
+      this,
+    );
   }
 }
 
@@ -197,13 +199,13 @@ abstract class _UserApiDto extends UserApiDto {
       _$_UserApiDto.fromJson;
 
   @override
-  String? get id => throw _privateConstructorUsedError;
+  String? get id;
   @override
-  String get name => throw _privateConstructorUsedError;
+  String get name;
   @override
-  String? get profileImage => throw _privateConstructorUsedError;
+  String? get profileImage;
   @override
-  AccountType get accountType => throw _privateConstructorUsedError;
+  AccountType get accountType;
   @override
   @JsonKey(ignore: true)
   _$$_UserApiDtoCopyWith<_$_UserApiDto> get copyWith =>

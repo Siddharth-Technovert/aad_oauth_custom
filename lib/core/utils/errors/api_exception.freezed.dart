@@ -1682,7 +1682,7 @@ abstract class _DefaultError extends ApiException {
   const factory _DefaultError(final String error) = _$_DefaultError;
   const _DefaultError._() : super._();
 
-  String get error => throw _privateConstructorUsedError;
+  String get error;
   @JsonKey(ignore: true)
   _$$_DefaultErrorCopyWith<_$_DefaultError> get copyWith =>
       throw _privateConstructorUsedError;

@@ -175,13 +175,13 @@ abstract class _User extends User {
   const _User._() : super._();
 
   @override
-  String? get id => throw _privateConstructorUsedError;
+  String? get id;
   @override
-  String get name => throw _privateConstructorUsedError;
+  String get name;
   @override
-  String? get profileImage => throw _privateConstructorUsedError;
+  String? get profileImage;
   @override
-  AccountType get accountType => throw _privateConstructorUsedError;
+  AccountType get accountType;
   @override
   @JsonKey(ignore: true)
   _$$_UserCopyWith<_$_User> get copyWith => throw _privateConstructorUsedError;
