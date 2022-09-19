@@ -96,6 +96,7 @@ dependencies:
     device_apps: ^2.2.0
     shimmer: ^2.0.0
     auth_buttons: ^3.0.0
+    envied: ^0.2.3
 
 dev_dependencies:
     flutter_test:
@@ -110,6 +111,7 @@ dev_dependencies:
     mockito: ^5.3.0
     flutter_gen_runner: ^4.3.0
     injectable_generator: ^1.5.4
+    envied_generator: ^0.2.3
 
 flutter_gen:
     output: lib/core/utils/assets_gen/ # Optional (default: lib/gen/)

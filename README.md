@@ -7,6 +7,8 @@ A starting boilerplate project for flutter using riverpod.
 - Follows Clean Architecture
 - Riverpod State Management (used for service dependency injection as well) and Flutter Hooks
 - Testing (Unit and Widget Testing, Mocking Data)
+- Flavors
+- Environment file for storing keys using Envied package
 - Api Client (using dio)
 - Cache Client (using hive)
 - UseCases

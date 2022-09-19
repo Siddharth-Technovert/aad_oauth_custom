@@ -1,8 +1,9 @@
 import 'package:flutter/services.dart';
 
+import '../env/env.dart';
+
 class AppConfiguration {
-  //TODO: Add your base url here
-  static const baseUrl = "";
+  static String baseUrl = Env.baseUrlKey;
 
   static const EventChannel eventChannel =
       EventChannel('com.technovert.boilerplate/eventChannel');

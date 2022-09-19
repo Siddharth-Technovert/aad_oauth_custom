@@ -1,6 +1,8 @@
 #Flutter Version Management
 .fvm/flutter_sdk
 
+lib/core/env/env.g.dart
+
 # Miscellaneous
 *.class
 *.log
