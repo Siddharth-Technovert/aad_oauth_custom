@@ -63,5 +63,29 @@
     <string>Need access to camera to capture image.</string>
     <key>NSMicrophoneUsageDescription</key>
     <string>Need access to microphone to capture audio</string>
-  </dict>
+  	<key>CADisableMinimumFrameDurationOnPhone</key>
+	<true/>
+  <key>CFBundleURLTypes</key>
+  <array>
+    <dict>
+      <key>CFBundleURLSchemes</key>
+      <array>
+        <string>fb422445329755045</string>
+      </array>
+    </dict>
+  </array>
+  <key>FacebookAppID</key>
+  <string>422445329755045</string>
+  <key>FacebookClientToken</key>
+  <string>dfc102f6cb524fb58c0109b926a87925</string>
+  <key>FacebookDisplayName</key>
+  <string>Riverpod Boilerplate</string>
+  <key>LSApplicationQueriesSchemes</key>
+  <array>
+    <string>fbapi</string>
+    <string>fb-messenger-share-api</string>
+    <string>fbauth2</string>
+    <string>fbshareextension</string>
+  </array>
+</dict>
 </plist>
