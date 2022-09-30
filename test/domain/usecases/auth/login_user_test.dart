@@ -41,9 +41,9 @@ void main() {
     'should return login.error on login failure',
     () async {
       const accountType = AccountType.google; //can be any account type
-      const DataState<User> dataState = DataState.error(
+      final DataState<User> dataState = const DataState.error(
         AppException.unknownError('Login failed'),
-      );
+      ) as DataState<User>;
       // arrange
       when(mockAuthRepository.login(AccountType.google)).thenAnswer(
         (_) async => dataState,
