@@ -31,7 +31,7 @@ class HomeNotifier extends StateNotifier<HomeState> {
     );
     await _read(appStateProvider.notifier).unAuthenticateState();
     // state = const HomeState.loggedOut();
-    _read(loggerServiceProvider).logInfo(
+    _read(loggerServiceProvider).infoLog(
       "logout user",
       className: "Home",
     );

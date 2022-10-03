@@ -28,7 +28,7 @@ abstract class Main {
         ),
       );
     }, (ex, s) {
-      loggerService.logException(ex, s);
+      loggerService.errorLog(ex, s);
     });
   }
 }

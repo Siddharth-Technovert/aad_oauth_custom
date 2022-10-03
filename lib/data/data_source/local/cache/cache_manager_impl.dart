@@ -7,7 +7,7 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
 
-import '../../../../core/device/logger_service.dart';
+import '../../../../core/device/logging/logger_service.dart';
 import '../../../../domain/service_providers.dart';
 import '../../../mappers/cache_dto.dart';
 import '../../../models/cache/user/user_cache_dto.dart';
@@ -76,7 +76,7 @@ class CacheManagerImpl implements CacheManager {
       await box.put(data.number, data);
       return true;
     } catch (ex, s) {
-      _loggerService.logException(ex, s);
+      _loggerService.errorLog(ex, s);
       return false;
     }
   }
@@ -93,7 +93,7 @@ class CacheManagerImpl implements CacheManager {
       await box.putAll(dataMap);
       return true;
     } catch (ex, s) {
-      _loggerService.logException(ex, s);
+      _loggerService.errorLog(ex, s);
       return false;
     }
   }
@@ -107,7 +107,7 @@ class CacheManagerImpl implements CacheManager {
       final box = _hive.box<HiveDto>(boxKey);
       return box.get(number);
     } catch (ex, s) {
-      _loggerService.logException(ex, s);
+      _loggerService.errorLog(ex, s);
       return null;
     }
   }
@@ -123,7 +123,7 @@ class CacheManagerImpl implements CacheManager {
           .toList();
       return dataList;
     } catch (ex, s) {
-      _loggerService.logException(ex, s);
+      _loggerService.errorLog(ex, s);
       return null;
     }
   }
@@ -148,7 +148,7 @@ class CacheManagerImpl implements CacheManager {
 
       return pagedDataList;
     } catch (ex, s) {
-      _loggerService.logException(ex, s);
+      _loggerService.errorLog(ex, s);
       return null;
     }
   }
@@ -194,7 +194,7 @@ class CacheManagerImpl implements CacheManager {
     try {
       return await executeMethod();
     } catch (ex, s) {
-      _loggerService.logException(ex, s);
+      _loggerService.errorLog(ex, s);
       return false;
     }
   }

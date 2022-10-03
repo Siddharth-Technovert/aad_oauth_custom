@@ -1,6 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../device/logger_service.dart';
+import '../../device/logging/logger_service.dart';
 
 class RiverpodObserverLog extends ProviderObserver {
   final LoggerService _loggerService;
@@ -11,7 +11,11 @@ class RiverpodObserverLog extends ProviderObserver {
     ProviderBase provider,
     Object? value,
     ProviderContainer container,
-  ) {}
+  ) {
+    _loggerService.debugLog(
+      "Created Provider: ${provider.name ?? provider.runtimeType}",
+    );
+  }
 
   @override
   void didUpdateProvider(
@@ -20,12 +24,9 @@ class RiverpodObserverLog extends ProviderObserver {
     Object? newValue,
     ProviderContainer container,
   ) {
-//     log(
-//       '''
-// "provider": "${provider.name ?? provider.runtimeType}",
-// "newValue": "$newValue"
-//       ''',
-//     );
+    _loggerService.debugLog(
+      "Updated Provider: ${provider.name ?? provider.runtimeType}\nnewValue: $newValue",
+    );
   }
 
   @override
@@ -35,23 +36,27 @@ class RiverpodObserverLog extends ProviderObserver {
     StackTrace stackTrace,
     ProviderContainer container,
   ) {
-    final errorMap = <String, String>{
-      'error': error.toString(),
-      'stackTrace': stackTrace.toString(),
-    };
-    _loggerService.logInfo(
-      '''
-Provider ${provider.name ?? provider.runtimeType} failed: ${errorMap.toString()}
-      ''',
-      className: "",
-      methodName: "",
-    );
-    _loggerService.logException(error, stackTrace);
+    // final errorMap = <String, String>{
+    //   'error': error.toString(),
+    //   'stackTrace': stackTrace.toString(),
+    // };
+//     _loggerService.infoLog(
+//       '''
+// Provider ${provider.name ?? provider.runtimeType} failed: ${errorMap.toString()}
+//       ''',
+//       className: "",
+//       methodName: "",
+//     );
+    _loggerService.errorLog(error, stackTrace);
   }
 
   @override
   void didDisposeProvider(
     ProviderBase provider,
     ProviderContainer containers,
-  ) {}
+  ) {
+    _loggerService.debugLog(
+      "Disposed Provider: ${provider.name ?? provider.runtimeType}",
+    );
+  }
 }

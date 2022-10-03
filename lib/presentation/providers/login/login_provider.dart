@@ -35,7 +35,7 @@ class LoginNotifier extends StateNotifier<LoginState> {
       success: (user) async {
         state = LoginState.success(user);
         await _read(appStateProvider.notifier).authenticateState(user);
-        _read(loggerServiceProvider).logInfo(
+        _read(loggerServiceProvider).infoLog(
           "login with $accountType account",
           className: "Login",
         );

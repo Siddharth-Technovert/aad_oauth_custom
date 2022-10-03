@@ -1,16 +1,15 @@
 import 'dart:io';
 
 import 'package:dio/dio.dart';
+import 'package:flutter_loggy_dio/flutter_loggy_dio.dart';
 
 import '../../../../core/configs/app_serializers.dart';
 import '../../../../core/device/connectivity_service.dart';
-import '../../../../core/device/logger_service.dart';
 import '../../../../core/utils/errors/api_exception.dart';
 import '../../../../core/utils/errors/app_exception.dart';
 import '../../../mappers/api_dto.dart';
 import '../../local/secure_storage/secure_storage_manager.dart';
 import '../interceptor/auth_interceptor.dart';
-import '../interceptor/network_log_interceptor.dart';
 import '../response/api_response.dart';
 import 'api_manager.dart';
 
@@ -18,14 +17,14 @@ typedef HttpLibraryMethod<T> = Future<ApiResponse<T>> Function();
 
 class ApiManagerImpl extends ApiManager {
   final SecureStorageManager _secureStorageManager;
-  final LoggerService _loggerService;
+  // final LoggerService _loggerService;
 
   late final Dio _dio;
   late final CancelToken _cancelToken;
 
   ApiManagerImpl(
     this._secureStorageManager,
-    this._loggerService,
+    // this._loggerService,
   ) {
     final BaseOptions options = BaseOptions(
       connectTimeout: 50000,
@@ -37,7 +36,8 @@ class ApiManagerImpl extends ApiManager {
 
     _dio = Dio(options);
     _dio.interceptors.addAll([
-      NetworkLogInterceptor(_loggerService),
+      LoggyDioInterceptor(),
+      // NetworkLogInterceptor(_loggerService),
       AuthInterceptor(_secureStorageManager),
     ]);
     _cancelToken = CancelToken();
@@ -243,13 +243,13 @@ class ApiManagerImpl extends ApiManager {
       } else {
         throw const AppException.networkError();
       }
-    } on DioError catch (ex, s) {
-      _loggerService.logException(ex, s);
+    } on DioError catch (ex, _) {
+      // _loggerService.errorLog(ex, s);
       return ApiResponse.error(
         AppException.apiError(ApiException.getDioException(ex)),
       );
-    } catch (ex, s) {
-      _loggerService.logException(ex, s);
+    } catch (ex, _) {
+      // _loggerService.errorLog(ex, s);
       return ApiResponse.error(
         AppException.apiError(ApiException.defaultError(ex.toString())),
       );

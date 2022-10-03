@@ -7,7 +7,7 @@ import '../core/device/file_picker_service.dart';
 import '../core/device/local_auth/local_auth_service.dart';
 import '../core/device/local_auth/support_state_service.dart';
 import '../core/device/local_notification_service.dart';
-import '../core/device/logger_service.dart';
+import '../core/device/logging/logger_service.dart';
 import '../core/device/permission_service.dart';
 import '../data/data_source/api/api_manager/api_manager.dart';
 import '../data/data_source/api/api_manager/api_manager_impl.dart';
@@ -56,7 +56,7 @@ final cacheManagerProvider = Provider<CacheManager>(
 final apiManagerProvider = Provider<ApiManager>((ref) {
   return ApiManagerImpl(
     ref.read(secureStorageManagerProvider),
-    ref.read(loggerServiceProvider),
+    // ref.read(loggerServiceProvider),
   );
 });
 final apiClientProvider = Provider((ref) {

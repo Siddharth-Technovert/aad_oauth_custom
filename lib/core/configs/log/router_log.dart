@@ -1,7 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/widgets.dart';
 
-import '../../device/logger_service.dart';
+import '../../device/logging/logger_service.dart';
 
 class RouterLog extends AutoRouterObserver {
   final LoggerService _log;
@@ -9,23 +9,23 @@ class RouterLog extends AutoRouterObserver {
 
   @override
   void didPush(Route route, Route? previousRoute) {
-    _log.logInfo('New route pushed: ${route.settings.name}');
+    _log.infoLog('New route pushed: ${route.settings.name}');
   }
 
   @override
   void didPop(Route route, Route? previousRoute) {
-    _log.logInfo(
+    _log.infoLog(
       'Route popped: ${route.settings.name}, New route: ${previousRoute!.settings.name}',
     );
   }
 
   @override
   void didInitTabRoute(TabPageRoute route, TabPageRoute? previousRoute) {
-    _log.logInfo('Tab route visited: ${route.name}');
+    _log.infoLog('Tab route visited: ${route.name}');
   }
 
   @override
   void didChangeTabRoute(TabPageRoute route, TabPageRoute previousRoute) {
-    _log.logInfo('Tab route re-visited: ${route.name}');
+    _log.infoLog('Tab route re-visited: ${route.name}');
   }
 }

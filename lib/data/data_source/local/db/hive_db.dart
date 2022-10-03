@@ -5,7 +5,7 @@ import 'package:hive/hive.dart';
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
 
-import '../../../../core/device/logger_service.dart';
+import '../../../../core/device/logging/logger_service.dart';
 import '../../../../domain/service_providers.dart';
 
 //TODO: Add adapters for other types in configure function
@@ -26,7 +26,7 @@ class HiveDb {
       //TODO: register adapter and open box here
       // Hive.registerAdapter(UserAdapter());
     } catch (ex, s) {
-      ProviderContainer().read(loggerServiceProvider).logException(ex, s);
+      ProviderContainer().read(loggerServiceProvider).errorLog(ex, s);
     }
   }
 
@@ -43,7 +43,7 @@ class HiveDb {
       final box = await _openBox<T>(boxName);
       return (box != null) ? box.values.toList() : <T>[];
     } catch (ex, s) {
-      _loggerService.logException(ex, s);
+      _loggerService.errorLog(ex, s);
       return null;
     } finally {
       if (Hive.isBoxOpen(boxName)) await Hive.close();
@@ -55,7 +55,7 @@ class HiveDb {
       final box = await _openBox<T>(boxName);
       await box?.addAll(values);
     } catch (ex, s) {
-      _loggerService.logException(ex, s);
+      _loggerService.errorLog(ex, s);
     } finally {
       if (Hive.isBoxOpen(boxName)) await Hive.close();
     }
@@ -66,7 +66,7 @@ class HiveDb {
       final box = await _openBox<T>(boxName);
       await box?.clear();
     } catch (ex, s) {
-      _loggerService.logException(ex, s);
+      _loggerService.errorLog(ex, s);
     } finally {
       if (Hive.isBoxOpen(boxName)) await Hive.close();
     }
@@ -80,7 +80,7 @@ class HiveDb {
       });
       await Hive.close();
     } catch (ex, s) {
-      _loggerService.logException(ex, s);
+      _loggerService.errorLog(ex, s);
     }
   }
 }

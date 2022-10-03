@@ -1,6 +1,6 @@
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
-import '../../../../core/device/logger_service.dart';
+import '../../../../core/device/logging/logger_service.dart';
 import 'secure_storage_manager.dart';
 
 class SecureStorageManagerImpl implements SecureStorageManager {
@@ -25,7 +25,7 @@ class SecureStorageManagerImpl implements SecureStorageManager {
         // aOptions: _androidOptions,
       );
     } catch (ex, s) {
-      _loggerService.logException(ex, s);
+      _loggerService.errorLog(ex, s);
 
       return null;
     }
@@ -44,7 +44,7 @@ class SecureStorageManagerImpl implements SecureStorageManager {
       );
       return true;
     } catch (ex, s) {
-      _loggerService.logException(ex, s);
+      _loggerService.errorLog(ex, s);
 
       return false;
     }
@@ -58,7 +58,7 @@ class SecureStorageManagerImpl implements SecureStorageManager {
         // aOptions: _androidOptions,
       );
     } catch (ex, s) {
-      _loggerService.logException(ex, s);
+      _loggerService.errorLog(ex, s);
     }
   }
 
@@ -69,7 +69,7 @@ class SecureStorageManagerImpl implements SecureStorageManager {
           // aOptions: _androidOptions,
           );
     } catch (ex, s) {
-      _loggerService.logException(ex, s);
+      _loggerService.errorLog(ex, s);
     }
   }
 }

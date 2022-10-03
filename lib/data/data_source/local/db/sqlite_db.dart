@@ -7,7 +7,7 @@ import 'package:path_provider/path_provider.dart';
 import 'package:sqflite/sqflite.dart';
 
 import '../../../../core/configs/constants/db_constants.dart';
-import '../../../../core/device/logger_service.dart';
+import '../../../../core/device/logging/logger_service.dart';
 
 class SQLiteDb {
   final LoggerService _loggerService;
@@ -44,7 +44,7 @@ class SQLiteDb {
     try {
       await db.execute(UserDB.tableCreationQuery);
     } catch (ex, s) {
-      _loggerService.logException(ex, s);
+      _loggerService.errorLog(ex, s);
     }
   }
 
@@ -58,7 +58,7 @@ class SQLiteDb {
       );
       // });
     } catch (ex, s) {
-      _loggerService.logException(ex, s);
+      _loggerService.errorLog(ex, s);
       return null;
     } finally {
       // db.close();
@@ -85,7 +85,7 @@ class SQLiteDb {
       }
       // });
     } catch (ex, s) {
-      _loggerService.logException(ex, s);
+      _loggerService.errorLog(ex, s);
       return null;
     } finally {
       // db.close();
@@ -116,7 +116,7 @@ class SQLiteDb {
       }
       // });
     } catch (ex, s) {
-      _loggerService.logException(ex, s);
+      _loggerService.errorLog(ex, s);
       return null;
     } finally {
       // db.close();
@@ -139,7 +139,7 @@ class SQLiteDb {
       );
       // });
     } catch (ex, s) {
-      _loggerService.logException(ex, s);
+      _loggerService.errorLog(ex, s);
       return 0;
     } finally {
       // db.close();
@@ -163,7 +163,7 @@ class SQLiteDb {
       );
       // });
     } catch (ex, s) {
-      _loggerService.logException(ex, s);
+      _loggerService.errorLog(ex, s);
       return 0;
     } finally {
       // db.close();
@@ -176,7 +176,7 @@ class SQLiteDb {
       var count = 0;
       return count += await db.delete(UserDB.tableName);
     } catch (ex, s) {
-      _loggerService.logException(ex, s);
+      _loggerService.errorLog(ex, s);
       return 0;
     } finally {
       // db.close();
@@ -192,7 +192,7 @@ class SQLiteDb {
       return data;
       // });
     } catch (ex, s) {
-      _loggerService.logException(ex, s);
+      _loggerService.errorLog(ex, s);
       return null;
     } finally {
       // db.close();
