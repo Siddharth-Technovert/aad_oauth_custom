@@ -63,7 +63,7 @@ class FilePickerService {
       final directory = await getApplicationDocumentsDirectory();
       final image = File('${directory.path}/$imageName.png');
       image.writeAsBytesSync(bytes);
-      await Share.shareFiles([image.path], text: shareText);
+      await Share.shareXFiles([XFile(image.path)], text: shareText);
     } catch (e) {
       log("Error : ${e.toString()}", error: e);
     }
