@@ -65,6 +65,13 @@ class HomeScreen extends HookConsumerWidget {
                     textAlign: TextAlign.center,
                   ),
                 ),
+                ElevatedButton(
+                  onPressed: () => throw Exception(),
+                  child: const Text(
+                    "Crash the App! (Firebase Test)",
+                    textAlign: TextAlign.center,
+                  ),
+                ),
               ],
             ),
           ),

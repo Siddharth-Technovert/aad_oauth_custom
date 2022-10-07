@@ -91,3 +91,5 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
     implementation 'androidx.work:work-runtime-ktx:2.7.0' //for work manager on android 12
 }
+
+apply plugin: 'com.google.gms.google-services' //firebase

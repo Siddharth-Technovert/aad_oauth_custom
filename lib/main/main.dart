@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -29,6 +30,7 @@ abstract class Main {
       );
     }, (ex, s) {
       loggerService.errorLog(ex, s);
+      FirebaseCrashlytics.instance.recordError(ex, s, fatal: true);
     });
   }
 }

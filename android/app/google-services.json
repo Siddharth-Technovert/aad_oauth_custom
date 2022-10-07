@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "631065529640",
+    "project_id": "massy-store-test",
+    "storage_bucket": "massy-store-test.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:631065529640:android:60a41b63a016ae0fa3141d",
+        "android_client_info": {
+          "package_name": "com.boilerplate.riverpod.dev"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "631065529640-lgtqqr1d4ji420ak7kso4hgir91ubb5m.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA2cbg6yvDsWrvMJM00DfPCzvmOfp0tAsA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "631065529640-lgtqqr1d4ji420ak7kso4hgir91ubb5m.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "631065529640-7lqegrd8duvpb3dalhhlmkmano3a2jdu.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.boilerplate.riverpod.staging"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
