@@ -7,18 +7,20 @@ import '../core/device/file_picker_service.dart';
 import '../core/device/local_auth/local_auth_service.dart';
 import '../core/device/local_auth/support_state_service.dart';
 import '../core/device/local_notification_service.dart';
-import '../core/device/logging/logger_service.dart';
 import '../core/device/permission_service.dart';
-import '../data/data_source/api/api_manager/api_manager.dart';
-import '../data/data_source/api/api_manager/api_manager_impl.dart';
+import '../core/logger/logger_service.dart';
+import '../core/utils/local_storage/cache/cache_manager.dart';
+import '../core/utils/local_storage/cache/cache_manager_impl.dart';
+import '../core/utils/local_storage/db/hive_db.dart';
+import '../core/utils/local_storage/db/sqlite_db.dart';
+import '../core/utils/local_storage/secure/secure_storage_manager.dart';
+import '../core/utils/local_storage/secure/secure_storage_manager_impl.dart';
+import '../core/utils/api/api_manager/api_manager.dart';
+import '../core/utils/api/api_manager/api_manager_impl.dart';
 import '../data/data_source/api_cache_client.dart';
 import '../data/data_source/api_client.dart';
-import '../data/data_source/local/cache/cache_manager.dart';
-import '../data/data_source/local/cache/cache_manager_impl.dart';
-import '../data/data_source/local/db/hive_db.dart';
-import '../data/data_source/local/db/sqlite_db.dart';
-import '../data/data_source/local/secure_storage/secure_storage_manager.dart';
-import '../data/data_source/local/secure_storage/secure_storage_manager_impl.dart';
+import '../data/data_source/local/user_local_data_source.dart';
+import '../data/data_source/remote/user_remote_data_source.dart';
 import '../data/repositories_impl/auth_repository_impl.dart';
 import '../data/repositories_impl/user_repository_impl.dart';
 import 'repositories/auth_repository.dart';
@@ -72,12 +74,26 @@ final apiCacheClientProvider = Provider((ref) {
   );
 });
 
+///remote data source providers
+final userRemoteDataSource = Provider(
+  (ref) => UserRemoteDataSource(
+    ref.read(apiManagerProvider),
+  ),
+);
+
+///local data source providers
+final userLocalDataProvider = Provider(
+  (ref) => UserLocalDataSource(
+    ref.read(cacheManagerProvider),
+    ref.read(secureStorageManagerProvider),
+  ),
+);
+
 ///http repository providers
 final userRepositoryProvider = Provider<UserRepository>((ref) {
   return UserRepositoryImpl(
-    ref.read(apiManagerProvider),
-    ref.read(secureStorageManagerProvider),
-    ref.read(cacheManagerProvider),
+    ref.read(userRemoteDataSource),
+    ref.read(userLocalDataProvider),
   );
 });
 final authRepositoryProvider = Provider<AuthRepository>((ref) {

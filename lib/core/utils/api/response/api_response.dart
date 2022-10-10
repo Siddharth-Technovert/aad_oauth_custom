@@ -1,6 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-import '../../../../core/utils/errors/app_exception.dart';
+import '../../errors/app_exception.dart';
 
 part 'api_response.freezed.dart';
 

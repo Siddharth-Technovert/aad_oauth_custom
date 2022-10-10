@@ -1,8 +1,6 @@
 name: riverpod_boilerplate
 description: A new Flutter project.
-
 publish_to: "none"
-
 version: 1.0.0+1
 
 environment:
@@ -17,63 +15,62 @@ dependencies:
         sdk: flutter
     intl: ^0.17.0
 
+    #Logger
+    loggy: ^2.0.1+1
+    flutter_loggy_dio: ^2.0.0+3
+
     #State management
     flutter_riverpod: ^1.0.4
     hooks_riverpod: ^1.0.4
     flutter_hooks: ^0.18.5+1
+
+    #Api Client
+    dio: ^4.0.6
+
+    #Storage
+    flutter_secure_storage: ^6.0.0
+    hive: ^2.2.3
+    hive_flutter: ^1.1.0
+    sqflite: ^2.1.0+1
 
     #Responsiveness
     flutter_screenutil: ^5.5.4
     auto_size_text: ^3.0.0
 
     #Permissions
-    permission_handler: ^10.0.0
-
-    #HttpClient
-    dio: ^4.0.6
-
-    #Storage
-    flutter_secure_storage: ^6.0.0
-    sqflite: ^2.0.3+1
-    hive: ^2.2.3
-    hive_flutter: ^1.1.0
-    sembast: ^3.3.0
+    permission_handler: ^10.1.0
 
     #Auth
-    google_sign_in: ^5.4.1
+    google_sign_in: ^5.4.2
     flutter_facebook_auth: ^4.4.1+1
     sign_in_with_apple: ^4.1.0
     local_auth: ^2.1.2
 
     #Code generation
-    json_annotation: ^4.6.0
+    json_annotation: ^4.7.0
     freezed_annotation: ^2.1.0
 
     #Image
-    image_picker: ^0.8.5+3
+    image_picker: ^0.8.6
     cached_network_image: ^3.2.2
     image_gallery_saver: ^1.7.1
 
     #File
-    file_picker: ^5.0.1
+    file_picker: ^5.2.0+1
     flutter_svg: ^1.1.5
-
-    #Logging
-    loggy: ^2.0.1+1
-    flutter_loggy_dio: ^2.0.0+3
 
     #Routing
     auto_route: ^5.0.1
 
     #Connectivity
-    connectivity_plus: ^2.3.6+1
+    connectivity_plus: ^2.3.9
 
     #Onboarding
 
     #Local Notifications
-    flutter_local_notifications: ^9.9.1
+    flutter_local_notifications: ^12.0.0
     flutter_native_timezone: ^2.0.0
-    timezone: ^0.8.0
+    timezone: ^0.9.0
     rxdart: ^0.27.5
 
     #Bottom Sheets
@@ -88,10 +85,10 @@ dependencies:
 
     #Tools
     cupertino_icons: ^1.0.5
-    flutter_native_splash: ^2.2.9
+    flutter_native_splash: ^2.2.10+1
     fluttertoast: ^8.0.9
-    share_plus: ^4.0.4
-    url_launcher: ^6.1.2
+    share_plus: ^4.5.3
+    url_launcher: ^6.1.6
     path_provider: ^2.0.11
     path: ^1.8.2
     device_apps: ^2.2.0
@@ -106,11 +103,11 @@ dev_dependencies:
     lint: ^1.10.0
     build_runner: ^2.2.0
     hive_generator: ^1.1.3
-    json_serializable: ^6.3.1
+    json_serializable: ^6.4.1
     auto_route_generator: ^5.0.2
     freezed: ^2.1.0+1
-    mockito: ^5.3.0
-    flutter_gen_runner: ^4.3.0
+    mockito: ^5.3.2
+    flutter_gen_runner: ^5.0.1
     injectable_generator: ^1.5.4
     envied_generator: ^0.2.3
 

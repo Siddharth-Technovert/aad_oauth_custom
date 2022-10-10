@@ -1,15 +1,15 @@
 import 'package:dio/dio.dart';
 
 import '../../core/device/connectivity_service.dart';
-import '../../core/device/logging/logger_service.dart';
+import '../../core/logger/logger_service.dart';
+import '../../core/utils/local_storage/cache/cache_manager.dart';
+import '../../core/utils/mappers/api_dto.dart';
+import '../../core/utils/mappers/cache_dto.dart';
+import '../../core/utils/mappers/ui_model.dart';
+import '../../core/utils/api/api_manager/api_manager.dart';
 import '../../core/utils/errors/app_exception.dart';
 import '../../core/utils/errors/cache_exception.dart';
-import '../mappers/api_dto.dart';
-import '../mappers/cache_dto.dart';
-import '../mappers/ui_model.dart';
 import '../models/result/data_state.dart';
-import 'api/api_manager/api_manager.dart';
-import 'local/cache/cache_manager.dart';
 
 //TODO: Add Support for editing of data in offline mode use SyncModel concept
 

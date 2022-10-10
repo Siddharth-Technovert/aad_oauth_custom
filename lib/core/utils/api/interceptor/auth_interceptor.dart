@@ -2,8 +2,8 @@ import 'dart:io';
 
 import 'package:dio/dio.dart';
 
-import '../../../../core/configs/constants/app_constants.dart';
-import '../../local/secure_storage/secure_storage_manager.dart';
+import '../../local_storage/secure/secure_storage_manager.dart';
+import '../../../utils/constants/app_constants.dart';
 
 class AuthInterceptor extends Interceptor {
   final SecureStorageManager _secureStorageManager;

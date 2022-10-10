@@ -22,7 +22,7 @@ class NotificationService {
 
     const androidSettings =
         AndroidInitializationSettings('@mipmap/ic_launcher');
-    const iOSSettings = IOSInitializationSettings();
+    const iOSSettings = DarwinInitializationSettings();
     const settings = InitializationSettings(
       android: androidSettings,
       iOS: iOSSettings,
@@ -31,14 +31,19 @@ class NotificationService {
     //? When App is Closed
     final details = await _notifications.getNotificationAppLaunchDetails();
     if (details != null && details.didNotificationLaunchApp) {
-      onSelectedNotifications.add(details.payload);
+      onSelectedNotifications.add(details.notificationResponse!.payload);
     }
 
     _notifications.initialize(
       settings,
-      onSelectNotification: (payload) async {
-        if (payload != null) {
-          onSelectedNotifications.add(payload);
+      onDidReceiveNotificationResponse: (notificationResponse) async {
+        if (notificationResponse.payload != null) {
+          onSelectedNotifications.add(notificationResponse.payload);
+        }
+      },
+      onDidReceiveBackgroundNotificationResponse: (notificationResponse) async {
+        if (notificationResponse.payload != null) {
+          onSelectedNotifications.add(notificationResponse.payload);
         }
       },
     );

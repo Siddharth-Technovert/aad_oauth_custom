@@ -1,19 +1,19 @@
 import 'dart:io';
 
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hive/hive.dart';
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
 
-import '../../../../core/device/logging/logger_service.dart';
-import '../../../../domain/service_providers.dart';
+import '../../../logger/logger_service.dart';
 
 //TODO: Add adapters for other types in configure function
 class HiveDb {
   final LoggerService _loggerService;
   HiveDb(this._loggerService);
 
-  static Future<void> initialize() async {
+  static Future<void> init({
+    required Future<void> registerAdapterAndOpen,
+  }) async {
     try {
       final dir = await getApplicationDocumentsDirectory();
       final String path = join(dir.path, 'hive_local_storage');
@@ -22,11 +22,9 @@ class HiveDb {
         await Directory(path).create();
       }
       Hive.init(path);
-
-      //TODO: register adapter and open box here
-      // Hive.registerAdapter(UserAdapter());
-    } catch (ex, s) {
-      ProviderContainer().read(loggerServiceProvider).errorLog(ex, s);
+      await registerAdapterAndOpen;
+    } catch (ex) {
+      // ProviderContainer().read(loggerServiceProvider).errorLog(ex, s);
     }
   }
 

@@ -6,8 +6,8 @@ import 'package:path/path.dart' as path;
 import 'package:path_provider/path_provider.dart';
 import 'package:sqflite/sqflite.dart';
 
-import '../../../../core/configs/constants/db_constants.dart';
-import '../../../../core/device/logging/logger_service.dart';
+import '../../../logger/logger_service.dart';
+import '../../constants/db_constants.dart';
 
 class SQLiteDb {
   final LoggerService _loggerService;

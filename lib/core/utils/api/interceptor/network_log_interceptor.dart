@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
 
-import '../../../../core/device/logging/logger_service.dart';
+import '../../../logger/logger_service.dart';
 
 class NetworkLogInterceptor extends Interceptor {
   final LoggerService _log;
@@ -8,31 +8,31 @@ class NetworkLogInterceptor extends Interceptor {
   @override
   Future onRequest(
     RequestOptions options,
-    RequestInterceptorHandler requestInterceptorHandler,
+    RequestInterceptorHandler handler,
   ) async {
     _log.infoLog('REQUEST[${options.method}] => PATH: ${options.path}');
-    return super.onRequest(options, requestInterceptorHandler);
+    return super.onRequest(options, handler);
   }
 
   @override
   Future onResponse(
     Response response,
-    ResponseInterceptorHandler responseInterceptorHandler,
+    ResponseInterceptorHandler handler,
   ) async {
     _log.infoLog(
       'RESPONSE[${response.statusCode}] => PATH: ${response.requestOptions.path}',
     );
-    return super.onResponse(response, responseInterceptorHandler);
+    return super.onResponse(response, handler);
   }
 
   @override
   Future onError(
-    DioError error,
-    ErrorInterceptorHandler errorInterceptorHandler,
+    DioError err,
+    ErrorInterceptorHandler handler,
   ) async {
     _log.infoLog(
-      'ERROR[${error.response?.statusCode}] => PATH: ${error.requestOptions.path}',
+      'ERROR[${err.response?.statusCode}] => PATH: ${err.requestOptions.path}',
     );
-    return super.onError(error, errorInterceptorHandler);
+    return super.onError(err, handler);
   }
 }

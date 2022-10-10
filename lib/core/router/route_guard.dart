@@ -1,7 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 
-import '../../data/data_source/local/secure_storage/secure_storage_manager.dart';
-import '../configs/constants/app_constants.dart';
+import '../utils/local_storage/secure/secure_storage_manager.dart';
+import '../utils/constants/app_constants.dart';
 import 'app_router.gr.dart';
 
 class RouteGuard extends AutoRouteGuard {
