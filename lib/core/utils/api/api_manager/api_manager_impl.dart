@@ -3,12 +3,12 @@ import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:flutter_loggy_dio/flutter_loggy_dio.dart';
 
-import '../../../../core/configs/app_serializers.dart';
-import '../../../../core/device/connectivity_service.dart';
-import '../../../../core/utils/errors/api_exception.dart';
-import '../../../../core/utils/errors/app_exception.dart';
-import '../../../mappers/api_dto.dart';
-import '../../local/secure_storage/secure_storage_manager.dart';
+import '../../../device/connectivity_service.dart';
+import '../../errors/api_exception.dart';
+import '../../errors/app_exception.dart';
+import '../../local_storage/secure/secure_storage_manager.dart';
+import '../../mappers/api_dto.dart';
+import '../dto_serializers.dart';
 import '../interceptor/auth_interceptor.dart';
 import '../response/api_response.dart';
 import 'api_manager.dart';
@@ -75,9 +75,9 @@ class ApiManagerImpl extends ApiManager {
           ),
           cancelToken: cancelToken ?? _cancelToken,
         );
-        if (AppSerializers.serializers[T] != null) {
+        if (DtoSerializers.serializers[T] != null) {
           return ApiResponse<T>.success(
-            AppSerializers
+            DtoSerializers
                 .serializers[T]!(response.data as Map<String, dynamic>) as T,
           );
         } else {
@@ -108,12 +108,12 @@ class ApiManagerImpl extends ApiManager {
           ),
           cancelToken: cancelToken ?? _cancelToken,
         );
-        if (AppSerializers.serializers[T] != null) {
+        if (DtoSerializers.serializers[T] != null) {
           final listData = response.data as List;
           return ApiResponse<List<T>>.success(
             listData
                 .map(
-                  (e) => AppSerializers.serializers[T]!(
+                  (e) => DtoSerializers.serializers[T]!(
                     response.data as Map<String, dynamic>,
                   ) as T,
                 )
@@ -182,9 +182,9 @@ class ApiManagerImpl extends ApiManager {
           ),
           cancelToken: cancelToken ?? _cancelToken,
         );
-        if (AppSerializers.serializers[T] != null) {
+        if (DtoSerializers.serializers[T] != null) {
           return ApiResponse<T>.success(
-            AppSerializers
+            DtoSerializers
                 .serializers[T]!(response.data as Map<String, dynamic>) as T,
           );
         } else {

@@ -5,7 +5,7 @@
 
 // coverage:ignore-file
 // ignore_for_file: type=lint
-// ignore_for_file: directives_ordering,unnecessary_import
+// ignore_for_file: directives_ordering,unnecessary_import,implicit_dynamic_list_literal
 
 import 'package:flutter/widgets.dart';
 
@@ -23,6 +23,10 @@ class $AssetsImagesGen {
   /// File path: assets/images/login_background.jpg
   AssetGenImage get loginBackground =>
       const AssetGenImage('assets/images/login_background.jpg');
+
+  /// List of all assets
+  List<AssetGenImage> get values =>
+      [flutterLogoDark, flutterLogoLight, loginBackground];
 }
 
 class Assets {
@@ -88,6 +92,8 @@ class AssetGenImage {
       cacheHeight: cacheHeight,
     );
   }
+
+  ImageProvider provider() => AssetImage(_assetName);
 
   String get path => _assetName;
 

@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
 
-import '../../../mappers/api_dto.dart';
+import '../../mappers/api_dto.dart';
 import '../response/api_response.dart';
 
 abstract class ApiManager {

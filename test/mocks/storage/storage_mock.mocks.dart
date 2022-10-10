@@ -5,9 +5,9 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'dart:async' as _i3;
 
-import 'package:mockito/mockito.dart' as _i1;
-import 'package:riverpod_boilerplate/data/data_source/local/secure_storage/secure_storage_manager.dart'
+import 'package:riverpod_boilerplate/core/utils/local_storage/secure/secure_storage_manager.dart'
     as _i2;
+import 'package:mockito/mockito.dart' as _i1;
 
 // ignore_for_file: type=lint
 // ignore_for_file: avoid_redundant_argument_values

@@ -1,6 +1,6 @@
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
-import '../../../../core/device/logging/logger_service.dart';
+import '../../../logger/logger_service.dart';
 import 'secure_storage_manager.dart';
 
 class SecureStorageManagerImpl implements SecureStorageManager {

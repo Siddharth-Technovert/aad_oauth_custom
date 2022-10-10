@@ -1,12 +1,12 @@
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
+import '../../core/utils/api/response/api_response.dart';
 import '../../core/utils/errors/app_exception.dart';
 import '../../domain/enums/account_type.dart';
 import '../../domain/models/user/user.dart';
 import '../../domain/repositories/auth_repository.dart';
 import '../../domain/repositories/user_repository.dart';
-import '../data_source/api/response/api_response.dart';
 import '../models/result/data_state.dart';
 
 class AuthRepositoryImpl implements AuthRepository {

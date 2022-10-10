@@ -1,4 +1,4 @@
-import '../../../mappers/cache_dto.dart';
+import '../../mappers/cache_dto.dart';
 
 abstract class CacheManager {
   Future<bool> hasData<HiveDto extends CacheDto>(

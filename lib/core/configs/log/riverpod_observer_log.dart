@@ -1,6 +1,5 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-
-import '../../device/logging/logger_service.dart';
+import '../../logger/logger_service.dart';
 
 class RiverpodObserverLog extends ProviderObserver {
   final LoggerService _loggerService;

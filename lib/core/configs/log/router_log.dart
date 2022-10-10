@@ -1,7 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/widgets.dart';
 
-import '../../device/logging/logger_service.dart';
+import '../../logger/logger_service.dart';
 
 class RouterLog extends AutoRouterObserver {
   final LoggerService _log;
