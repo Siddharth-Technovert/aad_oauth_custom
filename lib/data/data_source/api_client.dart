@@ -1,10 +1,10 @@
 import 'package:dio/dio.dart';
 
 import '../../core/device/connectivity_service.dart';
-import '../../core/utils/mappers/api_dto.dart';
-import '../../core/utils/mappers/ui_model.dart';
 import '../../core/utils/api/api_manager/api_manager.dart';
 import '../../core/utils/errors/app_exception.dart';
+import '../../core/utils/mappers/api_dto.dart';
+import '../../core/utils/mappers/ui_model.dart';
 import '../models/result/data_state.dart';
 
 class ApiClient {
