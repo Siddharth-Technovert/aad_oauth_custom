@@ -7,17 +7,18 @@ import '../core/app_state_provider.dart';
 import '../core/user_state_provider.dart';
 
 final homeProvider = StateNotifierProvider<HomeNotifier, HomeState>((ref) {
-  return HomeNotifier(ref.read);
+  return HomeNotifier(ref);
 });
 
 class HomeNotifier extends StateNotifier<HomeState> {
   HomeState get currentState => state;
 
-  final Reader _read;
-  late final LogoutUser _logoutUserUseCase = _read(logoutUserUseCaseProvider);
+  final Ref _ref;
+  late final LogoutUser _logoutUserUseCase =
+      _ref.read(logoutUserUseCaseProvider);
 
   HomeNotifier(
-    this._read,
+    this._ref,
   ) : super(const HomeState.initial()) {
     _init();
   }
@@ -25,15 +26,15 @@ class HomeNotifier extends StateNotifier<HomeState> {
   Future<void> _init() async {}
 
   Future<void> logout() async {
-    _read(userStateProvider).maybeWhen(
-      available: (user) => _logoutUserUseCase(user.accountType),
-      orElse: () {},
-    );
-    await _read(appStateProvider.notifier).unAuthenticateState();
+    _ref.read(userStateProvider).maybeWhen(
+          available: (user) => _logoutUserUseCase(user.accountType),
+          orElse: () {},
+        );
+    await _ref.read(appStateProvider.notifier).unAuthenticateState();
     // state = const HomeState.loggedOut();
-    _read(loggerServiceProvider).infoLog(
-      "logout user",
-      className: "Home",
-    );
+    _ref.read(loggerServiceProvider).infoLog(
+          "logout user",
+          className: "Home",
+        );
   }
 }

@@ -10,14 +10,15 @@ final userStateProvider = StateNotifierProvider<UserNotifier, UserState>((ref) {
         orElse: () => const UserState.notAvailable(),
         authenticated: (user) => UserState.available(user),
       );
-  return UserNotifier(ref.read, userState);
+  return UserNotifier(ref, userState);
 });
 
 class UserNotifier extends StateNotifier<UserState> {
-  final Reader _read;
-  late final UpdateUser _updateUserUseCase = _read(updateUserUseCaseProvider);
+  final Ref _ref;
+  late final UpdateUser _updateUserUseCase =
+      _ref.read(updateUserUseCaseProvider);
 
-  UserNotifier(this._read, UserState userState) : super(userState) {
+  UserNotifier(this._ref, UserState userState) : super(userState) {
     _init();
   }
 

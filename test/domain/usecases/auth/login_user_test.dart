@@ -18,7 +18,7 @@ void main() {
     'should login user with google account',
     () async {
       const accountType = AccountType.google; //can be any account type
-      const DataState<User> dataState = DataState.success(
+      const dataState = DataState<User>.success(
         User(
           name: "any_name",
           accountType: accountType,
@@ -41,9 +41,9 @@ void main() {
     'should return login.error on login failure',
     () async {
       const accountType = AccountType.google; //can be any account type
-      final DataState<User> dataState = const DataState.error(
+      const dataState = DataState<User>.error(
         AppException.unknownError('Login failed'),
-      ) as DataState<User>;
+      );
       // arrange
       when(mockAuthRepository.login(AccountType.google)).thenAnswer(
         (_) async => dataState,
@@ -51,7 +51,10 @@ void main() {
       // act
       final result = await mockAuthRepository.login(accountType);
       // assert
-      expect(result, dataState);
+      expect(
+        result,
+        dataState,
+      );
       verify(mockAuthRepository.login(accountType));
       verifyNoMoreInteractions(mockAuthRepository);
     },

@@ -20,8 +20,8 @@ dependencies:
     flutter_loggy_dio: ^2.0.0+3
 
     #State management
-    flutter_riverpod: ^1.0.4
-    hooks_riverpod: ^1.0.4
+    flutter_riverpod: ^2.0.2
+    hooks_riverpod: ^2.0.2
     flutter_hooks: ^0.18.5+1
 
     #Api Client
@@ -68,7 +68,7 @@ dependencies:
     #Onboarding
 
     #Local Notifications
-    flutter_local_notifications: ^12.0.0
+    flutter_local_notifications: ^12.0.1+1
     flutter_native_timezone: ^2.0.0
     timezone: ^0.9.0
     rxdart: ^0.27.5
@@ -85,7 +85,7 @@ dependencies:
 
     #Tools
     cupertino_icons: ^1.0.5
-    flutter_native_splash: ^2.2.10+1
+    flutter_native_splash: ^2.2.11
     fluttertoast: ^8.0.9
     share_plus: ^4.5.3
     url_launcher: ^6.1.6
@@ -98,7 +98,7 @@ dependencies:
 
     #Firebase
     firebase_core: ^1.24.0
-    firebase_crashlytics: ^2.8.12
+    firebase_crashlytics: ^2.8.13
     firebase_performance: ^0.8.3+3
 
 dev_dependencies:

@@ -5,17 +5,18 @@ import '../../../domain/usecases/storage/theme/theme_storage_usecases.dart';
 
 final themeStateProvider =
     StateNotifierProvider<ThemeStateNotifier, ThemeState>((ref) {
-  return ThemeStateNotifier(ref.read);
+  return ThemeStateNotifier(ref);
 });
 
 class ThemeStateNotifier extends StateNotifier<ThemeState> {
   ThemeState get currentState => state;
 
-  final Reader _read;
-  late final ReadTheme _readThemeUseCase = _read(readThemeUseCaseProvider);
-  late final WriteTheme _writeThemeUseCase = _read(writeThemeUseCaseProvider);
+  final Ref _ref;
+  late final ReadTheme _readThemeUseCase = _ref.read(readThemeUseCaseProvider);
+  late final WriteTheme _writeThemeUseCase =
+      _ref.read(writeThemeUseCaseProvider);
 
-  ThemeStateNotifier(this._read) : super(const ThemeState.system()) {
+  ThemeStateNotifier(this._ref) : super(const ThemeState.system()) {
     _init();
   }
 

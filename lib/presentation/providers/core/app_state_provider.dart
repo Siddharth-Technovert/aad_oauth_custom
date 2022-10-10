@@ -11,7 +11,7 @@ import '../../../domain/usecases/user/user_usecases.dart';
 
 final appStateProvider =
     StateNotifierProvider<AppStateNotifier, AppState>((ref) {
-  return AppStateNotifier(ref.read);
+  return AppStateNotifier(ref);
 });
 
 class AppStateNotifier extends StateNotifier<AppState> {
@@ -20,17 +20,17 @@ class AppStateNotifier extends StateNotifier<AppState> {
     state = appState;
   }
 
-  final Reader _read;
+  final Ref _ref;
 
-  late final ReadUser _readUserUseCase = _read(readUserUseCaseProvider);
+  late final ReadUser _readUserUseCase = _ref.read(readUserUseCaseProvider);
   // late final ReadJwt _readJwtUseCase = _read(readJwtTokenUseCaseProvider);
 
   late final ReadOnboarding _readOnboardingUseCase =
-      _read(readOnboardingUseCaseProvider);
+      _ref.read(readOnboardingUseCaseProvider);
   late final WriteOnboarding _writeOnboardingUseCase =
-      _read(writeOnboardingUseCaseProvider);
+      _ref.read(writeOnboardingUseCaseProvider);
 
-  AppStateNotifier(this._read) : super(const AppState.initial()) {
+  AppStateNotifier(this._ref) : super(const AppState.initial()) {
     _init();
   }
 
@@ -61,10 +61,10 @@ class AppStateNotifier extends StateNotifier<AppState> {
     //   state = const AppState.onboarding();
     // }
     //? For now temporary solution
-    await _read(backgroundServiceProvider).registerPeriodicTask(
-      "periodicTask",
-      BackgroundService.periodicTask,
-    );
+    await _ref.read(backgroundServiceProvider).registerPeriodicTask(
+          "periodicTask",
+          BackgroundService.periodicTask,
+        );
 
     FlutterNativeSplash.remove();
   }
