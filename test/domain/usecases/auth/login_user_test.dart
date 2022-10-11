@@ -1,9 +1,9 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 import 'package:riverpod_boilerplate/core/utils/errors/app_exception.dart';
-import 'package:riverpod_boilerplate/data/models/result/data_state.dart';
-import 'package:riverpod_boilerplate/domain/enums/account_type.dart';
-import 'package:riverpod_boilerplate/domain/models/user/user.dart';
+import 'package:riverpod_boilerplate/feature/auth/domain/models/user/user.dart';
+import 'package:riverpod_boilerplate/shared/data/models/result/data_state.dart';
+import 'package:riverpod_boilerplate/shared/domain/enums/account_type.dart';
 
 import '../../../mocks/repositories/repositories_mock.mocks.dart';
 

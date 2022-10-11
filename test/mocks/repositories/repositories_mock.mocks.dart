@@ -6,13 +6,16 @@
 import 'dart:async' as _i4;
 
 import 'package:mockito/mockito.dart' as _i1;
-import 'package:riverpod_boilerplate/data/models/result/data_state.dart' as _i2;
-import 'package:riverpod_boilerplate/domain/enums/account_type.dart' as _i6;
-import 'package:riverpod_boilerplate/domain/models/user/user.dart' as _i5;
-import 'package:riverpod_boilerplate/domain/repositories/auth_repository.dart'
+import 'package:riverpod_boilerplate/feature/auth/domain/models/user/user.dart'
+    as _i5;
+import 'package:riverpod_boilerplate/feature/auth/domain/repositories/auth_repository.dart'
     as _i3;
-import 'package:riverpod_boilerplate/domain/repositories/user_repository.dart'
+import 'package:riverpod_boilerplate/feature/auth/domain/repositories/user_repository.dart'
     as _i7;
+import 'package:riverpod_boilerplate/shared/data/models/result/data_state.dart'
+    as _i2;
+import 'package:riverpod_boilerplate/shared/domain/enums/account_type.dart'
+    as _i6;
 
 // ignore_for_file: type=lint
 // ignore_for_file: avoid_redundant_argument_values

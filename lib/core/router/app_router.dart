@@ -1,8 +1,8 @@
 import 'package:auto_route/auto_route.dart';
 
-import '../../presentation/ui/modals/bottom_sheets/bottom_sheet_factory.dart';
-import '../../presentation/ui/modals/bottom_sheets/logout/logout_bottom_sheet.dart';
-import '../../presentation/ui/screens/app_start_screen.dart';
+import '../../app/presentation/screens/app_start_screen.dart';
+import '../../feature/home/presentation/modals/bottom_sheets/logout/logout_bottom_sheet.dart';
+import '../../shared/presentation/ui/modals/bottom_sheets/bottom_sheet_factory.dart';
 
 @MaterialAutoRouter(
   replaceInRouteName: 'Screen,Route',

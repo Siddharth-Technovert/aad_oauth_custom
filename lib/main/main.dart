@@ -4,10 +4,10 @@ import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../app/presentation/screens/app.dart';
 import '../core/app_bootstrapper.dart';
 import '../core/configs/log/riverpod_observer_log.dart';
-import '../domain/service_providers.dart';
-import '../presentation/ui/app.dart';
+import '../feature/service_providers.dart';
 
 abstract class Main {
   static Future<void> main() async {

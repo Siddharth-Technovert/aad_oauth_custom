@@ -1,6 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:riverpod_boilerplate/presentation/ui/screens/app_start_screen.dart';
+import 'package:riverpod_boilerplate/app/presentation/screens/app_start_screen.dart';
 
 // import '../../../mocks/usecases/usecases_mock.mocks.dart';
 import '../localization_app.dart';

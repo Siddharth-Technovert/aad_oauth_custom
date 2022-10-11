@@ -3,8 +3,8 @@ import 'dart:convert';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
-import '../../../data/models/cache/user/user_cache_dto.dart';
-import '../../../domain/service_providers.dart';
+import '../../../feature/auth/data/models/cache/user/user_cache_dto.dart';
+import '../../../feature/service_providers.dart';
 import '../../utils/local_storage/secure/secure_storage_manager.dart';
 import '../../utils/local_storage/secure/secure_storage_manager_impl.dart';
 

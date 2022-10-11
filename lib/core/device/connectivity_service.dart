@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:connectivity_plus/connectivity_plus.dart';
 
-import '../../domain/enums/connectivity_status.dart';
+import '../../shared/domain/enums/connectivity_status.dart';
 
 class ConnectivityService {
   StreamController<ConnectivityStatus> connectionStatusController =

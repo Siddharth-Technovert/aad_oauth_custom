@@ -6,19 +6,22 @@
 import 'dart:async' as _i5;
 
 import 'package:mockito/mockito.dart' as _i1;
-import 'package:riverpod_boilerplate/data/models/result/data_state.dart' as _i2;
-import 'package:riverpod_boilerplate/domain/enums/account_type.dart' as _i7;
-import 'package:riverpod_boilerplate/domain/models/user/user.dart' as _i6;
-import 'package:riverpod_boilerplate/domain/states/core/theme/theme_state.dart'
-    as _i3;
-import 'package:riverpod_boilerplate/domain/usecases/auth/auth_usecases.dart'
-    as _i4;
-import 'package:riverpod_boilerplate/domain/usecases/storage/onboarding/onboarding_usecases.dart'
+import 'package:riverpod_boilerplate/app/domain/usecases/onboarding/onboarding_usecases.dart'
     as _i10;
-import 'package:riverpod_boilerplate/domain/usecases/storage/theme/theme_storage_usecases.dart'
-    as _i9;
-import 'package:riverpod_boilerplate/domain/usecases/user/user_usecases.dart'
+import 'package:riverpod_boilerplate/feature/auth/domain/models/user/user.dart'
+    as _i6;
+import 'package:riverpod_boilerplate/feature/auth/domain/usecases/auth/auth_usecases.dart'
+    as _i4;
+import 'package:riverpod_boilerplate/feature/auth/domain/usecases/user/user_usecases.dart'
     as _i8;
+import 'package:riverpod_boilerplate/shared/data/models/result/data_state.dart'
+    as _i2;
+import 'package:riverpod_boilerplate/shared/domain/enums/account_type.dart'
+    as _i7;
+import 'package:riverpod_boilerplate/shared/domain/states/theme/theme_state.dart'
+    as _i3;
+import 'package:riverpod_boilerplate/shared/domain/usecases/theme/theme_storage_usecases.dart'
+    as _i9;
 
 // ignore_for_file: type=lint
 // ignore_for_file: avoid_redundant_argument_values
