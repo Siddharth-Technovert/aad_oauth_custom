@@ -1,4 +1,7 @@
+import 'package:flutter/cupertino.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+
+import '../l10n/app_loc.dart';
 
 part 'cache_exception.freezed.dart';
 
@@ -10,10 +13,10 @@ class CacheException with _$CacheException {
   const factory CacheException.deleteError() = _DeleteError;
   const factory CacheException.updateError() = _UpdateError;
 
-  String get msg => when(
-        fetchError: () => "Failed to fetch data from cache",
-        insertError: () => "Failed to add data to cache",
-        deleteError: () => "Failed to delete data to cache",
-        updateError: () => "Failed to update data to cache",
+  String msg(BuildContext context) => when(
+        fetchError: () => AppLoc.of(context).fetchCacheError,
+        insertError: () => AppLoc.of(context).insertCacheError,
+        deleteError: () => AppLoc.of(context).deleteCacheError,
+        updateError: () => AppLoc.of(context).updateCacheError,
       );
 }

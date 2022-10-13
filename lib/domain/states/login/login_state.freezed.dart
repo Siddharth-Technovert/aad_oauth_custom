@@ -21,7 +21,7 @@ mixin _$LoginState {
     required TResult Function() initial,
     required TResult Function(AccountType accountType) loading,
     required TResult Function(User user) success,
-    required TResult Function(String message) error,
+    required TResult Function(AppException ex) error,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -29,7 +29,7 @@ mixin _$LoginState {
     TResult Function()? initial,
     TResult Function(AccountType accountType)? loading,
     TResult Function(User user)? success,
-    TResult Function(String message)? error,
+    TResult Function(AppException ex)? error,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -37,7 +37,7 @@ mixin _$LoginState {
     TResult Function()? initial,
     TResult Function(AccountType accountType)? loading,
     TResult Function(User user)? success,
-    TResult Function(String message)? error,
+    TResult Function(AppException ex)? error,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -126,7 +126,7 @@ class _$_Initial extends _Initial {
     required TResult Function() initial,
     required TResult Function(AccountType accountType) loading,
     required TResult Function(User user) success,
-    required TResult Function(String message) error,
+    required TResult Function(AppException ex) error,
   }) {
     return initial();
   }
@@ -137,7 +137,7 @@ class _$_Initial extends _Initial {
     TResult Function()? initial,
     TResult Function(AccountType accountType)? loading,
     TResult Function(User user)? success,
-    TResult Function(String message)? error,
+    TResult Function(AppException ex)? error,
   }) {
     return initial?.call();
   }
@@ -148,7 +148,7 @@ class _$_Initial extends _Initial {
     TResult Function()? initial,
     TResult Function(AccountType accountType)? loading,
     TResult Function(User user)? success,
-    TResult Function(String message)? error,
+    TResult Function(AppException ex)? error,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -267,7 +267,7 @@ class _$_Loading extends _Loading {
     required TResult Function() initial,
     required TResult Function(AccountType accountType) loading,
     required TResult Function(User user) success,
-    required TResult Function(String message) error,
+    required TResult Function(AppException ex) error,
   }) {
     return loading(accountType);
   }
@@ -278,7 +278,7 @@ class _$_Loading extends _Loading {
     TResult Function()? initial,
     TResult Function(AccountType accountType)? loading,
     TResult Function(User user)? success,
-    TResult Function(String message)? error,
+    TResult Function(AppException ex)? error,
   }) {
     return loading?.call(accountType);
   }
@@ -289,7 +289,7 @@ class _$_Loading extends _Loading {
     TResult Function()? initial,
     TResult Function(AccountType accountType)? loading,
     TResult Function(User user)? success,
-    TResult Function(String message)? error,
+    TResult Function(AppException ex)? error,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -421,7 +421,7 @@ class _$_Success extends _Success {
     required TResult Function() initial,
     required TResult Function(AccountType accountType) loading,
     required TResult Function(User user) success,
-    required TResult Function(String message) error,
+    required TResult Function(AppException ex) error,
   }) {
     return success(user);
   }
@@ -432,7 +432,7 @@ class _$_Success extends _Success {
     TResult Function()? initial,
     TResult Function(AccountType accountType)? loading,
     TResult Function(User user)? success,
-    TResult Function(String message)? error,
+    TResult Function(AppException ex)? error,
   }) {
     return success?.call(user);
   }
@@ -443,7 +443,7 @@ class _$_Success extends _Success {
     TResult Function()? initial,
     TResult Function(AccountType accountType)? loading,
     TResult Function(User user)? success,
-    TResult Function(String message)? error,
+    TResult Function(AppException ex)? error,
     required TResult orElse(),
   }) {
     if (success != null) {
@@ -504,7 +504,9 @@ abstract class _Success extends LoginState {
 abstract class _$$_ErrorCopyWith<$Res> {
   factory _$$_ErrorCopyWith(_$_Error value, $Res Function(_$_Error) then) =
       __$$_ErrorCopyWithImpl<$Res>;
-  $Res call({String message});
+  $Res call({AppException ex});
+
+  $AppExceptionCopyWith<$Res> get ex;
 }
 
 /// @nodoc
@@ -518,28 +520,35 @@ class __$$_ErrorCopyWithImpl<$Res> extends _$LoginStateCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object? message = freezed,
+    Object? ex = freezed,
   }) {
     return _then(_$_Error(
-      message == freezed
-          ? _value.message
-          : message // ignore: cast_nullable_to_non_nullable
-              as String,
+      ex == freezed
+          ? _value.ex
+          : ex // ignore: cast_nullable_to_non_nullable
+              as AppException,
     ));
+  }
+
+  @override
+  $AppExceptionCopyWith<$Res> get ex {
+    return $AppExceptionCopyWith<$Res>(_value.ex, (value) {
+      return _then(_value.copyWith(ex: value));
+    });
   }
 }
 
 /// @nodoc
 
 class _$_Error extends _Error {
-  const _$_Error(this.message) : super._();
+  const _$_Error(this.ex) : super._();
 
   @override
-  final String message;
+  final AppException ex;
 
   @override
   String toString() {
-    return 'LoginState.error(message: $message)';
+    return 'LoginState.error(ex: $ex)';
   }
 
   @override
@@ -547,12 +556,12 @@ class _$_Error extends _Error {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_Error &&
-            const DeepCollectionEquality().equals(other.message, message));
+            const DeepCollectionEquality().equals(other.ex, ex));
   }
 
   @override
   int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(message));
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(ex));
 
   @JsonKey(ignore: true)
   @override
@@ -565,9 +574,9 @@ class _$_Error extends _Error {
     required TResult Function() initial,
     required TResult Function(AccountType accountType) loading,
     required TResult Function(User user) success,
-    required TResult Function(String message) error,
+    required TResult Function(AppException ex) error,
   }) {
-    return error(message);
+    return error(ex);
   }
 
   @override
@@ -576,9 +585,9 @@ class _$_Error extends _Error {
     TResult Function()? initial,
     TResult Function(AccountType accountType)? loading,
     TResult Function(User user)? success,
-    TResult Function(String message)? error,
+    TResult Function(AppException ex)? error,
   }) {
-    return error?.call(message);
+    return error?.call(ex);
   }
 
   @override
@@ -587,11 +596,11 @@ class _$_Error extends _Error {
     TResult Function()? initial,
     TResult Function(AccountType accountType)? loading,
     TResult Function(User user)? success,
-    TResult Function(String message)? error,
+    TResult Function(AppException ex)? error,
     required TResult orElse(),
   }) {
     if (error != null) {
-      return error(message);
+      return error(ex);
     }
     return orElse();
   }
@@ -635,10 +644,10 @@ class _$_Error extends _Error {
 }
 
 abstract class _Error extends LoginState {
-  const factory _Error(final String message) = _$_Error;
+  const factory _Error(final AppException ex) = _$_Error;
   const _Error._() : super._();
 
-  String get message;
+  AppException get ex;
   @JsonKey(ignore: true)
   _$$_ErrorCopyWith<_$_Error> get copyWith =>
       throw _privateConstructorUsedError;

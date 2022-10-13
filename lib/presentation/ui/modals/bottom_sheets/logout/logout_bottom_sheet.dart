@@ -1,20 +1,22 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../../../core/utils/extensions/context_extension.dart';
 import '../../../../../core/utils/styles/dimensions/ui_dimensions.dart';
 import '../../../../providers/core/router_provider.dart';
 import '../../../../providers/home/home_provider.dart';
+import '../../../hooks/app_loc_hook.dart';
+import '../../../hooks/is_dark_mode_hook.dart';
 import '../../../widgets/buttons/primary_button.dart';
 import '../../../widgets/buttons/secondary_outlined_button.dart';
 
-class LogoutBottomSheet extends ConsumerWidget {
+class LogoutBottomSheet extends HookConsumerWidget {
   const LogoutBottomSheet({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final bool isDarkMode =
-        Theme.of(context).colorScheme.brightness == Brightness.dark;
+    final bool isDarkMode = useIsDarkHook();
+    final appLoc = useAppLoc();
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 24),
       decoration: BoxDecoration(
@@ -32,7 +34,7 @@ class LogoutBottomSheet extends ConsumerWidget {
           UIDimensions.verticalSpaceSmall,
           Center(
             child: Text(
-              'Logout',
+              appLoc.logout,
               style: context.h3,
             ),
           ),
@@ -41,7 +43,7 @@ class LogoutBottomSheet extends ConsumerWidget {
             child: SizedBox(
               width: 193,
               child: Text(
-                'Are you sure you want to logout from GenNex app ?',
+                appLoc.logoutConfirm,
                 textAlign: TextAlign.center,
                 style: context.h6,
               ),
@@ -53,12 +55,12 @@ class LogoutBottomSheet extends ConsumerWidget {
               ref.read(appRouterProvider).pop();
               ref.read(homeProvider.notifier).logout();
             },
-            text: "Logout",
+            text: appLoc.logout,
           ),
           UIDimensions.verticalSpaceMedium,
           SecondaryOutlinedButton(
             onPressed: () => ref.read(appRouterProvider).pop(),
-            text: "Cancel",
+            text: appLoc.cancel,
           ),
           UIDimensions.verticalSpaceMedium,
         ],

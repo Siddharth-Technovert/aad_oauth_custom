@@ -1,5 +1,4 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 
 import '../../../domain/enums/account_type.dart';
 import '../../../domain/service_providers.dart';
@@ -31,7 +30,7 @@ class LoginNotifier extends StateNotifier<LoginState> {
   }) async {
     state = LoginState.loading(accountType);
     final dataState = await _loginUserUseCase(accountType);
-    await dataState.when(
+    dataState.when(
       success: (user) async {
         state = LoginState.success(user);
         await _ref.read(appStateProvider.notifier).authenticateState(user);
@@ -40,9 +39,7 @@ class LoginNotifier extends StateNotifier<LoginState> {
               className: "Login",
             );
       },
-      error: (ex) => Fluttertoast.showToast(
-        msg: ex.msg,
-      ),
+      error: (ex) => state = LoginState.error(ex),
     );
   }
 }

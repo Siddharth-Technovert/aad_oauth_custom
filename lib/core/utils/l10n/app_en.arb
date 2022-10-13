@@ -2,9 +2,6 @@
   "@guestLogin": {
     "description": "A guest login message"
   },
-  "@language": {
-    "description": "The current Language"
-  },
   "@helloMsg": {
     "description": "A hello message to user",
     "placeholders": {
@@ -13,24 +10,50 @@
       }
     }
   },
+  "@language": {
+    "description": "The current Language"
+  },
+  "apiError": "Api Error",
+  "badRequest": "Error:400 Bad request",
+  "cacheError": "Cache error:",
   "cancel": "Cancel",
+  "connectTimeout": "Connection to server timed out",
   "connectivityStatus": "Connectivity Status",
   "connectivityStatusWait": "Connectivity Status: Plz wait for connection",
+  "crashAppFirebase": "Crash the App! (Firebase Test)",
   "dashboardScreen": "Dashboard Screen",
+  "defaultError": "Api Error occurred:",
+  "deleteCacheError": "Failed to delete data to cache",
   "errorMsg": "Error",
+  "fetchCacheError": "Failed to fetch data from cache",
   "guest": "Guest",
   "guestLogin": "Guest Login",
   "helloMsg": "Hello {name}",
+  "infoToastText": "This is the info",
+  "insertCacheError": "Failed to add data to cache",
+  "internalServerError": "Error:500 Internal server error",
   "language": "English",
+  "login": "Login",
   "logout": "Logout",
+  "logoutConfirm": "Are you sure you want to logout from GenNex app?",
+  "networkError": "Unable to connect to internet",
   "ok": "OK",
   "policyAcknowledge": "and acknowledging that you've read our ",
   "policyAgree": "By Continuing, You are agreeing to our ",
   "policyTerm": "Terms of Use ",
   "privacyPolicy": "Privacy Policy",
+  "receiveTimeout": "Receive timeout in connection with server",
+  "requestCancelled": "Request to server was cancelled",
+  "requestNotFound": "Error:404 Request not found",
+  "sendTimeout": "Send timeout in connection with server",
+  "serializationError": "Unable to deserialize data",
   "splashTitleText": "Flutter Boilerplate",
   "successMsg": "Success",
   "switchTheme": "Switch Theme",
   "toastSample": "Sample Toast",
-  "toastShow": "Show Toast"
+  "toastShow": "Show Toast",
+  "unAuthorizedRequest": "Error:401 Invalid api key",
+  "unexpectedError": "Error: Something went wrong",
+  "unknownError": "Unknown Error",
+  "updateCacheError": "Failed to update data to cache"
 }

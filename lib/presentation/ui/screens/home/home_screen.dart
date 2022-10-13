@@ -57,7 +57,7 @@ class HomeScreen extends HookConsumerWidget {
                     ToastFactory.showToast(
                       context,
                       ToastType.info,
-                      "This is the info",
+                      appLoc.infoToastText,
                     );
                   },
                   child: Text(
@@ -67,8 +67,8 @@ class HomeScreen extends HookConsumerWidget {
                 ),
                 ElevatedButton(
                   onPressed: () => throw Exception(),
-                  child: const Text(
-                    "Crash the App! (Firebase Test)",
+                  child: Text(
+                    appLoc.crashAppFirebase,
                     textAlign: TextAlign.center,
                   ),
                 ),

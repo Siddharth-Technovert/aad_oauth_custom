@@ -6,9 +6,12 @@ import '../../../../core/utils/extensions/context_extension.dart';
 import '../../../../core/utils/styles/colors/colors.dart';
 import '../../../../core/utils/styles/dimensions/ui_dimensions.dart';
 import '../../../../domain/enums/account_type.dart';
+import '../../../../domain/enums/toast_type.dart';
+import '../../../../domain/states/login/login_state.dart';
 import '../../../providers/core/theme_state_provider.dart';
 import '../../../providers/login/login_provider.dart';
 import '../../hooks/app_loc_hook.dart';
+import '../../modals/toasts/toast_factory.dart';
 import '../../widgets/buttons/secondary_button.dart';
 
 class LoginScreen extends HookConsumerWidget {
@@ -17,7 +20,18 @@ class LoginScreen extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final loginNotifier = ref.watch(loginProvider.notifier);
-    final appLocalization = useAppLoc();
+    final appLoc = useAppLoc();
+
+    ref.listen<LoginState>(loginProvider, (prev, next) {
+      next.whenOrNull(
+        error: (ex) => ToastFactory.showToast(
+          context,
+          ToastType.error,
+          ex.msg(context),
+        ),
+      );
+    });
+
     return SafeArea(
       child: Scaffold(
         resizeToAvoidBottomInset: false,
@@ -34,7 +48,7 @@ class LoginScreen extends HookConsumerWidget {
             children: <Widget>[
               const Spacer(),
               Text(
-                "Login",
+                appLoc.login,
                 style: context.h1.copyWith(
                   color: Colors.white,
                 ),
@@ -61,7 +75,7 @@ class LoginScreen extends HookConsumerWidget {
                   AccountType.guest,
                   isSignInButton: true,
                 ),
-                text: "Guest Login",
+                text: appLoc.guestLogin,
               ),
               const Spacer(),
               RichText(
@@ -69,26 +83,26 @@ class LoginScreen extends HookConsumerWidget {
                 text: TextSpan(
                   children: <TextSpan>[
                     TextSpan(
-                      text: appLocalization.policyAgree,
+                      text: appLoc.policyAgree,
                       style: context.bodyText1.copyWith(
                         color: Colors.white,
                       ),
                     ),
                     TextSpan(
-                      text: appLocalization.policyTerm,
+                      text: appLoc.policyTerm,
                       style: context.bodyText1.copyWith(
                         decoration: TextDecoration.underline,
                         color: Colors.white,
                       ),
                     ),
                     TextSpan(
-                      text: appLocalization.policyAcknowledge,
+                      text: appLoc.policyAcknowledge,
                       style: context.bodyText1.copyWith(
                         color: Colors.white,
                       ),
                     ),
                     TextSpan(
-                      text: appLocalization.privacyPolicy,
+                      text: appLoc.privacyPolicy,
                       style: context.bodyText1.copyWith(
                         decoration: TextDecoration.underline,
                         color: Colors.white,

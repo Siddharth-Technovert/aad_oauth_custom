@@ -1,5 +1,7 @@
+import 'package:flutter/cupertino.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
+import '../l10n/app_loc.dart';
 import 'api_exception.dart';
 import 'cache_exception.dart';
 
@@ -14,11 +16,11 @@ class AppException with _$AppException {
   const factory AppException.apiError(ApiException error) = _ApiError;
   const factory AppException.unknownError(dynamic error) = _UnknownError;
 
-  String get msg => when(
-        networkError: () => "Unable to connect to internet",
-        cacheError: (ex) => "Cache error: ${ex.msg}",
-        serializationError: () => "Unable to deserialize data",
-        apiError: (ex) => "ApiError ${ex.msg}",
-        unknownError: (ex) => "unknownError $ex",
+  String msg(BuildContext context) => when(
+        networkError: () => AppLoc.of(context).networkError,
+        cacheError: (ex) => "${AppLoc.of(context).cacheError} ${ex.msg}",
+        serializationError: () => AppLoc.of(context).serializationError,
+        apiError: (ex) => "${AppLoc.of(context).apiError} ${ex.msg}",
+        unknownError: (ex) => "${AppLoc.of(context).unknownError} $ex",
       );
 }

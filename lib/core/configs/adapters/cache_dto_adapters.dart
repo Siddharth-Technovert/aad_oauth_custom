@@ -9,14 +9,14 @@ import '../../utils/local_storage/secure/secure_storage_manager.dart';
 import '../../utils/local_storage/secure/secure_storage_manager_impl.dart';
 
 class CacheDtoAdapters {
-  static Future<void> call() async {
+  static Future<void> call(HiveInterface hive) async {
     //Securing the box
     final SecureStorageManager secureStorageManager = SecureStorageManagerImpl(
       ProviderContainer().read(loggerServiceProvider),
     );
     String? encryptKey = await secureStorageManager.getAsync(key: 'encryptKey');
     if (encryptKey == null) {
-      final key = base64UrlEncode(Hive.generateSecureKey());
+      final key = base64UrlEncode(hive.generateSecureKey());
       await secureStorageManager.putAsync(
         key: 'encryptKey',
         value: key,
@@ -28,8 +28,8 @@ class CacheDtoAdapters {
     //TODO: register adapter and open box here
     // TODO: create snippet for this
     //? Register nested cache dto first so that no typeid error comes
-    Hive.registerAdapter<UserCacheDto>(UserCacheDtoAdapter());
-    await Hive.openBox<UserCacheDto>(
+    hive.registerAdapter<UserCacheDto>(UserCacheDtoAdapter());
+    await hive.openBox<UserCacheDto>(
       UserCacheDto.boxKey,
       encryptionCipher: HiveAesCipher(encryptionKey),
     );

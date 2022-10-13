@@ -28,7 +28,7 @@ class AppBootStrapper {
           FirebaseCrashlytics.instance.recordFlutterFatalError;
       AppSerializer.init();
       await CacheManagerImpl.init(
-        registerAdapterAndOpen: CacheDtoAdapters.call(),
+        registerAdapterAndOpen: (hive) => CacheDtoAdapters.call(hive),
       );
       await HiveDb.init(
         registerAdapterAndOpen: HiveAdapters.call(),

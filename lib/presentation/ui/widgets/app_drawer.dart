@@ -82,7 +82,7 @@ class AppDrawer extends HookConsumerWidget {
                   onPressed: () => ref
                       .read(appRouterProvider)
                       .popAndPush(const LogoutBottomSheetRoute()),
-                  child: const Text("Logout"),
+                  child: Text(appLoc.logout),
                 ),
               ),
             ],

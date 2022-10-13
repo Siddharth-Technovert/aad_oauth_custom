@@ -19,7 +19,7 @@ class CacheManagerImpl implements CacheManager {
 
   //? call it in the app bootStrap
   static Future<void> init({
-    required Future<void> registerAdapterAndOpen,
+    required Future<void> Function(HiveInterface hive) registerAdapterAndOpen,
   }) async {
     final directory = await getApplicationDocumentsDirectory();
     final String path = join(directory.path, 'cache_storage');
@@ -29,7 +29,7 @@ class CacheManagerImpl implements CacheManager {
     }
     _hive.init(path);
 
-    await registerAdapterAndOpen;
+    await registerAdapterAndOpen(_hive);
   }
 
   @override
