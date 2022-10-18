@@ -33,7 +33,6 @@
   "requestNotFound": "त्रुटि: 404 अनुरोध नहीं मिला",
   "sendTimeout": "सर्वर के संबंध में टाइमआउट भेजें",
   "serializationError": "डेटा deserialize करने में असमर्थ",
-  "splashTitleText": "Flutter बॉयलरप्लेट",
   "successMsg": "सफलता",
   "switchTheme": " थीम स्विच करें",
   "toastSample": "नमूना टोस्ट",

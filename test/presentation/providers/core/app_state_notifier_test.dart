@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:massy_stores/core/utils/errors/app_exception.dart';
+import 'package:massy_stores/data/models/result/data_state.dart';
+import 'package:massy_stores/domain/enums/account_type.dart';
+import 'package:massy_stores/domain/models/user/user.dart';
+import 'package:massy_stores/domain/states/core/app/app_state.dart';
+import 'package:massy_stores/domain/usecases/storage/onboarding/onboarding_usecases.dart';
+import 'package:massy_stores/domain/usecases/user/user_usecases.dart';
+import 'package:massy_stores/presentation/providers/core/app_state_provider.dart';
 import 'package:mockito/mockito.dart';
-import 'package:riverpod_boilerplate/core/utils/errors/app_exception.dart';
-import 'package:riverpod_boilerplate/data/models/result/data_state.dart';
-import 'package:riverpod_boilerplate/domain/enums/account_type.dart';
-import 'package:riverpod_boilerplate/domain/models/user/user.dart';
-import 'package:riverpod_boilerplate/domain/states/core/app/app_state.dart';
-import 'package:riverpod_boilerplate/domain/usecases/storage/onboarding/onboarding_usecases.dart';
-import 'package:riverpod_boilerplate/domain/usecases/user/user_usecases.dart';
-import 'package:riverpod_boilerplate/presentation/providers/core/app_state_provider.dart';
 
 import '../../../mocks/usecases/usecases_mock.mocks.dart';
 

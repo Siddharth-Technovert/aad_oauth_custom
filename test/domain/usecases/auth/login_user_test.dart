@@ -1,9 +1,9 @@
 import 'package:flutter_test/flutter_test.dart';
+import 'package:massy_stores/core/utils/errors/app_exception.dart';
+import 'package:massy_stores/data/models/result/data_state.dart';
+import 'package:massy_stores/domain/enums/account_type.dart';
+import 'package:massy_stores/domain/models/user/user.dart';
 import 'package:mockito/mockito.dart';
-import 'package:riverpod_boilerplate/core/utils/errors/app_exception.dart';
-import 'package:riverpod_boilerplate/data/models/result/data_state.dart';
-import 'package:riverpod_boilerplate/domain/enums/account_type.dart';
-import 'package:riverpod_boilerplate/domain/models/user/user.dart';
 
 import '../../../mocks/repositories/repositories_mock.mocks.dart';
 

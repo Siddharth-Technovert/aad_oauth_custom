@@ -1,6 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
+import 'package:massy_stores/domain/enums/account_type.dart';
 import 'package:mockito/mockito.dart';
-import 'package:riverpod_boilerplate/domain/enums/account_type.dart';
 
 import '../../../mocks/repositories/repositories_mock.mocks.dart';
 

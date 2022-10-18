@@ -12,21 +12,12 @@ import 'package:flutter/widgets.dart';
 class $AssetsImagesGen {
   const $AssetsImagesGen();
 
-  /// File path: assets/images/flutter_logo_dark.png
-  AssetGenImage get flutterLogoDark =>
-      const AssetGenImage('assets/images/flutter_logo_dark.png');
-
-  /// File path: assets/images/flutter_logo_light.png
-  AssetGenImage get flutterLogoLight =>
-      const AssetGenImage('assets/images/flutter_logo_light.png');
-
-  /// File path: assets/images/login_background.jpg
-  AssetGenImage get loginBackground =>
-      const AssetGenImage('assets/images/login_background.jpg');
+  /// File path: assets/images/app_icon.png
+  AssetGenImage get appIcon =>
+      const AssetGenImage('assets/images/app_icon.png');
 
   /// List of all assets
-  List<AssetGenImage> get values =>
-      [flutterLogoDark, flutterLogoLight, loginBackground];
+  List<AssetGenImage> get values => [appIcon];
 }
 
 class Assets {

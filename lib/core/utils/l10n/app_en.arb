@@ -47,7 +47,6 @@
   "requestNotFound": "Error:404 Request not found",
   "sendTimeout": "Send timeout in connection with server",
   "serializationError": "Unable to deserialize data",
-  "splashTitleText": "Flutter Boilerplate",
   "successMsg": "Success",
   "switchTheme": "Switch Theme",
   "toastSample": "Sample Toast",

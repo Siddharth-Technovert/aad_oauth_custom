@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../core/app_bootstrapper.dart';
@@ -11,7 +12,8 @@ import '../presentation/ui/app.dart';
 
 abstract class Main {
   static Future<void> main() async {
-    WidgetsFlutterBinding.ensureInitialized();
+    final widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
+    FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
     await AppBootStrapper.initialize();
     _runAppInZone();
   }

@@ -6,6 +6,7 @@ import '../../core/configs/log/router_log.dart';
 import '../../core/configs/theme/app_theme.dart';
 import '../../core/utils/l10n/app_loc.dart';
 import '../../domain/service_providers.dart';
+import '../../main/flavors.dart';
 import '../providers/core/router_provider.dart';
 import '../providers/core/theme_state_provider.dart';
 
@@ -32,7 +33,7 @@ class App extends ConsumerWidget {
           // locale: localLanguage,
           supportedLocales: AppLoc.supportedLocale,
           localizationsDelegates: AppLoc.delegates,
-          title: "Riverpod Boilerplate",
+          title: F.title,
           debugShowCheckedModeBanner: false,
           themeMode: ref.watch(themeStateProvider).mode,
           theme: AppTheme.light.theme,

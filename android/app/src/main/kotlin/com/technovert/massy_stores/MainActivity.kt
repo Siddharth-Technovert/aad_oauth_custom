@@ -1,4 +1,4 @@
-package com.example.riverpod_boilerplate
+package com.technovert.massy_stores
 
 import android.content.Context
 import android.hardware.Sensor
@@ -16,8 +16,8 @@ import io.flutter.plugin.common.MethodChannel
 // class MainActivity : FlutterActivity()
 class MainActivity : FlutterFragmentActivity() {
 
-    private val methodChannelName = "com.technovert.boilerplate/methodChannel"
-    private val eventChannelName = "com.technovert.boilerplate/eventChannel"
+    private val methodChannelName = "com.technovert.massy_stores/methodChannel"
+    private val eventChannelName = "com.technovert.massy_stores/eventChannel"
     private lateinit var eventSink: EventChannel.EventSink
     private lateinit var sensorManager: SensorManager
     private lateinit var methodChannel: MethodChannel
