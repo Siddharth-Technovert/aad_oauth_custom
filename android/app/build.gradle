@@ -33,18 +33,18 @@ android {
     productFlavors {
         dev {
             dimension "flavor-type"
-            applicationId "com.boilerplate.riverpod.dev"
-            resValue "string", "app_name", "RiverpodBoilerplate Dev"
+            applicationId "com.technovert.massy_stores.dev"
+            resValue "string", "app_name", "MassyStores Dev"
         }
         staging {
             dimension "flavor-type"
-            applicationId "com.boilerplate.riverpod.staging"
-            resValue "string", "app_name", "RiverpodBoilerplate Staging"
+            applicationId "com.technovert.massy_stores.staging"
+            resValue "string", "app_name", "MassyStores Staging"
         }
         prod {
             dimension "flavor-type"
-            applicationId "com.boilerplate.riverpod.prod"
-            resValue "string", "app_name", "RiverpodBoilerplate Prod"
+            applicationId "com.technovert.massy_stores"
+            resValue "string", "app_name", "MassyStores"
         }
     }
 

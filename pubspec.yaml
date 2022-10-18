@@ -159,22 +159,22 @@ flavorizr:
     flavors:
         dev:
             app:
-                name: "RiverpodBoilerplate Dev"
+                name: "MassyStores Dev"
             android:
-                applicationId: "com.boilerplate.riverpod.dev"
+                applicationId: "com.technovert.massy_stores.dev"
             ios:
-                bundleId: "com.boilerplate.riverpod.dev"
+                bundleId: "com.technovert.massy_stores.dev"
         staging:
             app:
-                name: "RiverpodBoilerplate Staging"
+                name: "MassyStores Staging"
             android:
-                applicationId: "com.boilerplate.riverpod.staging"
+                applicationId: "com.technovert.massy_stores.staging"
             ios:
-                bundleId: "com.boilerplate.riverpod.staging"
+                bundleId: "com.technovert.massy_stores.staging"
         prod:
             app:
-                name: "RiverpodBoilerplate Prod"
+                name: "MassyStores"
             android:
-                applicationId: "com.boilerplate.riverpod.prod"
+                applicationId: "com.technovert.massy_stores"
             ios:
-                bundleId: "com.boilerplate.riverpod.prod"
+                bundleId: "com.technovert.massy_stores"

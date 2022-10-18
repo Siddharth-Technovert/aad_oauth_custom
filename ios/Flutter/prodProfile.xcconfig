@@ -2,5 +2,5 @@
 
 FLUTTER_TARGET=lib/main/main_prod.dart
 ASSET_PREFIX=prod
-BUNDLE_NAME=RiverpodBoilerplate Prod
-BUNDLE_DISPLAY_NAME=RiverpodBoilerplate Prod
+BUNDLE_NAME=MassyStores
+BUNDLE_DISPLAY_NAME=MassyStores
