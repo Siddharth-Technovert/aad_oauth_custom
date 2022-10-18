@@ -158,18 +158,18 @@ flavorizr:
             android:
                 applicationId: "com.technovert.massy_stores.dev"
             ios:
-                bundleId: "com.technovert.massy_stores.dev"
+                bundleId: "com.technovert.massy-stores.dev"
         staging:
             app:
                 name: "MassyStores Staging"
             android:
                 applicationId: "com.technovert.massy_stores.staging"
             ios:
-                bundleId: "com.technovert.massy_stores.staging"
+                bundleId: "com.technovert.massy-stores.staging"
         prod:
             app:
                 name: "MassyStores"
             android:
                 applicationId: "com.technovert.massy_stores"
             ios:
-                bundleId: "com.technovert.massy_stores"
+                bundleId: "com.technovert.massy-stores"

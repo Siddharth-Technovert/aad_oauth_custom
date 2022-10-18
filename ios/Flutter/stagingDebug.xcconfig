@@ -1,6 +1,6 @@
 #include "Generated.xcconfig"
 
-FLUTTER_TARGET=lib/main/main_staging.dart
+FLUTTER_TARGET=lib/main_staging.dart
 ASSET_PREFIX=staging
 BUNDLE_NAME=MassyStores Staging
 BUNDLE_DISPLAY_NAME=MassyStores Staging
