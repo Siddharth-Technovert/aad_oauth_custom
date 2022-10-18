@@ -130,6 +130,7 @@ flutter:
 
     assets:
         - assets/images/
+        - assets/svgs/
 
     fonts:
         - family: Poppins
