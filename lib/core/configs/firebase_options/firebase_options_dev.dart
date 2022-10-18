@@ -8,7 +8,7 @@ import 'package:flutter/foundation.dart'
 ///
 /// Example:
 /// ```dart
-/// import 'firebase_options.dart';
+/// import 'firebase_options_dev.dart';
 /// // ...
 /// await Firebase.initializeApp(
 ///   options: DefaultFirebaseOptions.currentPlatform,
@@ -50,20 +50,20 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyA2cbg6yvDsWrvMJM00DfPCzvmOfp0tAsA',
-    appId: '1:631065529640:android:60a41b63a016ae0fa3141d',
-    messagingSenderId: '631065529640',
-    projectId: 'massy-store-test',
-    storageBucket: 'massy-store-test.appspot.com',
+    apiKey: 'AIzaSyAIzdJPUi5MWgcHBvQmaQU9tyhMcOD24c4',
+    appId: '1:62106828676:android:9fbfa1b41d6724fe5b67d1',
+    messagingSenderId: '62106828676',
+    projectId: 'massy-stores-dev',
+    storageBucket: 'massy-stores-dev.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyD0PPBbVPENw07JRE67_sytl839ziC0g68',
-    appId: '1:631065529640:ios:0429b6f299ff5229a3141d',
-    messagingSenderId: '631065529640',
-    projectId: 'massy-store-test',
-    storageBucket: 'massy-store-test.appspot.com',
-    iosClientId: '631065529640-7lqegrd8duvpb3dalhhlmkmano3a2jdu.apps.googleusercontent.com',
-    iosBundleId: 'com.boilerplate.riverpod.staging',
+    apiKey: 'AIzaSyDjKOGBjSUMRaYvnAK6bqAIauT2iO00mQ0',
+    appId: '1:62106828676:ios:55786dd6b1ef79515b67d1',
+    messagingSenderId: '62106828676',
+    projectId: 'massy-stores-dev',
+    storageBucket: 'massy-stores-dev.appspot.com',
+    iosClientId: '62106828676-64iotj48113t0ra1pk58g5dtn12li7o8.apps.googleusercontent.com',
+    iosBundleId: 'com.technovert.massy-stores.dev',
   );
 }

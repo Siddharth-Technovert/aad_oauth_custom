@@ -1,7 +1,7 @@
 {
   "file_generated_by": "FlutterFire CLI",
   "purpose": "FirebaseAppID & ProjectID for this Firebase app in this directory",
-  "GOOGLE_APP_ID": "1:631065529640:ios:0429b6f299ff5229a3141d",
-  "FIREBASE_PROJECT_ID": "massy-store-test",
-  "GCM_SENDER_ID": "631065529640"
+  "GOOGLE_APP_ID": "1:62106828676:ios:55786dd6b1ef79515b67d1",
+  "FIREBASE_PROJECT_ID": "massy-stores-dev",
+  "GCM_SENDER_ID": "62106828676"
 }

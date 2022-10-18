@@ -79,7 +79,7 @@
 		<key>FacebookClientToken</key>
 		<string>dfc102f6cb524fb58c0109b926a87925</string>
 		<key>FacebookDisplayName</key>
-		<string>Riverpod Boilerplate</string>
+		<string>MassyStores</string>
 		<key>LSApplicationQueriesSchemes</key>
 		<array>
 			<string>fbapi</string>

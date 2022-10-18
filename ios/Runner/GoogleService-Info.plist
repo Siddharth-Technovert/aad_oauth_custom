@@ -3,21 +3,21 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>631065529640-7lqegrd8duvpb3dalhhlmkmano3a2jdu.apps.googleusercontent.com</string>
+	<string>62106828676-64iotj48113t0ra1pk58g5dtn12li7o8.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.631065529640-7lqegrd8duvpb3dalhhlmkmano3a2jdu</string>
+	<string>com.googleusercontent.apps.62106828676-64iotj48113t0ra1pk58g5dtn12li7o8</string>
 	<key>API_KEY</key>
-	<string>AIzaSyD0PPBbVPENw07JRE67_sytl839ziC0g68</string>
+	<string>AIzaSyDjKOGBjSUMRaYvnAK6bqAIauT2iO00mQ0</string>
 	<key>GCM_SENDER_ID</key>
-	<string>631065529640</string>
+	<string>62106828676</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.boilerplate.riverpod.staging</string>
+	<string>com.technovert.massy-stores.dev</string>
 	<key>PROJECT_ID</key>
-	<string>massy-store-test</string>
+	<string>massy-stores-dev</string>
 	<key>STORAGE_BUCKET</key>
-	<string>massy-store-test.appspot.com</string>
+	<string>massy-stores-dev.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -29,6 +29,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:631065529640:ios:0429b6f299ff5229a3141d</string>
+	<string>1:62106828676:ios:55786dd6b1ef79515b67d1</string>
 </dict>
 </plist>

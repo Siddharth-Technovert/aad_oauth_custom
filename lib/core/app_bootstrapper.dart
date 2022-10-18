@@ -5,10 +5,10 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/material.dart';
 
-import '../firebase_options.dart';
 import 'configs/adapters/cache_dto_adapters.dart';
 import 'configs/adapters/hive_adapters.dart';
 import 'configs/app_serializers.dart';
+import 'configs/firebase_options/firebase_options_dev.dart';
 import 'configs/http_config.dart';
 import 'device/background_service.dart';
 import 'logger/logger_service.dart';
