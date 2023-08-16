@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../data/data_service_providers.dart';
 import '../../../domain/enums/account_type.dart';
-import '../../../domain/service_providers.dart';
 import '../../../domain/states/signup/signup_state.dart';
 
 final signUpProvider =

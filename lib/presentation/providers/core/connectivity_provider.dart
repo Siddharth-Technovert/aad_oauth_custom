@@ -1,6 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../../domain/service_providers.dart';
+import '../../../data/data_service_providers.dart';
 
 //check for initial condition
 final connectivityStatusProvider = StreamProvider<bool>(

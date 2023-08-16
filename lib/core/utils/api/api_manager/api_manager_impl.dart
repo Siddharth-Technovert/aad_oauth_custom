@@ -5,7 +5,7 @@ import 'package:flutter_loggy_dio/flutter_loggy_dio.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:loggy/loggy.dart';
 
-import '../../../../domain/service_providers.dart';
+import '../../../../data/data_service_providers.dart';
 import '../../../../presentation/providers/core/connectivity_provider.dart';
 import '../../../configs/app_configuration.dart';
 import '../../errors/api_exception.dart';

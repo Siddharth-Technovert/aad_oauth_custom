@@ -1,7 +1,7 @@
 import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../domain/service_providers.dart';
+import '../data/data_service_providers.dart';
 import 'configs/adapters/cache_dto_adapters.dart';
 import 'configs/app_serializers.dart';
 import 'logger/logger_service.dart';

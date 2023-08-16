@@ -5,7 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'core/app_bootstrapper.dart';
 import 'core/configs/log/riverpod_observer_log.dart';
-import 'domain/service_providers.dart';
+import 'data/data_service_providers.dart';
 import 'presentation/ui/app.dart';
 
 Future<void> main() async {

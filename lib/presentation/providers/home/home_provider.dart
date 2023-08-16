@@ -1,6 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../../domain/service_providers.dart';
+import '../../../data/data_service_providers.dart';
 import '../../../domain/states/home/home_state.dart';
 import '../../../domain/usecases/auth/auth_usecases.dart';
 import '../core/app_state_provider.dart';

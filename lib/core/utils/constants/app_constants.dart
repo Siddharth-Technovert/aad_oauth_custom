@@ -1,6 +1,9 @@
 import 'package:flutter/widgets.dart';
 
 class AppConstants {
+  //?TODO: Remove this when implementing API store that value as JWT Token not this
+  static const String tokenKey = "token";
+
   //screen key
   static const Key homeScreenKey = Key("homeScreenKey");
 
@@ -13,7 +16,6 @@ class AppConstants {
   static const String isOnboardingDoneKey = "isOnboardingDone";
   static const String userKey = "user";
   static const String themeKey = "theme";
-  static const String tokenKey = "token";
 
   ///Hive Adapter Ids
   //?TODO: Add Hive Adapter Ids
