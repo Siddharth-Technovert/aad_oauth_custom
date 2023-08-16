@@ -6,33 +6,36 @@ class NetworkLogInterceptor extends Interceptor {
   final LoggerService _log;
   NetworkLogInterceptor(this._log);
   @override
-  Future onRequest(
+  Future<void> onRequest(
     RequestOptions options,
     RequestInterceptorHandler handler,
   ) async {
     _log.infoLog('REQUEST[${options.method}] => PATH: ${options.path}');
-    return super.onRequest(options, handler);
+    super.onRequest(options, handler);
   }
 
   @override
-  Future onResponse(
+  Future<void> onResponse(
     Response response,
     ResponseInterceptorHandler handler,
   ) async {
     _log.infoLog(
       'RESPONSE[${response.statusCode}] => PATH: ${response.requestOptions.path}',
     );
-    return super.onResponse(response, handler);
+    super.onResponse(response, handler);
   }
 
   @override
-  Future onError(
-    DioError err,
+  Future<void> onError(
+    DioException err,
     ErrorInterceptorHandler handler,
   ) async {
     _log.infoLog(
       'ERROR[${err.response?.statusCode}] => PATH: ${err.requestOptions.path}',
     );
-    return super.onError(err, handler);
+    _log.infoLog(
+      'ERROR Log: [${err.response?.data}]',
+    );
+    super.onError(err, handler);
   }
 }

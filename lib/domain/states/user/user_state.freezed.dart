@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'user_state.dart';
 
@@ -24,8 +24,8 @@ mixin _$UserState {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(User user)? available,
-    TResult Function()? notAvailable,
+    TResult? Function(User user)? available,
+    TResult? Function()? notAvailable,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -43,8 +43,8 @@ mixin _$UserState {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_Available value)? available,
-    TResult Function(_NotAvailable value)? notAvailable,
+    TResult? Function(_Available value)? available,
+    TResult? Function(_NotAvailable value)? notAvailable,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -59,16 +59,18 @@ mixin _$UserState {
 /// @nodoc
 abstract class $UserStateCopyWith<$Res> {
   factory $UserStateCopyWith(UserState value, $Res Function(UserState) then) =
-      _$UserStateCopyWithImpl<$Res>;
+      _$UserStateCopyWithImpl<$Res, UserState>;
 }
 
 /// @nodoc
-class _$UserStateCopyWithImpl<$Res> implements $UserStateCopyWith<$Res> {
+class _$UserStateCopyWithImpl<$Res, $Val extends UserState>
+    implements $UserStateCopyWith<$Res> {
   _$UserStateCopyWithImpl(this._value, this._then);
 
-  final UserState _value;
   // ignore: unused_field
-  final $Res Function(UserState) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 }
 
 /// @nodoc
@@ -76,27 +78,27 @@ abstract class _$$_AvailableCopyWith<$Res> {
   factory _$$_AvailableCopyWith(
           _$_Available value, $Res Function(_$_Available) then) =
       __$$_AvailableCopyWithImpl<$Res>;
+  @useResult
   $Res call({User user});
 
   $UserCopyWith<$Res> get user;
 }
 
 /// @nodoc
-class __$$_AvailableCopyWithImpl<$Res> extends _$UserStateCopyWithImpl<$Res>
+class __$$_AvailableCopyWithImpl<$Res>
+    extends _$UserStateCopyWithImpl<$Res, _$_Available>
     implements _$$_AvailableCopyWith<$Res> {
   __$$_AvailableCopyWithImpl(
       _$_Available _value, $Res Function(_$_Available) _then)
-      : super(_value, (v) => _then(v as _$_Available));
+      : super(_value, _then);
 
-  @override
-  _$_Available get _value => super._value as _$_Available;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? user = freezed,
+    Object? user = null,
   }) {
     return _then(_$_Available(
-      user == freezed
+      null == user
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
               as User,
@@ -104,6 +106,7 @@ class __$$_AvailableCopyWithImpl<$Res> extends _$UserStateCopyWithImpl<$Res>
   }
 
   @override
+  @pragma('vm:prefer-inline')
   $UserCopyWith<$Res> get user {
     return $UserCopyWith<$Res>(_value.user, (value) {
       return _then(_value.copyWith(user: value));
@@ -129,15 +132,15 @@ class _$_Available extends _Available {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_Available &&
-            const DeepCollectionEquality().equals(other.user, user));
+            (identical(other.user, user) || other.user == user));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(user));
+  int get hashCode => Object.hash(runtimeType, user);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_AvailableCopyWith<_$_Available> get copyWith =>
       __$$_AvailableCopyWithImpl<_$_Available>(this, _$identity);
 
@@ -153,8 +156,8 @@ class _$_Available extends _Available {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(User user)? available,
-    TResult Function()? notAvailable,
+    TResult? Function(User user)? available,
+    TResult? Function()? notAvailable,
   }) {
     return available?.call(user);
   }
@@ -184,8 +187,8 @@ class _$_Available extends _Available {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_Available value)? available,
-    TResult Function(_NotAvailable value)? notAvailable,
+    TResult? Function(_Available value)? available,
+    TResult? Function(_NotAvailable value)? notAvailable,
   }) {
     return available?.call(this);
   }
@@ -222,14 +225,12 @@ abstract class _$$_NotAvailableCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_NotAvailableCopyWithImpl<$Res> extends _$UserStateCopyWithImpl<$Res>
+class __$$_NotAvailableCopyWithImpl<$Res>
+    extends _$UserStateCopyWithImpl<$Res, _$_NotAvailable>
     implements _$$_NotAvailableCopyWith<$Res> {
   __$$_NotAvailableCopyWithImpl(
       _$_NotAvailable _value, $Res Function(_$_NotAvailable) _then)
-      : super(_value, (v) => _then(v as _$_NotAvailable));
-
-  @override
-  _$_NotAvailable get _value => super._value as _$_NotAvailable;
+      : super(_value, _then);
 }
 
 /// @nodoc
@@ -263,8 +264,8 @@ class _$_NotAvailable extends _NotAvailable {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(User user)? available,
-    TResult Function()? notAvailable,
+    TResult? Function(User user)? available,
+    TResult? Function()? notAvailable,
   }) {
     return notAvailable?.call();
   }
@@ -294,8 +295,8 @@ class _$_NotAvailable extends _NotAvailable {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_Available value)? available,
-    TResult Function(_NotAvailable value)? notAvailable,
+    TResult? Function(_Available value)? available,
+    TResult? Function(_NotAvailable value)? notAvailable,
   }) {
     return notAvailable?.call(this);
   }

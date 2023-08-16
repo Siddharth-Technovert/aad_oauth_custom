@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'app_state.dart';
 
@@ -26,10 +26,10 @@ mixin _$AppState {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function()? onboarding,
-    TResult Function()? unAuthenticated,
-    TResult Function(User user)? authenticated,
+    TResult? Function()? initial,
+    TResult? Function()? onboarding,
+    TResult? Function()? unAuthenticated,
+    TResult? Function(User user)? authenticated,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -51,10 +51,10 @@ mixin _$AppState {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_Initial value)? initial,
-    TResult Function(_Onboarding value)? onboarding,
-    TResult Function(_UnAuthenticated value)? unAuthenticated,
-    TResult Function(_Authenticated value)? authenticated,
+    TResult? Function(_Initial value)? initial,
+    TResult? Function(_Onboarding value)? onboarding,
+    TResult? Function(_UnAuthenticated value)? unAuthenticated,
+    TResult? Function(_Authenticated value)? authenticated,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -71,16 +71,18 @@ mixin _$AppState {
 /// @nodoc
 abstract class $AppStateCopyWith<$Res> {
   factory $AppStateCopyWith(AppState value, $Res Function(AppState) then) =
-      _$AppStateCopyWithImpl<$Res>;
+      _$AppStateCopyWithImpl<$Res, AppState>;
 }
 
 /// @nodoc
-class _$AppStateCopyWithImpl<$Res> implements $AppStateCopyWith<$Res> {
+class _$AppStateCopyWithImpl<$Res, $Val extends AppState>
+    implements $AppStateCopyWith<$Res> {
   _$AppStateCopyWithImpl(this._value, this._then);
 
-  final AppState _value;
   // ignore: unused_field
-  final $Res Function(AppState) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 }
 
 /// @nodoc
@@ -91,13 +93,11 @@ abstract class _$$_InitialCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_InitialCopyWithImpl<$Res> extends _$AppStateCopyWithImpl<$Res>
+class __$$_InitialCopyWithImpl<$Res>
+    extends _$AppStateCopyWithImpl<$Res, _$_Initial>
     implements _$$_InitialCopyWith<$Res> {
   __$$_InitialCopyWithImpl(_$_Initial _value, $Res Function(_$_Initial) _then)
-      : super(_value, (v) => _then(v as _$_Initial));
-
-  @override
-  _$_Initial get _value => super._value as _$_Initial;
+      : super(_value, _then);
 }
 
 /// @nodoc
@@ -133,10 +133,10 @@ class _$_Initial extends _Initial {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function()? onboarding,
-    TResult Function()? unAuthenticated,
-    TResult Function(User user)? authenticated,
+    TResult? Function()? initial,
+    TResult? Function()? onboarding,
+    TResult? Function()? unAuthenticated,
+    TResult? Function(User user)? authenticated,
   }) {
     return initial?.call();
   }
@@ -170,10 +170,10 @@ class _$_Initial extends _Initial {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_Initial value)? initial,
-    TResult Function(_Onboarding value)? onboarding,
-    TResult Function(_UnAuthenticated value)? unAuthenticated,
-    TResult Function(_Authenticated value)? authenticated,
+    TResult? Function(_Initial value)? initial,
+    TResult? Function(_Onboarding value)? onboarding,
+    TResult? Function(_UnAuthenticated value)? unAuthenticated,
+    TResult? Function(_Authenticated value)? authenticated,
   }) {
     return initial?.call(this);
   }
@@ -207,14 +207,12 @@ abstract class _$$_OnboardingCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_OnboardingCopyWithImpl<$Res> extends _$AppStateCopyWithImpl<$Res>
+class __$$_OnboardingCopyWithImpl<$Res>
+    extends _$AppStateCopyWithImpl<$Res, _$_Onboarding>
     implements _$$_OnboardingCopyWith<$Res> {
   __$$_OnboardingCopyWithImpl(
       _$_Onboarding _value, $Res Function(_$_Onboarding) _then)
-      : super(_value, (v) => _then(v as _$_Onboarding));
-
-  @override
-  _$_Onboarding get _value => super._value as _$_Onboarding;
+      : super(_value, _then);
 }
 
 /// @nodoc
@@ -250,10 +248,10 @@ class _$_Onboarding extends _Onboarding {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function()? onboarding,
-    TResult Function()? unAuthenticated,
-    TResult Function(User user)? authenticated,
+    TResult? Function()? initial,
+    TResult? Function()? onboarding,
+    TResult? Function()? unAuthenticated,
+    TResult? Function(User user)? authenticated,
   }) {
     return onboarding?.call();
   }
@@ -287,10 +285,10 @@ class _$_Onboarding extends _Onboarding {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_Initial value)? initial,
-    TResult Function(_Onboarding value)? onboarding,
-    TResult Function(_UnAuthenticated value)? unAuthenticated,
-    TResult Function(_Authenticated value)? authenticated,
+    TResult? Function(_Initial value)? initial,
+    TResult? Function(_Onboarding value)? onboarding,
+    TResult? Function(_UnAuthenticated value)? unAuthenticated,
+    TResult? Function(_Authenticated value)? authenticated,
   }) {
     return onboarding?.call(this);
   }
@@ -325,14 +323,11 @@ abstract class _$$_UnAuthenticatedCopyWith<$Res> {
 
 /// @nodoc
 class __$$_UnAuthenticatedCopyWithImpl<$Res>
-    extends _$AppStateCopyWithImpl<$Res>
+    extends _$AppStateCopyWithImpl<$Res, _$_UnAuthenticated>
     implements _$$_UnAuthenticatedCopyWith<$Res> {
   __$$_UnAuthenticatedCopyWithImpl(
       _$_UnAuthenticated _value, $Res Function(_$_UnAuthenticated) _then)
-      : super(_value, (v) => _then(v as _$_UnAuthenticated));
-
-  @override
-  _$_UnAuthenticated get _value => super._value as _$_UnAuthenticated;
+      : super(_value, _then);
 }
 
 /// @nodoc
@@ -368,10 +363,10 @@ class _$_UnAuthenticated extends _UnAuthenticated {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function()? onboarding,
-    TResult Function()? unAuthenticated,
-    TResult Function(User user)? authenticated,
+    TResult? Function()? initial,
+    TResult? Function()? onboarding,
+    TResult? Function()? unAuthenticated,
+    TResult? Function(User user)? authenticated,
   }) {
     return unAuthenticated?.call();
   }
@@ -405,10 +400,10 @@ class _$_UnAuthenticated extends _UnAuthenticated {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_Initial value)? initial,
-    TResult Function(_Onboarding value)? onboarding,
-    TResult Function(_UnAuthenticated value)? unAuthenticated,
-    TResult Function(_Authenticated value)? authenticated,
+    TResult? Function(_Initial value)? initial,
+    TResult? Function(_Onboarding value)? onboarding,
+    TResult? Function(_UnAuthenticated value)? unAuthenticated,
+    TResult? Function(_Authenticated value)? authenticated,
   }) {
     return unAuthenticated?.call(this);
   }
@@ -439,27 +434,27 @@ abstract class _$$_AuthenticatedCopyWith<$Res> {
   factory _$$_AuthenticatedCopyWith(
           _$_Authenticated value, $Res Function(_$_Authenticated) then) =
       __$$_AuthenticatedCopyWithImpl<$Res>;
+  @useResult
   $Res call({User user});
 
   $UserCopyWith<$Res> get user;
 }
 
 /// @nodoc
-class __$$_AuthenticatedCopyWithImpl<$Res> extends _$AppStateCopyWithImpl<$Res>
+class __$$_AuthenticatedCopyWithImpl<$Res>
+    extends _$AppStateCopyWithImpl<$Res, _$_Authenticated>
     implements _$$_AuthenticatedCopyWith<$Res> {
   __$$_AuthenticatedCopyWithImpl(
       _$_Authenticated _value, $Res Function(_$_Authenticated) _then)
-      : super(_value, (v) => _then(v as _$_Authenticated));
+      : super(_value, _then);
 
-  @override
-  _$_Authenticated get _value => super._value as _$_Authenticated;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? user = freezed,
+    Object? user = null,
   }) {
     return _then(_$_Authenticated(
-      user == freezed
+      null == user
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
               as User,
@@ -467,6 +462,7 @@ class __$$_AuthenticatedCopyWithImpl<$Res> extends _$AppStateCopyWithImpl<$Res>
   }
 
   @override
+  @pragma('vm:prefer-inline')
   $UserCopyWith<$Res> get user {
     return $UserCopyWith<$Res>(_value.user, (value) {
       return _then(_value.copyWith(user: value));
@@ -492,15 +488,15 @@ class _$_Authenticated extends _Authenticated {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_Authenticated &&
-            const DeepCollectionEquality().equals(other.user, user));
+            (identical(other.user, user) || other.user == user));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(user));
+  int get hashCode => Object.hash(runtimeType, user);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_AuthenticatedCopyWith<_$_Authenticated> get copyWith =>
       __$$_AuthenticatedCopyWithImpl<_$_Authenticated>(this, _$identity);
 
@@ -518,10 +514,10 @@ class _$_Authenticated extends _Authenticated {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function()? onboarding,
-    TResult Function()? unAuthenticated,
-    TResult Function(User user)? authenticated,
+    TResult? Function()? initial,
+    TResult? Function()? onboarding,
+    TResult? Function()? unAuthenticated,
+    TResult? Function(User user)? authenticated,
   }) {
     return authenticated?.call(user);
   }
@@ -555,10 +551,10 @@ class _$_Authenticated extends _Authenticated {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_Initial value)? initial,
-    TResult Function(_Onboarding value)? onboarding,
-    TResult Function(_UnAuthenticated value)? unAuthenticated,
-    TResult Function(_Authenticated value)? authenticated,
+    TResult? Function(_Initial value)? initial,
+    TResult? Function(_Onboarding value)? onboarding,
+    TResult? Function(_UnAuthenticated value)? unAuthenticated,
+    TResult? Function(_Authenticated value)? authenticated,
   }) {
     return authenticated?.call(this);
   }

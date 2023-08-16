@@ -1,6 +1,0 @@
-#include "Generated.xcconfig"
-
-FLUTTER_TARGET=lib/main/main_staging.dart
-ASSET_PREFIX=staging
-BUNDLE_NAME=RiverpodBoilerplate Staging
-BUNDLE_DISPLAY_NAME=RiverpodBoilerplate Staging

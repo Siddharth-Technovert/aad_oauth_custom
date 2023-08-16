@@ -8,6 +8,6 @@ part 'app_theme_dark.dart';
 part 'app_theme_light.dart';
 
 class AppTheme {
-  static _AppThemeLight get light => const _AppThemeLight();
-  static _AppThemeDark get dark => const _AppThemeDark();
+  static AppThemeLight get light => const AppThemeLight();
+  static AppThemeDark get dark => const AppThemeDark();
 }

@@ -1,7 +1,7 @@
 part of 'user_usecases.dart';
 
 final readUserUseCaseProvider = Provider(
-  (ref) => ReadUser(ref.read(userRepositoryProvider)),
+  (ref) => ReadUser(ref.watch(userRepositoryProvider)),
 );
 
 class ReadUser extends NoParamsUseCase<DataState<User>> {

@@ -1,7 +1,7 @@
 part of 'onboarding_usecases.dart';
 
 final writeOnboardingUseCaseProvider = Provider(
-  (ref) => WriteOnboarding(ref.read(secureStorageManagerProvider)),
+  (ref) => WriteOnboarding(ref.watch(secureStorageManagerProvider)),
 );
 
 class WriteOnboarding extends UseCase<void, bool?> {

@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../../../../core/utils/extensions/context_extension.dart';
 import '../../../../core/utils/styles/dimensions/ui_dimensions.dart';
 import '../../../../domain/enums/toast_type.dart';
 import '../../../../domain/models/user/user.dart';
 import '../../../providers/core/connectivity_provider.dart';
 import '../../hooks/app_loc_hook.dart';
-import '../../modals/toasts/toast_factory.dart';
+import '../../modals/snack_bar/snack_bar_factory.dart';
 import '../../widgets/app_drawer.dart';
 
 class HomeScreen extends HookConsumerWidget {
@@ -24,6 +23,7 @@ class HomeScreen extends HookConsumerWidget {
       child: Scaffold(
         appBar: AppBar(
           title: Text(appLoc.dashboardScreen),
+          elevation: 1,
         ),
         drawer: AppDrawer(
           user: user,
@@ -37,7 +37,7 @@ class HomeScreen extends HookConsumerWidget {
                   appLoc.helloMsg(
                     user.name,
                   ),
-                  style: context.h4,
+                  style: Theme.of(context).textTheme.titleLarge,
                   textAlign: TextAlign.center,
                 ),
                 Text(
@@ -48,27 +48,21 @@ class HomeScreen extends HookConsumerWidget {
                             "${appLoc.connectivityStatus}: ${ex.toString()}",
                         loading: () => appLoc.connectivityStatusWait,
                       ),
-                  style: context.bodyText1,
+                  style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                        fontSize: 16,
+                      ),
                   textAlign: TextAlign.center,
                 ),
                 UIDimensions.verticalSpaceMedium,
                 ElevatedButton(
                   onPressed: () {
-                    ToastFactory.showToast(
-                      context,
+                    SnackbarFactory.showToast(
                       ToastType.info,
-                      appLoc.infoToastText,
+                      "This is the info",
                     );
                   },
                   child: Text(
                     appLoc.toastShow,
-                    textAlign: TextAlign.center,
-                  ),
-                ),
-                ElevatedButton(
-                  onPressed: () => throw Exception(),
-                  child: Text(
-                    appLoc.crashAppFirebase,
                     textAlign: TextAlign.center,
                   ),
                 ),

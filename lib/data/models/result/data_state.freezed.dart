@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'data_state.dart';
 
@@ -24,8 +24,8 @@ mixin _$DataState<T> {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(T data)? success,
-    TResult Function(AppException exception)? error,
+    TResult? Function(T data)? success,
+    TResult? Function(AppException exception)? error,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -43,8 +43,8 @@ mixin _$DataState<T> {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_DataSuccess<T> value)? success,
-    TResult Function(_DataError<T> value)? error,
+    TResult? Function(_DataSuccess<T> value)? success,
+    TResult? Function(_DataError<T> value)? error,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -60,16 +60,18 @@ mixin _$DataState<T> {
 abstract class $DataStateCopyWith<T, $Res> {
   factory $DataStateCopyWith(
           DataState<T> value, $Res Function(DataState<T>) then) =
-      _$DataStateCopyWithImpl<T, $Res>;
+      _$DataStateCopyWithImpl<T, $Res, DataState<T>>;
 }
 
 /// @nodoc
-class _$DataStateCopyWithImpl<T, $Res> implements $DataStateCopyWith<T, $Res> {
+class _$DataStateCopyWithImpl<T, $Res, $Val extends DataState<T>>
+    implements $DataStateCopyWith<T, $Res> {
   _$DataStateCopyWithImpl(this._value, this._then);
 
-  final DataState<T> _value;
   // ignore: unused_field
-  final $Res Function(DataState<T>) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 }
 
 /// @nodoc
@@ -77,26 +79,25 @@ abstract class _$$_DataSuccessCopyWith<T, $Res> {
   factory _$$_DataSuccessCopyWith(
           _$_DataSuccess<T> value, $Res Function(_$_DataSuccess<T>) then) =
       __$$_DataSuccessCopyWithImpl<T, $Res>;
+  @useResult
   $Res call({T data});
 }
 
 /// @nodoc
 class __$$_DataSuccessCopyWithImpl<T, $Res>
-    extends _$DataStateCopyWithImpl<T, $Res>
+    extends _$DataStateCopyWithImpl<T, $Res, _$_DataSuccess<T>>
     implements _$$_DataSuccessCopyWith<T, $Res> {
   __$$_DataSuccessCopyWithImpl(
       _$_DataSuccess<T> _value, $Res Function(_$_DataSuccess<T>) _then)
-      : super(_value, (v) => _then(v as _$_DataSuccess<T>));
+      : super(_value, _then);
 
-  @override
-  _$_DataSuccess<T> get _value => super._value as _$_DataSuccess<T>;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? data = freezed,
   }) {
     return _then(_$_DataSuccess<T>(
-      data == freezed
+      freezed == data
           ? _value.data
           : data // ignore: cast_nullable_to_non_nullable
               as T,
@@ -131,6 +132,7 @@ class _$_DataSuccess<T> extends _DataSuccess<T> {
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_DataSuccessCopyWith<T, _$_DataSuccess<T>> get copyWith =>
       __$$_DataSuccessCopyWithImpl<T, _$_DataSuccess<T>>(this, _$identity);
 
@@ -146,8 +148,8 @@ class _$_DataSuccess<T> extends _DataSuccess<T> {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(T data)? success,
-    TResult Function(AppException exception)? error,
+    TResult? Function(T data)? success,
+    TResult? Function(AppException exception)? error,
   }) {
     return success?.call(data);
   }
@@ -177,8 +179,8 @@ class _$_DataSuccess<T> extends _DataSuccess<T> {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_DataSuccess<T> value)? success,
-    TResult Function(_DataError<T> value)? error,
+    TResult? Function(_DataSuccess<T> value)? success,
+    TResult? Function(_DataError<T> value)? error,
   }) {
     return success?.call(this);
   }
@@ -212,6 +214,7 @@ abstract class _$$_DataErrorCopyWith<T, $Res> {
   factory _$$_DataErrorCopyWith(
           _$_DataError<T> value, $Res Function(_$_DataError<T>) then) =
       __$$_DataErrorCopyWithImpl<T, $Res>;
+  @useResult
   $Res call({AppException exception});
 
   $AppExceptionCopyWith<$Res> get exception;
@@ -219,21 +222,19 @@ abstract class _$$_DataErrorCopyWith<T, $Res> {
 
 /// @nodoc
 class __$$_DataErrorCopyWithImpl<T, $Res>
-    extends _$DataStateCopyWithImpl<T, $Res>
+    extends _$DataStateCopyWithImpl<T, $Res, _$_DataError<T>>
     implements _$$_DataErrorCopyWith<T, $Res> {
   __$$_DataErrorCopyWithImpl(
       _$_DataError<T> _value, $Res Function(_$_DataError<T>) _then)
-      : super(_value, (v) => _then(v as _$_DataError<T>));
+      : super(_value, _then);
 
-  @override
-  _$_DataError<T> get _value => super._value as _$_DataError<T>;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? exception = freezed,
+    Object? exception = null,
   }) {
     return _then(_$_DataError<T>(
-      exception == freezed
+      null == exception
           ? _value.exception
           : exception // ignore: cast_nullable_to_non_nullable
               as AppException,
@@ -241,6 +242,7 @@ class __$$_DataErrorCopyWithImpl<T, $Res>
   }
 
   @override
+  @pragma('vm:prefer-inline')
   $AppExceptionCopyWith<$Res> get exception {
     return $AppExceptionCopyWith<$Res>(_value.exception, (value) {
       return _then(_value.copyWith(exception: value));
@@ -266,15 +268,16 @@ class _$_DataError<T> extends _DataError<T> {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_DataError<T> &&
-            const DeepCollectionEquality().equals(other.exception, exception));
+            (identical(other.exception, exception) ||
+                other.exception == exception));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(exception));
+  int get hashCode => Object.hash(runtimeType, exception);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_DataErrorCopyWith<T, _$_DataError<T>> get copyWith =>
       __$$_DataErrorCopyWithImpl<T, _$_DataError<T>>(this, _$identity);
 
@@ -290,8 +293,8 @@ class _$_DataError<T> extends _DataError<T> {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(T data)? success,
-    TResult Function(AppException exception)? error,
+    TResult? Function(T data)? success,
+    TResult? Function(AppException exception)? error,
   }) {
     return error?.call(exception);
   }
@@ -321,8 +324,8 @@ class _$_DataError<T> extends _DataError<T> {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_DataSuccess<T> value)? success,
-    TResult Function(_DataError<T> value)? error,
+    TResult? Function(_DataSuccess<T> value)? success,
+    TResult? Function(_DataError<T> value)? error,
   }) {
     return error?.call(this);
   }

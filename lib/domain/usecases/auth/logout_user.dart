@@ -1,7 +1,7 @@
 part of 'auth_usecases.dart';
 
 final logoutUserUseCaseProvider = Provider(
-  (ref) => LogoutUser(ref.read(authRepositoryProvider)),
+  (ref) => LogoutUser(ref.watch(authRepositoryProvider)),
 );
 
 class LogoutUser extends UseCase<void, AccountType> {

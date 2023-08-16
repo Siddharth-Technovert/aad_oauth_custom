@@ -1,20 +1,24 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../core/utils/extensions/context_extension.dart';
-import '../../../../core/utils/styles/colors/colors.dart';
+import '../../../../core/utils/styles/decorations/corner_shape_decoration.dart';
 import '../../../../core/utils/styles/dimensions/ui_dimensions.dart';
-import '../../hooks/is_dark_mode_hook.dart';
 
-class SecondaryButton extends HookWidget {
+class SecondaryButton extends StatelessWidget {
   const SecondaryButton({
-    required this.onPressed,
     required this.text,
+    required this.onPressed,
     this.horizontalPadding = 18,
     this.verticalPadding = 16,
     this.suffixIconData,
     this.prefixIconData,
+    this.backgroundColor,
+    this.foregroundColor,
+    this.borderColor,
+    this.child,
+    this.height,
+    this.cornerRadius,
     Key? key,
   }) : super(key: key);
 
@@ -24,34 +28,29 @@ class SecondaryButton extends HookWidget {
   final double verticalPadding;
   final IconData? suffixIconData;
   final IconData? prefixIconData;
+  final Color? backgroundColor;
+  final Color? foregroundColor;
+  final Color? borderColor;
+  final double? height;
+  final Widget? child;
+  final double? cornerRadius;
 
   @override
   Widget build(BuildContext context) {
-    final isDark = useIsDarkHook();
-    return Container(
+    return SizedBox(
+      height: height ?? 60.h,
       width: horizontalPadding == 18.w ? double.infinity : null,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(100).r,
-        gradient: UIColors.secondaryGradient,
-        boxShadow: isDark
-            ? UIColors.dark.secondaryBoxShadow
-            : UIColors.light.secondaryBoxShadow,
-      ),
-      child: ElevatedButton(
+      child: OutlinedButton(
         onPressed: onPressed,
-        style: ElevatedButton.styleFrom(
+        style: OutlinedButton.styleFrom(
+          side: BorderSide(color: borderColor ?? context.primaryColor),
+          shape: smoothCornerShape(cornerRadius: cornerRadius),
           padding: EdgeInsets.symmetric(
             vertical: verticalPadding,
             horizontal: horizontalPadding,
           ),
-          backgroundColor: Colors.transparent,
-          shadowColor: Colors.transparent,
-          foregroundColor:
-              isDark ? UIColors.light.secondary : UIColors.dark.secondary,
-          elevation: 3,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(100).r,
-          ),
+          foregroundColor: foregroundColor ?? context.primaryColor,
+          backgroundColor: backgroundColor,
         ),
         child: Center(
           child: Row(
@@ -60,22 +59,23 @@ class SecondaryButton extends HookWidget {
               if (prefixIconData != null)
                 Icon(
                   prefixIconData,
-                  color: Colors.white,
-                  size: 20.sm,
+                  color: context.primaryColor,
+                  size: 28.sp,
                 ),
               if (prefixIconData != null) UIDimensions.horizontalSpace(6),
-              Text(
-                text,
-                style: context.h5.copyWith(
-                  color: Colors.white,
-                ),
-              ),
+              child ??
+                  Text(
+                    text,
+                    style: context.h5.copyWith(
+                      color: context.primaryColor,
+                    ),
+                  ),
               if (suffixIconData != null) UIDimensions.horizontalSpace(6),
               if (suffixIconData != null)
                 Icon(
                   suffixIconData,
-                  color: Colors.white,
-                  size: 20.sm,
+                  color: context.primaryColor,
+                  size: 20.sp,
                 ),
             ],
           ),

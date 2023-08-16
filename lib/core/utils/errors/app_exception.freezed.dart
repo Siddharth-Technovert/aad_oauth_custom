@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'app_exception.dart';
 
@@ -21,17 +21,21 @@ mixin _$AppException {
     required TResult Function() networkError,
     required TResult Function(CacheException error) cacheError,
     required TResult Function() serializationError,
-    required TResult Function(ApiException error) apiError,
+    required TResult Function(
+            ApiErrorResponse? apiErrorResponse, ApiException apiException)
+        apiError,
     required TResult Function(dynamic error) unknownError,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? networkError,
-    TResult Function(CacheException error)? cacheError,
-    TResult Function()? serializationError,
-    TResult Function(ApiException error)? apiError,
-    TResult Function(dynamic error)? unknownError,
+    TResult? Function()? networkError,
+    TResult? Function(CacheException error)? cacheError,
+    TResult? Function()? serializationError,
+    TResult? Function(
+            ApiErrorResponse? apiErrorResponse, ApiException apiException)?
+        apiError,
+    TResult? Function(dynamic error)? unknownError,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -39,7 +43,9 @@ mixin _$AppException {
     TResult Function()? networkError,
     TResult Function(CacheException error)? cacheError,
     TResult Function()? serializationError,
-    TResult Function(ApiException error)? apiError,
+    TResult Function(
+            ApiErrorResponse? apiErrorResponse, ApiException apiException)?
+        apiError,
     TResult Function(dynamic error)? unknownError,
     required TResult orElse(),
   }) =>
@@ -55,11 +61,11 @@ mixin _$AppException {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_NetworkError value)? networkError,
-    TResult Function(_CacheError value)? cacheError,
-    TResult Function(_SerializationError value)? serializationError,
-    TResult Function(_ApiError value)? apiError,
-    TResult Function(_UnknownError value)? unknownError,
+    TResult? Function(_NetworkError value)? networkError,
+    TResult? Function(_CacheError value)? cacheError,
+    TResult? Function(_SerializationError value)? serializationError,
+    TResult? Function(_ApiError value)? apiError,
+    TResult? Function(_UnknownError value)? unknownError,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -78,16 +84,18 @@ mixin _$AppException {
 abstract class $AppExceptionCopyWith<$Res> {
   factory $AppExceptionCopyWith(
           AppException value, $Res Function(AppException) then) =
-      _$AppExceptionCopyWithImpl<$Res>;
+      _$AppExceptionCopyWithImpl<$Res, AppException>;
 }
 
 /// @nodoc
-class _$AppExceptionCopyWithImpl<$Res> implements $AppExceptionCopyWith<$Res> {
+class _$AppExceptionCopyWithImpl<$Res, $Val extends AppException>
+    implements $AppExceptionCopyWith<$Res> {
   _$AppExceptionCopyWithImpl(this._value, this._then);
 
-  final AppException _value;
   // ignore: unused_field
-  final $Res Function(AppException) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 }
 
 /// @nodoc
@@ -99,14 +107,11 @@ abstract class _$$_NetworkErrorCopyWith<$Res> {
 
 /// @nodoc
 class __$$_NetworkErrorCopyWithImpl<$Res>
-    extends _$AppExceptionCopyWithImpl<$Res>
+    extends _$AppExceptionCopyWithImpl<$Res, _$_NetworkError>
     implements _$$_NetworkErrorCopyWith<$Res> {
   __$$_NetworkErrorCopyWithImpl(
       _$_NetworkError _value, $Res Function(_$_NetworkError) _then)
-      : super(_value, (v) => _then(v as _$_NetworkError));
-
-  @override
-  _$_NetworkError get _value => super._value as _$_NetworkError;
+      : super(_value, _then);
 }
 
 /// @nodoc
@@ -134,7 +139,9 @@ class _$_NetworkError extends _NetworkError {
     required TResult Function() networkError,
     required TResult Function(CacheException error) cacheError,
     required TResult Function() serializationError,
-    required TResult Function(ApiException error) apiError,
+    required TResult Function(
+            ApiErrorResponse? apiErrorResponse, ApiException apiException)
+        apiError,
     required TResult Function(dynamic error) unknownError,
   }) {
     return networkError();
@@ -143,11 +150,13 @@ class _$_NetworkError extends _NetworkError {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? networkError,
-    TResult Function(CacheException error)? cacheError,
-    TResult Function()? serializationError,
-    TResult Function(ApiException error)? apiError,
-    TResult Function(dynamic error)? unknownError,
+    TResult? Function()? networkError,
+    TResult? Function(CacheException error)? cacheError,
+    TResult? Function()? serializationError,
+    TResult? Function(
+            ApiErrorResponse? apiErrorResponse, ApiException apiException)?
+        apiError,
+    TResult? Function(dynamic error)? unknownError,
   }) {
     return networkError?.call();
   }
@@ -158,7 +167,9 @@ class _$_NetworkError extends _NetworkError {
     TResult Function()? networkError,
     TResult Function(CacheException error)? cacheError,
     TResult Function()? serializationError,
-    TResult Function(ApiException error)? apiError,
+    TResult Function(
+            ApiErrorResponse? apiErrorResponse, ApiException apiException)?
+        apiError,
     TResult Function(dynamic error)? unknownError,
     required TResult orElse(),
   }) {
@@ -183,11 +194,11 @@ class _$_NetworkError extends _NetworkError {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_NetworkError value)? networkError,
-    TResult Function(_CacheError value)? cacheError,
-    TResult Function(_SerializationError value)? serializationError,
-    TResult Function(_ApiError value)? apiError,
-    TResult Function(_UnknownError value)? unknownError,
+    TResult? Function(_NetworkError value)? networkError,
+    TResult? Function(_CacheError value)? cacheError,
+    TResult? Function(_SerializationError value)? serializationError,
+    TResult? Function(_ApiError value)? apiError,
+    TResult? Function(_UnknownError value)? unknownError,
   }) {
     return networkError?.call(this);
   }
@@ -219,27 +230,27 @@ abstract class _$$_CacheErrorCopyWith<$Res> {
   factory _$$_CacheErrorCopyWith(
           _$_CacheError value, $Res Function(_$_CacheError) then) =
       __$$_CacheErrorCopyWithImpl<$Res>;
+  @useResult
   $Res call({CacheException error});
 
   $CacheExceptionCopyWith<$Res> get error;
 }
 
 /// @nodoc
-class __$$_CacheErrorCopyWithImpl<$Res> extends _$AppExceptionCopyWithImpl<$Res>
+class __$$_CacheErrorCopyWithImpl<$Res>
+    extends _$AppExceptionCopyWithImpl<$Res, _$_CacheError>
     implements _$$_CacheErrorCopyWith<$Res> {
   __$$_CacheErrorCopyWithImpl(
       _$_CacheError _value, $Res Function(_$_CacheError) _then)
-      : super(_value, (v) => _then(v as _$_CacheError));
+      : super(_value, _then);
 
-  @override
-  _$_CacheError get _value => super._value as _$_CacheError;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? error = freezed,
+    Object? error = null,
   }) {
     return _then(_$_CacheError(
-      error == freezed
+      null == error
           ? _value.error
           : error // ignore: cast_nullable_to_non_nullable
               as CacheException,
@@ -247,6 +258,7 @@ class __$$_CacheErrorCopyWithImpl<$Res> extends _$AppExceptionCopyWithImpl<$Res>
   }
 
   @override
+  @pragma('vm:prefer-inline')
   $CacheExceptionCopyWith<$Res> get error {
     return $CacheExceptionCopyWith<$Res>(_value.error, (value) {
       return _then(_value.copyWith(error: value));
@@ -272,15 +284,15 @@ class _$_CacheError extends _CacheError {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_CacheError &&
-            const DeepCollectionEquality().equals(other.error, error));
+            (identical(other.error, error) || other.error == error));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(error));
+  int get hashCode => Object.hash(runtimeType, error);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_CacheErrorCopyWith<_$_CacheError> get copyWith =>
       __$$_CacheErrorCopyWithImpl<_$_CacheError>(this, _$identity);
 
@@ -290,7 +302,9 @@ class _$_CacheError extends _CacheError {
     required TResult Function() networkError,
     required TResult Function(CacheException error) cacheError,
     required TResult Function() serializationError,
-    required TResult Function(ApiException error) apiError,
+    required TResult Function(
+            ApiErrorResponse? apiErrorResponse, ApiException apiException)
+        apiError,
     required TResult Function(dynamic error) unknownError,
   }) {
     return cacheError(error);
@@ -299,11 +313,13 @@ class _$_CacheError extends _CacheError {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? networkError,
-    TResult Function(CacheException error)? cacheError,
-    TResult Function()? serializationError,
-    TResult Function(ApiException error)? apiError,
-    TResult Function(dynamic error)? unknownError,
+    TResult? Function()? networkError,
+    TResult? Function(CacheException error)? cacheError,
+    TResult? Function()? serializationError,
+    TResult? Function(
+            ApiErrorResponse? apiErrorResponse, ApiException apiException)?
+        apiError,
+    TResult? Function(dynamic error)? unknownError,
   }) {
     return cacheError?.call(error);
   }
@@ -314,7 +330,9 @@ class _$_CacheError extends _CacheError {
     TResult Function()? networkError,
     TResult Function(CacheException error)? cacheError,
     TResult Function()? serializationError,
-    TResult Function(ApiException error)? apiError,
+    TResult Function(
+            ApiErrorResponse? apiErrorResponse, ApiException apiException)?
+        apiError,
     TResult Function(dynamic error)? unknownError,
     required TResult orElse(),
   }) {
@@ -339,11 +357,11 @@ class _$_CacheError extends _CacheError {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_NetworkError value)? networkError,
-    TResult Function(_CacheError value)? cacheError,
-    TResult Function(_SerializationError value)? serializationError,
-    TResult Function(_ApiError value)? apiError,
-    TResult Function(_UnknownError value)? unknownError,
+    TResult? Function(_NetworkError value)? networkError,
+    TResult? Function(_CacheError value)? cacheError,
+    TResult? Function(_SerializationError value)? serializationError,
+    TResult? Function(_ApiError value)? apiError,
+    TResult? Function(_UnknownError value)? unknownError,
   }) {
     return cacheError?.call(this);
   }
@@ -384,14 +402,11 @@ abstract class _$$_SerializationErrorCopyWith<$Res> {
 
 /// @nodoc
 class __$$_SerializationErrorCopyWithImpl<$Res>
-    extends _$AppExceptionCopyWithImpl<$Res>
+    extends _$AppExceptionCopyWithImpl<$Res, _$_SerializationError>
     implements _$$_SerializationErrorCopyWith<$Res> {
   __$$_SerializationErrorCopyWithImpl(
       _$_SerializationError _value, $Res Function(_$_SerializationError) _then)
-      : super(_value, (v) => _then(v as _$_SerializationError));
-
-  @override
-  _$_SerializationError get _value => super._value as _$_SerializationError;
+      : super(_value, _then);
 }
 
 /// @nodoc
@@ -419,7 +434,9 @@ class _$_SerializationError extends _SerializationError {
     required TResult Function() networkError,
     required TResult Function(CacheException error) cacheError,
     required TResult Function() serializationError,
-    required TResult Function(ApiException error) apiError,
+    required TResult Function(
+            ApiErrorResponse? apiErrorResponse, ApiException apiException)
+        apiError,
     required TResult Function(dynamic error) unknownError,
   }) {
     return serializationError();
@@ -428,11 +445,13 @@ class _$_SerializationError extends _SerializationError {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? networkError,
-    TResult Function(CacheException error)? cacheError,
-    TResult Function()? serializationError,
-    TResult Function(ApiException error)? apiError,
-    TResult Function(dynamic error)? unknownError,
+    TResult? Function()? networkError,
+    TResult? Function(CacheException error)? cacheError,
+    TResult? Function()? serializationError,
+    TResult? Function(
+            ApiErrorResponse? apiErrorResponse, ApiException apiException)?
+        apiError,
+    TResult? Function(dynamic error)? unknownError,
   }) {
     return serializationError?.call();
   }
@@ -443,7 +462,9 @@ class _$_SerializationError extends _SerializationError {
     TResult Function()? networkError,
     TResult Function(CacheException error)? cacheError,
     TResult Function()? serializationError,
-    TResult Function(ApiException error)? apiError,
+    TResult Function(
+            ApiErrorResponse? apiErrorResponse, ApiException apiException)?
+        apiError,
     TResult Function(dynamic error)? unknownError,
     required TResult orElse(),
   }) {
@@ -468,11 +489,11 @@ class _$_SerializationError extends _SerializationError {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_NetworkError value)? networkError,
-    TResult Function(_CacheError value)? cacheError,
-    TResult Function(_SerializationError value)? serializationError,
-    TResult Function(_ApiError value)? apiError,
-    TResult Function(_UnknownError value)? unknownError,
+    TResult? Function(_NetworkError value)? networkError,
+    TResult? Function(_CacheError value)? cacheError,
+    TResult? Function(_SerializationError value)? serializationError,
+    TResult? Function(_ApiError value)? apiError,
+    TResult? Function(_UnknownError value)? unknownError,
   }) {
     return serializationError?.call(this);
   }
@@ -504,37 +525,43 @@ abstract class _$$_ApiErrorCopyWith<$Res> {
   factory _$$_ApiErrorCopyWith(
           _$_ApiError value, $Res Function(_$_ApiError) then) =
       __$$_ApiErrorCopyWithImpl<$Res>;
-  $Res call({ApiException error});
+  @useResult
+  $Res call({ApiErrorResponse? apiErrorResponse, ApiException apiException});
 
-  $ApiExceptionCopyWith<$Res> get error;
+  $ApiExceptionCopyWith<$Res> get apiException;
 }
 
 /// @nodoc
-class __$$_ApiErrorCopyWithImpl<$Res> extends _$AppExceptionCopyWithImpl<$Res>
+class __$$_ApiErrorCopyWithImpl<$Res>
+    extends _$AppExceptionCopyWithImpl<$Res, _$_ApiError>
     implements _$$_ApiErrorCopyWith<$Res> {
   __$$_ApiErrorCopyWithImpl(
       _$_ApiError _value, $Res Function(_$_ApiError) _then)
-      : super(_value, (v) => _then(v as _$_ApiError));
+      : super(_value, _then);
 
-  @override
-  _$_ApiError get _value => super._value as _$_ApiError;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? error = freezed,
+    Object? apiErrorResponse = freezed,
+    Object? apiException = null,
   }) {
     return _then(_$_ApiError(
-      error == freezed
-          ? _value.error
-          : error // ignore: cast_nullable_to_non_nullable
+      freezed == apiErrorResponse
+          ? _value.apiErrorResponse
+          : apiErrorResponse // ignore: cast_nullable_to_non_nullable
+              as ApiErrorResponse?,
+      null == apiException
+          ? _value.apiException
+          : apiException // ignore: cast_nullable_to_non_nullable
               as ApiException,
     ));
   }
 
   @override
-  $ApiExceptionCopyWith<$Res> get error {
-    return $ApiExceptionCopyWith<$Res>(_value.error, (value) {
-      return _then(_value.copyWith(error: value));
+  @pragma('vm:prefer-inline')
+  $ApiExceptionCopyWith<$Res> get apiException {
+    return $ApiExceptionCopyWith<$Res>(_value.apiException, (value) {
+      return _then(_value.copyWith(apiException: value));
     });
   }
 }
@@ -542,14 +569,16 @@ class __$$_ApiErrorCopyWithImpl<$Res> extends _$AppExceptionCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_ApiError extends _ApiError {
-  const _$_ApiError(this.error) : super._();
+  const _$_ApiError(this.apiErrorResponse, this.apiException) : super._();
 
   @override
-  final ApiException error;
+  final ApiErrorResponse? apiErrorResponse;
+  @override
+  final ApiException apiException;
 
   @override
   String toString() {
-    return 'AppException.apiError(error: $error)';
+    return 'AppException.apiError(apiErrorResponse: $apiErrorResponse, apiException: $apiException)';
   }
 
   @override
@@ -557,15 +586,18 @@ class _$_ApiError extends _ApiError {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_ApiError &&
-            const DeepCollectionEquality().equals(other.error, error));
+            (identical(other.apiErrorResponse, apiErrorResponse) ||
+                other.apiErrorResponse == apiErrorResponse) &&
+            (identical(other.apiException, apiException) ||
+                other.apiException == apiException));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(error));
+  int get hashCode => Object.hash(runtimeType, apiErrorResponse, apiException);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_ApiErrorCopyWith<_$_ApiError> get copyWith =>
       __$$_ApiErrorCopyWithImpl<_$_ApiError>(this, _$identity);
 
@@ -575,22 +607,26 @@ class _$_ApiError extends _ApiError {
     required TResult Function() networkError,
     required TResult Function(CacheException error) cacheError,
     required TResult Function() serializationError,
-    required TResult Function(ApiException error) apiError,
+    required TResult Function(
+            ApiErrorResponse? apiErrorResponse, ApiException apiException)
+        apiError,
     required TResult Function(dynamic error) unknownError,
   }) {
-    return apiError(error);
+    return apiError(apiErrorResponse, apiException);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? networkError,
-    TResult Function(CacheException error)? cacheError,
-    TResult Function()? serializationError,
-    TResult Function(ApiException error)? apiError,
-    TResult Function(dynamic error)? unknownError,
+    TResult? Function()? networkError,
+    TResult? Function(CacheException error)? cacheError,
+    TResult? Function()? serializationError,
+    TResult? Function(
+            ApiErrorResponse? apiErrorResponse, ApiException apiException)?
+        apiError,
+    TResult? Function(dynamic error)? unknownError,
   }) {
-    return apiError?.call(error);
+    return apiError?.call(apiErrorResponse, apiException);
   }
 
   @override
@@ -599,12 +635,14 @@ class _$_ApiError extends _ApiError {
     TResult Function()? networkError,
     TResult Function(CacheException error)? cacheError,
     TResult Function()? serializationError,
-    TResult Function(ApiException error)? apiError,
+    TResult Function(
+            ApiErrorResponse? apiErrorResponse, ApiException apiException)?
+        apiError,
     TResult Function(dynamic error)? unknownError,
     required TResult orElse(),
   }) {
     if (apiError != null) {
-      return apiError(error);
+      return apiError(apiErrorResponse, apiException);
     }
     return orElse();
   }
@@ -624,11 +662,11 @@ class _$_ApiError extends _ApiError {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_NetworkError value)? networkError,
-    TResult Function(_CacheError value)? cacheError,
-    TResult Function(_SerializationError value)? serializationError,
-    TResult Function(_ApiError value)? apiError,
-    TResult Function(_UnknownError value)? unknownError,
+    TResult? Function(_NetworkError value)? networkError,
+    TResult? Function(_CacheError value)? cacheError,
+    TResult? Function(_SerializationError value)? serializationError,
+    TResult? Function(_ApiError value)? apiError,
+    TResult? Function(_UnknownError value)? unknownError,
   }) {
     return apiError?.call(this);
   }
@@ -651,10 +689,12 @@ class _$_ApiError extends _ApiError {
 }
 
 abstract class _ApiError extends AppException {
-  const factory _ApiError(final ApiException error) = _$_ApiError;
+  const factory _ApiError(final ApiErrorResponse? apiErrorResponse,
+      final ApiException apiException) = _$_ApiError;
   const _ApiError._() : super._();
 
-  ApiException get error;
+  ApiErrorResponse? get apiErrorResponse;
+  ApiException get apiException;
   @JsonKey(ignore: true)
   _$$_ApiErrorCopyWith<_$_ApiError> get copyWith =>
       throw _privateConstructorUsedError;
@@ -665,26 +705,25 @@ abstract class _$$_UnknownErrorCopyWith<$Res> {
   factory _$$_UnknownErrorCopyWith(
           _$_UnknownError value, $Res Function(_$_UnknownError) then) =
       __$$_UnknownErrorCopyWithImpl<$Res>;
+  @useResult
   $Res call({dynamic error});
 }
 
 /// @nodoc
 class __$$_UnknownErrorCopyWithImpl<$Res>
-    extends _$AppExceptionCopyWithImpl<$Res>
+    extends _$AppExceptionCopyWithImpl<$Res, _$_UnknownError>
     implements _$$_UnknownErrorCopyWith<$Res> {
   __$$_UnknownErrorCopyWithImpl(
       _$_UnknownError _value, $Res Function(_$_UnknownError) _then)
-      : super(_value, (v) => _then(v as _$_UnknownError));
+      : super(_value, _then);
 
-  @override
-  _$_UnknownError get _value => super._value as _$_UnknownError;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? error = freezed,
   }) {
     return _then(_$_UnknownError(
-      error == freezed
+      freezed == error
           ? _value.error
           : error // ignore: cast_nullable_to_non_nullable
               as dynamic,
@@ -719,6 +758,7 @@ class _$_UnknownError extends _UnknownError {
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_UnknownErrorCopyWith<_$_UnknownError> get copyWith =>
       __$$_UnknownErrorCopyWithImpl<_$_UnknownError>(this, _$identity);
 
@@ -728,7 +768,9 @@ class _$_UnknownError extends _UnknownError {
     required TResult Function() networkError,
     required TResult Function(CacheException error) cacheError,
     required TResult Function() serializationError,
-    required TResult Function(ApiException error) apiError,
+    required TResult Function(
+            ApiErrorResponse? apiErrorResponse, ApiException apiException)
+        apiError,
     required TResult Function(dynamic error) unknownError,
   }) {
     return unknownError(error);
@@ -737,11 +779,13 @@ class _$_UnknownError extends _UnknownError {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? networkError,
-    TResult Function(CacheException error)? cacheError,
-    TResult Function()? serializationError,
-    TResult Function(ApiException error)? apiError,
-    TResult Function(dynamic error)? unknownError,
+    TResult? Function()? networkError,
+    TResult? Function(CacheException error)? cacheError,
+    TResult? Function()? serializationError,
+    TResult? Function(
+            ApiErrorResponse? apiErrorResponse, ApiException apiException)?
+        apiError,
+    TResult? Function(dynamic error)? unknownError,
   }) {
     return unknownError?.call(error);
   }
@@ -752,7 +796,9 @@ class _$_UnknownError extends _UnknownError {
     TResult Function()? networkError,
     TResult Function(CacheException error)? cacheError,
     TResult Function()? serializationError,
-    TResult Function(ApiException error)? apiError,
+    TResult Function(
+            ApiErrorResponse? apiErrorResponse, ApiException apiException)?
+        apiError,
     TResult Function(dynamic error)? unknownError,
     required TResult orElse(),
   }) {
@@ -777,11 +823,11 @@ class _$_UnknownError extends _UnknownError {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_NetworkError value)? networkError,
-    TResult Function(_CacheError value)? cacheError,
-    TResult Function(_SerializationError value)? serializationError,
-    TResult Function(_ApiError value)? apiError,
-    TResult Function(_UnknownError value)? unknownError,
+    TResult? Function(_NetworkError value)? networkError,
+    TResult? Function(_CacheError value)? cacheError,
+    TResult? Function(_SerializationError value)? serializationError,
+    TResult? Function(_ApiError value)? apiError,
+    TResult? Function(_UnknownError value)? unknownError,
   }) {
     return unknownError?.call(this);
   }

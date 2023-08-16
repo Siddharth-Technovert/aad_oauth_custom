@@ -3,17 +3,18 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../colors/colors.dart';
 
-part 'text_styles_light.dart';
 part 'text_styles_dark.dart';
+part 'text_styles_light.dart';
 
 class UITextStyles {
   const UITextStyles._();
 
-  static const _TextStylesDark dark = _TextStylesDark();
-  static const _TextStylesLight light = _TextStylesLight();
+  static const TextStylesLight light = TextStylesLight();
+  static const TextStylesDark dark = TextStylesDark();
 
   static TextStyle defaultStyle() => const TextStyle(
-        letterSpacing: 0.2,
+        fontFamily: 'Urbanist',
+        letterSpacing: 0.5,
       );
 
   static TextStyle defaultButtonStyle() => defaultStyle().copyWith(

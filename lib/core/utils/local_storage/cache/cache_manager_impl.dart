@@ -135,6 +135,9 @@ class CacheManagerImpl implements CacheManager {
     return _tryCacheRequest<HiveDto>(() async {
       final box = _hive.box<HiveDto>(boxKey);
       await box.put(data.number, data);
+
+      // final val = await getData(boxKey, data.number)s;
+
       return true;
     });
   }

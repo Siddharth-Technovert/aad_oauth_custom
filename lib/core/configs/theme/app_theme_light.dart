@@ -1,17 +1,18 @@
 part of 'app_theme.dart';
 
-class _AppThemeLight {
-  const _AppThemeLight();
+class AppThemeLight {
+  const AppThemeLight();
   ThemeData get theme => ThemeData(
-        fontFamily: 'Poppins',
+        useMaterial3: true,
+        fontFamily: 'Urbanist',
         colorScheme: ColorScheme.fromSeed(
           seedColor: UIColors.light.primary,
           primary: UIColors.light.primary,
           secondary: UIColors.light.secondary,
-          background: UIColors.light.scaffoldBackground,
+          background: UIColors.light.background,
+          // background: UIColors.light.scaffoldBackground,
         ),
         scaffoldBackgroundColor: UIColors.light.scaffoldBackground,
-        backgroundColor: UIColors.light.background,
         drawerTheme: DrawerThemeData(
           backgroundColor: UIColors.light.scaffoldBackground,
         ),
@@ -30,16 +31,17 @@ class _AppThemeLight {
           color: UIColors.light.icon,
         ),
         textTheme: TextTheme(
-          headline1: UITextStyles.light.h1,
-          headline2: UITextStyles.light.h2,
-          headline3: UITextStyles.light.h3,
-          headline4: UITextStyles.light.h4,
-          headline5: UITextStyles.light.h5,
-          headline6: UITextStyles.light.h6,
-          bodyText1: UITextStyles.light.bodyText1,
-          bodyText2: UITextStyles.light.bodyText2,
-          button: UITextStyles.defaultButtonStyle(),
-          caption: UITextStyles.light.caption,
+          displayLarge: UITextStyles.light.h1,
+          displayMedium: UITextStyles.light.h2,
+          displaySmall: UITextStyles.light.h3,
+          headlineMedium: UITextStyles.light.h4,
+          headlineSmall: UITextStyles.light.h5,
+          titleLarge: UITextStyles.light.subtitle1,
+          headlineLarge: UITextStyles.light.subtitle3,
+          bodyLarge: UITextStyles.light.bodyText1,
+          bodyMedium: UITextStyles.light.bodyText2,
+          labelLarge: UITextStyles.defaultButtonStyle(),
+          bodySmall: UITextStyles.light.caption,
         ),
         textSelectionTheme: TextSelectionThemeData(
           selectionColor: UIColors.light.textSelection,
@@ -62,7 +64,7 @@ class _AppThemeLight {
             UIColors.light.primary,
           ),
           trackColor: MaterialStateProperty.all<Color>(
-            UIColors.light.primary.withOpacity(0.5),
+            UIColors.light.switchActiveTrackColor.withOpacity(0.5),
           ),
         ),
       );

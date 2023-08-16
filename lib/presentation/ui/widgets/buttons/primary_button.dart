@@ -3,23 +3,26 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../core/utils/extensions/context_extension.dart';
-import '../../../../core/utils/styles/colors/colors.dart';
+import '../../../../core/utils/styles/decorations/corner_shape_decoration.dart';
 import '../../../../core/utils/styles/dimensions/ui_dimensions.dart';
-import '../../hooks/is_dark_mode_hook.dart';
 
 class PrimaryButton extends HookWidget {
   const PrimaryButton({
-    required this.onPressed,
-    required this.text,
+    this.onPressed,
+    this.text,
+    this.widget,
     this.horizontalPadding = 18,
     this.verticalPadding = 16,
     this.suffixIconData,
     this.prefixIconData,
+    this.height = 60,
     Key? key,
   }) : super(key: key);
 
-  final VoidCallback onPressed;
-  final String text;
+  final VoidCallback? onPressed;
+  final double height;
+  final String? text;
+  final Widget? widget;
   final double horizontalPadding;
   final double verticalPadding;
   final IconData? suffixIconData;
@@ -27,16 +30,12 @@ class PrimaryButton extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    final isDark = useIsDarkHook();
     return Container(
-      height: 56.h,
+      height: height.h,
       width: horizontalPadding == 18.w ? double.infinity : null,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(100).r,
-        gradient: UIColors.primaryGradient,
-        boxShadow: isDark
-            ? UIColors.dark.primaryBoxShadow
-            : UIColors.light.primaryBoxShadow,
+      decoration: roundCornerSolidBg(
+        bgColor: context.primaryColor,
+        isShadowVisible: true,
       ),
       child: ElevatedButton(
         onPressed: onPressed,
@@ -49,7 +48,7 @@ class PrimaryButton extends HookWidget {
           shadowColor: Colors.transparent,
           elevation: 3,
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(100).r,
+            borderRadius: BorderRadius.circular(16).r,
           ),
         ),
         child: Center(
@@ -60,21 +59,23 @@ class PrimaryButton extends HookWidget {
                 Icon(
                   prefixIconData,
                   color: Colors.white,
-                  size: 28.sm,
+                  size: 28.sp,
                 ),
               if (prefixIconData != null) UIDimensions.horizontalSpace(6),
-              Text(
-                text,
-                style: context.h5.copyWith(
-                  color: Colors.white,
+              if (text != null)
+                Text(
+                  text!,
+                  style: context.h5.copyWith(
+                    color: Colors.white,
+                  ),
                 ),
-              ),
+              if (widget != null) widget!,
               if (suffixIconData != null) UIDimensions.horizontalSpace(6),
               if (suffixIconData != null)
                 Icon(
                   suffixIconData,
                   color: Colors.white,
-                  size: 20.sm,
+                  size: 20.sp,
                 ),
             ],
           ),

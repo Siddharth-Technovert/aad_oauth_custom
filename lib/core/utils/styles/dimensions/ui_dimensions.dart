@@ -5,6 +5,7 @@ class UIDimensions {
   static const Widget verticalSpaceSmall = RSizedBox(height: 8);
   static const Widget verticalSpaceMedium = RSizedBox(height: 16);
   static const Widget verticalSpaceLarge = RSizedBox(height: 32);
+  static const Widget verticalSpaceExtraLarge = RSizedBox(height: 60);
 
   static const Widget horizontalSpaceSmall = RSizedBox(width: 8);
   static const Widget horizontalSpaceMedium = RSizedBox(width: 16);

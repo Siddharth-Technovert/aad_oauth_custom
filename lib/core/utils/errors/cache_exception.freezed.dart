@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'cache_exception.dart';
 
@@ -26,10 +26,10 @@ mixin _$CacheException {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? fetchError,
-    TResult Function()? insertError,
-    TResult Function()? deleteError,
-    TResult Function()? updateError,
+    TResult? Function()? fetchError,
+    TResult? Function()? insertError,
+    TResult? Function()? deleteError,
+    TResult? Function()? updateError,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -51,10 +51,10 @@ mixin _$CacheException {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_FetchError value)? fetchError,
-    TResult Function(_InsertError value)? insertError,
-    TResult Function(_DeleteError value)? deleteError,
-    TResult Function(_UpdateError value)? updateError,
+    TResult? Function(_FetchError value)? fetchError,
+    TResult? Function(_InsertError value)? insertError,
+    TResult? Function(_DeleteError value)? deleteError,
+    TResult? Function(_UpdateError value)? updateError,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -72,17 +72,18 @@ mixin _$CacheException {
 abstract class $CacheExceptionCopyWith<$Res> {
   factory $CacheExceptionCopyWith(
           CacheException value, $Res Function(CacheException) then) =
-      _$CacheExceptionCopyWithImpl<$Res>;
+      _$CacheExceptionCopyWithImpl<$Res, CacheException>;
 }
 
 /// @nodoc
-class _$CacheExceptionCopyWithImpl<$Res>
+class _$CacheExceptionCopyWithImpl<$Res, $Val extends CacheException>
     implements $CacheExceptionCopyWith<$Res> {
   _$CacheExceptionCopyWithImpl(this._value, this._then);
 
-  final CacheException _value;
   // ignore: unused_field
-  final $Res Function(CacheException) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 }
 
 /// @nodoc
@@ -94,14 +95,11 @@ abstract class _$$_FetchErrorCopyWith<$Res> {
 
 /// @nodoc
 class __$$_FetchErrorCopyWithImpl<$Res>
-    extends _$CacheExceptionCopyWithImpl<$Res>
+    extends _$CacheExceptionCopyWithImpl<$Res, _$_FetchError>
     implements _$$_FetchErrorCopyWith<$Res> {
   __$$_FetchErrorCopyWithImpl(
       _$_FetchError _value, $Res Function(_$_FetchError) _then)
-      : super(_value, (v) => _then(v as _$_FetchError));
-
-  @override
-  _$_FetchError get _value => super._value as _$_FetchError;
+      : super(_value, _then);
 }
 
 /// @nodoc
@@ -137,10 +135,10 @@ class _$_FetchError extends _FetchError {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? fetchError,
-    TResult Function()? insertError,
-    TResult Function()? deleteError,
-    TResult Function()? updateError,
+    TResult? Function()? fetchError,
+    TResult? Function()? insertError,
+    TResult? Function()? deleteError,
+    TResult? Function()? updateError,
   }) {
     return fetchError?.call();
   }
@@ -174,10 +172,10 @@ class _$_FetchError extends _FetchError {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_FetchError value)? fetchError,
-    TResult Function(_InsertError value)? insertError,
-    TResult Function(_DeleteError value)? deleteError,
-    TResult Function(_UpdateError value)? updateError,
+    TResult? Function(_FetchError value)? fetchError,
+    TResult? Function(_InsertError value)? insertError,
+    TResult? Function(_DeleteError value)? deleteError,
+    TResult? Function(_UpdateError value)? updateError,
   }) {
     return fetchError?.call(this);
   }
@@ -212,14 +210,11 @@ abstract class _$$_InsertErrorCopyWith<$Res> {
 
 /// @nodoc
 class __$$_InsertErrorCopyWithImpl<$Res>
-    extends _$CacheExceptionCopyWithImpl<$Res>
+    extends _$CacheExceptionCopyWithImpl<$Res, _$_InsertError>
     implements _$$_InsertErrorCopyWith<$Res> {
   __$$_InsertErrorCopyWithImpl(
       _$_InsertError _value, $Res Function(_$_InsertError) _then)
-      : super(_value, (v) => _then(v as _$_InsertError));
-
-  @override
-  _$_InsertError get _value => super._value as _$_InsertError;
+      : super(_value, _then);
 }
 
 /// @nodoc
@@ -255,10 +250,10 @@ class _$_InsertError extends _InsertError {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? fetchError,
-    TResult Function()? insertError,
-    TResult Function()? deleteError,
-    TResult Function()? updateError,
+    TResult? Function()? fetchError,
+    TResult? Function()? insertError,
+    TResult? Function()? deleteError,
+    TResult? Function()? updateError,
   }) {
     return insertError?.call();
   }
@@ -292,10 +287,10 @@ class _$_InsertError extends _InsertError {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_FetchError value)? fetchError,
-    TResult Function(_InsertError value)? insertError,
-    TResult Function(_DeleteError value)? deleteError,
-    TResult Function(_UpdateError value)? updateError,
+    TResult? Function(_FetchError value)? fetchError,
+    TResult? Function(_InsertError value)? insertError,
+    TResult? Function(_DeleteError value)? deleteError,
+    TResult? Function(_UpdateError value)? updateError,
   }) {
     return insertError?.call(this);
   }
@@ -330,14 +325,11 @@ abstract class _$$_DeleteErrorCopyWith<$Res> {
 
 /// @nodoc
 class __$$_DeleteErrorCopyWithImpl<$Res>
-    extends _$CacheExceptionCopyWithImpl<$Res>
+    extends _$CacheExceptionCopyWithImpl<$Res, _$_DeleteError>
     implements _$$_DeleteErrorCopyWith<$Res> {
   __$$_DeleteErrorCopyWithImpl(
       _$_DeleteError _value, $Res Function(_$_DeleteError) _then)
-      : super(_value, (v) => _then(v as _$_DeleteError));
-
-  @override
-  _$_DeleteError get _value => super._value as _$_DeleteError;
+      : super(_value, _then);
 }
 
 /// @nodoc
@@ -373,10 +365,10 @@ class _$_DeleteError extends _DeleteError {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? fetchError,
-    TResult Function()? insertError,
-    TResult Function()? deleteError,
-    TResult Function()? updateError,
+    TResult? Function()? fetchError,
+    TResult? Function()? insertError,
+    TResult? Function()? deleteError,
+    TResult? Function()? updateError,
   }) {
     return deleteError?.call();
   }
@@ -410,10 +402,10 @@ class _$_DeleteError extends _DeleteError {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_FetchError value)? fetchError,
-    TResult Function(_InsertError value)? insertError,
-    TResult Function(_DeleteError value)? deleteError,
-    TResult Function(_UpdateError value)? updateError,
+    TResult? Function(_FetchError value)? fetchError,
+    TResult? Function(_InsertError value)? insertError,
+    TResult? Function(_DeleteError value)? deleteError,
+    TResult? Function(_UpdateError value)? updateError,
   }) {
     return deleteError?.call(this);
   }
@@ -448,14 +440,11 @@ abstract class _$$_UpdateErrorCopyWith<$Res> {
 
 /// @nodoc
 class __$$_UpdateErrorCopyWithImpl<$Res>
-    extends _$CacheExceptionCopyWithImpl<$Res>
+    extends _$CacheExceptionCopyWithImpl<$Res, _$_UpdateError>
     implements _$$_UpdateErrorCopyWith<$Res> {
   __$$_UpdateErrorCopyWithImpl(
       _$_UpdateError _value, $Res Function(_$_UpdateError) _then)
-      : super(_value, (v) => _then(v as _$_UpdateError));
-
-  @override
-  _$_UpdateError get _value => super._value as _$_UpdateError;
+      : super(_value, _then);
 }
 
 /// @nodoc
@@ -491,10 +480,10 @@ class _$_UpdateError extends _UpdateError {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? fetchError,
-    TResult Function()? insertError,
-    TResult Function()? deleteError,
-    TResult Function()? updateError,
+    TResult? Function()? fetchError,
+    TResult? Function()? insertError,
+    TResult? Function()? deleteError,
+    TResult? Function()? updateError,
   }) {
     return updateError?.call();
   }
@@ -528,10 +517,10 @@ class _$_UpdateError extends _UpdateError {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_FetchError value)? fetchError,
-    TResult Function(_InsertError value)? insertError,
-    TResult Function(_DeleteError value)? deleteError,
-    TResult Function(_UpdateError value)? updateError,
+    TResult? Function(_FetchError value)? fetchError,
+    TResult? Function(_InsertError value)? insertError,
+    TResult? Function(_DeleteError value)? deleteError,
+    TResult? Function(_UpdateError value)? updateError,
   }) {
     return updateError?.call(this);
   }

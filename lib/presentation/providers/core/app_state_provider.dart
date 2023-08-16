@@ -1,11 +1,8 @@
-import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../../core/device/background_service.dart';
+import '../../../core/app_bootstrapper.dart';
 import '../../../domain/models/user/user.dart';
-import '../../../domain/service_providers.dart';
 import '../../../domain/states/core/app/app_state.dart';
-// import '../../../domain/usecases/storage/jwt/jwt_usecases.dart';
 import '../../../domain/usecases/storage/onboarding/onboarding_usecases.dart';
 import '../../../domain/usecases/user/user_usecases.dart';
 
@@ -22,13 +19,13 @@ class AppStateNotifier extends StateNotifier<AppState> {
 
   final Ref _ref;
 
-  late final ReadUser _readUserUseCase = _ref.read(readUserUseCaseProvider);
+  late final ReadUser _readUserUseCase = _ref.watch(readUserUseCaseProvider);
   // late final ReadJwt _readJwtUseCase = _read(readJwtTokenUseCaseProvider);
 
   late final ReadOnboarding _readOnboardingUseCase =
-      _ref.read(readOnboardingUseCaseProvider);
+      _ref.watch(readOnboardingUseCaseProvider);
   late final WriteOnboarding _writeOnboardingUseCase =
-      _ref.read(writeOnboardingUseCaseProvider);
+      _ref.watch(writeOnboardingUseCaseProvider);
 
   AppStateNotifier(this._ref) : super(const AppState.initial()) {
     _init();
@@ -60,13 +57,8 @@ class AppStateNotifier extends StateNotifier<AppState> {
     // } else {
     //   state = const AppState.onboarding();
     // }
-    //? For now temporary solution
-    await _ref.read(backgroundServiceProvider).registerPeriodicTask(
-          "periodicTask",
-          BackgroundService.periodicTask,
-        );
 
-    FlutterNativeSplash.remove();
+    SplashFactory.remove();
   }
 
   Future<void> completeOnboarding() async {

@@ -1,7 +1,7 @@
 part of 'text_styles.dart';
 
-class _TextStylesLight {
-  const _TextStylesLight();
+class TextStylesLight {
+  const TextStylesLight();
 
   TextStyle get h1 => UITextStyles.defaultStyle().copyWith(
         color: UIColors.light.title,
@@ -51,6 +51,12 @@ class _TextStylesLight {
         fontWeight: FontWeight.w400,
       );
 
+  TextStyle get subtitle3 => UITextStyles.defaultStyle().copyWith(
+        color: UIColors.light.subTitle,
+        fontSize: 18.0.sp,
+        fontWeight: FontWeight.w700,
+      );
+
   TextStyle get bodyText1 => UITextStyles.defaultStyle().copyWith(
         color: UIColors.light.bodyText,
         fontSize: 16.0.sp,
@@ -62,10 +68,15 @@ class _TextStylesLight {
         fontSize: 14.0.sp,
         fontWeight: FontWeight.normal,
       );
+  TextStyle get hintText => UITextStyles.defaultStyle().copyWith(
+        color: UIColors.light.slate800,
+        fontSize: 14.0.sp,
+        fontWeight: FontWeight.w400,
+      );
 
   TextStyle get caption => UITextStyles.defaultStyle().copyWith(
-        color: UIColors.light.caption,
-        fontSize: 12.0.sp,
+        color: UIColors.light.blackShade,
+        fontSize: 13.0.sp,
         fontWeight: FontWeight.w500,
       );
 

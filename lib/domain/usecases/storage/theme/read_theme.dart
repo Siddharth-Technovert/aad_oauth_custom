@@ -1,7 +1,7 @@
 part of 'theme_storage_usecases.dart';
 
 final readThemeUseCaseProvider = Provider(
-  (ref) => ReadTheme(ref.read(secureStorageManagerProvider)),
+  (ref) => ReadTheme(ref.watch(secureStorageManagerProvider)),
 );
 
 class ReadTheme extends NoParamsUseCase<ThemeState> {

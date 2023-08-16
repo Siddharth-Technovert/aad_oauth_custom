@@ -1,6 +1,6 @@
 import 'package:flutter/widgets.dart';
 
-abstract class AppConstants {
+class AppConstants {
   //screen key
   static const Key homeScreenKey = Key("homeScreenKey");
 
@@ -25,4 +25,7 @@ abstract class AppConstants {
 
   ///Error Messages
   static const String exception = "exception";
+
+  ///Static Messages
+  static const String emptyErrorFieldText = "This field can't be empty";
 }

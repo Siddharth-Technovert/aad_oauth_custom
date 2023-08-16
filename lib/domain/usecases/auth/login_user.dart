@@ -1,7 +1,7 @@
 part of 'auth_usecases.dart';
 
 final loginUserUseCaseProvider = Provider(
-  (ref) => LoginUser(ref.read(authRepositoryProvider)),
+  (ref) => LoginUser(ref.watch(authRepositoryProvider)),
 );
 
 class LoginUser extends UseCase<DataState<User>, AccountType> {

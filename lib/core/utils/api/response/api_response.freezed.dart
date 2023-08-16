@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'api_response.dart';
 
@@ -18,19 +18,20 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$ApiResponse<T> {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(T data) success,
+    required TResult Function(T data, Map<String, dynamic> headerResponse)
+        success,
     required TResult Function(AppException exception) error,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(T data)? success,
-    TResult Function(AppException exception)? error,
+    TResult? Function(T data, Map<String, dynamic> headerResponse)? success,
+    TResult? Function(AppException exception)? error,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(T data)? success,
+    TResult Function(T data, Map<String, dynamic> headerResponse)? success,
     TResult Function(AppException exception)? error,
     required TResult orElse(),
   }) =>
@@ -43,8 +44,8 @@ mixin _$ApiResponse<T> {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_ApiSuccess<T> value)? success,
-    TResult Function(_ApiError<T> value)? error,
+    TResult? Function(_ApiSuccess<T> value)? success,
+    TResult? Function(_ApiError<T> value)? error,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -60,17 +61,18 @@ mixin _$ApiResponse<T> {
 abstract class $ApiResponseCopyWith<T, $Res> {
   factory $ApiResponseCopyWith(
           ApiResponse<T> value, $Res Function(ApiResponse<T>) then) =
-      _$ApiResponseCopyWithImpl<T, $Res>;
+      _$ApiResponseCopyWithImpl<T, $Res, ApiResponse<T>>;
 }
 
 /// @nodoc
-class _$ApiResponseCopyWithImpl<T, $Res>
+class _$ApiResponseCopyWithImpl<T, $Res, $Val extends ApiResponse<T>>
     implements $ApiResponseCopyWith<T, $Res> {
   _$ApiResponseCopyWithImpl(this._value, this._then);
 
-  final ApiResponse<T> _value;
   // ignore: unused_field
-  final $Res Function(ApiResponse<T>) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 }
 
 /// @nodoc
@@ -78,29 +80,33 @@ abstract class _$$_ApiSuccessCopyWith<T, $Res> {
   factory _$$_ApiSuccessCopyWith(
           _$_ApiSuccess<T> value, $Res Function(_$_ApiSuccess<T>) then) =
       __$$_ApiSuccessCopyWithImpl<T, $Res>;
-  $Res call({T data});
+  @useResult
+  $Res call({T data, Map<String, dynamic> headerResponse});
 }
 
 /// @nodoc
 class __$$_ApiSuccessCopyWithImpl<T, $Res>
-    extends _$ApiResponseCopyWithImpl<T, $Res>
+    extends _$ApiResponseCopyWithImpl<T, $Res, _$_ApiSuccess<T>>
     implements _$$_ApiSuccessCopyWith<T, $Res> {
   __$$_ApiSuccessCopyWithImpl(
       _$_ApiSuccess<T> _value, $Res Function(_$_ApiSuccess<T>) _then)
-      : super(_value, (v) => _then(v as _$_ApiSuccess<T>));
+      : super(_value, _then);
 
-  @override
-  _$_ApiSuccess<T> get _value => super._value as _$_ApiSuccess<T>;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? data = freezed,
+    Object? headerResponse = null,
   }) {
     return _then(_$_ApiSuccess<T>(
-      data == freezed
+      freezed == data
           ? _value.data
           : data // ignore: cast_nullable_to_non_nullable
               as T,
+      headerResponse: null == headerResponse
+          ? _value._headerResponse
+          : headerResponse // ignore: cast_nullable_to_non_nullable
+              as Map<String, dynamic>,
     ));
   }
 }
@@ -108,14 +114,25 @@ class __$$_ApiSuccessCopyWithImpl<T, $Res>
 /// @nodoc
 
 class _$_ApiSuccess<T> extends _ApiSuccess<T> {
-  const _$_ApiSuccess(this.data) : super._();
+  const _$_ApiSuccess(this.data,
+      {final Map<String, dynamic> headerResponse = const {}})
+      : _headerResponse = headerResponse,
+        super._();
 
   @override
   final T data;
+  final Map<String, dynamic> _headerResponse;
+  @override
+  @JsonKey()
+  Map<String, dynamic> get headerResponse {
+    if (_headerResponse is EqualUnmodifiableMapView) return _headerResponse;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableMapView(_headerResponse);
+  }
 
   @override
   String toString() {
-    return 'ApiResponse<$T>.success(data: $data)';
+    return 'ApiResponse<$T>.success(data: $data, headerResponse: $headerResponse)';
   }
 
   @override
@@ -123,45 +140,51 @@ class _$_ApiSuccess<T> extends _ApiSuccess<T> {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_ApiSuccess<T> &&
-            const DeepCollectionEquality().equals(other.data, data));
+            const DeepCollectionEquality().equals(other.data, data) &&
+            const DeepCollectionEquality()
+                .equals(other._headerResponse, _headerResponse));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(data));
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(data),
+      const DeepCollectionEquality().hash(_headerResponse));
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_ApiSuccessCopyWith<T, _$_ApiSuccess<T>> get copyWith =>
       __$$_ApiSuccessCopyWithImpl<T, _$_ApiSuccess<T>>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(T data) success,
+    required TResult Function(T data, Map<String, dynamic> headerResponse)
+        success,
     required TResult Function(AppException exception) error,
   }) {
-    return success(data);
+    return success(data, headerResponse);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(T data)? success,
-    TResult Function(AppException exception)? error,
+    TResult? Function(T data, Map<String, dynamic> headerResponse)? success,
+    TResult? Function(AppException exception)? error,
   }) {
-    return success?.call(data);
+    return success?.call(data, headerResponse);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(T data)? success,
+    TResult Function(T data, Map<String, dynamic> headerResponse)? success,
     TResult Function(AppException exception)? error,
     required TResult orElse(),
   }) {
     if (success != null) {
-      return success(data);
+      return success(data, headerResponse);
     }
     return orElse();
   }
@@ -178,8 +201,8 @@ class _$_ApiSuccess<T> extends _ApiSuccess<T> {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_ApiSuccess<T> value)? success,
-    TResult Function(_ApiError<T> value)? error,
+    TResult? Function(_ApiSuccess<T> value)? success,
+    TResult? Function(_ApiError<T> value)? error,
   }) {
     return success?.call(this);
   }
@@ -199,10 +222,12 @@ class _$_ApiSuccess<T> extends _ApiSuccess<T> {
 }
 
 abstract class _ApiSuccess<T> extends ApiResponse<T> {
-  const factory _ApiSuccess(final T data) = _$_ApiSuccess<T>;
+  const factory _ApiSuccess(final T data,
+      {final Map<String, dynamic> headerResponse}) = _$_ApiSuccess<T>;
   const _ApiSuccess._() : super._();
 
   T get data;
+  Map<String, dynamic> get headerResponse;
   @JsonKey(ignore: true)
   _$$_ApiSuccessCopyWith<T, _$_ApiSuccess<T>> get copyWith =>
       throw _privateConstructorUsedError;
@@ -213,6 +238,7 @@ abstract class _$$_ApiErrorCopyWith<T, $Res> {
   factory _$$_ApiErrorCopyWith(
           _$_ApiError<T> value, $Res Function(_$_ApiError<T>) then) =
       __$$_ApiErrorCopyWithImpl<T, $Res>;
+  @useResult
   $Res call({AppException exception});
 
   $AppExceptionCopyWith<$Res> get exception;
@@ -220,21 +246,19 @@ abstract class _$$_ApiErrorCopyWith<T, $Res> {
 
 /// @nodoc
 class __$$_ApiErrorCopyWithImpl<T, $Res>
-    extends _$ApiResponseCopyWithImpl<T, $Res>
+    extends _$ApiResponseCopyWithImpl<T, $Res, _$_ApiError<T>>
     implements _$$_ApiErrorCopyWith<T, $Res> {
   __$$_ApiErrorCopyWithImpl(
       _$_ApiError<T> _value, $Res Function(_$_ApiError<T>) _then)
-      : super(_value, (v) => _then(v as _$_ApiError<T>));
+      : super(_value, _then);
 
-  @override
-  _$_ApiError<T> get _value => super._value as _$_ApiError<T>;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? exception = freezed,
+    Object? exception = null,
   }) {
     return _then(_$_ApiError<T>(
-      exception == freezed
+      null == exception
           ? _value.exception
           : exception // ignore: cast_nullable_to_non_nullable
               as AppException,
@@ -242,6 +266,7 @@ class __$$_ApiErrorCopyWithImpl<T, $Res>
   }
 
   @override
+  @pragma('vm:prefer-inline')
   $AppExceptionCopyWith<$Res> get exception {
     return $AppExceptionCopyWith<$Res>(_value.exception, (value) {
       return _then(_value.copyWith(exception: value));
@@ -267,22 +292,24 @@ class _$_ApiError<T> extends _ApiError<T> {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_ApiError<T> &&
-            const DeepCollectionEquality().equals(other.exception, exception));
+            (identical(other.exception, exception) ||
+                other.exception == exception));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(exception));
+  int get hashCode => Object.hash(runtimeType, exception);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_ApiErrorCopyWith<T, _$_ApiError<T>> get copyWith =>
       __$$_ApiErrorCopyWithImpl<T, _$_ApiError<T>>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(T data) success,
+    required TResult Function(T data, Map<String, dynamic> headerResponse)
+        success,
     required TResult Function(AppException exception) error,
   }) {
     return error(exception);
@@ -291,8 +318,8 @@ class _$_ApiError<T> extends _ApiError<T> {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(T data)? success,
-    TResult Function(AppException exception)? error,
+    TResult? Function(T data, Map<String, dynamic> headerResponse)? success,
+    TResult? Function(AppException exception)? error,
   }) {
     return error?.call(exception);
   }
@@ -300,7 +327,7 @@ class _$_ApiError<T> extends _ApiError<T> {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(T data)? success,
+    TResult Function(T data, Map<String, dynamic> headerResponse)? success,
     TResult Function(AppException exception)? error,
     required TResult orElse(),
   }) {
@@ -322,8 +349,8 @@ class _$_ApiError<T> extends _ApiError<T> {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_ApiSuccess<T> value)? success,
-    TResult Function(_ApiError<T> value)? error,
+    TResult? Function(_ApiSuccess<T> value)? success,
+    TResult? Function(_ApiError<T> value)? error,
   }) {
     return error?.call(this);
   }

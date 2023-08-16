@@ -1,23 +1,27 @@
-// ignore_for_file: unused_local_variable
-
 import 'package:intl/intl.dart';
 
 extension DateTimeExtension on DateTime {
-  String get timeAgo {
-    const time = "";
-    final now = DateTime.now();
-    final diff = DateTime.now().difference(this).inMinutes;
-    if (diff == 0) {
-      return "Just Now";
-    } else if (diff < 60) {
-      return "$diff ${diff == 1 ? 'minute ago' : 'minutes ago'}";
-    } else if (diff < 60 * 24) {
-      final hours = (diff / 60).round();
-      return "${hours.toString()} ${hours == 1 ? 'hour ago' : 'hours ago'}";
-    } else if (diff < 60 * 24 * 2) {
-      return "Yesterday";
+  String timeAgo({bool numericDates = true}) {
+    final diff = DateTime.now().difference(this);
+    if (diff.inDays > 365) {
+      return "${(diff.inDays / 365).floor()} ${(diff.inDays / 365).floor() == 1 ? "year" : "years"} ago";
     }
-    return "${DateTime.now().difference(this).inDays} days ago";
+    if (diff.inDays > 30) {
+      return "${(diff.inDays / 30).floor()} ${(diff.inDays / 30).floor() == 1 ? "month" : "months"} ago";
+    }
+    if (diff.inDays > 7) {
+      return "${(diff.inDays / 7).floor()} ${(diff.inDays / 7).floor() == 1 ? "week" : "weeks"} ago";
+    }
+    if (diff.inDays > 0) {
+      return DateFormat.E().add_jm().format(this);
+    }
+    if (diff.inHours > 0) {
+      return "Today ${DateFormat('jm').format(this)}";
+    }
+    if (diff.inMinutes > 0) {
+      return "${diff.inMinutes} ${diff.inMinutes == 1 ? "minute" : "minutes"} ago";
+    }
+    return "just now";
   }
 
   String get suffix {
@@ -32,7 +36,27 @@ extension DateTimeExtension on DateTime {
   String get yMMMMd {
     return DateFormat.yMMMMd().format(this);
   }
+
+  // for getting order screen datetime format
+  String get mmmDhm {
+    return DateFormat('MMM d, h:mm a').format(this);
+  }
+
+  String get eeeDMMM {
+    return DateFormat('E, d MMM').format(this);
+  }
+
+  // for 12hr day format (hour am/hour pm)
+  String get ha {
+    return DateFormat("ha").format(this);
+  }
+
+  String get hmma {
+    return DateFormat("h:mma").format(this);
+  }
 }
+
+
 
 // extension DateFormatExtension on DateFormat {
 //   DateFormat get ddMMy {

@@ -1,88 +1,60 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../core/utils/styles/colors/colors.dart';
-import '../../../providers/core/router_provider.dart';
-import '../../hooks/is_dark_mode_hook.dart';
+import '../../../../core/utils/styles/decorations/corner_shape_decoration.dart';
+import '../../widgets/buttons/debounce_button.dart';
 
-class CloseButtonBottomSheet extends HookConsumerWidget {
+class CloseButtonBottomSheet extends StatelessWidget {
   final Widget child;
-  final Animation<double> animation;
 
   const CloseButtonBottomSheet({
     Key? key,
     required this.child,
-    required this.animation,
   }) : super(key: key);
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final bool isDarkMode = useIsDarkHook();
-
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      mainAxisAlignment: MainAxisAlignment.end,
-      crossAxisAlignment: CrossAxisAlignment.end,
-      children: [
-        Stack(
-          children: [
-            Padding(
-              padding: const EdgeInsets.only(top: 24),
-              child: ClipRRect(
-                borderRadius: const BorderRadius.vertical(
-                  top: Radius.circular(24.0),
-                ),
-                child: Container(
-                  decoration: BoxDecoration(
-                    color: Theme.of(context).scaffoldBackgroundColor,
-                  ),
-                  width: double.infinity,
-                  child: child,
-                ),
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: EdgeInsets.only(
+        bottom: MediaQuery.of(context).viewInsets.bottom,
+      ),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: [
+          Stack(
+            alignment: Alignment.topRight,
+            children: [
+              ClipRRect(
+                borderRadius: smoothBorderRadius(cornerRadius: 24),
+                child: child,
               ),
-            ),
-            Positioned(
-              child: AnimatedBuilder(
-                animation: animation,
-                builder: (context, child) => Transform.translate(
-                  offset: Offset(0, (1 - animation.value) * 100),
-                  child: Opacity(
-                    opacity: max(0, animation.value * 2 - 1),
-                    child: child,
-                  ),
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    ElevatedButton(
+              Positioned(
+                child: Material(
+                  color: Colors.transparent,
+                  shape: const CircleBorder(),
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0).w,
+                    child: DebouncedButton(
                       onPressed: () {
-                        ref.read(appRouterProvider).pop();
+                        Navigator.pop(context);
                       },
-                      style: ButtonStyle(
-                        backgroundColor: isDarkMode
-                            ? UIColors.dark.button
-                            : UIColors.light.button,
-                        shape: MaterialStateProperty.all(
-                          const CircleBorder(),
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0).w,
+                        child: Icon(
+                          Icons.close,
+                          color: UIColors.light.grey,
                         ),
-                        padding: MaterialStateProperty.all(
-                          const EdgeInsets.all(12),
-                        ),
-                      ),
-                      child: Icon(
-                        Icons.close,
-                        color: isDarkMode ? Colors.white : Colors.grey,
                       ),
                     ),
-                  ],
+                  ),
                 ),
               ),
-            ),
-          ],
-        ),
-      ],
+            ],
+          ),
+        ],
+      ),
     );
   }
 }

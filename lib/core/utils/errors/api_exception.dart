@@ -21,18 +21,20 @@ class ApiException with _$ApiException {
   const factory ApiException.unexpectedError() = _UnexpectedError;
   const factory ApiException.defaultError(String error) = _DefaultError;
 
-  factory ApiException.getDioException(DioError error) {
-    switch (error.type) {
-      case DioErrorType.cancel:
+  factory ApiException.getDioException(DioException exception) {
+    switch (exception.type) {
+      case DioExceptionType.cancel:
         return const ApiException.requestCancelled();
-      case DioErrorType.connectTimeout:
+      case DioExceptionType.connectionTimeout:
         return const ApiException.connectTimeout();
-      case DioErrorType.sendTimeout:
+      case DioExceptionType.connectionError:
+        return const ApiException.connectTimeout();
+      case DioExceptionType.sendTimeout:
         return const ApiException.sendTimeout();
-      case DioErrorType.receiveTimeout:
+      case DioExceptionType.receiveTimeout:
         return const ApiException.sendTimeout();
-      case DioErrorType.response:
-        switch (error.response!.statusCode) {
+      case DioExceptionType.badResponse:
+        switch (exception.response!.statusCode) {
           case 400:
             return const ApiException.badRequest();
           case 401:
@@ -42,7 +44,7 @@ class ApiException with _$ApiException {
           case 500:
             return const ApiException.internalServerError();
           default:
-            final responseCode = error.response!.statusCode;
+            final responseCode = exception.response!.statusCode;
             return ApiException.defaultError(
               "Received invalid status code: $responseCode",
             );

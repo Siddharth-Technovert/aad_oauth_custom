@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'theme_state.dart';
 
@@ -25,9 +25,9 @@ mixin _$ThemeState {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? light,
-    TResult Function()? dark,
-    TResult Function()? system,
+    TResult? Function()? light,
+    TResult? Function()? dark,
+    TResult? Function()? system,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -47,9 +47,9 @@ mixin _$ThemeState {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_Light value)? light,
-    TResult Function(_Dark value)? dark,
-    TResult Function(_System value)? system,
+    TResult? Function(_Light value)? light,
+    TResult? Function(_Dark value)? dark,
+    TResult? Function(_System value)? system,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -66,16 +66,18 @@ mixin _$ThemeState {
 abstract class $ThemeStateCopyWith<$Res> {
   factory $ThemeStateCopyWith(
           ThemeState value, $Res Function(ThemeState) then) =
-      _$ThemeStateCopyWithImpl<$Res>;
+      _$ThemeStateCopyWithImpl<$Res, ThemeState>;
 }
 
 /// @nodoc
-class _$ThemeStateCopyWithImpl<$Res> implements $ThemeStateCopyWith<$Res> {
+class _$ThemeStateCopyWithImpl<$Res, $Val extends ThemeState>
+    implements $ThemeStateCopyWith<$Res> {
   _$ThemeStateCopyWithImpl(this._value, this._then);
 
-  final ThemeState _value;
   // ignore: unused_field
-  final $Res Function(ThemeState) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 }
 
 /// @nodoc
@@ -85,13 +87,11 @@ abstract class _$$_LightCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_LightCopyWithImpl<$Res> extends _$ThemeStateCopyWithImpl<$Res>
+class __$$_LightCopyWithImpl<$Res>
+    extends _$ThemeStateCopyWithImpl<$Res, _$_Light>
     implements _$$_LightCopyWith<$Res> {
   __$$_LightCopyWithImpl(_$_Light _value, $Res Function(_$_Light) _then)
-      : super(_value, (v) => _then(v as _$_Light));
-
-  @override
-  _$_Light get _value => super._value as _$_Light;
+      : super(_value, _then);
 }
 
 /// @nodoc
@@ -126,9 +126,9 @@ class _$_Light extends _Light {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? light,
-    TResult Function()? dark,
-    TResult Function()? system,
+    TResult? Function()? light,
+    TResult? Function()? dark,
+    TResult? Function()? system,
   }) {
     return light?.call();
   }
@@ -160,9 +160,9 @@ class _$_Light extends _Light {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_Light value)? light,
-    TResult Function(_Dark value)? dark,
-    TResult Function(_System value)? system,
+    TResult? Function(_Light value)? light,
+    TResult? Function(_Dark value)? dark,
+    TResult? Function(_System value)? system,
   }) {
     return light?.call(this);
   }
@@ -194,13 +194,11 @@ abstract class _$$_DarkCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_DarkCopyWithImpl<$Res> extends _$ThemeStateCopyWithImpl<$Res>
+class __$$_DarkCopyWithImpl<$Res>
+    extends _$ThemeStateCopyWithImpl<$Res, _$_Dark>
     implements _$$_DarkCopyWith<$Res> {
   __$$_DarkCopyWithImpl(_$_Dark _value, $Res Function(_$_Dark) _then)
-      : super(_value, (v) => _then(v as _$_Dark));
-
-  @override
-  _$_Dark get _value => super._value as _$_Dark;
+      : super(_value, _then);
 }
 
 /// @nodoc
@@ -235,9 +233,9 @@ class _$_Dark extends _Dark {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? light,
-    TResult Function()? dark,
-    TResult Function()? system,
+    TResult? Function()? light,
+    TResult? Function()? dark,
+    TResult? Function()? system,
   }) {
     return dark?.call();
   }
@@ -269,9 +267,9 @@ class _$_Dark extends _Dark {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_Light value)? light,
-    TResult Function(_Dark value)? dark,
-    TResult Function(_System value)? system,
+    TResult? Function(_Light value)? light,
+    TResult? Function(_Dark value)? dark,
+    TResult? Function(_System value)? system,
   }) {
     return dark?.call(this);
   }
@@ -303,13 +301,11 @@ abstract class _$$_SystemCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_SystemCopyWithImpl<$Res> extends _$ThemeStateCopyWithImpl<$Res>
+class __$$_SystemCopyWithImpl<$Res>
+    extends _$ThemeStateCopyWithImpl<$Res, _$_System>
     implements _$$_SystemCopyWith<$Res> {
   __$$_SystemCopyWithImpl(_$_System _value, $Res Function(_$_System) _then)
-      : super(_value, (v) => _then(v as _$_System));
-
-  @override
-  _$_System get _value => super._value as _$_System;
+      : super(_value, _then);
 }
 
 /// @nodoc
@@ -344,9 +340,9 @@ class _$_System extends _System {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? light,
-    TResult Function()? dark,
-    TResult Function()? system,
+    TResult? Function()? light,
+    TResult? Function()? dark,
+    TResult? Function()? system,
   }) {
     return system?.call();
   }
@@ -378,9 +374,9 @@ class _$_System extends _System {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_Light value)? light,
-    TResult Function(_Dark value)? dark,
-    TResult Function(_System value)? system,
+    TResult? Function(_Light value)? light,
+    TResult? Function(_Dark value)? dark,
+    TResult? Function(_System value)? system,
   }) {
     return system?.call(this);
   }

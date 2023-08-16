@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'user_api_dto.dart';
 
@@ -35,44 +35,48 @@ mixin _$UserApiDto {
 abstract class $UserApiDtoCopyWith<$Res> {
   factory $UserApiDtoCopyWith(
           UserApiDto value, $Res Function(UserApiDto) then) =
-      _$UserApiDtoCopyWithImpl<$Res>;
+      _$UserApiDtoCopyWithImpl<$Res, UserApiDto>;
+  @useResult
   $Res call(
       {String? id, String name, String? profileImage, AccountType accountType});
 }
 
 /// @nodoc
-class _$UserApiDtoCopyWithImpl<$Res> implements $UserApiDtoCopyWith<$Res> {
+class _$UserApiDtoCopyWithImpl<$Res, $Val extends UserApiDto>
+    implements $UserApiDtoCopyWith<$Res> {
   _$UserApiDtoCopyWithImpl(this._value, this._then);
 
-  final UserApiDto _value;
   // ignore: unused_field
-  final $Res Function(UserApiDto) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? id = freezed,
-    Object? name = freezed,
+    Object? name = null,
     Object? profileImage = freezed,
-    Object? accountType = freezed,
+    Object? accountType = null,
   }) {
     return _then(_value.copyWith(
-      id: id == freezed
+      id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String?,
-      name: name == freezed
+      name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      profileImage: profileImage == freezed
+      profileImage: freezed == profileImage
           ? _value.profileImage
           : profileImage // ignore: cast_nullable_to_non_nullable
               as String?,
-      accountType: accountType == freezed
+      accountType: null == accountType
           ? _value.accountType
           : accountType // ignore: cast_nullable_to_non_nullable
               as AccountType,
-    ));
+    ) as $Val);
   }
 }
 
@@ -83,41 +87,41 @@ abstract class _$$_UserApiDtoCopyWith<$Res>
           _$_UserApiDto value, $Res Function(_$_UserApiDto) then) =
       __$$_UserApiDtoCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
       {String? id, String name, String? profileImage, AccountType accountType});
 }
 
 /// @nodoc
-class __$$_UserApiDtoCopyWithImpl<$Res> extends _$UserApiDtoCopyWithImpl<$Res>
+class __$$_UserApiDtoCopyWithImpl<$Res>
+    extends _$UserApiDtoCopyWithImpl<$Res, _$_UserApiDto>
     implements _$$_UserApiDtoCopyWith<$Res> {
   __$$_UserApiDtoCopyWithImpl(
       _$_UserApiDto _value, $Res Function(_$_UserApiDto) _then)
-      : super(_value, (v) => _then(v as _$_UserApiDto));
+      : super(_value, _then);
 
-  @override
-  _$_UserApiDto get _value => super._value as _$_UserApiDto;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? id = freezed,
-    Object? name = freezed,
+    Object? name = null,
     Object? profileImage = freezed,
-    Object? accountType = freezed,
+    Object? accountType = null,
   }) {
     return _then(_$_UserApiDto(
-      id: id == freezed
+      id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String?,
-      name: name == freezed
+      name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      profileImage: profileImage == freezed
+      profileImage: freezed == profileImage
           ? _value.profileImage
           : profileImage // ignore: cast_nullable_to_non_nullable
               as String?,
-      accountType: accountType == freezed
+      accountType: null == accountType
           ? _value.accountType
           : accountType // ignore: cast_nullable_to_non_nullable
               as AccountType,
@@ -157,25 +161,22 @@ class _$_UserApiDto extends _UserApiDto {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_UserApiDto &&
-            const DeepCollectionEquality().equals(other.id, id) &&
-            const DeepCollectionEquality().equals(other.name, name) &&
-            const DeepCollectionEquality()
-                .equals(other.profileImage, profileImage) &&
-            const DeepCollectionEquality()
-                .equals(other.accountType, accountType));
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.name, name) || other.name == name) &&
+            (identical(other.profileImage, profileImage) ||
+                other.profileImage == profileImage) &&
+            (identical(other.accountType, accountType) ||
+                other.accountType == accountType));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(id),
-      const DeepCollectionEquality().hash(name),
-      const DeepCollectionEquality().hash(profileImage),
-      const DeepCollectionEquality().hash(accountType));
+  int get hashCode =>
+      Object.hash(runtimeType, id, name, profileImage, accountType);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_UserApiDtoCopyWith<_$_UserApiDto> get copyWith =>
       __$$_UserApiDtoCopyWithImpl<_$_UserApiDto>(this, _$identity);
 

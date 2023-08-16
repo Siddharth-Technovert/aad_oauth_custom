@@ -7,7 +7,9 @@ import 'home/home_screen.dart';
 import 'login/login_screen.dart';
 
 class AppStartScreen extends HookConsumerWidget {
-  const AppStartScreen({Key? key}) : super(key: key);
+  const AppStartScreen({
+    Key? key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

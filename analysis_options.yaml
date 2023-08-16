@@ -1,4 +1,4 @@
-include: package:lint/analysis_options.yaml
+include: package:flutter_lints/flutter.yaml
 
 analyzer:
   exclude:
@@ -8,6 +8,7 @@ analyzer:
     - "**/*.gen.dart"
   errors:
     invalid_annotation_target: ignore
+    todo: ignore
 
 linter:
   rules:
@@ -15,8 +16,7 @@ linter:
     avoid_classes_with_only_static_members: false
     always_use_package_imports: false
     sort_pub_dependencies: false
-    use_super_parameters: false
-    use_decorated_box: false
+    avoid_renaming_method_parameters: false
     # sort_constructors_first: true
     # prefer_double_quotes: true
     # prefer_single_quotes: true

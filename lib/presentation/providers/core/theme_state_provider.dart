@@ -12,9 +12,9 @@ class ThemeStateNotifier extends StateNotifier<ThemeState> {
   ThemeState get currentState => state;
 
   final Ref _ref;
-  late final ReadTheme _readThemeUseCase = _ref.read(readThemeUseCaseProvider);
+  late final ReadTheme _readThemeUseCase = _ref.watch(readThemeUseCaseProvider);
   late final WriteTheme _writeThemeUseCase =
-      _ref.read(writeThemeUseCaseProvider);
+      _ref.watch(writeThemeUseCaseProvider);
 
   ThemeStateNotifier(this._ref) : super(const ThemeState.system()) {
     _init();

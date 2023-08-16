@@ -1,19 +1,26 @@
+import '../../core/utils/api/api_manager/api_manager.dart';
+import '../../core/utils/constants/app_constants.dart';
 import '../../core/utils/errors/app_exception.dart';
 import '../../core/utils/errors/cache_exception.dart';
+import '../../core/utils/local_storage/cache/cache_manager.dart';
+import '../../core/utils/local_storage/secure/secure_storage_manager.dart';
 import '../../domain/enums/account_type.dart';
 import '../../domain/models/user/user.dart';
 import '../../domain/repositories/user_repository.dart';
-import '../data_source/local/user_local_data_source.dart';
-import '../data_source/remote/user_remote_data_source.dart';
+import '../models/api/user/user_api_dto.dart';
+import '../models/cache/user/user_cache_dto.dart';
 import '../models/result/data_state.dart';
 
 class UserRepositoryImpl implements UserRepository {
-  final UserRemoteDataSource _userRemoteDataSource;
-  final UserLocalDataSource _userLocalDataSource;
+  // ignore: unused_field
+  final ApiManager _apiManager;
+  final SecureStorageManager _secureStorageManager;
+  final CacheManager _cacheManager;
 
   UserRepositoryImpl(
-    this._userRemoteDataSource,
-    this._userLocalDataSource,
+    this._apiManager,
+    this._secureStorageManager,
+    this._cacheManager,
   );
 
   @override
@@ -21,16 +28,28 @@ class UserRepositoryImpl implements UserRepository {
     String token,
     AccountType accountType,
   ) async {
-    final isTokenStored = await _userLocalDataSource.storeJwtToken(token);
+    final bool isTokenStored = await _secureStorageManager.putAsync(
+      key: AppConstants.tokenKey,
+      value: token,
+    );
     if (isTokenStored) {
-      final userApiDtoResponse =
-          await _userRemoteDataSource.createUser(accountType);
-      return userApiDtoResponse.when(
-        success: (data) {
-          return _userLocalDataSource.createUser(data.toCacheDto());
-        },
-        error: (ex) => DataState.error(ex),
+      const userApiDto = UserApiDto(
+        id: "0",
+        name: "Jon Snow",
+        accountType: AccountType.guest,
       );
+      final userCacheDto = userApiDto.toCacheDto();
+      final userCacheDtoResponse = await _cacheManager.insertData<UserCacheDto>(
+        UserCacheDto.boxKey,
+        userCacheDto,
+      );
+      if (userCacheDtoResponse) {
+        return DataState.success(userCacheDto.toModel());
+      } else {
+        return const DataState.error(
+          AppException.cacheError(CacheException.insertError()),
+        );
+      }
     } else {
       return const DataState.error(
         AppException.cacheError(CacheException.insertError()),
@@ -40,16 +59,28 @@ class UserRepositoryImpl implements UserRepository {
 
   @override
   Future<DataState<User>> readUser() async {
-    return _userLocalDataSource.readUser();
+    final usersCacheDto =
+        await _cacheManager.getAll<UserCacheDto>(UserCacheDto.boxKey);
+    return usersCacheDto == null || usersCacheDto.isEmpty
+        ? const DataState.error(
+            AppException.cacheError(CacheException.insertError()),
+          )
+        : DataState.success(
+            usersCacheDto.first.toModel(),
+          );
   }
 
   @override
   Future<void> removeUser() async {
-    _userLocalDataSource.removeUser();
+    await _cacheManager.clearAll<UserCacheDto>(UserCacheDto.boxKey);
+    await _secureStorageManager.deleteAsync(
+      key: AppConstants.tokenKey,
+    );
   }
 
   @override
   Future<bool> updateUser(User user) {
-    return _userLocalDataSource.updateUser();
+    // TODO: implement updateUser
+    throw UnimplementedError();
   }
 }

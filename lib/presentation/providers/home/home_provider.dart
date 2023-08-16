@@ -4,6 +4,7 @@ import '../../../domain/service_providers.dart';
 import '../../../domain/states/home/home_state.dart';
 import '../../../domain/usecases/auth/auth_usecases.dart';
 import '../core/app_state_provider.dart';
+import '../core/router_provider.dart';
 import '../core/user_state_provider.dart';
 
 final homeProvider = StateNotifierProvider<HomeNotifier, HomeState>((ref) {
@@ -15,7 +16,7 @@ class HomeNotifier extends StateNotifier<HomeState> {
 
   final Ref _ref;
   late final LogoutUser _logoutUserUseCase =
-      _ref.read(logoutUserUseCaseProvider);
+      _ref.watch(logoutUserUseCaseProvider);
 
   HomeNotifier(
     this._ref,
@@ -30,6 +31,7 @@ class HomeNotifier extends StateNotifier<HomeState> {
           available: (user) => _logoutUserUseCase(user.accountType),
           orElse: () {},
         );
+    _ref.read(appRouterProvider).pop();
     await _ref.read(appStateProvider.notifier).unAuthenticateState();
     // state = const HomeState.loggedOut();
     _ref.read(loggerServiceProvider).infoLog(

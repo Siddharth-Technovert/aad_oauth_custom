@@ -1,11 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../../core/router/app_router.gr.dart';
+import '../../../core/router/app_router.dart';
 
-final appRouterProvider = Provider.autoDispose(
-  (ref) => AppRouter(
-      // routeGuard: RouteGuard(
-      //   ref.read(secureStorageManagerProvider),
-      // ),
-      ),
+final appRouterProvider = Provider(
+  (ref) => AppRouter(),
 );
