@@ -2,7 +2,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../data/data_service_providers.dart';
 import '../../../domain/enums/account_type.dart';
-import '../../../domain/enums/toast_type.dart';
 import '../../../domain/states/login/login_state.dart';
 import '../../../domain/usecases/auth/auth_usecases.dart';
 import '../../ui/modals/snack_bar/snack_bar_factory.dart';
@@ -42,7 +41,7 @@ class LoginNotifier extends StateNotifier<LoginState> {
             );
       },
       error: (ex) {
-        SnackbarFactory.showToast(ToastType.error, "Something Went Wrong");
+        SnackbarFactory.showError("Something Went Wrong");
       },
     );
   }

@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../../../core/utils/styles/dimensions/ui_dimensions.dart';
 import '../../../../domain/enums/toast_type.dart';
+import '../../widgets/custom_text.dart';
 import 'widgets/message_toast.dart';
 
 abstract class SnackbarFactory {
@@ -17,15 +18,18 @@ abstract class SnackbarFactory {
         SnackBar(
           backgroundColor: Colors.red,
           elevation: 0,
-          padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16).w,
+          padding: UIDimensions.symmetricPaddingGeometry(
+            horizontal: 24,
+            vertical: 16,
+          ),
           duration: const Duration(seconds: 3),
           shape: const RoundedRectangleBorder(),
-          content: const Text('Internet Connection Not Available'),
+          content: const NoInternetText(),
         ),
       );
   }
 
-  static void showToast(
+  static void _showToast(
     ToastType toastType,
     String message, {
     String? title,
@@ -50,13 +54,53 @@ abstract class SnackbarFactory {
   }
 
   static void showError(
-    String errorMessage, {
+    String message, {
     String? title,
-  }) {
-    SnackbarFactory.showToast(
-      ToastType.error,
-      errorMessage,
-      title: title,
-    );
+  }) =>
+      _showToast(
+        ToastType.error,
+        message,
+        title: title,
+      );
+
+  static void showInfo(
+    String message, {
+    String? title,
+  }) =>
+      _showToast(
+        ToastType.info,
+        message,
+        title: title,
+      );
+
+  static void showSuccess(
+    String message, {
+    String? title,
+  }) =>
+      _showToast(
+        ToastType.success,
+        message,
+        title: title,
+      );
+
+  static void showWarning(
+    String message, {
+    String? title,
+  }) =>
+      _showToast(
+        ToastType.warning,
+        message,
+        title: title,
+      );
+}
+
+class NoInternetText extends StatelessWidget {
+  const NoInternetText({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return CustomText.bodyMedium(context, 'Internet Connection Not Available');
   }
 }

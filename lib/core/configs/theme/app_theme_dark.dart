@@ -1,71 +1,111 @@
-part of 'app_theme.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
-class AppThemeDark {
-  const AppThemeDark();
-  ThemeData get theme => ThemeData(
-        useMaterial3: true,
-        fontFamily: 'Urbanist',
-        colorScheme: ColorScheme.fromSeed(
-          seedColor: UIColors.dark.primary,
-          primary: UIColors.dark.primary,
-          secondary: UIColors.dark.secondary,
-          background: UIColors.dark.background,
-          // background: UIColors.dark.scaffoldBackground,
+import '../../utils/styles/colors/ui_colors_dark.dart';
+import '../../utils/styles/text_styles/ui_text_styles.dart';
+import '../../utils/styles/text_styles/ui_text_styles_dark.dart';
+
+abstract class AppThemeDark {
+  static ThemeData get theme {
+    final colors = UIColorsDark();
+    final textStylesDark = UITextStylesDark();
+
+    return ThemeData(
+      useMaterial3: true,
+      fontFamily: fontFamily,
+      colorScheme: ColorScheme(
+        brightness: Brightness.dark,
+        primary: colors.primary,
+        onPrimary: colors.onPrimary,
+        primaryContainer: colors.primaryContainer,
+        onPrimaryContainer: colors.onPrimaryContainer,
+        secondary: colors.secondary,
+        onSecondary: colors.onSecondary,
+        secondaryContainer: colors.secondaryContainer,
+        onSecondaryContainer: colors.onSecondaryContainer,
+        tertiary: colors.tertiary,
+        onTertiary: colors.onTertiary,
+        tertiaryContainer: colors.tertiaryContainer,
+        onTertiaryContainer: colors.onTertiaryContainer,
+        error: colors.error,
+        onError: colors.onError,
+        errorContainer: colors.errorContainer,
+        onErrorContainer: colors.onErrorContainer,
+        background: colors.background,
+        onBackground: colors.onBackground,
+        surface: colors.surface,
+        onSurface: colors.onSurface,
+        surfaceVariant: colors.surfaceVariant,
+        onSurfaceVariant: colors.onSurfaceVariant,
+        outline: colors.outline,
+        outlineVariant: colors.outlineVariant,
+        shadow: colors.shadow,
+        scrim: colors.scrim,
+        inverseSurface: colors.inverseSurface,
+        onInverseSurface: colors.onInverseSurface,
+        inversePrimary: colors.inversePrimary,
+        surfaceTint: colors.surfaceTint,
+      ),
+      //?Theme Extensions
+      extensions: [
+        colors.customColors,
+      ],
+      //?Shapes Theme
+      appBarTheme: const AppBarTheme(
+        // color: UIColors.dark.background,
+        // iconTheme: IconThemeData(color: UIColors.dark.icon),
+        systemOverlayStyle: SystemUiOverlayStyle(
+          statusBarBrightness: Brightness.dark,
+          // statusBarColor: UIColors.dark.background,
+          statusBarIconBrightness: Brightness.dark,
         ),
-        scaffoldBackgroundColor: UIColors.dark.scaffoldBackground,
-        drawerTheme: DrawerThemeData(
-          backgroundColor: UIColors.dark.scaffoldBackground,
-        ),
-        appBarTheme: AppBarTheme(
-          color: UIColors.dark.background,
-          iconTheme: IconThemeData(color: UIColors.dark.icon),
-          titleTextStyle: UITextStyles.dark.h3,
-          toolbarTextStyle: UITextStyles.dark.h6,
-          systemOverlayStyle: SystemUiOverlayStyle(
-            statusBarBrightness: Brightness.dark,
-            statusBarColor: UIColors.dark.background,
-            statusBarIconBrightness: Brightness.dark,
-          ),
-        ),
-        iconTheme: IconThemeData(
-          color: UIColors.dark.icon,
-        ),
-        textTheme: TextTheme(
-          displayLarge: UITextStyles.dark.h1,
-          displayMedium: UITextStyles.dark.h2,
-          displaySmall: UITextStyles.dark.h3,
-          headlineMedium: UITextStyles.dark.h4,
-          headlineSmall: UITextStyles.dark.h5,
-          titleLarge: UITextStyles.dark.subtitle1,
-          headlineLarge: UITextStyles.dark.subtitle3,
-          bodyLarge: UITextStyles.dark.bodyText1,
-          bodyMedium: UITextStyles.dark.bodyText2,
-          labelLarge: UITextStyles.defaultButtonStyle(),
-          bodySmall: UITextStyles.dark.caption,
-        ),
-        textSelectionTheme: TextSelectionThemeData(
-          selectionColor: UIColors.dark.textSelection,
-        ),
-        textButtonTheme: TextButtonThemeData(
-          style: ButtonStyle(
-            backgroundColor: UIColors.dark.button,
-          ),
-        ),
-        bottomNavigationBarTheme: BottomNavigationBarThemeData(
-          backgroundColor: UIColors.dark.bottomNavBgColor,
-          selectedItemColor: UIColors.dark.bottomNavSelectedItem,
-          unselectedItemColor: UIColors.dark.bottomNavUnSelectedItem,
-        ),
-        bottomSheetTheme: BottomSheetThemeData(
-          backgroundColor: UIColors.dark.scaffoldBackground,
-        ),
-        switchTheme: SwitchThemeData(
-          thumbColor: MaterialStateProperty.all<Color>(
-            UIColors.dark.primary,
-          ),
-          trackColor: MaterialStateProperty.all<Color>(
-            UIColors.dark.switchActiveTrackColor.withOpacity(0.5),
-          ),
-        ),
-      );
+      ),
+      // iconTheme: const IconThemeData(
+      //     // color: UIColors.dark.icon,
+      //     ),
+      // bottomNavigationBarTheme: const BottomNavigationBarThemeData(
+      //     // backgroundColor: UIColors.dark.bottomNavBgColor,
+      //     // selectedItemColor: UIColors.dark.bottomNavSelectedItem,
+      //     // unselectedItemColor: UIColors.dark.bottomNavUnSelectedItem,
+      //     ),
+      // bottomSheetTheme: const BottomSheetThemeData(
+      //     // backgroundColor: UIColors.dark.scaffoldBackground,
+      //     ),
+      // switchTheme: const SwitchThemeData(
+      //     // thumbColor: MaterialStateProperty.all<Color>(
+      //     //   UIColors.dark.primary,
+      //     // ),
+      //     // trackColor: MaterialStateProperty.all<Color>(
+      //     //   UIColors.dark.switchActiveTrackColor.withOpacity(0.5),
+      //     // ),
+      //     ),
+      //?Typography
+      typography: Typography.material2021(),
+      textTheme: TextTheme(
+        displayLarge: textStylesDark.displayLarge,
+        displayMedium: textStylesDark.displayMedium,
+        displaySmall: textStylesDark.displaySmall,
+        headlineLarge: textStylesDark.headlineLarge,
+        headlineMedium: textStylesDark.headlineMedium,
+        headlineSmall: textStylesDark.headlineSmall,
+        titleLarge: textStylesDark.titleLarge,
+        titleMedium: textStylesDark.titleMedium,
+        titleSmall: textStylesDark.titleSmall,
+        bodyLarge: textStylesDark.bodyLarge,
+        bodyMedium: textStylesDark.bodyMedium,
+        bodySmall: textStylesDark.bodySmall,
+        labelLarge: textStylesDark.labelLarge,
+        labelMedium: textStylesDark.labelMedium,
+        labelSmall: textStylesDark.labelSmall,
+      ).apply(fontFamily: fontFamily),
+      // textSelectionTheme: const TextSelectionThemeData(
+      //     // selectionColor: UIColors.dark.textSelection,
+      //     ),
+      // textButtonTheme: const TextButtonThemeData(
+      //   style: ButtonStyle(
+      //       // backgroundColor: UIColors.dark.button,
+      //       ),
+      // ),
+    );
+  }
 }

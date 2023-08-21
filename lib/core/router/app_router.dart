@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../../presentation/ui/modals/bottom_sheets/bottom_sheet_factory.dart';
 import '../../presentation/ui/modals/bottom_sheets/logout/logout_bottom_sheet.dart';
 import '../../presentation/ui/screens/app_start_screen.dart';
+import '../../presentation/ui/widgets/custom_text.dart';
 
 class AppRouter {
   final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
@@ -49,7 +50,10 @@ class AppRouter {
         return MaterialPageRoute(
           builder: (context) => Scaffold(
             body: Center(
-              child: Text("Not found ${settings.name}"),
+              child: CustomText.displaySmall(
+                context,
+                "Not found ${settings.name}",
+              ),
             ),
           ),
         );

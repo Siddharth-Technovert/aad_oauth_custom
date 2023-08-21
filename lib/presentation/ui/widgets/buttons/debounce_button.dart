@@ -2,7 +2,8 @@ import 'dart:async';
 
 import 'package:figma_squircle/figma_squircle.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+import '../../../../core/utils/styles/dimensions/ui_dimensions.dart';
 
 class DebouncedButton extends StatefulWidget {
   final Widget _child;
@@ -55,13 +56,13 @@ class DebouncedButtonState extends State<DebouncedButton> {
       builder: (context, bool isEnabled, child) => Material(
         color: widget.bgColor ?? Colors.transparent,
         borderRadius: SmoothBorderRadius(
-          cornerRadius: widget.cornerRadius.r,
+          cornerRadius: UIDimensions.radius(widget.cornerRadius),
           cornerSmoothing: widget.cornerSmoothing,
         ),
         child: InkWell(
           customBorder: SmoothRectangleBorder(
             borderRadius: SmoothBorderRadius(
-              cornerRadius: widget.cornerRadius.r,
+              cornerRadius: UIDimensions.radius(widget.cornerRadius),
               cornerSmoothing: widget.cornerSmoothing,
             ),
           ),

@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../core/utils/assets_gen/assets.gen.dart';
-import 'widget/custom_alert_dialog.dart';
-import 'widget/custom_alert_title_dialog.dart';
+import '../../../../core/utils/styles/dimensions/ui_dimensions.dart';
+import '../../widgets/custom_text.dart';
 
 class AlertDialogFactory {
   static final AlertDialogFactory _alertDialogFactory =
@@ -27,9 +26,9 @@ class AlertDialogFactory {
         return WillPopScope(
           onWillPop: () async => false,
           child: Center(
-            child: SizedBox(
-              height: 32.h,
-              width: 32.w,
+            child: UIDimensions.sizedBox(
+              height: 32,
+              width: 32,
               child: const CircularProgressIndicator(),
             ),
           ),
@@ -53,10 +52,8 @@ class AlertDialogFactory {
   }) {
     showDialog(
       context: context,
-      builder: (BuildContext context) => CustomAlertTitleDialog(
-        title: title,
-        allowCallback: allowCallback,
-        description: description,
+      builder: (BuildContext context) => AlertDialog(
+        title: CustomText.headlineMedium(context, title),
       ),
     );
   }
@@ -73,12 +70,15 @@ class AlertDialogFactory {
   }) {
     return showDialog<bool>(
       context: ctx,
-      builder: (context) => CustomAlertDialog(
-        title: title,
-        allowCallBack: allowCallback,
-        subtitle: subTitle,
-        positiveButtonText: positiveButtonText ?? "Clear",
-        negativeButtonText: negativeButtonText ?? "Cancel",
+      builder: (context) => AlertDialog(
+        title: CustomText.headlineMedium(context, title),
+        content: subTitle == null
+            ? null
+            : CustomText.headlineMedium(context, subTitle),
+        actions: [
+          CustomText.headlineMedium(context, negativeButtonText ?? "Cancel"),
+          CustomText.headlineMedium(context, positiveButtonText ?? "Clear"),
+        ],
       ),
     );
   }

@@ -11,7 +11,7 @@ abstract class BottomSheetFactory {
   ) {
     return ModalBottomSheetRoute(
       builder: (context) => CloseButtonBottomSheet(
-        child: Material(color: Colors.white, child: child),
+        child: Material(child: child),
       ),
       isScrollControlled: true,
       settings: routeSettings,

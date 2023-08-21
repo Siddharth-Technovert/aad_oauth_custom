@@ -13,15 +13,15 @@ dependencies:
         sdk: flutter
 
     #Localizations
-    intl: ^0.18.0
+    intl: ^0.18.1
 
     #State management
-    flutter_riverpod: ^2.3.6
-    hooks_riverpod: ^2.3.6
+    flutter_riverpod: ^2.3.7
+    hooks_riverpod: ^2.3.8
     flutter_hooks: ^0.20.0
 
     #Responsiveness
-    flutter_screenutil: ^5.8.4
+    flutter_screenutil: ^5.9.0
 
     #Permissions
     permission_handler: ^10.4.3

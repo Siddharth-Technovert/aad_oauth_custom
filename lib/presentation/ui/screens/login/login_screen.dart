@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../../core/utils/styles/dimensions/ui_dimensions.dart';
@@ -7,6 +6,7 @@ import '../../../../domain/enums/account_type.dart';
 import '../../../providers/login/login_provider.dart';
 import '../../hooks/app_loc_hook.dart';
 import '../../widgets/buttons/primary_button.dart';
+import '../../widgets/custom_text.dart';
 
 class LoginScreen extends HookConsumerWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -30,11 +30,9 @@ class LoginScreen extends HookConsumerWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               const Spacer(),
-              Text(
+              CustomText.headlineLarge(
+                context,
                 "Boilerplate App",
-                style: Theme.of(context).textTheme.titleLarge!.copyWith(
-                      fontSize: 28.sp,
-                    ),
               ),
               const Spacer(),
               PrimaryButton(

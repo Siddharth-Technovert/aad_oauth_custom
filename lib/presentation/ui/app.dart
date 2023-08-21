@@ -3,7 +3,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../core/configs/log/router_log.dart';
-import '../../core/configs/theme/app_theme.dart';
+import '../../core/configs/theme/app_theme_dark.dart';
+import '../../core/configs/theme/app_theme_light.dart';
 import '../../core/router/app_router.dart';
 import '../../core/utils/l10n/app_loc.dart';
 import '../../data/data_service_providers.dart';
@@ -43,8 +44,8 @@ class App extends ConsumerWidget {
             title: "RiverPod Boilerplate",
             debugShowCheckedModeBanner: false,
             themeMode: ref.watch(themeStateProvider).mode,
-            theme: AppTheme.light.theme,
-            darkTheme: AppTheme.light.theme,
+            theme: AppThemeLight.theme,
+            darkTheme: AppThemeDark.theme,
             builder: (context, child) {
               return MediaQuery(
                 data: MediaQuery.of(context).copyWith(textScaleFactor: 1),

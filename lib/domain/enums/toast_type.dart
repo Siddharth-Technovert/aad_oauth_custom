@@ -1,26 +1,52 @@
 import 'package:flutter/material.dart';
 
+import '../../core/utils/styles/colors/ui_colors_dark.dart';
+import '../../core/utils/styles/colors/ui_colors_light.dart';
+
 enum ToastType {
   success(
     "Success",
-    Color(0xff4ac39e),
   ),
   error(
     "Error",
-    Color(0xffed5f53),
   ),
   warning(
     "Warning",
-    Color(0xffffce68),
   ),
   info(
     "Info",
-    Color(0xffaab2f6),
   );
 
   final String val;
-  final Color color;
-  const ToastType(this.val, this.color);
+  const ToastType(this.val);
+}
+
+extension ToastColors on ToastType {
+  Color get lightColor {
+    switch (this) {
+      case ToastType.success:
+        return UIColorsLight().customColors.greenColor!;
+      case ToastType.error:
+        return UIColorsLight().customColors.redColor!;
+      case ToastType.warning:
+        return UIColorsLight().customColors.marinerColor!;
+      case ToastType.info:
+        return UIColorsLight().customColors.greyColor!;
+    }
+  }
+
+  Color get darkColor {
+    switch (this) {
+      case ToastType.success:
+        return UIColorsDark().customColors.greenColor!;
+      case ToastType.error:
+        return UIColorsDark().customColors.redColor!;
+      case ToastType.warning:
+        return UIColorsDark().customColors.marinerColor!;
+      case ToastType.info:
+        return UIColorsDark().customColors.greyColor!;
+    }
+  }
 }
 
 // extension ToastTypeIconPaths on ToastType {
