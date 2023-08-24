@@ -17,5 +17,3 @@ abstract interface class UITextStyles {
   TextStyle get labelMedium;
   TextStyle get labelSmall;
 }
-
-const String fontFamily = "Urbanist";

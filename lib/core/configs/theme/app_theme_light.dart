@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+import '../../utils/assets_gen/fonts.gen.dart';
 import '../../utils/styles/colors/ui_colors_light.dart';
 import '../../utils/styles/dimensions/ui_dimensions.dart';
-import '../../utils/styles/text_styles/ui_text_styles.dart';
 import '../../utils/styles/text_styles/ui_text_styles_light.dart';
 
 abstract class AppThemeLight {
@@ -13,7 +13,7 @@ abstract class AppThemeLight {
 
     return ThemeData(
       useMaterial3: true,
-      fontFamily: fontFamily,
+      fontFamily: FontFamily.poppins,
       colorScheme: ColorScheme(
         brightness: Brightness.light,
         primary: colors.primary,
@@ -103,7 +103,9 @@ abstract class AppThemeLight {
         labelLarge: textStylesLight.labelLarge,
         labelMedium: textStylesLight.labelMedium,
         labelSmall: textStylesLight.labelSmall,
-      ).apply(fontFamily: fontFamily),
+      ).apply(
+        fontFamily: FontFamily.poppins,
+      ),
       // textSelectionTheme: const TextSelectionThemeData(
       //     // selectionColor: UIColors.light.textSelection,
       //     ),

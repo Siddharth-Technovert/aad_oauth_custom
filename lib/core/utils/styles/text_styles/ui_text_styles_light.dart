@@ -1,5 +1,6 @@
 import 'package:flutter/widgets.dart';
 
+import '../../assets_gen/fonts.gen.dart';
 import '../colors/ui_colors_light.dart';
 import '../dimensions/ui_dimensions.dart';
 import 'ui_text_styles.dart';
@@ -10,7 +11,7 @@ class UITextStylesLight implements UITextStyles {
   final UIColorsLight lightColors = UIColorsLight();
 
   static TextStyle _defaultStyle() => const TextStyle(
-        fontFamily: fontFamily,
+        fontFamily: FontFamily.poppins,
       );
 
   @override
