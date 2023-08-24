@@ -51,7 +51,7 @@ class PrimaryButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return UIDimensions.sizedBox(
-      height: (height ?? UIDimensions.buttonH60),
+      height: (height ?? UIDimensions.buttonH56),
       width:
           horizontalPadding == UIDimensions.buttonW18 ? double.infinity : null,
       // decoration: roundCornerSolidBg(
@@ -74,7 +74,7 @@ class PrimaryButton extends StatelessWidget {
               Padding(
                 padding: UIDimensions.symmetricPaddingGeometry(horizontal: 6),
                 child: child ??
-                    CustomText.headlineMedium(
+                    CustomText.titleMedium(
                       text,
                     ),
               ),

@@ -19,14 +19,14 @@ class LogoutBottomSheet extends ConsumerWidget {
       child: Column(
         children: [
           Center(
-            child: CustomText.headlineLarge(
+            child: CustomText.headlineMedium(
               context.appLoc.logout,
             ),
           ),
           UIDimensions.verticalSpaceMedium,
           Center(
             child: SizedBox(
-              child: CustomText.headlineSmall(
+              child: CustomText.titleMedium(
                 context.appLoc.logoutConfirm,
                 textAlign: TextAlign.center,
                 textOverflow: null,

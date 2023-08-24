@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../../../../core/utils/extensions/context_extension.dart';
 import '../../../../core/utils/styles/dimensions/ui_dimensions.dart';
 import '../custom_text.dart';
 
@@ -52,12 +51,12 @@ class SecondaryButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return UIDimensions.sizedBox(
-      height: (height ?? UIDimensions.buttonH60),
+      height: (height ?? UIDimensions.buttonH56),
       width: horizontalPadding == 18 ? double.infinity : null,
       child: OutlinedButton(
         onPressed: _onPressed,
         style: OutlinedButton.styleFrom(
-          side: BorderSide(color: borderColor ?? context.primary),
+          side: borderColor == null ? null : BorderSide(color: borderColor!),
           // shape: smoothCornerShape(cornerRadius: cornerRadius),
           padding: EdgeInsets.symmetric(
             vertical: verticalPadding,
@@ -74,7 +73,7 @@ class SecondaryButton extends StatelessWidget {
               Padding(
                 padding: UIDimensions.symmetricPaddingGeometry(horizontal: 6),
                 child: child ??
-                    CustomText.headlineMedium(
+                    CustomText.titleMedium(
                       text,
                     ),
               ),

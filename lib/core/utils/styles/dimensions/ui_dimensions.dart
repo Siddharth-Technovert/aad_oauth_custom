@@ -114,6 +114,16 @@ class UIDimensions {
   static double width(double val) => val.w;
 
   //?Height
-  static double buttonH60 = 60.h;
+  static double buttonH56 = 56.h;
   static double height(double val) => val.h;
+
+  //?Input Decoration
+  static OutlineInputBorder inputDecorationBorder(
+    Color borderColor, [
+    double borderWidth = 1.0,
+  ]) =>
+      OutlineInputBorder(
+        borderRadius: const BorderRadius.all(Radius.circular(12)),
+        borderSide: BorderSide(color: borderColor, width: borderWidth),
+      );
 }

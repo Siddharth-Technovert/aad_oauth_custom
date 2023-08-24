@@ -44,8 +44,8 @@ class App extends ConsumerWidget {
             title: "RiverPod Boilerplate",
             debugShowCheckedModeBanner: false,
             themeMode: ref.watch(themeStateProvider).mode,
-            theme: AppThemeLight.theme,
-            darkTheme: AppThemeDark.theme,
+            theme: AppThemeLight().theme,
+            darkTheme: AppThemeDark().theme,
             builder: (context, child) {
               return MediaQuery(
                 data: MediaQuery.of(context).copyWith(textScaleFactor: 1),

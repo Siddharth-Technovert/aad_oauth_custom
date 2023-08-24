@@ -17,19 +17,28 @@ class LoginScreen extends ConsumerWidget {
     return SafeArea(
       child: Scaffold(
         resizeToAvoidBottomInset: false,
-        body: Container(
-          padding: const EdgeInsets.symmetric(horizontal: 32),
-          decoration: const BoxDecoration(
-              // gradient: UIColors.eventBgGradients.first,
-              ),
+        body: UIDimensions.padding(
+          padding: const EdgeInsets.symmetric(horizontal: 24),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              const Spacer(),
+            children: [
               const CustomText.headlineLarge(
-                "Boilerplate App",
+                "Lets Get Started",
               ),
-              const Spacer(),
+              UIDimensions.verticalSpace(12),
+              const CustomText.bodySmall(
+                "A Boilerplate App to let you get started for building the project",
+                textOverflow: null,
+                textAlign: TextAlign.center,
+                fontWeight: FontWeight.w600,
+              ),
+              UIDimensions.verticalSpaceLarge,
+              TextField(
+                style:
+                    context.titleMedium.copyWith(fontWeight: FontWeight.w500),
+                decoration: const InputDecoration(hintText: "Email"),
+              ),
+              UIDimensions.verticalSpaceMedium,
               PrimaryButton(
                 onPressed: () async => loginNotifier.logIn(
                   AccountType.guest,
@@ -37,35 +46,6 @@ class LoginScreen extends ConsumerWidget {
                 ),
                 text: "Guest Login",
               ),
-              const Spacer(),
-              RichText(
-                textAlign: TextAlign.center,
-                text: TextSpan(
-                  children: <TextSpan>[
-                    TextSpan(
-                      text: context.appLoc.policyAgree,
-                      style: Theme.of(context).textTheme.bodyLarge,
-                    ),
-                    TextSpan(
-                      text: context.appLoc.policyTerm,
-                      style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                            decoration: TextDecoration.underline,
-                          ),
-                    ),
-                    TextSpan(
-                      text: context.appLoc.policyAcknowledge,
-                      style: Theme.of(context).textTheme.bodyLarge,
-                    ),
-                    TextSpan(
-                      text: context.appLoc.privacyPolicy,
-                      style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                            decoration: TextDecoration.underline,
-                          ),
-                    )
-                  ],
-                ),
-              ),
-              UIDimensions.verticalSpaceMedium,
             ],
           ),
         ),

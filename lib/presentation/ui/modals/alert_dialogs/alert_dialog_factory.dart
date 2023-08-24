@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../../core/utils/assets_gen/assets.gen.dart';
+import '../../../../core/utils/extensions/context_extension.dart';
 import '../../../../core/utils/styles/dimensions/ui_dimensions.dart';
 import '../../widgets/custom_text.dart';
 
@@ -19,7 +20,7 @@ class AlertDialogFactory {
     showDialog(
       context: ctx1,
       barrierDismissible: false,
-      barrierColor: Colors.white.withOpacity(0.5),
+      barrierColor: ctx1.onBackground.withOpacity(0.5),
       builder: (BuildContext ctx) {
         context = ctx;
 

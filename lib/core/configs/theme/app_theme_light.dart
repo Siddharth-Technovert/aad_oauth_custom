@@ -1,20 +1,44 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import '../../utils/assets_gen/fonts.gen.dart';
+import '../../utils/styles/colors/ui_colors.dart';
 import '../../utils/styles/colors/ui_colors_light.dart';
 import '../../utils/styles/dimensions/ui_dimensions.dart';
+import '../../utils/styles/text_styles/ui_text_styles.dart';
 import '../../utils/styles/text_styles/ui_text_styles_light.dart';
 
-abstract class AppThemeLight {
-  static ThemeData get theme {
-    final colors = UIColorsLight();
-    final textStylesLight = UITextStylesLight();
+class AppThemeLight {
+  final UIColors colors = UIColorsLight();
+  final UITextStyles textStyles = UITextStylesLight();
 
+  ThemeData get theme {
     return ThemeData(
       useMaterial3: true,
       fontFamily: FontFamily.poppins,
-      colorScheme: ColorScheme(
+      colorScheme: _colorScheme,
+      //?Theme Extensions
+      extensions: [colors.customColors],
+      //?Typography
+      typography: Typography.material2021(
+        platform:
+            Platform.isAndroid ? TargetPlatform.android : TargetPlatform.iOS,
+        colorScheme: const ColorScheme.dark(),
+      ),
+      textTheme: _textTheme,
+
+      textSelectionTheme: TextSelectionThemeData(cursorColor: colors.primary),
+      //?Shapes Theme
+      iconTheme: _iconTheme,
+      appBarTheme: _appBarTheme,
+      navigationBarTheme: _navigationBarTheme,
+      inputDecorationTheme: _inputDecorationTheme,
+    );
+  }
+
+  ColorScheme get _colorScheme => ColorScheme(
         brightness: Brightness.light,
         primary: colors.primary,
         onPrimary: colors.onPrimary,
@@ -46,74 +70,52 @@ abstract class AppThemeLight {
         onInverseSurface: colors.onInverseSurface,
         inversePrimary: colors.inversePrimary,
         surfaceTint: colors.surfaceTint,
-      ),
-      //?Theme Extensions
-      extensions: [
-        colors.customColors,
-      ],
-      //?Shapes Theme
-      appBarTheme: const AppBarTheme(
-        // color: UIColors.light.background,
-        // iconTheme: IconThemeData(color: UIColors.light.icon),
-        systemOverlayStyle: SystemUiOverlayStyle(
-          statusBarBrightness: Brightness.light,
-          // statusBarColor: UIColors.light.background,
-          statusBarIconBrightness: Brightness.dark,
-        ),
-      ),
-      iconTheme: IconThemeData(
+      );
+
+  IconThemeData get _iconTheme => IconThemeData(
         size: UIDimensions.icon24,
-        // color: UIColors.dark.icon,
-      ),
-      navigationBarTheme: NavigationBarThemeData(
-        height: UIDimensions.height(80),
-      ),
-      // bottomNavigationBarTheme: const BottomNavigationBarThemeData(
-      //     // backgroundColor: UIColors.light.bottomNavBgColor,
-      //     // selectedItemColor: UIColors.light.bottomNavSelectedItem,
-      //     // unselectedItemColor: UIColors.light.bottomNavUnSelectedItem,
-      //     ),
-      // bottomSheetTheme: const BottomSheetThemeData(
-      //     // backgroundColor: UIColors.light.scaffoldBackground,
-      //     ),
-      // switchTheme: const SwitchThemeData(
-      //     // thumbColor: MaterialStateProperty.all<Color>(
-      //     //   UIColors.light.primary,
-      //     // ),
-      //     // trackColor: MaterialStateProperty.all<Color>(
-      //     //   UIColors.light.switchActiveTrackColor.withOpacity(0.5),
-      //     // ),
-      //     ),
-      //?Typography
-      typography:
-          Typography.material2021(colorScheme: const ColorScheme.dark()),
-      textTheme: TextTheme(
-        displayLarge: textStylesLight.displayLarge,
-        displayMedium: textStylesLight.displayMedium,
-        displaySmall: textStylesLight.displaySmall,
-        headlineLarge: textStylesLight.headlineLarge,
-        headlineMedium: textStylesLight.headlineMedium,
-        headlineSmall: textStylesLight.headlineSmall,
-        titleLarge: textStylesLight.titleLarge,
-        titleMedium: textStylesLight.titleMedium,
-        titleSmall: textStylesLight.titleSmall,
-        bodyLarge: textStylesLight.bodyLarge,
-        bodyMedium: textStylesLight.bodyMedium,
-        bodySmall: textStylesLight.bodySmall,
-        labelLarge: textStylesLight.labelLarge,
-        labelMedium: textStylesLight.labelMedium,
-        labelSmall: textStylesLight.labelSmall,
+        color: colors.onBackground,
+      );
+
+  TextTheme get _textTheme => TextTheme(
+        displayLarge: textStyles.displayLarge,
+        displayMedium: textStyles.displayMedium,
+        displaySmall: textStyles.displaySmall,
+        headlineLarge: textStyles.headlineLarge,
+        headlineMedium: textStyles.headlineMedium,
+        headlineSmall: textStyles.headlineSmall,
+        titleLarge: textStyles.titleLarge,
+        titleMedium: textStyles.titleMedium,
+        titleSmall: textStyles.titleSmall,
+        bodyLarge: textStyles.bodyLarge,
+        bodyMedium: textStyles.bodyMedium,
+        bodySmall: textStyles.bodySmall,
+        labelLarge: textStyles.labelLarge,
+        labelMedium: textStyles.labelMedium,
+        labelSmall: textStyles.labelSmall,
       ).apply(
         fontFamily: FontFamily.poppins,
-      ),
-      // textSelectionTheme: const TextSelectionThemeData(
-      //     // selectionColor: UIColors.light.textSelection,
-      //     ),
-      // textButtonTheme: const TextButtonThemeData(
-      //   style: ButtonStyle(
-      //       // backgroundColor: UIColors.light.button,
-      //       ),
-      // ),
-    );
-  }
+      );
+
+  AppBarTheme get _appBarTheme => AppBarTheme(
+        iconTheme: _iconTheme,
+        systemOverlayStyle: SystemUiOverlayStyle.dark.copyWith(
+          statusBarColor: colors.onBackground,
+        ),
+      );
+
+  NavigationBarThemeData get _navigationBarTheme => NavigationBarThemeData(
+        height: UIDimensions.height(80),
+      );
+
+  InputDecorationTheme get _inputDecorationTheme => InputDecorationTheme(
+        enabledBorder: UIDimensions.inputDecorationBorder(colors.background),
+        focusedBorder: UIDimensions.inputDecorationBorder(colors.primary),
+        disabledBorder: UIDimensions.inputDecorationBorder(colors.background),
+        hintStyle: textStyles.bodyMedium,
+        contentPadding: UIDimensions.allPaddingGeometry(16),
+        border: const UnderlineInputBorder(),
+        filled: true,
+        isDense: true,
+      );
 }
