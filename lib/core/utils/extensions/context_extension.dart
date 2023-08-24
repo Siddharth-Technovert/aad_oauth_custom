@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
+import '../l10n/app_loc.dart';
 import '../styles/colors/ui_custom_colors.dart';
 
 extension ContextExtensions on BuildContext {
+  AppLocalizations get appLoc => AppLoc.of(this);
+
   void removeFocus() {
     final FocusScopeNode currentFocus = FocusScope.of(this);
     if (!currentFocus.hasPrimaryFocus) {
@@ -16,6 +20,9 @@ extension ContextExtensions on BuildContext {
 
   double screenHeightPercentage(int percentage) =>
       (MediaQuery.of(this).size.height / 100) * percentage;
+
+  bool get isDarkMode =>
+      Theme.of(this).colorScheme.brightness == Brightness.dark;
 
   ThemeData get theme => Theme.of(this);
   TextTheme get textTheme => theme.textTheme;
@@ -39,6 +46,7 @@ extension ContextExtensions on BuildContext {
   TextStyle get labelMedium => textTheme.labelMedium!;
   TextStyle get labelSmall => textTheme.labelSmall!;
 
-  Color get primaryColor => colorScheme.primary;
-  Color get secondaryColor => colorScheme.secondary;
+  Color get primary => colorScheme.primary;
+  Color get secondary => colorScheme.secondary;
+  Color get tertiary => colorScheme.tertiary;
 }

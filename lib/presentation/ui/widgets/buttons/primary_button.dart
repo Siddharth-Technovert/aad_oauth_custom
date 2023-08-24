@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
 
 import '../../../../core/utils/styles/dimensions/ui_dimensions.dart';
 import '../custom_text.dart';
 
-class PrimaryButton extends HookWidget {
+class PrimaryButton extends StatelessWidget {
   final VoidCallback? _onPressed;
   final String text;
   final double horizontalPadding;
@@ -76,7 +75,6 @@ class PrimaryButton extends HookWidget {
                 padding: UIDimensions.symmetricPaddingGeometry(horizontal: 6),
                 child: child ??
                     CustomText.headlineMedium(
-                      context,
                       text,
                     ),
               ),

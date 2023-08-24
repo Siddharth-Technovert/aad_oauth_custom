@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../../core/utils/constants/app_constants.dart';
 import '../../providers/core/app_state_provider.dart';
-import 'home/home_screen.dart';
+import 'landing/landing_screen.dart';
 import 'login/login_screen.dart';
 
-class AppStartScreen extends HookConsumerWidget {
+class AppStartScreen extends ConsumerWidget {
   const AppStartScreen({
     Key? key,
   }) : super(key: key);
@@ -17,10 +16,7 @@ class AppStartScreen extends HookConsumerWidget {
           initial: () => const SizedBox.shrink(),
           onboarding: () => const SizedBox.shrink(),
           unAuthenticated: () => const LoginScreen(),
-          authenticated: (user) => HomeScreen(
-            key: AppConstants.homeScreenKey,
-            user: user,
-          ),
+          authenticated: (user) => const LandingScreen(),
         );
   }
 }

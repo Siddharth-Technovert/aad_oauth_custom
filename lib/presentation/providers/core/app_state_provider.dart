@@ -22,8 +22,8 @@ class AppStateNotifier extends StateNotifier<AppState> {
   late final ReadUser _readUserUseCase = _ref.watch(readUserUseCaseProvider);
   // late final ReadJwt _readJwtUseCase = _read(readJwtTokenUseCaseProvider);
 
-  late final ReadOnboarding _readOnboardingUseCase =
-      _ref.watch(readOnboardingUseCaseProvider);
+  // late final ReadOnboarding _readOnboardingUseCase =
+  //     _ref.watch(readOnboardingUseCaseProvider);
   late final WriteOnboarding _writeOnboardingUseCase =
       _ref.watch(writeOnboardingUseCaseProvider);
 
@@ -32,28 +32,29 @@ class AppStateNotifier extends StateNotifier<AppState> {
   }
 
   Future<void> _init() async {
-    final isOnboardingDone = await _readOnboardingUseCase();
+    //TODO: Uncomment onboarding and jwt code if require in the app
+    // final isOnboardingDone = await _readOnboardingUseCase();
 
-    if (isOnboardingDone) {
-      // final jwt = await _readJwtUseCase();
-      // if (jwt != null) {
-      final dataState = await _readUserUseCase();
-      dataState.when(
-        success: (user) {
-          //? is state authenticated and want to do some background task
-          // await _read(backgroundServiceProvider).registerPeriodicTask(
-          //   "periodicTask",
-          //   BackgroundService.periodicTask,
-          // );
-          state = AppState.authenticated(user);
-        },
-        error: (ex) {
-          state = const AppState.unAuthenticated();
-        },
-      );
-    } else {
-      state = const AppState.unAuthenticated();
-    }
+    // if (isOnboardingDone) {
+    // final jwt = await _readJwtUseCase();
+    // if (jwt != null) {
+    final dataState = await _readUserUseCase();
+    dataState.when(
+      success: (user) {
+        //? is state authenticated and want to do some background task
+        // await _read(backgroundServiceProvider).registerPeriodicTask(
+        //   "periodicTask",
+        //   BackgroundService.periodicTask,
+        // );
+        state = AppState.authenticated(user);
+      },
+      error: (ex) {
+        state = const AppState.unAuthenticated();
+      },
+    );
+    // } else {
+    //   state = const AppState.unAuthenticated();
+    // }
     // } else {
     //   state = const AppState.onboarding();
     // }

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import '../../utils/styles/colors/ui_colors_light.dart';
+import '../../utils/styles/dimensions/ui_dimensions.dart';
 import '../../utils/styles/text_styles/ui_text_styles.dart';
 import '../../utils/styles/text_styles/ui_text_styles_light.dart';
 
@@ -60,9 +61,13 @@ abstract class AppThemeLight {
           statusBarIconBrightness: Brightness.dark,
         ),
       ),
-      // iconTheme: const IconThemeData(
-      //     // color: UIColors.light.icon,
-      //     ),
+      iconTheme: IconThemeData(
+        size: UIDimensions.icon24,
+        // color: UIColors.dark.icon,
+      ),
+      navigationBarTheme: NavigationBarThemeData(
+        height: UIDimensions.height(80),
+      ),
       // bottomNavigationBarTheme: const BottomNavigationBarThemeData(
       //     // backgroundColor: UIColors.light.bottomNavBgColor,
       //     // selectedItemColor: UIColors.light.bottomNavSelectedItem,

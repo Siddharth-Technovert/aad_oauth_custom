@@ -24,7 +24,8 @@ abstract class SnackbarFactory {
           ),
           duration: const Duration(seconds: 3),
           shape: const RoundedRectangleBorder(),
-          content: const NoInternetText(),
+          content:
+              const CustomText.bodyMedium('Internet Connection Not Available'),
         ),
       );
   }
@@ -92,15 +93,4 @@ abstract class SnackbarFactory {
         message,
         title: title,
       );
-}
-
-class NoInternetText extends StatelessWidget {
-  const NoInternetText({
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return CustomText.bodyMedium(context, 'Internet Connection Not Available');
-  }
 }

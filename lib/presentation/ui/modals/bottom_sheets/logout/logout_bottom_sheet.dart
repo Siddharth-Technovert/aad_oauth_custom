@@ -1,36 +1,33 @@
 import 'package:flutter/material.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../../../core/utils/extensions/context_extension.dart';
 import '../../../../../core/utils/styles/dimensions/ui_dimensions.dart';
 import '../../../../providers/core/router_provider.dart';
 import '../../../../providers/home/home_provider.dart';
-import '../../../hooks/app_loc_hook.dart';
 import '../../../widgets/buttons/primary_button.dart';
 import '../../../widgets/buttons/secondary_button.dart';
 import '../../../widgets/custom_text.dart';
 
-class LogoutBottomSheet extends HookConsumerWidget {
+class LogoutBottomSheet extends ConsumerWidget {
   const LogoutBottomSheet({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final appLoc = useAppLoc();
     return UIDimensions.padding(
       padding: const EdgeInsets.all(16),
       child: Column(
         children: [
           Center(
             child: CustomText.headlineLarge(
-              context,
-              appLoc.logout,
+              context.appLoc.logout,
             ),
           ),
           UIDimensions.verticalSpaceMedium,
           Center(
             child: SizedBox(
               child: CustomText.headlineSmall(
-                context,
-                appLoc.logoutConfirm,
+                context.appLoc.logoutConfirm,
                 textAlign: TextAlign.center,
                 textOverflow: null,
               ),
@@ -41,12 +38,12 @@ class LogoutBottomSheet extends HookConsumerWidget {
             onPressed: () async {
               await ref.read(homeProvider.notifier).logout();
             },
-            text: appLoc.logout,
+            text: context.appLoc.logout,
           ),
           UIDimensions.verticalSpaceMedium,
           SecondaryButton(
             onPressed: () => ref.read(appRouterProvider).pop(),
-            text: appLoc.cancel,
+            text: context.appLoc.cancel,
           ),
           UIDimensions.verticalSpaceMedium,
         ],

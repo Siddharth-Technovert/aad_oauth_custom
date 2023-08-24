@@ -17,8 +17,6 @@ dependencies:
 
     #State management
     flutter_riverpod: ^2.3.7
-    hooks_riverpod: ^2.3.8
-    flutter_hooks: ^0.20.0
 
     #Responsiveness
     flutter_screenutil: ^5.9.0

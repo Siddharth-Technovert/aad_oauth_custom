@@ -57,7 +57,7 @@ class SecondaryButton extends StatelessWidget {
       child: OutlinedButton(
         onPressed: _onPressed,
         style: OutlinedButton.styleFrom(
-          side: BorderSide(color: borderColor ?? context.primaryColor),
+          side: BorderSide(color: borderColor ?? context.primary),
           // shape: smoothCornerShape(cornerRadius: cornerRadius),
           padding: EdgeInsets.symmetric(
             vertical: verticalPadding,
@@ -75,7 +75,6 @@ class SecondaryButton extends StatelessWidget {
                 padding: UIDimensions.symmetricPaddingGeometry(horizontal: 6),
                 child: child ??
                     CustomText.headlineMedium(
-                      context,
                       text,
                     ),
               ),

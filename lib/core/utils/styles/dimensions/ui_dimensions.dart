@@ -36,6 +36,17 @@ class UIDimensions {
         child: child,
       );
 
+  static Radius radiusCircular(
+    double radius,
+  ) =>
+      Radius.circular(radius).w;
+
+  static Radius radiusElliptical(
+    double x,
+    double y,
+  ) =>
+      Radius.elliptical(x, y).w;
+
   static SizedBox sizedBox({
     double? height,
     double? width,

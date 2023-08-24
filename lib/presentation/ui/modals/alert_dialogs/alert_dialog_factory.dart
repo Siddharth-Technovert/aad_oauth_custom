@@ -53,7 +53,7 @@ class AlertDialogFactory {
     showDialog(
       context: context,
       builder: (BuildContext context) => AlertDialog(
-        title: CustomText.headlineMedium(context, title),
+        title: CustomText.headlineMedium(title),
       ),
     );
   }
@@ -71,13 +71,11 @@ class AlertDialogFactory {
     return showDialog<bool>(
       context: ctx,
       builder: (context) => AlertDialog(
-        title: CustomText.headlineMedium(context, title),
-        content: subTitle == null
-            ? null
-            : CustomText.headlineMedium(context, subTitle),
+        title: CustomText.headlineMedium(title),
+        content: subTitle == null ? null : CustomText.headlineMedium(subTitle),
         actions: [
-          CustomText.headlineMedium(context, negativeButtonText ?? "Cancel"),
-          CustomText.headlineMedium(context, positiveButtonText ?? "Clear"),
+          CustomText.headlineMedium(negativeButtonText ?? "Cancel"),
+          CustomText.headlineMedium(positiveButtonText ?? "Clear"),
         ],
       ),
     );

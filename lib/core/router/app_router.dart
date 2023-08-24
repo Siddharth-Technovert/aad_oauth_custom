@@ -51,7 +51,6 @@ class AppRouter {
           builder: (context) => Scaffold(
             body: Center(
               child: CustomText.displaySmall(
-                context,
                 "Not found ${settings.name}",
               ),
             ),
