@@ -10,7 +10,7 @@ class UserRemoteDataSource {
   UserRemoteDataSource(this._apiManager);
 
   Future<ApiResponse<UserApiDto>> createUser(AccountType accountType) async {
-    return ApiResponse.success(
+    return ApiResponseSuccess(
       UserApiDto(
         id: "0",
         name: "Jon Snow",

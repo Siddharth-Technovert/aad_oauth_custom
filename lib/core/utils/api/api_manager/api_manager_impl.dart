@@ -269,13 +269,12 @@ class ApiManagerImpl extends ApiManager {
         );
         final data = response.data as Map<String, dynamic>?;
         if (data == null) {
-          return const ApiResponse.error(
+          return const ApiResponseError(
             AppException.unknownError("Api Response is Empty"),
           );
         }
-        return ApiResponse<Map<String, dynamic>>.success(
+        return ApiResponseSuccess(
           data,
-          headerResponse: response.headers.map,
         );
       },
     );
@@ -301,13 +300,12 @@ class ApiManagerImpl extends ApiManager {
       );
       final data = response.data as String?;
       if (data == null) {
-        return const ApiResponse.error(
+        return const ApiResponseError(
           AppException.unknownError("Api Response is Empty"),
         );
       }
-      return ApiResponse<String>.success(
+      return ApiResponseSuccess(
         data,
-        headerResponse: response.headers.map,
       );
     });
   }
@@ -328,7 +326,7 @@ class ApiManagerImpl extends ApiManager {
       if (await _ref.read(hasConnectivityProvider)) {
         return await executeMethod();
       } else {
-        return const ApiResponse.error(AppException.networkError());
+        return const ApiResponseError(AppException.networkError());
       }
     } on DioException catch (ex, stackTrace) {
       // _loggerService.errorLog(ex, s);
@@ -342,7 +340,7 @@ class ApiManagerImpl extends ApiManager {
       }
 
       try {
-        return ApiResponse.error(
+        return ApiResponseError(
           AppException.apiError(
             ex.response == null || ex.response!.data == null
                 ? null
@@ -353,7 +351,7 @@ class ApiManagerImpl extends ApiManager {
           ),
         );
       } catch (_, __) {
-        return ApiResponse.error(
+        return ApiResponseError(
           AppException.apiError(
             ApiErrorResponse(
               reason: ex.message,
@@ -368,7 +366,7 @@ class ApiManagerImpl extends ApiManager {
       }
     } catch (ex, _) {
       // _loggerService.errorLog(ex, s);
-      return ApiResponse.error(
+      return ApiResponseError(
         AppException.apiError(null, ApiException.defaultError(ex.toString())),
       );
     }
@@ -384,20 +382,19 @@ class ApiManagerImpl extends ApiManager {
               StackTrace.current,
             );
 
-        return const ApiResponse.error(
+        return const ApiResponseError(
           AppException.unknownError("Api Response is Empty"),
         );
       }
-      return ApiResponse<T>.success(
+      return ApiResponseSuccess(
         DtoSerializers.serializers[T]!(data) as T,
-        headerResponse: response.headers.map,
       );
     } else {
       await _ref.read(loggerServiceProvider).serializationErrorLog<T>(
             "${response.requestOptions.path}/${response.requestOptions.queryParameters}",
           );
 
-      return const ApiResponse.error(
+      return const ApiResponseError(
         AppException.serializationError(),
       );
     }
@@ -409,9 +406,9 @@ class ApiManagerImpl extends ApiManager {
     if (DtoSerializers.serializers[T] != null) {
       final listData = response.data as List?;
       if (listData == null) {
-        return const ApiResponse.success([]);
+        return const ApiResponseSuccess([]);
       }
-      return ApiResponse<List<T>>.success(
+      return ApiResponseSuccess(
         listData
             .map(
               (e) => DtoSerializers.serializers[T]!(
@@ -419,14 +416,13 @@ class ApiManagerImpl extends ApiManager {
               ) as T,
             )
             .toList(),
-        headerResponse: response.headers.map,
       );
     } else {
       await _ref.read(loggerServiceProvider).serializationErrorLog<T>(
             "${response.requestOptions.path}/${response.requestOptions.queryParameters}",
           );
 
-      return const ApiResponse.error(
+      return const ApiResponseError(
         AppException.serializationError(),
       );
     }

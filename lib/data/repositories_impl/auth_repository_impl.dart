@@ -17,7 +17,7 @@ class AuthRepositoryImpl implements AuthRepository {
       default:
         break;
     }
-    return const DataState.error(AppException.unknownError("Some error"));
+    return const DataStateError(AppException.unknownError("Some error"));
   }
 
   @override

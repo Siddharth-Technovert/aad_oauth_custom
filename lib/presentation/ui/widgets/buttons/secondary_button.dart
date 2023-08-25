@@ -51,14 +51,18 @@ class SecondaryButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return UIDimensions.sizedBox(
-      height: (height ?? UIDimensions.buttonH56),
-      width: horizontalPadding == 18 ? double.infinity : null,
+      height: height == null
+          ? UIDimensions.buttonH56
+          : UIDimensions.height(height!),
+      width: UIDimensions.width(horizontalPadding) == UIDimensions.buttonW18
+          ? double.infinity
+          : null,
       child: OutlinedButton(
         onPressed: _onPressed,
         style: OutlinedButton.styleFrom(
           side: borderColor == null ? null : BorderSide(color: borderColor!),
           // shape: smoothCornerShape(cornerRadius: cornerRadius),
-          padding: EdgeInsets.symmetric(
+          padding: UIDimensions.symmetricPaddingGeometry(
             vertical: verticalPadding,
             horizontal: horizontalPadding,
           ),

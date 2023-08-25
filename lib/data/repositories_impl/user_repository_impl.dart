@@ -1,8 +1,11 @@
+import '../../core/utils/api/response/api_response.dart';
+import '../../core/utils/errors/app_exception.dart';
 import '../../domain/enums/account_type.dart';
 import '../../domain/models/user/user.dart';
 import '../../domain/repositories/user_repository.dart';
 import '../data_source/local/user_local_data_source.dart';
 import '../data_source/remote/user_remote_data_source.dart';
+import '../models/api/user/user_api_dto.dart';
 import '../models/result/data_state.dart';
 
 class UserRepositoryImpl implements UserRepository {
@@ -19,17 +22,19 @@ class UserRepositoryImpl implements UserRepository {
     String token,
     AccountType accountType,
   ) async {
-    return (await _userRemoteDataSource.createUser(accountType)).when(
-      success: (data, _) async {
+    final userResponse = await _userRemoteDataSource.createUser(accountType);
+    switch (userResponse) {
+      case ApiResponseSuccess<UserApiDto>(data: UserApiDto data):
         final tokenStatusState = await _userLocalDataSource.storeToken(token);
-        return tokenStatusState.when(
-            success: (_) async {
-              return _userLocalDataSource.storeUser(data.toCacheDto());
-            },
-            error: (ex) => DataState.error(ex));
-      },
-      error: (ex) => DataState.error(ex),
-    );
+        switch (tokenStatusState) {
+          case DataStateSuccess<bool>():
+            return _userLocalDataSource.storeUser(data.toCacheDto());
+          case DataStateError<bool>(ex: var ex):
+            return DataStateError(ex);
+        }
+      case ApiResponseError<UserApiDto>(ex: AppException ex):
+        return DataStateError(ex);
+    }
   }
 
   @override

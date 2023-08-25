@@ -1,6 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../core/app_bootstrapper.dart';
+import '../../../data/models/result/data_state.dart';
 import '../../../domain/models/user/user.dart';
 import '../../../domain/states/core/app_state.dart';
 import '../../../domain/usecases/storage/onboarding/onboarding_usecases.dart';
@@ -39,19 +40,18 @@ class AppStateNotifier extends StateNotifier<AppState> {
     // final jwt = await _readJwtUseCase();
     // if (jwt != null) {
     final dataState = await _readUserUseCase();
-    dataState.when(
-      success: (user) {
+
+    switch (dataState) {
+      case DataStateSuccess<User>(data: var user):
         //? is state authenticated and want to do some background task
         // await _read(backgroundServiceProvider).registerPeriodicTask(
         //   "periodicTask",
         //   BackgroundService.periodicTask,
         // );
         state = AppStateAuthenticated(user: user);
-      },
-      error: (ex) {
+      case DataStateError<User>():
         state = const AppStateUnAuthenticated();
-      },
-    );
+    }
     // } else {
     //   state = const AppState.unAuthenticated();
     // }

@@ -22,9 +22,9 @@ class UserLocalDataSource {
       value: token,
     );
     if (isTokenStored) {
-      return const DataState.success(true);
+      return const DataStateSuccess(true);
     } else {
-      return const DataState.error(
+      return const DataStateError(
         AppException.cacheError(CacheException.insertError()),
       );
     }
@@ -36,9 +36,9 @@ class UserLocalDataSource {
       userCacheDto,
     );
     if (userCacheDtoResponse) {
-      return DataState.success(userCacheDto.toModel());
+      return DataStateSuccess(userCacheDto.toModel());
     } else {
-      return const DataState.error(
+      return const DataStateError(
         AppException.cacheError(CacheException.insertError()),
       );
     }
@@ -48,10 +48,10 @@ class UserLocalDataSource {
     final usersCacheDto =
         await _cacheManager.getAll<UserCacheDto>(UserCacheDto.boxKey);
     return usersCacheDto == null || usersCacheDto.isEmpty
-        ? const DataState.error(
+        ? const DataStateError(
             AppException.cacheError(CacheException.fetchError()),
           )
-        : DataState.success(
+        : DataStateSuccess(
             usersCacheDto.first.toModel(),
           );
   }

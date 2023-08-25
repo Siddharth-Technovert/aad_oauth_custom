@@ -28,6 +28,7 @@ class AppThemeDark {
         colorScheme: const ColorScheme.light(),
       ),
       textTheme: _textTheme,
+      primaryTextTheme: _primaryTextTheme,
       textSelectionTheme: TextSelectionThemeData(cursorColor: colors.primary),
       //?Shapes Theme
       iconTheme: _iconTheme,
@@ -96,6 +97,27 @@ class AppThemeDark {
         fontFamily: FontFamily.poppins,
       );
 
+  TextTheme get _primaryTextTheme => TextTheme(
+        displayLarge: textStyles.displayLarge.copyWith(color: colors.primary),
+        displayMedium: textStyles.displayMedium.copyWith(color: colors.primary),
+        displaySmall: textStyles.displaySmall.copyWith(color: colors.primary),
+        headlineLarge: textStyles.headlineLarge.copyWith(color: colors.primary),
+        headlineMedium:
+            textStyles.headlineMedium.copyWith(color: colors.primary),
+        headlineSmall: textStyles.headlineSmall.copyWith(color: colors.primary),
+        titleLarge: textStyles.titleLarge.copyWith(color: colors.primary),
+        titleMedium: textStyles.titleMedium.copyWith(color: colors.primary),
+        titleSmall: textStyles.titleSmall.copyWith(color: colors.primary),
+        bodyLarge: textStyles.bodyLarge.copyWith(color: colors.primary),
+        bodyMedium: textStyles.bodyMedium.copyWith(color: colors.primary),
+        bodySmall: textStyles.bodySmall.copyWith(color: colors.primary),
+        labelLarge: textStyles.labelLarge.copyWith(color: colors.primary),
+        labelMedium: textStyles.labelMedium.copyWith(color: colors.primary),
+        labelSmall: textStyles.labelSmall.copyWith(color: colors.primary),
+      ).apply(
+        fontFamily: FontFamily.poppins,
+      );
+
   AppBarTheme get _appBarTheme => AppBarTheme(
         iconTheme: _iconTheme,
         systemOverlayStyle: SystemUiOverlayStyle.light.copyWith(
@@ -108,13 +130,15 @@ class AppThemeDark {
       );
 
   InputDecorationTheme get _inputDecorationTheme => InputDecorationTheme(
+        border: UIDimensions.inputDecorationBorder(colors.background),
         enabledBorder: UIDimensions.inputDecorationBorder(colors.background),
         focusedBorder: UIDimensions.inputDecorationBorder(colors.primary),
         disabledBorder: UIDimensions.inputDecorationBorder(colors.background),
-        hintStyle: textStyles.bodyMedium,
+        hintStyle: textStyles.bodyMedium.copyWith(color: colors.onBackground),
         contentPadding: UIDimensions.allPaddingGeometry(16),
-        border: const UnderlineInputBorder(),
         filled: true,
         isDense: true,
+        suffixIconColor: colors.onBackground,
+        prefixIconColor: colors.onBackground,
       );
 }

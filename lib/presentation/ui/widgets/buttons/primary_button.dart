@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../../../core/utils/extensions/context_extension.dart';
 import '../../../../core/utils/styles/dimensions/ui_dimensions.dart';
 import '../custom_text.dart';
 
@@ -51,20 +52,23 @@ class PrimaryButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return UIDimensions.sizedBox(
-      height: (height ?? UIDimensions.buttonH56),
-      width:
-          horizontalPadding == UIDimensions.buttonW18 ? double.infinity : null,
-      // decoration: roundCornerSolidBg(
-      //   bgColor: context.primaryColor,
-      //   isShadowVisible: true,
-      // ),
-      child: ElevatedButton(
+      height: height == null
+          ? UIDimensions.buttonH56
+          : UIDimensions.height(height!),
+      width: UIDimensions.width(horizontalPadding) == UIDimensions.buttonW18
+          ? double.infinity
+          : null,
+      child: FilledButton(
         onPressed: _onPressed,
-        style: ElevatedButton.styleFrom(
+        style: FilledButton.styleFrom(
+          side: borderColor == null ? null : BorderSide(color: borderColor!),
+          // shape: smoothCornerShape(cornerRadius: cornerRadius),
           padding: UIDimensions.symmetricPaddingGeometry(
             vertical: verticalPadding,
             horizontal: horizontalPadding,
           ),
+          foregroundColor: foregroundColor,
+          backgroundColor: backgroundColor,
         ),
         child: Center(
           child: Row(
@@ -76,6 +80,7 @@ class PrimaryButton extends StatelessWidget {
                 child: child ??
                     CustomText.titleMedium(
                       text,
+                      color: context.colorScheme.onPrimary,
                     ),
               ),
               if (suffix != null) suffix!,

@@ -18,7 +18,7 @@ void main() {
     'should login user with guest account',
     () async {
       const accountType = AccountType.guest; //can be any account type
-      const DataState<User> dataState = DataState.success(
+      const DataState<User> dataState = DataStateSuccess(
         User(
           name: "any_name",
           accountType: accountType,
@@ -41,12 +41,12 @@ void main() {
     'should return login.error on login failure',
     () async {
       const accountType = AccountType.guest; //can be any account type
-      const dataState = DataState.error(
+      const DataState<User> dataState = DataStateError(
         AppException.unknownError('Login failed'),
       );
       // arrange
       when(mockAuthRepository.login(AccountType.guest)).thenAnswer(
-        (_) async => dataState as DataState<User>,
+        (_) async => dataState,
       );
       // act
       final result = await mockAuthRepository.login(accountType);

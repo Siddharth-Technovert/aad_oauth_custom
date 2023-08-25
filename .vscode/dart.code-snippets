@@ -3,7 +3,7 @@
         "prefix": "apiDto",
         "body": [
             "import 'package:freezed_annotation/freezed_annotation.dart';",
-            "import '../../../mappers/api_dto.dart';",
+            "import '../../../../core/utils/mappers/api_dto.dart';",
             "",
             "part '$TM_FILENAME_BASE.freezed.dart';",
             "part '$TM_FILENAME_BASE.g.dart';",
@@ -31,7 +31,7 @@
         "prefix": "apiDtoImplementingCache",
         "body": [
             "import 'package:freezed_annotation/freezed_annotation.dart';",
-            "import '../../../mappers/api_dto.dart';",
+            "import '../../../../core/utils/mappers/api_dto.dart';",
             "",
             "part '$TM_FILENAME_BASE.freezed.dart';",
             "part '$TM_FILENAME_BASE.g.dart';",
@@ -106,7 +106,7 @@
         "prefix": "uiModel",
         "body": [
             "import 'package:freezed_annotation/freezed_annotation.dart';",
-            "import '../../../data/mappers/ui_model.dart';",
+            "import '../../../core/utils/mappers/ui_model.dart';",
             "",
             "part '$TM_FILENAME_BASE.freezed.dart';",
             "",
@@ -131,7 +131,7 @@
         "prefix": "uiModelImplementingCache",
         "body": [
             "import 'package:freezed_annotation/freezed_annotation.dart';",
-            "import '../../../data/mappers/ui_model.dart';",
+            "import '../../../core/utils/mappers/ui_model.dart';",
             "",
             "part '$TM_FILENAME_BASE.freezed.dart';",
             "",
