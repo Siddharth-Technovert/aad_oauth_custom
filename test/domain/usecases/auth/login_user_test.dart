@@ -42,7 +42,7 @@ void main() {
     () async {
       const accountType = AccountType.guest; //can be any account type
       const DataState<User> dataState = DataStateError(
-        AppException.unknownError('Login failed'),
+        AppExceptionUnknownError('Login failed'),
       );
       // arrange
       when(mockAuthRepository.login(AccountType.guest)).thenAnswer(

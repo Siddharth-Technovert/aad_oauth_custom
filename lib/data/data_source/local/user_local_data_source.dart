@@ -25,7 +25,7 @@ class UserLocalDataSource {
       return const DataStateSuccess(true);
     } else {
       return const DataStateError(
-        AppException.cacheError(CacheException.insertError()),
+        AppExceptionCacheError(CacheExceptionInsertError()),
       );
     }
   }
@@ -39,7 +39,7 @@ class UserLocalDataSource {
       return DataStateSuccess(userCacheDto.toModel());
     } else {
       return const DataStateError(
-        AppException.cacheError(CacheException.insertError()),
+        AppExceptionCacheError(CacheExceptionInsertError()),
       );
     }
   }
@@ -49,7 +49,7 @@ class UserLocalDataSource {
         await _cacheManager.getAll<UserCacheDto>(UserCacheDto.boxKey);
     return usersCacheDto == null || usersCacheDto.isEmpty
         ? const DataStateError(
-            AppException.cacheError(CacheException.fetchError()),
+            AppExceptionCacheError(CacheExceptionFetchError()),
           )
         : DataStateSuccess(
             usersCacheDto.first.toModel(),

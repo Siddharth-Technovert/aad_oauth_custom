@@ -270,7 +270,7 @@ class ApiManagerImpl extends ApiManager {
         final data = response.data as Map<String, dynamic>?;
         if (data == null) {
           return const ApiResponseError(
-            AppException.unknownError("Api Response is Empty"),
+            AppExceptionUnknownError("Api Response is Empty"),
           );
         }
         return ApiResponseSuccess(
@@ -301,7 +301,7 @@ class ApiManagerImpl extends ApiManager {
       final data = response.data as String?;
       if (data == null) {
         return const ApiResponseError(
-          AppException.unknownError("Api Response is Empty"),
+          AppExceptionUnknownError("Api Response is Empty"),
         );
       }
       return ApiResponseSuccess(
@@ -326,7 +326,7 @@ class ApiManagerImpl extends ApiManager {
       if (await _ref.read(hasConnectivityProvider)) {
         return await executeMethod();
       } else {
-        return const ApiResponseError(AppException.networkError());
+        return const ApiResponseError(AppExceptionNetworkError());
       }
     } on DioException catch (ex, stackTrace) {
       // _loggerService.errorLog(ex, s);
@@ -341,18 +341,18 @@ class ApiManagerImpl extends ApiManager {
 
       try {
         return ApiResponseError(
-          AppException.apiError(
+          AppExceptionApiError(
             ex.response == null || ex.response!.data == null
                 ? null
                 : ApiErrorResponse.fromJson(
                     ex.response!.data! as Map<String, dynamic>,
                   ),
-            ApiException.getDioException(ex),
+            ex.dioExceptionToApiException,
           ),
         );
       } catch (_, __) {
         return ApiResponseError(
-          AppException.apiError(
+          AppExceptionApiError(
             ApiErrorResponse(
               reason: ex.message,
               code: ex.response?.data.toString(),
@@ -360,14 +360,14 @@ class ApiManagerImpl extends ApiManager {
               message: null,
               data: null,
             ),
-            ApiException.getDioException(ex),
+            ex.dioExceptionToApiException,
           ),
         );
       }
     } catch (ex, _) {
       // _loggerService.errorLog(ex, s);
       return ApiResponseError(
-        AppException.apiError(null, ApiException.defaultError(ex.toString())),
+        AppExceptionApiError(null, ApiExceptionDefaultError(ex.toString())),
       );
     }
   }
@@ -383,7 +383,7 @@ class ApiManagerImpl extends ApiManager {
             );
 
         return const ApiResponseError(
-          AppException.unknownError("Api Response is Empty"),
+          AppExceptionUnknownError("Api Response is Empty"),
         );
       }
       return ApiResponseSuccess(
@@ -395,7 +395,7 @@ class ApiManagerImpl extends ApiManager {
           );
 
       return const ApiResponseError(
-        AppException.serializationError(),
+        AppExceptionSerializationError(),
       );
     }
   }
@@ -423,7 +423,7 @@ class ApiManagerImpl extends ApiManager {
           );
 
       return const ApiResponseError(
-        AppException.serializationError(),
+        AppExceptionSerializationError(),
       );
     }
   }
