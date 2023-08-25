@@ -13,9 +13,9 @@ class ReadTheme extends NoParamsUseCase<ThemeState> {
       key: AppConstants.themeKey,
     );
     return themeString == 'light'
-        ? const ThemeState.light()
+        ? const ThemeStateLight()
         : themeString == 'dark'
-            ? const ThemeState.dark()
-            : const ThemeState.system();
+            ? const ThemeStateDark()
+            : const ThemeStateSystem();
   }
 }

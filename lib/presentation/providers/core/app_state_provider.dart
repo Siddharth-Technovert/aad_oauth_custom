@@ -2,7 +2,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../core/app_bootstrapper.dart';
 import '../../../domain/models/user/user.dart';
-import '../../../domain/states/core/app/app_state.dart';
+import '../../../domain/states/core/app_state.dart';
 import '../../../domain/usecases/storage/onboarding/onboarding_usecases.dart';
 import '../../../domain/usecases/user/user_usecases.dart';
 
@@ -27,7 +27,7 @@ class AppStateNotifier extends StateNotifier<AppState> {
   late final WriteOnboarding _writeOnboardingUseCase =
       _ref.watch(writeOnboardingUseCaseProvider);
 
-  AppStateNotifier(this._ref) : super(const AppState.initial()) {
+  AppStateNotifier(this._ref) : super(const AppStateInitial()) {
     _init();
   }
 
@@ -46,10 +46,10 @@ class AppStateNotifier extends StateNotifier<AppState> {
         //   "periodicTask",
         //   BackgroundService.periodicTask,
         // );
-        state = AppState.authenticated(user);
+        state = AppStateAuthenticated(user: user);
       },
       error: (ex) {
-        state = const AppState.unAuthenticated();
+        state = const AppStateUnAuthenticated();
       },
     );
     // } else {
@@ -64,14 +64,14 @@ class AppStateNotifier extends StateNotifier<AppState> {
 
   Future<void> completeOnboarding() async {
     await _writeOnboardingUseCase(true);
-    state = const AppState.unAuthenticated();
+    state = const AppStateUnAuthenticated();
   }
 
   Future<void> authenticateState(User user) async {
-    state = AppState.authenticated(user);
+    state = AppStateAuthenticated(user: user);
   }
 
   Future<void> unAuthenticateState() async {
-    state = const AppState.unAuthenticated();
+    state = const AppStateUnAuthenticated();
   }
 }

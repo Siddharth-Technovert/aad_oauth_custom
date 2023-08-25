@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../data/data_service_providers.dart';
 import '../../../domain/enums/account_type.dart';
-import '../../../domain/states/signup/signup_state.dart';
+import '../../../domain/states/signup_state.dart';
 
 final signUpProvider =
     StateNotifierProvider<SignUpNotifier, SignupState>((ref) {
@@ -18,7 +18,7 @@ class SignUpNotifier extends StateNotifier<SignupState> {
   // late final SignupUser _signupUserUseCase =
   //     _ref.watch(signupUserUseCaseProvider);
 
-  SignUpNotifier(this._ref) : super(const SignupState.initial()) {
+  SignUpNotifier(this._ref) : super(const SignupStateInitial()) {
     _init();
   }
 

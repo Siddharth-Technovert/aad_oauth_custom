@@ -1,7 +1,8 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../data/data_service_providers.dart';
-import '../../../domain/states/home/home_state.dart';
+import '../../../domain/states/home_state.dart';
+import '../../../domain/states/user_state.dart';
 import '../../../domain/usecases/auth/auth_usecases.dart';
 import '../core/app_state_provider.dart';
 import '../core/router_provider.dart';
@@ -20,17 +21,18 @@ class HomeNotifier extends StateNotifier<HomeState> {
 
   HomeNotifier(
     this._ref,
-  ) : super(const HomeState.initial()) {
+  ) : super(const HomeStateInitial()) {
     _init();
   }
 
   Future<void> _init() async {}
 
   Future<void> logout() async {
-    _ref.read(userStateProvider).maybeWhen(
-          available: (user) => _logoutUserUseCase(user.accountType),
-          orElse: () {},
-        );
+    switch (_ref.read(userStateProvider)) {
+      case UserStateAvailable(user: var user):
+        _logoutUserUseCase(user.accountType);
+      default:
+    }
     _ref.read(appRouterProvider).pop();
     await _ref.read(appStateProvider.notifier).unAuthenticateState();
     // state = const HomeState.loggedOut();

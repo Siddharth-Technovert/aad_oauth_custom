@@ -8,6 +8,7 @@ import '../../core/configs/theme/app_theme_light.dart';
 import '../../core/router/app_router.dart';
 import '../../core/utils/l10n/app_loc.dart';
 import '../../data/data_service_providers.dart';
+import '../../domain/states/core/theme_state.dart';
 import '../providers/core/router_provider.dart';
 import '../providers/core/theme_state_provider.dart';
 import 'modals/snack_bar/snack_bar_factory.dart';

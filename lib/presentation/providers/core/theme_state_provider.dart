@@ -1,6 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../../domain/states/core/theme/theme_state.dart';
+import '../../../domain/states/core/theme_state.dart';
 import '../../../domain/usecases/storage/theme/theme_storage_usecases.dart';
 
 final themeStateProvider =
@@ -16,7 +16,7 @@ class ThemeStateNotifier extends StateNotifier<ThemeState> {
   late final WriteTheme _writeThemeUseCase =
       _ref.watch(writeThemeUseCaseProvider);
 
-  ThemeStateNotifier(this._ref) : super(const ThemeState.system()) {
+  ThemeStateNotifier(this._ref) : super(const ThemeStateSystem()) {
     _init();
   }
 

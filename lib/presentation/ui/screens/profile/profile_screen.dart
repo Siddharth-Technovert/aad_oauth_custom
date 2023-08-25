@@ -4,7 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../../core/router/app_router.dart';
 import '../../../../core/utils/extensions/context_extension.dart';
 import '../../../../core/utils/styles/dimensions/ui_dimensions.dart';
-import '../../../../domain/states/core/theme/theme_state.dart';
+import '../../../../domain/states/core/theme_state.dart';
 import '../../../providers/core/router_provider.dart';
 import '../../../providers/core/theme_state_provider.dart';
 import '../../widgets/buttons/primary_button.dart';
@@ -26,12 +26,11 @@ class ProfileScreen extends ConsumerWidget {
               title: CustomText.bodyLarge(
                 context.appLoc.switchTheme,
               ),
-              value: selectedThemeState == const ThemeState.dark(),
-              onChanged: (val) async => ref
-                  .read(themeStateProvider.notifier)
-                  .setThemeState(
-                    val ? const ThemeState.dark() : const ThemeState.light(),
-                  ),
+              value: selectedThemeState == const ThemeStateDark(),
+              onChanged: (val) async =>
+                  ref.read(themeStateProvider.notifier).setThemeState(
+                        val ? const ThemeStateDark() : const ThemeStateLight(),
+                      ),
             );
           }),
           UIDimensions.verticalSpaceMedium,

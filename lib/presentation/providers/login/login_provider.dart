@@ -2,7 +2,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../data/data_service_providers.dart';
 import '../../../domain/enums/account_type.dart';
-import '../../../domain/states/login/login_state.dart';
+import '../../../domain/states/login_state.dart';
 import '../../../domain/usecases/auth/auth_usecases.dart';
 import '../../ui/modals/snack_bar/snack_bar_factory.dart';
 import '../core/app_state_provider.dart';
@@ -19,7 +19,7 @@ class LoginNotifier extends StateNotifier<LoginState> {
 
   LoginNotifier(
     this._ref,
-  ) : super(const LoginState.initial()) {
+  ) : super(const LoginStateInitial()) {
     _init();
   }
 
@@ -29,11 +29,11 @@ class LoginNotifier extends StateNotifier<LoginState> {
     AccountType accountType, {
     required bool isSignInButton,
   }) async {
-    state = LoginState.loading(accountType);
+    state = LoginStateLoading(accountType: accountType);
     final dataState = await _loginUserUseCase(accountType);
     await dataState.when(
       success: (user) async {
-        state = LoginState.success(user);
+        state = LoginStateSuccess(user: user);
         await _ref.read(appStateProvider.notifier).authenticateState(user);
         _ref.read(loggerServiceProvider).infoLog(
               "login with $accountType account",

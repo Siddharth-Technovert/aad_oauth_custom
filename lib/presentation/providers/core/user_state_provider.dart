@@ -1,14 +1,15 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../../domain/states/user/user_state.dart';
+import '../../../domain/states/core/app_state.dart';
+import '../../../domain/states/user_state.dart';
 import '../../../domain/usecases/user/user_usecases.dart';
 import 'app_state_provider.dart';
 
 final userStateProvider = StateNotifierProvider<UserNotifier, UserState>((ref) {
-  final userState = ref.watch(appStateProvider).maybeWhen(
-        orElse: () => const UserState.notAvailable(),
-        authenticated: (user) => UserState.available(user),
-      );
+  final userState = switch (ref.watch(appStateProvider)) {
+    AppStateAuthenticated(user: var user) => UserStateAvailable(user: user),
+    _ => const UserStateNotAvailable()
+  };
   return UserNotifier(ref, userState);
 });
 
@@ -28,7 +29,7 @@ class UserNotifier extends StateNotifier<UserState> {
       final updatedUser = state.user!.copyWith(profileImage: path);
       final isUpdated = await _updateUserUseCase(updatedUser);
       if (isUpdated) {
-        state = UserState.available(updatedUser);
+        state = UserStateAvailable(user: updatedUser);
       } else {
         // Fluttertoast.showToast(msg: "Unable to update image");
       }
@@ -41,7 +42,7 @@ class UserNotifier extends StateNotifier<UserState> {
       final isUpdated = await _updateUserUseCase(updatedUser);
 
       if (isUpdated) {
-        state = UserState.available(updatedUser);
+        state = UserStateAvailable(user: updatedUser);
       } else {
         // Fluttertoast.showToast(msg: "Unable to update name");
       }
