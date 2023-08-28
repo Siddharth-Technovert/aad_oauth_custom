@@ -53,6 +53,7 @@ dependencies:
     path: ^1.8.1
     shimmer: ^3.0.0
     figma_squircle: ^0.5.3
+    envied: ^0.3.0+3
 
 dev_dependencies:
     flutter_test:
@@ -66,6 +67,7 @@ dev_dependencies:
     freezed: ^2.4.1
     mockito: ^5.4.2
     flutter_gen_runner: ^5.3.1
+    envied_generator: ^0.3.0+3
 
 flutter_gen:
     output: lib/core/utils/assets_gen/ # Optional (default: lib/gen/)
