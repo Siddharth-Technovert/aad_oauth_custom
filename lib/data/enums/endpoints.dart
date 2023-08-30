@@ -1,12 +1,18 @@
 enum EndPoints {
-  getQuiz, //? This is for testing purpose
+  topHeadlines,
+  everything,
+  sources,
 }
 
 extension EndPointsBuilder on EndPoints {
   String val<T>({T? data}) {
     switch (this) {
-      case EndPoints.getQuiz:
-        return "usermetadata/Quiz";
+      case EndPoints.topHeadlines:
+        return "top-headlines";
+      case EndPoints.everything:
+        return "everything";
+      case EndPoints.sources:
+        return "top-headlines/sources";
     }
   }
 }

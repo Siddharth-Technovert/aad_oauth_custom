@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -7,7 +9,6 @@ import '../../../../core/utils/styles/dimensions/ui_dimensions.dart';
 import '../../../../domain/states/core/theme_state.dart';
 import '../../../providers/core/router_provider.dart';
 import '../../../providers/core/theme_state_provider.dart';
-import '../../widgets/buttons/primary_button.dart';
 import '../../widgets/custom_text.dart';
 
 class ProfileScreen extends ConsumerWidget {
@@ -15,36 +16,52 @@ class ProfileScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return SingleChildScrollView(
-      child: Column(
-        children: [
-          Consumer(builder: (context, ref, child) {
-            final selectedThemeState = ref.watch(themeStateProvider);
-            return SwitchListTile(
-              contentPadding:
-                  UIDimensions.symmetricPaddingGeometry(horizontal: 24),
-              title: CustomText.bodyLarge(
-                context.appLoc.switchTheme,
-              ),
-              value: selectedThemeState == const ThemeStateDark(),
-              onChanged: (val) async =>
-                  ref.read(themeStateProvider.notifier).setThemeState(
-                        val ? const ThemeStateDark() : const ThemeStateLight(),
-                      ),
-            );
-          }),
-          UIDimensions.verticalSpaceMedium,
-          UIDimensions.padding(
-            padding: const EdgeInsets.symmetric(horizontal: 24),
-            child: PrimaryButton(
-              onPressed: () => ref.read(appRouterProvider).pushNamed(
-                    BottomSheetRouteNames.logOutBottomSheetRoute,
-                  ),
-              text: context.appLoc.logout,
+    return ListView(
+      children: [
+        UIDimensions.padding(
+          padding: const EdgeInsets.fromLTRB(16, 16, 16, 0),
+          child: CustomText.headlineLarge(context.appLoc.settings),
+        ),
+        Consumer(builder: (context, ref, child) {
+          final selectedThemeState = ref.watch(themeStateProvider);
+          return SwitchListTile.adaptive(
+            contentPadding:
+                UIDimensions.symmetricPaddingGeometry(horizontal: 16),
+            title: CustomText.bodyMedium(
+              context.appLoc.switchTheme,
             ),
+            value: selectedThemeState == const ThemeStateDark(),
+            onChanged: (val) async =>
+                ref.read(themeStateProvider.notifier).setThemeState(
+                      val ? const ThemeStateDark() : const ThemeStateLight(),
+                    ),
+          );
+        }),
+        ListTile(
+          contentPadding: UIDimensions.symmetricPaddingGeometry(horizontal: 16),
+          title: CustomText.bodyMedium(context.appLoc.languages),
+          trailing: Icon(
+            Platform.isIOS ? Icons.arrow_forward_ios : Icons.arrow_forward,
           ),
-        ],
-      ),
+          onTap: () {
+            ref
+                .read(appRouterProvider)
+                .pushNamed(ScreenRouteNames.languageSelectionRoute);
+          },
+        ),
+        ListTile(
+          contentPadding: UIDimensions.symmetricPaddingGeometry(horizontal: 16),
+          title: CustomText.bodyMedium(context.appLoc.logout),
+          trailing: Icon(
+            Platform.isIOS ? Icons.arrow_forward_ios : Icons.arrow_forward,
+          ),
+          onTap: () {
+            ref
+                .read(appRouterProvider)
+                .pushNamed(BottomSheetRouteNames.logOutBottomSheetRoute);
+          },
+        ),
+      ],
     );
   }
 }

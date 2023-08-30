@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../../core/utils/extensions/context_extension.dart';
 import '../home/home_screen.dart';
 import '../profile/profile_screen.dart';
-import 'widget/landing_app_bar.dart';
 
 final landingScreenIndexProvider = StateProvider.autoDispose<int>(
   (ref) {
@@ -17,39 +17,41 @@ class LandingScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final index = ref.watch(landingScreenIndexProvider);
+    final currentIndex = ref.watch(landingScreenIndexProvider);
     // final indexController = useTabController(initialLength: 2);
-    return SafeArea(
-      child: Scaffold(
-        appBar: LandingAppBar(context),
-        // body: TabBarView(
-        //   controller: indexController,
-        //   children: const [HomeScreen(), ProfileScreen()],
-        // ),
-        body: const [HomeScreen(), ProfileScreen()][index],
-        bottomNavigationBar: NavigationBar(
-          // labelBehavior: NavigationDestinationLabelBehavior.alwaysHide,
-          animationDuration: const Duration(seconds: 1),
-          onDestinationSelected: (int index) {
-            ref
-                .read(landingScreenIndexProvider.notifier)
-                .update((state) => index);
-
-            // indexController.index = index;
-          },
-          selectedIndex: index,
-          destinations: const <Widget>[
-            NavigationDestination(
-              selectedIcon: Icon(Icons.home),
-              icon: Icon(Icons.home_outlined),
-              label: 'Home',
-            ),
-            NavigationDestination(
-              icon: Icon(Icons.settings),
-              label: 'Settings',
-            ),
-          ],
+    return Scaffold(
+      // body: TabBarView(
+      //   controller: indexController,
+      //   children: const [HomeScreen(), ProfileScreen()],
+      // ),
+      body: SafeArea(
+        child: IndexedStack(
+          index: currentIndex,
+          children: const [HomeScreen(), ProfileScreen()],
         ),
+      ),
+      bottomNavigationBar: NavigationBar(
+        // labelBehavior: NavigationDestinationLabelBehavior.alwaysHide,
+        animationDuration: const Duration(seconds: 1),
+        onDestinationSelected: (int index) {
+          ref
+              .read(landingScreenIndexProvider.notifier)
+              .update((state) => index);
+
+          // indexController.index = index;
+        },
+        selectedIndex: currentIndex,
+        destinations: <Widget>[
+          NavigationDestination(
+            selectedIcon: const Icon(Icons.home),
+            icon: const Icon(Icons.home_outlined),
+            label: context.appLoc.home,
+          ),
+          NavigationDestination(
+            icon: const Icon(Icons.settings),
+            label: context.appLoc.settings,
+          ),
+        ],
       ),
     );
   }

@@ -9,6 +9,7 @@ import '../core/utils/local_storage/cache/cache_manager_impl.dart';
 import '../core/utils/local_storage/secure/secure_storage_manager.dart';
 import '../core/utils/local_storage/secure/secure_storage_manager_impl.dart';
 import 'data_source/local/user_local_data_source.dart';
+import 'data_source/remote/news_remote_data_source.dart';
 import 'data_source/remote/user_remote_data_source.dart';
 
 ///?Device Services Providers
@@ -37,4 +38,7 @@ final userLocalDataSourceProvider = Provider<UserLocalDataSource>((ref) {
 ///?Remote Data Source Providers
 final userRemoteDataSourceProvider = Provider<UserRemoteDataSource>((ref) {
   return UserRemoteDataSource(ref.watch(apiManagerProvider));
+});
+final newsRemoteDataSourceProvider = Provider<NewsRemoteDataSource>((ref) {
+  return NewsRemoteDataSource(ref.watch(apiManagerProvider));
 });

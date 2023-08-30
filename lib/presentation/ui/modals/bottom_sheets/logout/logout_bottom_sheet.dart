@@ -27,7 +27,7 @@ class LogoutBottomSheet extends ConsumerWidget {
           Center(
             child: SizedBox(
               child: CustomText.titleMedium(
-                context.appLoc.logoutConfirm,
+                context.appLoc.logoutConfirmation,
                 textAlign: TextAlign.center,
                 textOverflow: null,
               ),

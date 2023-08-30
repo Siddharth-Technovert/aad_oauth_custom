@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../../core/utils/styles/dimensions/ui_dimensions.dart';
 import '../../../../domain/enums/toast_type.dart';
+import '../../../providers/core/connectivity_provider.dart';
 import '../../widgets/custom_text.dart';
 import 'widgets/message_toast.dart';
 
@@ -10,6 +12,17 @@ abstract class SnackbarFactory {
 
   static final GlobalKey<ScaffoldMessengerState> scaffoldMessengerKey =
       GlobalKey<ScaffoldMessengerState>();
+
+  static void noInternetCheck(
+    WidgetRef ref,
+    VoidCallback fun,
+  ) {
+    if (ref.read(hasConnectivityProvider)) {
+      fun();
+    } else {
+      SnackbarFactory.showNoInternetConnectionSnackbar();
+    }
+  }
 
   static void showNoInternetConnectionSnackbar() {
     scaffoldMessengerKey.currentState!

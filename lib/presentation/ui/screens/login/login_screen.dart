@@ -22,12 +22,13 @@ class LoginScreen extends ConsumerWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const CustomText.headlineLarge(
-                "Lets Get Started",
+              CustomText.headlineLarge(
+                context.appLoc.letsGetStarted,
+                color: context.primary,
               ),
               UIDimensions.verticalSpace(12),
-              const CustomText.bodySmall(
-                "A Boilerplate App to let you get started for building the project",
+              CustomText.bodySmall(
+                context.appLoc.boilerplateWelcomeMsg,
                 textOverflow: null,
                 textAlign: TextAlign.center,
                 fontWeight: FontWeight.w600,
@@ -36,7 +37,17 @@ class LoginScreen extends ConsumerWidget {
               TextField(
                 style:
                     context.titleMedium.copyWith(fontWeight: FontWeight.w500),
-                decoration: const InputDecoration(hintText: "Email"),
+                decoration: InputDecoration(
+                  hintText: context.appLoc.email,
+                  prefixIcon: Icon(
+                    Icons.mail_outline,
+                    size: UIDimensions.icon24,
+                  ),
+                ),
+                onEditingComplete: () async => loginNotifier.logIn(
+                  AccountType.guest,
+                  isSignInButton: true,
+                ),
               ),
               UIDimensions.verticalSpaceMedium,
               PrimaryButton(
@@ -44,8 +55,9 @@ class LoginScreen extends ConsumerWidget {
                   AccountType.guest,
                   isSignInButton: true,
                 ),
-                text: "Guest Login",
+                text: context.appLoc.guestLogin,
               ),
+              UIDimensions.verticalSpaceMedium,
             ],
           ),
         ),

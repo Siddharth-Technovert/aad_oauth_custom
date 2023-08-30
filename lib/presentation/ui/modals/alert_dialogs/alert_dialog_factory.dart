@@ -75,8 +75,12 @@ class AlertDialogFactory {
         title: CustomText.headlineMedium(title),
         content: subTitle == null ? null : CustomText.headlineMedium(subTitle),
         actions: [
-          CustomText.headlineMedium(negativeButtonText ?? "Cancel"),
-          CustomText.headlineMedium(positiveButtonText ?? "Clear"),
+          CustomText.headlineMedium(
+            negativeButtonText ?? context.appLoc.cancel,
+          ),
+          CustomText.headlineMedium(
+            positiveButtonText ?? context.appLoc.clear,
+          ),
         ],
       ),
     );
