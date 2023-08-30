@@ -57,6 +57,7 @@ class ApiManagerImpl extends ApiManager {
   }
 
   String _generateUrl(String endPoint, String? newBaseUrl) {
+    //TODO: Please note this base url should end with "/"
     if (newBaseUrl == null) {
       final baseUrl = AppConfiguration.baseUrl;
       return "$baseUrl$endPoint";

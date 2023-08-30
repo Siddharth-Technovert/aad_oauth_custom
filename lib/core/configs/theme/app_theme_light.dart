@@ -121,7 +121,7 @@ class AppThemeLight {
   AppBarTheme get _appBarTheme => AppBarTheme(
         iconTheme: _iconTheme,
         systemOverlayStyle: SystemUiOverlayStyle.dark.copyWith(
-          statusBarColor: colors.onBackground,
+          statusBarColor: colors.background,
         ),
       );
 
