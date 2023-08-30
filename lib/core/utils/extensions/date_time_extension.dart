@@ -33,6 +33,10 @@ extension DateTimeExtension on DateTime {
     return suffix;
   }
 
+  String get week {
+    return DateFormat.EEEE().format(this);
+  }
+
   String get yMMMMd {
     return DateFormat.yMMMMd().format(this);
   }

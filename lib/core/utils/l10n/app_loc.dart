@@ -23,3 +23,12 @@ class AppLocException implements Exception {
     return "AppLocalization is either null or some error occurred";
   }
 }
+
+//TODO: update this whenever you add new language
+extension LanguageNameExtension on Locale {
+  String get languageName => switch (languageCode) {
+        "en" => "English",
+        "hi" => "Hindi",
+        _ => "",
+      };
+}

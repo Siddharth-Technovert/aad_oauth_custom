@@ -79,14 +79,14 @@ class UITextStylesLight implements UITextStyles {
 
   @override
   TextStyle get bodyLarge => _defaultStyle().copyWith(
-        color: lightColors.customColors.font12Color,
+        color: lightColors.customColors.font14Color,
         fontSize: UIDimensions.font16,
         fontWeight: FontWeight.w400,
       );
 
   @override
   TextStyle get bodyMedium => _defaultStyle().copyWith(
-        color: lightColors.customColors.font12Color,
+        color: lightColors.customColors.font14Color,
         fontSize: UIDimensions.font14,
         fontWeight: FontWeight.w400,
       );
@@ -99,14 +99,14 @@ class UITextStylesLight implements UITextStyles {
       );
   @override
   TextStyle get labelLarge => _defaultStyle().copyWith(
-        color: lightColors.customColors.font12Color,
+        color: lightColors.customColors.font14Color,
         fontSize: UIDimensions.font16,
         fontWeight: FontWeight.w300,
       );
 
   @override
   TextStyle get labelMedium => _defaultStyle().copyWith(
-        color: lightColors.customColors.font12Color,
+        color: lightColors.customColors.font14Color,
         fontSize: UIDimensions.font14,
         fontWeight: FontWeight.w300,
       );

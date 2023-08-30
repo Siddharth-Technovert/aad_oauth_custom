@@ -13,7 +13,6 @@ class SecondaryButton extends StatelessWidget {
   final Color? backgroundColor;
   final Color? foregroundColor;
   final Color? borderColor;
-  final double? height;
   final Widget? child;
   final double? cornerRadius;
 
@@ -28,7 +27,6 @@ class SecondaryButton extends StatelessWidget {
     this.foregroundColor,
     this.borderColor,
     this.child,
-    this.height,
     this.cornerRadius,
     super.key,
   }) : _onPressed = onPressed;
@@ -43,7 +41,6 @@ class SecondaryButton extends StatelessWidget {
     this.foregroundColor,
     this.borderColor,
     this.child,
-    this.height,
     this.cornerRadius,
     super.key,
   }) : _onPressed = null;
@@ -51,9 +48,6 @@ class SecondaryButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return UIDimensions.sizedBox(
-      height: height == null
-          ? UIDimensions.buttonH56
-          : UIDimensions.height(height!),
       width: UIDimensions.width(horizontalPadding) == UIDimensions.buttonW18
           ? double.infinity
           : null,

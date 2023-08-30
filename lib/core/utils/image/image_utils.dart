@@ -1,18 +1,12 @@
-/*This class will hold all common methods for using images. It will hold methods to pick image from
-gallery, etc.*/
 import '../styles/dimensions/ui_dimensions.dart';
 
 class ImageUtils {
-  static final ImageUtils _imageUtils = ImageUtils._internal();
-
-  factory ImageUtils() {
-    return _imageUtils;
+  //TODO: add your custom ratio here
+  static double getHeightForBannerRatio({required double width}) {
+    return UIDimensions.height((width * 118) / 343);
   }
 
-  ImageUtils._internal();
-
-  //TODO: add your custom ratio here
-  double getHeightForBannerRatio({required double width}) {
-    return UIDimensions.height((width * 118) / 343);
+  static double getHeightForNewsCard({required double width}) {
+    return UIDimensions.height((width * 9) / 16);
   }
 }

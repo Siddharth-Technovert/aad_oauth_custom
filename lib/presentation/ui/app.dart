@@ -9,17 +9,41 @@ import '../../core/router/app_router.dart';
 import '../../core/utils/l10n/app_loc.dart';
 import '../../data/data_service_providers.dart';
 import '../../domain/states/core/theme_state.dart';
+import '../providers/core/language_provider.dart';
 import '../providers/core/router_provider.dart';
 import '../providers/core/theme_state_provider.dart';
 import 'modals/snack_bar/snack_bar_factory.dart';
 
-class App extends ConsumerWidget {
+class App extends ConsumerStatefulWidget {
   const App({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<ConsumerStatefulWidget> createState() => _AppState();
+}
+
+class _AppState extends ConsumerState<App> with WidgetsBindingObserver {
+  @override
+  void initState() {
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      ref.read(connectivityServiceProvider).checkConnectivity();
+    });
+    super.initState();
+  }
+
+  @override
+  Future<void> didChangeAppLifecycleState(AppLifecycleState state) async {
+    switch (state) {
+      case AppLifecycleState.resumed:
+        ref.read(connectivityServiceProvider).checkConnectivity();
+      default:
+    }
+    super.didChangeAppLifecycleState(state);
+  }
+
+  @override
+  Widget build(BuildContext context) {
     final appRouter = ref.watch(appRouterProvider);
-    // final localLanguage = ref.watch(localLanguageProvider);
+    final localLanguage = ref.watch(localLanguageProvider);
 
     return GestureDetector(
       behavior: HitTestBehavior.translucent,
@@ -39,7 +63,7 @@ class App extends ConsumerWidget {
               RouterLog(ref.watch(loggerServiceProvider)),
             ],
             initialRoute: ScreenRouteNames.appStartRoute,
-            // locale: localLanguage,
+            locale: localLanguage,
             supportedLocales: AppLoc.supportedLocale,
             localizationsDelegates: AppLoc.delegates,
             title: "RiverPod Boilerplate",

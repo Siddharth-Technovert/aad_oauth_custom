@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../domain/states/core/app_state.dart';
 import '../../providers/core/app_state_provider.dart';
+import '../../providers/core/connectivity_provider.dart';
 import 'landing/landing_screen.dart';
 import 'login/login_screen.dart';
 
@@ -13,6 +14,7 @@ class AppStartScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    ref.watch(hasConnectivityProvider);
     return switch (ref.watch(appStateProvider)) {
       AppStateInitial() => const SizedBox.shrink(),
       AppStateOnboarding() => const SizedBox.shrink(),

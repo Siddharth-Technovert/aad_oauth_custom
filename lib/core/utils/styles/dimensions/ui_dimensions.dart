@@ -36,6 +36,22 @@ class UIDimensions {
         child: child,
       );
 
+  static Padding horizontalPadding({
+    EdgeInsets? padding,
+    required Widget child,
+  }) =>
+      Padding(
+        padding: padding != null
+            ? REdgeInsets.fromLTRB(
+                padding.left,
+                padding.top,
+                padding.right,
+                padding.bottom,
+              )
+            : REdgeInsets.symmetric(horizontal: 16),
+        child: child,
+      );
+
   static Radius radiusCircular(
     double radius,
   ) =>

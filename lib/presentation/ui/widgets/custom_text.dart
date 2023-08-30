@@ -394,6 +394,91 @@ class CustomText extends StatelessWidget {
           height: height,
         );
 
+  const CustomText.labelLarge(
+    String text, {
+    Color? color,
+    FontWeight? fontWeight,
+    TextOverflow? textOverflow = TextOverflow.ellipsis,
+    double? letterSpacing,
+    FontStyle? fontStyle,
+    double? fontSize,
+    int? maxLines,
+    TextDecoration? decoration,
+    TextAlign? textAlign,
+    double? height,
+    bool? softWrap,
+  }) : this._(
+          text,
+          maxLines: maxLines,
+          textAlign: textAlign,
+          softWrap: softWrap,
+          textOverflow: textOverflow,
+          textStyleType: _TextStyleType.labelLarge,
+          color: color,
+          fontWeight: fontWeight,
+          letterSpacing: letterSpacing,
+          fontStyle: fontStyle,
+          fontSize: fontSize,
+          decoration: decoration,
+          height: height,
+        );
+  const CustomText.labelMedium(
+    String text, {
+    Color? color,
+    FontWeight? fontWeight,
+    TextOverflow? textOverflow = TextOverflow.ellipsis,
+    double? letterSpacing,
+    FontStyle? fontStyle,
+    double? fontSize,
+    int? maxLines,
+    TextDecoration? decoration,
+    TextAlign? textAlign,
+    double? height,
+    bool? softWrap,
+  }) : this._(
+          text,
+          maxLines: maxLines,
+          textAlign: textAlign,
+          softWrap: softWrap,
+          textOverflow: textOverflow,
+          textStyleType: _TextStyleType.labelMedium,
+          color: color,
+          fontWeight: fontWeight,
+          letterSpacing: letterSpacing,
+          fontStyle: fontStyle,
+          fontSize: fontSize,
+          decoration: decoration,
+          height: height,
+        );
+  const CustomText.labelSmall(
+    String text, {
+    Color? color,
+    FontWeight? fontWeight,
+    TextOverflow? textOverflow = TextOverflow.ellipsis,
+    double? letterSpacing,
+    FontStyle? fontStyle,
+    double? fontSize,
+    int? maxLines,
+    TextDecoration? decoration,
+    TextAlign? textAlign,
+    double? height,
+    bool? softWrap,
+  }) : this._(
+          text,
+          maxLines: maxLines,
+          textAlign: textAlign,
+          softWrap: softWrap,
+          textOverflow: textOverflow,
+          textStyleType: _TextStyleType.labelSmall,
+          color: color,
+          fontWeight: fontWeight,
+          letterSpacing: letterSpacing,
+          fontStyle: fontStyle,
+          fontSize: fontSize,
+          decoration: decoration,
+          height: height,
+        );
+
   @override
   Widget build(BuildContext context) {
     return Text(
@@ -429,7 +514,10 @@ enum _TextStyleType {
   titleSmall,
   bodyLarge,
   bodyMedium,
-  bodySmall
+  bodySmall,
+  labelLarge,
+  labelMedium,
+  labelSmall,
 }
 
 extension _TextStyleTypeExtension on BuildContext {
@@ -447,6 +535,9 @@ extension _TextStyleTypeExtension on BuildContext {
       _TextStyleType.bodyLarge => bodyLarge,
       _TextStyleType.bodyMedium => bodyMedium,
       _TextStyleType.bodySmall => bodySmall,
+      _TextStyleType.labelLarge => labelLarge,
+      _TextStyleType.labelMedium => labelMedium,
+      _TextStyleType.labelSmall => labelSmall,
     };
   }
 }
