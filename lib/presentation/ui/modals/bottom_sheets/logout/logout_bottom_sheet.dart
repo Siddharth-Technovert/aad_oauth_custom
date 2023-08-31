@@ -10,7 +10,7 @@ import '../../../widgets/buttons/secondary_button.dart';
 import '../../../widgets/custom_text.dart';
 
 class LogoutBottomSheet extends ConsumerWidget {
-  const LogoutBottomSheet({Key? key}) : super(key: key);
+  const LogoutBottomSheet({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

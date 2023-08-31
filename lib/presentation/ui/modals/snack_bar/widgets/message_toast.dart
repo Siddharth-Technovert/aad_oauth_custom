@@ -7,12 +7,12 @@ import '../../../widgets/custom_text.dart';
 
 class MessageToast extends StatelessWidget {
   const MessageToast({
-    Key? key,
+    super.key,
     this.title,
     required this.message,
     required this.toastType,
     required this.seconds,
-  }) : super(key: key);
+  });
 
   final String? title;
   final String message;

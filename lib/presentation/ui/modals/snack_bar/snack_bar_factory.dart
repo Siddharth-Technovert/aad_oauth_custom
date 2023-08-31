@@ -18,7 +18,7 @@ abstract class SnackbarFactory {
     VoidCallback fun,
   ) {
     if (ref.read(hasConnectivityProvider)) {
-      fun();
+      fun;
     } else {
       SnackbarFactory.showNoInternetConnectionSnackbar();
     }

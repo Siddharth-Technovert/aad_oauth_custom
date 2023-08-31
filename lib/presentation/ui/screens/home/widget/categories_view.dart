@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../../../core/utils/extensions/context_extension.dart';
 import '../../../../../core/utils/styles/dimensions/ui_dimensions.dart';
 import '../../../../providers/news/news_by_category_provider.dart';
+import '../../../modals/snack_bar/snack_bar_factory.dart';
 import '../../../widgets/custom_text.dart';
 
 class CategoriesView extends ConsumerWidget {
@@ -29,20 +30,22 @@ class CategoriesView extends ConsumerWidget {
                 ),
                 selected: selectedCategory.contains(categories[index]),
                 onSelected: (val) {
-                  if (ref
-                      .read(categorySelectionChipsProvider)
-                      .contains(categories[index])) {
-                    ref
-                        .read(categorySelectionChipsProvider.notifier)
-                        .update((state) => categories[0]);
-                  } else {
-                    ref
-                        .read(categorySelectionChipsProvider.notifier)
-                        .update((state) => categories[index]);
-                  }
-                  ref.read(newsByCategoryProvider.notifier).getNewsByCategory(
-                        category: ref.read(categorySelectionChipsProvider),
-                      );
+                  SnackbarFactory.noInternetCheck(ref, () async {
+                    if (ref
+                        .read(categorySelectionChipsProvider)
+                        .contains(categories[index])) {
+                      ref
+                          .read(categorySelectionChipsProvider.notifier)
+                          .update((state) => categories[0]);
+                    } else {
+                      ref
+                          .read(categorySelectionChipsProvider.notifier)
+                          .update((state) => categories[index]);
+                    }
+                    ref.read(newsByCategoryProvider.notifier).getNewsByCategory(
+                          category: ref.read(categorySelectionChipsProvider),
+                        );
+                  });
                 },
               ),
             ),

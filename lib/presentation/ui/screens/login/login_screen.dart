@@ -9,7 +9,7 @@ import '../../widgets/buttons/primary_button.dart';
 import '../../widgets/custom_text.dart';
 
 class LoginScreen extends ConsumerWidget {
-  const LoginScreen({Key? key}) : super(key: key);
+  const LoginScreen({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

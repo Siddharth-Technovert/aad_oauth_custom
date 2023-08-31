@@ -324,7 +324,7 @@ class ApiManagerImpl extends ApiManager {
     HttpLibraryMethod<T> executeMethod,
   ) async {
     try {
-      if (await _ref.read(hasConnectivityProvider)) {
+      if (_ref.read(hasConnectivityProvider)) {
         return await executeMethod();
       } else {
         return const ApiResponseError(AppExceptionNetworkError());

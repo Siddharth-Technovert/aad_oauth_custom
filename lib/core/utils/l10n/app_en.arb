@@ -16,6 +16,8 @@
   "logout": "Logout",
   "logoutConfirmation": "Are you sure want to logout from app?",
   "news": "News",
+  "noConnection": "No Connection",
+  "noConnectionMsg": "No Internet connection found. Please check your connection and try again.",
   "settings": "Settings",
   "somethingWentWrong": "Something went wrong. Please try again later.",
   "switchTheme": "Switch Theme",

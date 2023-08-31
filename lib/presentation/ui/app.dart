@@ -24,9 +24,7 @@ class App extends ConsumerStatefulWidget {
 class _AppState extends ConsumerState<App> with WidgetsBindingObserver {
   @override
   void initState() {
-    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-      ref.read(connectivityServiceProvider).checkConnectivity();
-    });
+    ref.read(connectivityServiceProvider).checkConnectivity();
     super.initState();
   }
 
@@ -44,6 +42,7 @@ class _AppState extends ConsumerState<App> with WidgetsBindingObserver {
   Widget build(BuildContext context) {
     final appRouter = ref.watch(appRouterProvider);
     final localLanguage = ref.watch(localLanguageProvider);
+    final themeState = ref.watch(themeStateProvider);
 
     return GestureDetector(
       behavior: HitTestBehavior.translucent,
@@ -68,7 +67,7 @@ class _AppState extends ConsumerState<App> with WidgetsBindingObserver {
             localizationsDelegates: AppLoc.delegates,
             title: "RiverPod Boilerplate",
             debugShowCheckedModeBanner: false,
-            themeMode: ref.watch(themeStateProvider).mode,
+            themeMode: themeState.mode,
             theme: AppThemeLight().theme,
             darkTheme: AppThemeDark().theme,
             builder: (context, child) {

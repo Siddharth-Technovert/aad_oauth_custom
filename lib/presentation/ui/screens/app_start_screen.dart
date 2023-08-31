@@ -9,8 +9,8 @@ import 'login/login_screen.dart';
 
 class AppStartScreen extends ConsumerWidget {
   const AppStartScreen({
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

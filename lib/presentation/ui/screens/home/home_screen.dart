@@ -1,22 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../../core/utils/errors/app_exception.dart';
 import '../../../../core/utils/extensions/context_extension.dart';
 import '../../../../core/utils/extensions/date_time_extension.dart';
 import '../../../../core/utils/styles/dimensions/ui_dimensions.dart';
 import '../../../../domain/states/news_by_category_state.dart';
 import '../../../providers/news/news_by_category_provider.dart';
 import '../../modals/snack_bar/snack_bar_factory.dart';
-import '../../widgets/cards/something_went_wrong_card.dart';
 import '../../widgets/custom_text.dart';
+import '../../widgets/error_cards/no_internet_card.dart';
+import '../../widgets/error_cards/something_went_wrong_card.dart';
 import '../../widgets/shimmer/common_shimmer.dart';
 import 'widget/categories_view.dart';
 import 'widget/news_card.dart';
 
 class HomeScreen extends ConsumerWidget {
-  const HomeScreen({
-    Key? key,
-  }) : super(key: key);
+  const HomeScreen({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -40,7 +40,7 @@ class HomeScreen extends ConsumerWidget {
         SliverPadding(
           padding: UIDimensions.symmetricPaddingGeometry(horizontal: 16),
           sliver: switch (newsByCategoryState) {
-            NewsByCategoryStateInitial() => const SliverToBoxAdapter(
+            NewsByCategoryStateInitial() => const SliverFillRemaining(
                 child: SizedBox.shrink(),
               ),
             NewsByCategoryStateLoading() => SliverList.separated(
@@ -60,16 +60,25 @@ class HomeScreen extends ConsumerWidget {
                     UIDimensions.verticalSpaceSmall,
                 itemCount: news.length,
               ),
-            NewsByCategoryStateError() => SliverFillRemaining(
-                child: SomethingWentWrongCard(
-                  onPressed: () {
-                    SnackbarFactory.noInternetCheck(ref, () async {
-                      await ref
-                          .read(newsByCategoryProvider.notifier)
-                          .getNewsByCategory();
-                    });
-                  },
-                ),
+            NewsByCategoryStateError(ex: var ex) => SliverToBoxAdapter(
+                child: switch (ex) {
+                  AppExceptionNetworkError() => NoConnectionCard(onPressed: () {
+                      SnackbarFactory.noInternetCheck(ref, () async {
+                        await ref
+                            .read(newsByCategoryProvider.notifier)
+                            .getNewsByCategory();
+                      });
+                    }),
+                  _ => SomethingWentWrongCard(
+                      onPressed: () {
+                        SnackbarFactory.noInternetCheck(ref, () async {
+                          await ref
+                              .read(newsByCategoryProvider.notifier)
+                              .getNewsByCategory();
+                        });
+                      },
+                    )
+                },
               ),
           },
         ),

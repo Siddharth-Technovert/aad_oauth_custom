@@ -20,6 +20,9 @@ class LandingScreen extends ConsumerWidget {
     final currentIndex = ref.watch(landingScreenIndexProvider);
     // final indexController = useTabController(initialLength: 2);
     return Scaffold(
+      appBar: AppBar(
+        toolbarHeight: 0,
+      ),
       // body: TabBarView(
       //   controller: indexController,
       //   children: const [HomeScreen(), ProfileScreen()],
