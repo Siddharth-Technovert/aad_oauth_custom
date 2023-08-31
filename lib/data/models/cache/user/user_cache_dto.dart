@@ -1,6 +1,6 @@
 import 'package:hive_flutter/hive_flutter.dart';
 
-import '../../../../core/utils/constants/app_constants.dart';
+import '../../../../core/utils/app_constants.dart';
 import '../../../../core/utils/mappers/cache_dto.dart';
 import '../../../../domain/enums/account_type.dart';
 import '../../../../domain/models/user/user.dart';

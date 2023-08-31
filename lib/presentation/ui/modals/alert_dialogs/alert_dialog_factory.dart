@@ -20,7 +20,7 @@ class AlertDialogFactory {
     showDialog(
       context: ctx1,
       barrierDismissible: false,
-      barrierColor: ctx1.onBackground.withOpacity(0.5),
+      barrierColor: ctx1.colorScheme.onBackground.withOpacity(0.5),
       builder: (BuildContext ctx) {
         context = ctx;
 

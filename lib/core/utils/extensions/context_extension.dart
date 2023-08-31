@@ -48,6 +48,4 @@ extension ContextExtensions on BuildContext {
 
   Color get primary => colorScheme.primary;
   Color get secondary => colorScheme.secondary;
-  Color get tertiary => colorScheme.tertiary;
-  Color get onBackground => colorScheme.onBackground;
 }

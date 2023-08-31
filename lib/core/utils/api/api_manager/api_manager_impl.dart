@@ -1,6 +1,8 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:dio/dio.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_loggy_dio/flutter_loggy_dio.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:loggy/loggy.dart';
@@ -16,6 +18,14 @@ import '../interceptor/auth_interceptor.dart';
 import '../response/api_error_response.dart';
 import '../response/api_response.dart';
 import 'api_manager.dart';
+
+Map<String, dynamic> _parseAndDecode(String response) {
+  return jsonDecode(response) as Map<String, dynamic>;
+}
+
+Future<Map<String, dynamic>> parseJson(String text) {
+  return compute(_parseAndDecode, text);
+}
 
 typedef HttpLibraryMethod<T> = Future<ApiResponse<T>> Function();
 
@@ -45,6 +55,8 @@ class ApiManagerImpl extends ApiManager {
     // );
 
     _dio = Dio(options);
+
+    _dio.transformer = BackgroundTransformer()..jsonDecodeCallback = parseJson;
     _dio.interceptors.addAll([
       // DioCacheInterceptor(options: cacheOptions),
       LoggyDioInterceptor(

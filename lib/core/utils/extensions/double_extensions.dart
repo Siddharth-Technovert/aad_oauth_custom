@@ -1,3 +1,3 @@
-extension DubleExtension on double {
+extension DoubleExtension on double {
   double toPrecision(int n) => double.parse(toStringAsFixed(n));
 }

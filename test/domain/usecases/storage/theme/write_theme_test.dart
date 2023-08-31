@@ -1,6 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
-import 'package:riverpod_boilerplate/core/utils/constants/app_constants.dart';
+import 'package:riverpod_boilerplate/core/utils/app_constants.dart';
 import 'package:riverpod_boilerplate/domain/states/core/theme_state.dart';
 
 import '../../../../mocks/storage/storage_mock.mocks.dart';

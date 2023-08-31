@@ -1,4 +1,4 @@
-import 'constants/app_constants.dart';
+import 'app_constants.dart';
 import 'extensions/validation_extensions.dart';
 
 class FormValidator {

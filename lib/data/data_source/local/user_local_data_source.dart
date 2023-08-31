@@ -1,4 +1,4 @@
-import '../../../core/utils/constants/app_constants.dart';
+import '../../../core/utils/app_constants.dart';
 import '../../../core/utils/errors/app_exception.dart';
 import '../../../core/utils/errors/cache_exception.dart';
 import '../../../core/utils/local_storage/cache/cache_manager.dart';
