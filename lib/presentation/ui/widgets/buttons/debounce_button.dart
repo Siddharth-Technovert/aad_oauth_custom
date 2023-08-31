@@ -1,6 +1,5 @@
 import 'dart:async';
 
-import 'package:figma_squircle/figma_squircle.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../core/utils/styles/dimensions/ui_dimensions.dart';
@@ -55,15 +54,13 @@ class DebouncedButtonState extends State<DebouncedButton> {
       valueListenable: _isEnabled,
       builder: (context, bool isEnabled, child) => Material(
         color: widget.bgColor ?? Colors.transparent,
-        borderRadius: SmoothBorderRadius(
-          cornerRadius: UIDimensions.radius(widget.cornerRadius),
-          cornerSmoothing: widget.cornerSmoothing,
+        borderRadius: BorderRadius.circular(
+          UIDimensions.radius(widget.cornerRadius),
         ),
         child: InkWell(
-          customBorder: SmoothRectangleBorder(
-            borderRadius: SmoothBorderRadius(
-              cornerRadius: UIDimensions.radius(widget.cornerRadius),
-              cornerSmoothing: widget.cornerSmoothing,
+          customBorder: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(
+              UIDimensions.radius(widget.cornerRadius),
             ),
           ),
           splashColor: widget.splashColor,
