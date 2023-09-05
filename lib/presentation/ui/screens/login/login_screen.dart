@@ -13,7 +13,7 @@ class LoginScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final loginNotifier = ref.watch(loginProvider.notifier);
+    final loginNotifier = ref.watch(loginNotifierProvider.notifier);
     return SafeArea(
       child: Scaffold(
         resizeToAvoidBottomInset: false,
@@ -35,8 +35,9 @@ class LoginScreen extends ConsumerWidget {
               ),
               UIDimensions.verticalSpaceLarge,
               TextField(
-                style:
-                    context.titleMedium.copyWith(fontWeight: FontWeight.w500),
+                style: context.titleMedium.copyWith(
+                  fontWeight: FontWeight.w500,
+                ),
                 decoration: InputDecoration(
                   hintText: context.appLoc.email,
                   prefixIcon: Icon(

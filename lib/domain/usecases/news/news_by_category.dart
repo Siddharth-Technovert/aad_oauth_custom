@@ -1,8 +1,9 @@
 part of 'news_usecases.dart';
 
-final newsByCategoryUseCaseProvider = Provider(
-  (ref) => NewsByCategory(ref.watch(newsRepositoryProvider)),
-);
+@Riverpod(keepAlive: true)
+NewsByCategory newsByCategoryUseCase(NewsByCategoryUseCaseRef ref) {
+  return NewsByCategory(ref.watch(newsRepositoryProvider));
+}
 
 class NewsByCategory
     extends UseCase<DataState<List<Article>>, NewsByCategoryParam> {

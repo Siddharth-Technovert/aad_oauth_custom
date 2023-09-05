@@ -1,4 +1,4 @@
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../core/device/connectivity_service.dart';
 import '../core/logger/logger_service.dart';
@@ -12,33 +12,53 @@ import 'data_source/local/user_local_data_source.dart';
 import 'data_source/remote/news_remote_data_source.dart';
 import 'data_source/remote/user_remote_data_source.dart';
 
+part 'data_service_providers.g.dart';
+
 ///?Device Services Providers
-final connectivityServiceProvider = Provider((_) => ConnectivityService());
-final loggerServiceProvider = Provider((_) => LoggerService());
+@Riverpod(keepAlive: true)
+ConnectivityService connectivityService(ConnectivityServiceRef ref) {
+  return ConnectivityService();
+}
+
+@Riverpod(keepAlive: true)
+LoggerService loggerService(LoggerServiceRef ref) {
+  return LoggerService();
+}
 
 ///?Data Source Providers
-final secureStorageManagerProvider = Provider<SecureStorageManager>(
-  (ref) => SecureStorageManagerImpl(ref.watch(loggerServiceProvider)),
-);
-final cacheManagerProvider = Provider<CacheManager>(
-  (ref) => CacheManagerImpl(ref.watch(loggerServiceProvider)),
-);
-final apiManagerProvider = Provider<ApiManager>((ref) {
-  return ApiManagerImpl(ref);
-});
+@Riverpod(keepAlive: true)
+SecureStorageManager secureStorageManager(SecureStorageManagerRef ref) {
+  return SecureStorageManagerImpl(ref.watch(loggerServiceProvider));
+}
 
-///?Local Data Source Providers
-final userLocalDataSourceProvider = Provider<UserLocalDataSource>((ref) {
+@Riverpod(keepAlive: true)
+CacheManager cacheManager(CacheManagerRef ref) {
+  return CacheManagerImpl(ref.watch(loggerServiceProvider));
+}
+
+@Riverpod(keepAlive: true)
+ApiManager apiManager(ApiManagerRef ref) {
+  return ApiManagerImpl(ref);
+}
+
+// ///?Local Data Source Providers
+
+@Riverpod(keepAlive: true)
+UserLocalDataSource userLocalDataSource(UserLocalDataSourceRef ref) {
   return UserLocalDataSource(
     ref.watch(secureStorageManagerProvider),
     ref.watch(cacheManagerProvider),
   );
-});
+}
 
 ///?Remote Data Source Providers
-final userRemoteDataSourceProvider = Provider<UserRemoteDataSource>((ref) {
+
+@Riverpod(keepAlive: true)
+UserRemoteDataSource userRemoteDataSource(UserRemoteDataSourceRef ref) {
   return UserRemoteDataSource(ref.watch(apiManagerProvider));
-});
-final newsRemoteDataSourceProvider = Provider<NewsRemoteDataSource>((ref) {
+}
+
+@Riverpod(keepAlive: true)
+NewsRemoteDataSource newsRemoteDataSource(NewsRemoteDataSourceRef ref) {
   return NewsRemoteDataSource(ref.watch(apiManagerProvider));
-});
+}

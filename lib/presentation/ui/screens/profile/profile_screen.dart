@@ -23,7 +23,7 @@ class ProfileScreen extends ConsumerWidget {
           child: CustomText.headlineLarge(context.appLoc.settings),
         ),
         Consumer(builder: (context, ref, child) {
-          final selectedThemeState = ref.watch(themeStateProvider);
+          final selectedThemeState = ref.watch(themeStateNotifierProvider);
           return SwitchListTile.adaptive(
             contentPadding:
                 UIDimensions.symmetricPaddingGeometry(horizontal: 16),
@@ -32,7 +32,7 @@ class ProfileScreen extends ConsumerWidget {
             ),
             value: selectedThemeState == const ThemeStateDark(),
             onChanged: (val) async =>
-                ref.read(themeStateProvider.notifier).setThemeState(
+                ref.read(themeStateNotifierProvider.notifier).setThemeState(
                       val ? const ThemeStateDark() : const ThemeStateLight(),
                     ),
           );
@@ -45,7 +45,7 @@ class ProfileScreen extends ConsumerWidget {
           ),
           onTap: () {
             ref
-                .read(appRouterProvider)
+                .read(appRouterNotifierProvider)
                 .pushNamed(ScreenRouteNames.languageSelectionRoute);
           },
         ),
@@ -57,7 +57,7 @@ class ProfileScreen extends ConsumerWidget {
           ),
           onTap: () {
             ref
-                .read(appRouterProvider)
+                .read(appRouterNotifierProvider)
                 .pushNamed(BottomSheetRouteNames.logOutBottomSheetRoute);
           },
         ),

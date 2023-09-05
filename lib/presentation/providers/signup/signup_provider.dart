@@ -1,28 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../../data/data_service_providers.dart';
 import '../../../domain/enums/account_type.dart';
 import '../../../domain/states/signup_state.dart';
 
-final signUpProvider =
-    StateNotifierProvider<SignUpNotifier, SignupState>((ref) {
-  return SignUpNotifier(ref);
-});
+part 'signup_provider.g.dart';
 
-class SignUpNotifier extends StateNotifier<SignupState> {
-  // late final LoginRequest loginRequestInstance;
-  SignupState get currentState => state;
-
-  final Ref _ref;
-  // late final SignupUser _signupUserUseCase =
-  //     _ref.watch(signupUserUseCaseProvider);
-
-  SignUpNotifier(this._ref) : super(const SignupStateInitial()) {
-    _init();
+@riverpod
+class SignUpNotifier extends _$SignUpNotifier {
+  @override
+  SignupState build() {
+    return const SignupStateInitial();
   }
-
-  Future<void> _init() async {}
 
   Future<void> signUp(
     BuildContext context,
@@ -34,6 +24,6 @@ class SignUpNotifier extends StateNotifier<SignupState> {
     required String lastName,
     required String password,
   }) async {
-    _ref.read(loggerServiceProvider);
+    ref.read(loggerServiceProvider);
   }
 }

@@ -1,8 +1,9 @@
 part of 'auth_usecases.dart';
 
-final loginUserUseCaseProvider = Provider(
-  (ref) => LoginUser(ref.watch(authRepositoryProvider)),
-);
+@Riverpod(keepAlive: true)
+LoginUser loginUserUseCase(LoginUserUseCaseRef ref) {
+  return LoginUser(ref.watch(authRepositoryProvider));
+}
 
 class LoginUser extends UseCase<DataState<User>, AccountType> {
   final AuthRepository _authRepository;

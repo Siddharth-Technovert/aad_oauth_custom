@@ -1,8 +1,9 @@
 part of 'onboarding_usecases.dart';
 
-final readOnboardingUseCaseProvider = Provider(
-  (ref) => ReadOnboarding(ref.watch(secureStorageManagerProvider)),
-);
+@Riverpod(keepAlive: true)
+ReadOnboarding readOnboardingUseCase(ReadOnboardingUseCaseRef ref) {
+  return ReadOnboarding(ref.watch(secureStorageManagerProvider));
+}
 
 class ReadOnboarding extends NoParamsUseCase<bool> {
   final SecureStorageManager _secureStorageManager;

@@ -17,7 +17,7 @@ abstract class SnackbarFactory {
     WidgetRef ref,
     VoidCallback fun,
   ) {
-    if (ref.read(hasConnectivityProvider)) {
+    if (ref.read(connectivityStatusProvider).value == true) {
       fun();
     } else {
       SnackbarFactory.showNoInternetConnectionSnackbar();

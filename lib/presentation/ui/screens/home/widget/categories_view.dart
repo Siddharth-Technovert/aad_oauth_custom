@@ -12,7 +12,7 @@ class CategoriesView extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final selectedCategory = ref.watch(categorySelectionChipsProvider);
+    final selectedCategory = ref.watch(categorySelectionChipsNotifierProvider);
     return SingleChildScrollView(
       scrollDirection: Axis.horizontal,
       child: IntrinsicHeight(
@@ -32,18 +32,21 @@ class CategoriesView extends ConsumerWidget {
                 onSelected: (val) {
                   SnackbarFactory.noInternetCheck(ref, () async {
                     if (ref
-                        .read(categorySelectionChipsProvider)
+                        .read(categorySelectionChipsNotifierProvider)
                         .contains(categories[index])) {
                       ref
-                          .read(categorySelectionChipsProvider.notifier)
-                          .update((state) => categories[0]);
+                          .read(categorySelectionChipsNotifierProvider.notifier)
+                          .updateTo(categories[0]);
                     } else {
                       ref
-                          .read(categorySelectionChipsProvider.notifier)
-                          .update((state) => categories[index]);
+                          .read(categorySelectionChipsNotifierProvider.notifier)
+                          .updateTo(categories[index]);
                     }
-                    ref.read(newsByCategoryProvider.notifier).getNewsByCategory(
-                          category: ref.read(categorySelectionChipsProvider),
+                    ref
+                        .read(newsByCategoryNotifierProvider.notifier)
+                        .getNewsByCategory(
+                          category:
+                              ref.read(categorySelectionChipsNotifierProvider),
                         );
                   });
                 },

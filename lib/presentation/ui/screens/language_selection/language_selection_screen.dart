@@ -12,7 +12,7 @@ class LanguageSelectionScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final localLanguage = ref.watch(localLanguageProvider);
+    final localLanguage = ref.watch(languageNotifierProvider);
     return Scaffold(
       appBar: AppBar(
         title: CustomText.titleMedium(context.appLoc.languageSelection),
@@ -54,7 +54,7 @@ class LanguageSelectionTile extends ConsumerWidget {
     return InkWell(
       onTap: () {
         if (selectedLanguage != language) {
-          ref.read(localLanguageProvider.notifier).update((state) => language);
+          ref.read(languageNotifierProvider.notifier).update(language);
         }
       },
       borderRadius: BorderRadius.circular(UIDimensions.radius(12)),

@@ -1,4 +1,4 @@
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../../core/app_bootstrapper.dart';
 import '../../../data/models/result/data_state.dart';
@@ -7,29 +7,22 @@ import '../../../domain/states/core/app_state.dart';
 import '../../../domain/usecases/storage/onboarding/onboarding_usecases.dart';
 import '../../../domain/usecases/user/user_usecases.dart';
 
-final appStateProvider =
-    StateNotifierProvider<AppStateNotifier, AppState>((ref) {
-  return AppStateNotifier(ref);
-});
+part 'app_state_provider.g.dart';
 
-class AppStateNotifier extends StateNotifier<AppState> {
-  AppState get currentState => state;
-  set currentState(AppState appState) {
-    state = appState;
-  }
-
-  final Ref _ref;
-
-  late final ReadUser _readUserUseCase = _ref.watch(readUserUseCaseProvider);
+@Riverpod(keepAlive: true)
+class AppStateNotifier extends _$AppStateNotifier {
+  late final ReadUser _readUserUseCase = ref.watch(readUserUseCaseProvider);
   // late final ReadJwt _readJwtUseCase = _read(readJwtTokenUseCaseProvider);
 
   // late final ReadOnboarding _readOnboardingUseCase =
   //     _ref.watch(readOnboardingUseCaseProvider);
   late final WriteOnboarding _writeOnboardingUseCase =
-      _ref.watch(writeOnboardingUseCaseProvider);
+      ref.watch(writeOnboardingUseCaseProvider);
 
-  AppStateNotifier(this._ref) : super(const AppStateInitial()) {
+  @override
+  AppState build() {
     _init();
+    return const AppStateInitial();
   }
 
   Future<void> _init() async {

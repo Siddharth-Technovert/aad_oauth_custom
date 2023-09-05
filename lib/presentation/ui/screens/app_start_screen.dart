@@ -14,8 +14,8 @@ class AppStartScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    ref.watch(hasConnectivityProvider);
-    return switch (ref.watch(appStateProvider)) {
+    ref.watch(connectivityStatusProvider);
+    return switch (ref.watch(appStateNotifierProvider)) {
       AppStateInitial() => const SizedBox.shrink(),
       AppStateOnboarding() => const SizedBox.shrink(),
       AppStateUnAuthenticated() => const LoginScreen(),

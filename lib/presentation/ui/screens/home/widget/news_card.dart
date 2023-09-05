@@ -21,7 +21,7 @@ class NewsCard extends ConsumerWidget {
           borderRadius: BorderRadius.circular(UIDimensions.radius(12))),
       child: InkWell(
         onTap: () {
-          ref.read(appRouterProvider).pushNamed(
+          ref.read(appRouterNotifierProvider).pushNamed(
                 ScreenRouteNames.newsDetailRoute,
                 arguments: article,
               );

@@ -1,7 +1,13 @@
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../../core/router/app_router.dart';
 
-final appRouterProvider = Provider(
-  (ref) => AppRouter(),
-);
+part 'router_provider.g.dart';
+
+@Riverpod(keepAlive: true)
+class AppRouterNotifier extends _$AppRouterNotifier {
+  @override
+  AppRouter build() {
+    return AppRouter();
+  }
+}

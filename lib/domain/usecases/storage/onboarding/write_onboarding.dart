@@ -1,8 +1,9 @@
 part of 'onboarding_usecases.dart';
 
-final writeOnboardingUseCaseProvider = Provider(
-  (ref) => WriteOnboarding(ref.watch(secureStorageManagerProvider)),
-);
+@Riverpod(keepAlive: true)
+WriteOnboarding writeOnboardingUseCase(WriteOnboardingUseCaseRef ref) {
+  return WriteOnboarding(ref.watch(secureStorageManagerProvider));
+}
 
 class WriteOnboarding extends UseCase<void, bool?> {
   final SecureStorageManager _secureStorageManager;

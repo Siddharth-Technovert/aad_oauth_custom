@@ -20,7 +20,7 @@ class HomeScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final newsByCategoryState = ref.watch(newsByCategoryProvider);
+    final newsByCategoryState = ref.watch(newsByCategoryNotifierProvider);
     return CustomScrollView(
       slivers: [
         SliverAppBar(
@@ -65,7 +65,7 @@ class HomeScreen extends ConsumerWidget {
                   AppExceptionNetworkError() => NoConnectionCard(onPressed: () {
                       SnackbarFactory.noInternetCheck(ref, () async {
                         await ref
-                            .read(newsByCategoryProvider.notifier)
+                            .read(newsByCategoryNotifierProvider.notifier)
                             .getNewsByCategory();
                       });
                     }),
@@ -73,7 +73,7 @@ class HomeScreen extends ConsumerWidget {
                       onPressed: () {
                         SnackbarFactory.noInternetCheck(ref, () async {
                           await ref
-                              .read(newsByCategoryProvider.notifier)
+                              .read(newsByCategoryNotifierProvider.notifier)
                               .getNewsByCategory();
                         });
                       },

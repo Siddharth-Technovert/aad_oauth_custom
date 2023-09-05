@@ -1,28 +1,25 @@
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../../domain/states/core/app_state.dart';
 import '../../../domain/states/user_state.dart';
 import '../../../domain/usecases/user/user_usecases.dart';
+import '../../ui/modals/snack_bar/snack_bar_factory.dart';
 import 'app_state_provider.dart';
 
-final userStateProvider = StateNotifierProvider<UserNotifier, UserState>((ref) {
-  final userState = switch (ref.watch(appStateProvider)) {
-    AppStateAuthenticated(user: var user) => UserStateAvailable(user: user),
-    _ => const UserStateNotAvailable()
-  };
-  return UserNotifier(ref, userState);
-});
+part 'user_state_provider.g.dart';
 
-class UserNotifier extends StateNotifier<UserState> {
-  final Ref _ref;
+@Riverpod(keepAlive: true)
+class UserStateNotifier extends _$UserStateNotifier {
   late final UpdateUser _updateUserUseCase =
-      _ref.watch(updateUserUseCaseProvider);
+      ref.watch(updateUserUseCaseProvider);
 
-  UserNotifier(this._ref, UserState userState) : super(userState) {
-    _init();
+  @override
+  UserState build() {
+    return switch (ref.watch(appStateNotifierProvider)) {
+      AppStateAuthenticated(user: var user) => UserStateAvailable(user: user),
+      _ => const UserStateNotAvailable()
+    };
   }
-
-  Future<void> _init() async {}
 
   Future<void> updateUserImage(String path) async {
     if (state.user != null) {
@@ -31,7 +28,7 @@ class UserNotifier extends StateNotifier<UserState> {
       if (isUpdated) {
         state = UserStateAvailable(user: updatedUser);
       } else {
-        // Fluttertoast.showToast(msg: "Unable to update image");
+        SnackbarFactory.showError("Unable to update image");
       }
     }
   }
@@ -44,7 +41,7 @@ class UserNotifier extends StateNotifier<UserState> {
       if (isUpdated) {
         state = UserStateAvailable(user: updatedUser);
       } else {
-        // Fluttertoast.showToast(msg: "Unable to update name");
+        SnackbarFactory.showError("Unable to update name");
       }
     }
   }

@@ -1,7 +1,9 @@
 part of 'user_usecases.dart';
 
-final updateUserUseCaseProvider =
-    Provider((ref) => UpdateUser(ref.watch(userRepositoryProvider)));
+@Riverpod(keepAlive: true)
+UpdateUser updateUserUseCase(UpdateUserUseCaseRef ref) {
+  return UpdateUser(ref.watch(userRepositoryProvider));
+}
 
 class UpdateUser extends UseCase<bool, User> {
   final UserRepository _userRepository;

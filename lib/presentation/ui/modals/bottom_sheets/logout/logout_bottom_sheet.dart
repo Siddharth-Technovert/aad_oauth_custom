@@ -36,13 +36,13 @@ class LogoutBottomSheet extends ConsumerWidget {
           UIDimensions.verticalSpaceMedium,
           PrimaryButton(
             onPressed: () async {
-              await ref.read(homeProvider.notifier).logout();
+              await ref.read(homeNotifierProvider.notifier).logout();
             },
             text: context.appLoc.logout,
           ),
           UIDimensions.verticalSpaceMedium,
           SecondaryButton(
-            onPressed: () => ref.read(appRouterProvider).pop(),
+            onPressed: () => ref.read(appRouterNotifierProvider).pop(),
             text: context.appLoc.cancel,
           ),
           UIDimensions.verticalSpaceMedium,

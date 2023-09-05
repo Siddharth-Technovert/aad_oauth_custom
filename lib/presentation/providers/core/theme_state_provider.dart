@@ -1,23 +1,20 @@
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../../domain/states/core/theme_state.dart';
 import '../../../domain/usecases/storage/theme/theme_storage_usecases.dart';
 
-final themeStateProvider =
-    StateNotifierProvider<ThemeStateNotifier, ThemeState>((ref) {
-  return ThemeStateNotifier(ref);
-});
+part 'theme_state_provider.g.dart';
 
-class ThemeStateNotifier extends StateNotifier<ThemeState> {
-  ThemeState get currentState => state;
-
-  final Ref _ref;
-  late final ReadTheme _readThemeUseCase = _ref.watch(readThemeUseCaseProvider);
+@Riverpod(keepAlive: true)
+class ThemeStateNotifier extends _$ThemeStateNotifier {
+  late final ReadTheme _readThemeUseCase = ref.watch(readThemeUseCaseProvider);
   late final WriteTheme _writeThemeUseCase =
-      _ref.watch(writeThemeUseCaseProvider);
+      ref.watch(writeThemeUseCaseProvider);
 
-  ThemeStateNotifier(this._ref) : super(const ThemeStateSystem()) {
+  @override
+  ThemeState build() {
     _init();
+    return const ThemeStateSystem();
   }
 
   Future<void> _init() async {

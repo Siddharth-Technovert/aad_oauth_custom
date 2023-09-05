@@ -1,4 +1,4 @@
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../../data/data_service_providers.dart';
 import '../../../data/models/result/data_state.dart';
@@ -9,23 +9,15 @@ import '../../../domain/usecases/auth/auth_usecases.dart';
 import '../../ui/modals/snack_bar/snack_bar_factory.dart';
 import '../core/app_state_provider.dart';
 
-final loginProvider = StateNotifierProvider<LoginNotifier, LoginState>((ref) {
-  return LoginNotifier(ref);
-});
+part 'login_provider.g.dart';
 
-class LoginNotifier extends StateNotifier<LoginState> {
-  LoginState get currentState => state;
-
-  final Ref _ref;
-  late final LoginUser _loginUserUseCase = _ref.watch(loginUserUseCaseProvider);
-
-  LoginNotifier(
-    this._ref,
-  ) : super(const LoginStateInitial()) {
-    _init();
+@riverpod
+class LoginNotifier extends _$LoginNotifier {
+  late final LoginUser _loginUserUseCase = ref.watch(loginUserUseCaseProvider);
+  @override
+  LoginState build() {
+    return const LoginStateInitial();
   }
-
-  Future<void> _init() async {}
 
   Future<void> logIn(
     AccountType accountType, {
@@ -36,8 +28,10 @@ class LoginNotifier extends StateNotifier<LoginState> {
     switch (dataState) {
       case DataStateSuccess<User>(data: var user):
         state = LoginStateSuccess(user: user);
-        await _ref.read(appStateProvider.notifier).authenticateState(user);
-        _ref.read(loggerServiceProvider).infoLog(
+        await ref
+            .read(appStateNotifierProvider.notifier)
+            .authenticateState(user);
+        ref.read(loggerServiceProvider).infoLog(
               "login with $accountType account",
               className: "Login",
             );

@@ -40,9 +40,9 @@ class _AppState extends ConsumerState<App> with WidgetsBindingObserver {
 
   @override
   Widget build(BuildContext context) {
-    final appRouter = ref.watch(appRouterProvider);
-    final localLanguage = ref.watch(localLanguageProvider);
-    final themeState = ref.watch(themeStateProvider);
+    final appRouter = ref.watch(appRouterNotifierProvider);
+    final localLanguage = ref.watch(languageNotifierProvider);
+    final themeState = ref.watch(themeStateNotifierProvider);
 
     return GestureDetector(
       behavior: HitTestBehavior.translucent,

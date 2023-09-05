@@ -1,4 +1,4 @@
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../../data/data_service_providers.dart';
 import '../../../domain/states/home_state.dart';
@@ -8,35 +8,28 @@ import '../core/app_state_provider.dart';
 import '../core/router_provider.dart';
 import '../core/user_state_provider.dart';
 
-final homeProvider = StateNotifierProvider<HomeNotifier, HomeState>((ref) {
-  return HomeNotifier(ref);
-});
+part 'home_provider.g.dart';
 
-class HomeNotifier extends StateNotifier<HomeState> {
-  HomeState get currentState => state;
-
-  final Ref _ref;
+@riverpod
+class HomeNotifier extends _$HomeNotifier {
   late final LogoutUser _logoutUserUseCase =
-      _ref.watch(logoutUserUseCaseProvider);
+      ref.watch(logoutUserUseCaseProvider);
 
-  HomeNotifier(
-    this._ref,
-  ) : super(const HomeStateInitial()) {
-    _init();
+  @override
+  HomeState build() {
+    return const HomeStateInitial();
   }
 
-  Future<void> _init() async {}
-
   Future<void> logout() async {
-    switch (_ref.read(userStateProvider)) {
+    switch (ref.read(userStateNotifierProvider)) {
       case UserStateAvailable(user: var user):
         _logoutUserUseCase(user.accountType);
       default:
     }
-    _ref.read(appRouterProvider).pop();
-    await _ref.read(appStateProvider.notifier).unAuthenticateState();
+    ref.read(appRouterNotifierProvider).pop();
+    await ref.read(appStateNotifierProvider.notifier).unAuthenticateState();
     // state = const HomeState.loggedOut();
-    _ref.read(loggerServiceProvider).infoLog(
+    ref.read(loggerServiceProvider).infoLog(
           "logout user",
           className: "Home",
         );

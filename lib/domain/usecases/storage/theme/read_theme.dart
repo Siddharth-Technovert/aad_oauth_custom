@@ -1,8 +1,9 @@
 part of 'theme_storage_usecases.dart';
 
-final readThemeUseCaseProvider = Provider(
-  (ref) => ReadTheme(ref.watch(secureStorageManagerProvider)),
-);
+@Riverpod(keepAlive: true)
+ReadTheme readThemeUseCase(ReadThemeUseCaseRef ref) {
+  return ReadTheme(ref.watch(secureStorageManagerProvider));
+}
 
 class ReadTheme extends NoParamsUseCase<ThemeState> {
   final SecureStorageManager _secureStorageManager;
