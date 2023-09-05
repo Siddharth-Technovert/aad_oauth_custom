@@ -37,19 +37,24 @@ class AppRouter {
     return navigatorKey.currentState?.pop<T>(result);
   }
 
+  //?Make sure to pass setting in material page route setting param
   Route<dynamic> generateRoutes(RouteSettings settings) {
     switch (settings.name) {
       case ScreenRouteNames.appStartRoute:
         return MaterialPageRoute(
+          settings: settings,
           builder: (context) => const AppStartScreen(),
         );
       case ScreenRouteNames.newsDetailRoute:
         return MaterialPageRoute(
-          builder: (context) =>
-              NewsDetailScreen(article: settings.arguments as Article),
+          settings: settings,
+          builder: (context) => NewsDetailScreen(
+            article: settings.arguments as Article,
+          ),
         );
       case ScreenRouteNames.languageSelectionRoute:
         return MaterialPageRoute(
+          settings: settings,
           builder: (context) => const LanguageSelectionScreen(),
         );
       case BottomSheetRouteNames.logOutBottomSheetRoute:
@@ -60,6 +65,7 @@ class AppRouter {
         );
       default:
         return MaterialPageRoute(
+          settings: settings,
           builder: (context) => Scaffold(
             body: Center(
               child: CustomText.displaySmall(
@@ -73,7 +79,7 @@ class AppRouter {
 }
 
 class ScreenRouteNames {
-  static const String appStartRoute = "/";
+  static const String appStartRoute = "/app_start_route";
   static const String newsDetailRoute = "/news_detail_route";
   static const String languageSelectionRoute = "/language_selection_route";
 }
