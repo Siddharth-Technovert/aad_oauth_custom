@@ -79,7 +79,7 @@ class AppRouter {
 }
 
 class ScreenRouteNames {
-  static const String appStartRoute = "/app_start_route";
+  static const String appStartRoute = "/";
   static const String newsDetailRoute = "/news_detail_route";
   static const String languageSelectionRoute = "/language_selection_route";
 }
