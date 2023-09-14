@@ -26,7 +26,7 @@ class HomeNotifier extends _$HomeNotifier {
         _logoutUserUseCase(user.accountType);
       default:
     }
-    ref.read(appRouterNotifierProvider).pop();
+    ref.read(appRouterProvider).pop();
     await ref.read(appStateNotifierProvider.notifier).unAuthenticateState();
     // state = const HomeState.loggedOut();
     ref.read(loggerServiceProvider).infoLog(

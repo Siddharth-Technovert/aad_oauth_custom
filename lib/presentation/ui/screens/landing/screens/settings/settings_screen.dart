@@ -1,18 +1,20 @@
 import 'dart:io';
 
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../../../core/router/app_router.dart';
-import '../../../../core/utils/extensions/context_extension.dart';
-import '../../../../core/utils/styles/dimensions/ui_dimensions.dart';
-import '../../../../domain/states/core/theme_state.dart';
-import '../../../providers/core/router_provider.dart';
-import '../../../providers/core/theme_state_provider.dart';
-import '../../widgets/custom_text.dart';
+import '../../../../../../core/router/app_router.dart';
+import '../../../../../../core/utils/extensions/context_extension.dart';
+import '../../../../../../core/utils/styles/dimensions/ui_dimensions.dart';
+import '../../../../../../domain/states/core/theme_state.dart';
+import '../../../../../providers/core/router_provider.dart';
+import '../../../../../providers/core/theme_state_provider.dart';
+import '../../../../widgets/custom_text.dart';
 
-class ProfileScreen extends ConsumerWidget {
-  const ProfileScreen({super.key});
+@RoutePage()
+class SettingsScreen extends ConsumerWidget {
+  const SettingsScreen({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -44,9 +46,7 @@ class ProfileScreen extends ConsumerWidget {
             Platform.isIOS ? Icons.arrow_forward_ios : Icons.arrow_forward,
           ),
           onTap: () {
-            ref
-                .read(appRouterNotifierProvider)
-                .pushNamed(ScreenRouteNames.languageSelectionRoute);
+            ref.read(appRouterProvider).push(const LanguageSelectionRoute());
           },
         ),
         ListTile(
@@ -55,10 +55,20 @@ class ProfileScreen extends ConsumerWidget {
           trailing: Icon(
             Platform.isIOS ? Icons.arrow_forward_ios : Icons.arrow_forward,
           ),
-          onTap: () {
-            ref
-                .read(appRouterNotifierProvider)
-                .pushNamed(BottomSheetRouteNames.logOutBottomSheetRoute);
+          onTap: () async {
+            // // final response =
+            // //     await Dio(BaseOptions(baseUrl: AppConfiguration.baseUrl)).get(
+            // //   EndPoints.topHeadlines.val(),
+            // //   queryParameters: {
+            // //     "country": "in",
+            // //     "apiKey": AppConfiguration.apiKey,
+            // //   },
+            // // );
+            // final response = await Dio().get(
+            //   "https://dart.dev",
+            // );
+            // print("Received Response $response");
+            ref.read(appRouterProvider).push(const LogoutBottomSheetRoute());
           },
         ),
       ],

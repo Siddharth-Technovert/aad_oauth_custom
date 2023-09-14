@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -7,6 +8,7 @@ import '../../../../core/utils/styles/dimensions/ui_dimensions.dart';
 import '../../../providers/core/language_provider.dart';
 import '../../widgets/custom_text.dart';
 
+@RoutePage()
 class LanguageSelectionScreen extends ConsumerWidget {
   const LanguageSelectionScreen({super.key});
 
@@ -16,6 +18,7 @@ class LanguageSelectionScreen extends ConsumerWidget {
     return Scaffold(
       appBar: AppBar(
         title: CustomText.titleMedium(context.appLoc.languageSelection),
+        leading: const AutoLeadingButton(),
         centerTitle: false,
       ),
       body: SafeArea(

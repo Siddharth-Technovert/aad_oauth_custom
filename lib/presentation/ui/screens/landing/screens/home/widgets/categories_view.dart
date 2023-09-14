@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../../../../core/utils/extensions/context_extension.dart';
-import '../../../../../core/utils/styles/dimensions/ui_dimensions.dart';
-import '../../../../providers/news/news_by_category_provider.dart';
-import '../../../modals/snack_bar/snack_bar_factory.dart';
-import '../../../widgets/custom_text.dart';
+import '../../../../../../../core/utils/extensions/context_extension.dart';
+import '../../../../../../../core/utils/styles/dimensions/ui_dimensions.dart';
+import '../../../../../../providers/news/news_by_category_provider.dart';
+import '../../../../../modals/snack_bar/snack_bar_factory.dart';
+import '../../../../../widgets/custom_text.dart';
 
 class CategoriesView extends ConsumerWidget {
   const CategoriesView({super.key});

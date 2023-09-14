@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -7,6 +8,7 @@ import '../../../../domain/models/article/article.dart';
 import '../../widgets/custom_network_image.dart';
 import '../../widgets/custom_text.dart';
 
+@RoutePage()
 class NewsDetailScreen extends ConsumerWidget {
   const NewsDetailScreen({required this.article, super.key});
 
@@ -17,6 +19,7 @@ class NewsDetailScreen extends ConsumerWidget {
     return Scaffold(
       appBar: AppBar(
         title: CustomText.titleMedium(context.appLoc.news),
+        leading: const AutoLeadingButton(),
         centerTitle: false,
       ),
       body: SafeArea(

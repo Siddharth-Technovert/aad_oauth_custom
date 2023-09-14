@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../../../../core/router/app_router.dart';
-import '../../../../../core/utils/styles/dimensions/ui_dimensions.dart';
-import '../../../../../domain/models/article/article.dart';
-import '../../../../providers/core/router_provider.dart';
-import '../../../widgets/custom_network_image.dart';
-import '../../../widgets/custom_text.dart';
+import '../../../../../../../core/router/app_router.dart';
+import '../../../../../../../core/utils/styles/dimensions/ui_dimensions.dart';
+import '../../../../../../../domain/models/article/article.dart';
+import '../../../../../../providers/core/router_provider.dart';
+import '../../../../../widgets/custom_network_image.dart';
+import '../../../../../widgets/custom_text.dart';
 
 class NewsCard extends ConsumerWidget {
   final Article article;
@@ -21,10 +21,7 @@ class NewsCard extends ConsumerWidget {
           borderRadius: BorderRadius.circular(UIDimensions.radius(12))),
       child: InkWell(
         onTap: () {
-          ref.read(appRouterNotifierProvider).pushNamed(
-                ScreenRouteNames.newsDetailRoute,
-                arguments: article,
-              );
+          ref.read(appRouterProvider).push(NewsDetailRoute(article: article));
         },
         borderRadius: BorderRadius.circular(UIDimensions.radius(12)),
         child: UIDimensions.padding(

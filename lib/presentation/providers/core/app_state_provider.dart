@@ -1,6 +1,7 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../../core/app_bootstrapper.dart';
+import '../../../data/data_service_providers.dart';
 import '../../../data/models/result/data_state.dart';
 import '../../../domain/models/user/user.dart';
 import '../../../domain/states/core/app_state.dart';
@@ -26,6 +27,8 @@ class AppStateNotifier extends _$AppStateNotifier {
   }
 
   Future<void> _init() async {
+    await ref.read(connectivityServiceProvider).checkConnectivity();
+
     //TODO: Uncomment onboarding and jwt code if require in the app
     // final isOnboardingDone = await _readOnboardingUseCase();
 
@@ -46,10 +49,10 @@ class AppStateNotifier extends _$AppStateNotifier {
         state = const AppStateUnAuthenticated();
     }
     // } else {
-    //   state = const AppState.unAuthenticated();
+    //   state = const AppStateUnAuthenticated();
     // }
     // } else {
-    //   state = const AppState.onboarding();
+    //   state = const AppStateOnboarding();
     // }
 
     SplashFactory.remove();

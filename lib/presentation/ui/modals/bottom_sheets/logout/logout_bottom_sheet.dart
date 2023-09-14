@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -9,6 +10,7 @@ import '../../../widgets/buttons/primary_button.dart';
 import '../../../widgets/buttons/secondary_button.dart';
 import '../../../widgets/custom_text.dart';
 
+@RoutePage(name: "LogoutBottomSheetRoute")
 class LogoutBottomSheet extends ConsumerWidget {
   const LogoutBottomSheet({super.key});
 
@@ -42,7 +44,7 @@ class LogoutBottomSheet extends ConsumerWidget {
           ),
           UIDimensions.verticalSpaceMedium,
           SecondaryButton(
-            onPressed: () => ref.read(appRouterNotifierProvider).pop(),
+            onPressed: () => ref.read(appRouterProvider).pop(),
             text: context.appLoc.cancel,
           ),
           UIDimensions.verticalSpaceMedium,
