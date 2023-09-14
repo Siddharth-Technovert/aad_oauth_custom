@@ -24,7 +24,8 @@ class LoggerService {
     } else {}
   }
 
-  Future dioErrorLog(String endpoint, dynamic e, StackTrace stackTrace) async {
+  Future dioExceptionLog(
+      String endpoint, dynamic e, StackTrace stackTrace) async {
     if (kDebugMode) {
       logError(e, stackTrace);
     } else {}

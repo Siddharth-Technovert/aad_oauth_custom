@@ -345,7 +345,7 @@ class ApiManagerImpl extends ApiManager {
       // _loggerService.errorLog(ex, s);
 
       if (ex.requestOptions.cancelToken?.isCancelled == false) {
-        await _ref.read(loggerServiceProvider).dioErrorLog(
+        await _ref.read(loggerServiceProvider).dioExceptionLog(
               "${ex.requestOptions.path}/${ex.requestOptions.queryParameters}",
               ex,
               stackTrace,
@@ -389,7 +389,7 @@ class ApiManagerImpl extends ApiManager {
     if (DtoSerializers.serializers[T] != null) {
       final data = response.data as Map<String, dynamic>?;
       if (data == null) {
-        await _ref.read(loggerServiceProvider).dioErrorLog(
+        await _ref.read(loggerServiceProvider).dioExceptionLog(
               "${response.requestOptions.path}/${response.requestOptions.queryParameters}",
               "null_data_in_response",
               StackTrace.current,
