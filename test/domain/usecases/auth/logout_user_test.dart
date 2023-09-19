@@ -14,7 +14,7 @@ void main() {
   test(
     'should logout user',
     () async {
-      const accountType = AccountType.google; //can be any account type
+      const accountType = AccountType.guest; //can be any account type
       // arrange
       when(mockAuthRepository.logout(accountType)).thenAnswer(
         (_) async => Future.value(),

@@ -15,17 +15,17 @@ void main() {
   });
 
   test(
-    'should login user with google account',
+    'should login user with guest account',
     () async {
-      const accountType = AccountType.google; //can be any account type
-      const dataState = DataState<User>.success(
+      const accountType = AccountType.guest; //can be any account type
+      const DataState<User> dataState = DataStateSuccess(
         User(
           name: "any_name",
           accountType: accountType,
         ),
       );
       // arrange
-      when(mockAuthRepository.login(AccountType.google)).thenAnswer(
+      when(mockAuthRepository.login(AccountType.guest)).thenAnswer(
         (_) async => dataState,
       );
       // act
@@ -40,21 +40,18 @@ void main() {
   test(
     'should return login.error on login failure',
     () async {
-      const accountType = AccountType.google; //can be any account type
-      const dataState = DataState<User>.error(
-        AppException.unknownError('Login failed'),
+      const accountType = AccountType.guest; //can be any account type
+      const DataState<User> dataState = DataStateError(
+        AppExceptionUnknownError('Login failed'),
       );
       // arrange
-      when(mockAuthRepository.login(AccountType.google)).thenAnswer(
+      when(mockAuthRepository.login(AccountType.guest)).thenAnswer(
         (_) async => dataState,
       );
       // act
       final result = await mockAuthRepository.login(accountType);
       // assert
-      expect(
-        result,
-        dataState,
-      );
+      expect(result, dataState);
       verify(mockAuthRepository.login(accountType));
       verifyNoMoreInteractions(mockAuthRepository);
     },

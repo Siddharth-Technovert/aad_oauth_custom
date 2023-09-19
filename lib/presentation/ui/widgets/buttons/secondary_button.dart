@@ -1,82 +1,81 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../../core/utils/extensions/context_extension.dart';
-import '../../../../core/utils/styles/colors/colors.dart';
 import '../../../../core/utils/styles/dimensions/ui_dimensions.dart';
-import '../../hooks/is_dark_mode_hook.dart';
+import '../custom_text.dart';
 
-class SecondaryButton extends HookWidget {
-  const SecondaryButton({
-    required this.onPressed,
-    required this.text,
-    this.horizontalPadding = 18,
-    this.verticalPadding = 16,
-    this.suffixIconData,
-    this.prefixIconData,
-    Key? key,
-  }) : super(key: key);
-
-  final VoidCallback onPressed;
+class SecondaryButton extends StatelessWidget {
+  final VoidCallback? _onPressed;
   final String text;
   final double horizontalPadding;
   final double verticalPadding;
-  final IconData? suffixIconData;
-  final IconData? prefixIconData;
+  final Widget? suffix;
+  final Widget? prefix;
+  final Color? backgroundColor;
+  final Color? foregroundColor;
+  final Color? borderColor;
+  final Widget? child;
+  final double? cornerRadius;
+
+  const SecondaryButton({
+    required this.text,
+    required VoidCallback onPressed,
+    this.horizontalPadding = 18,
+    this.verticalPadding = 16,
+    this.suffix,
+    this.prefix,
+    this.backgroundColor,
+    this.foregroundColor,
+    this.borderColor,
+    this.child,
+    this.cornerRadius,
+    super.key,
+  }) : _onPressed = onPressed;
+
+  const SecondaryButton.disabled({
+    required this.text,
+    this.horizontalPadding = 18,
+    this.verticalPadding = 16,
+    this.suffix,
+    this.prefix,
+    this.backgroundColor,
+    this.foregroundColor,
+    this.borderColor,
+    this.child,
+    this.cornerRadius,
+    super.key,
+  }) : _onPressed = null;
 
   @override
   Widget build(BuildContext context) {
-    final isDark = useIsDarkHook();
-    return Container(
-      width: horizontalPadding == 18.w ? double.infinity : null,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(100).r,
-        gradient: UIColors.secondaryGradient,
-        boxShadow: isDark
-            ? UIColors.dark.secondaryBoxShadow
-            : UIColors.light.secondaryBoxShadow,
-      ),
-      child: ElevatedButton(
-        onPressed: onPressed,
-        style: ElevatedButton.styleFrom(
-          padding: EdgeInsets.symmetric(
+    return UIDimensions.sizedBox(
+      width: UIDimensions.width(horizontalPadding) == UIDimensions.buttonW18
+          ? double.infinity
+          : null,
+      child: OutlinedButton(
+        onPressed: _onPressed,
+        style: OutlinedButton.styleFrom(
+          side: borderColor == null ? null : BorderSide(color: borderColor!),
+          // shape: smoothCornerShape(cornerRadius: cornerRadius),
+          padding: UIDimensions.symmetricPaddingGeometry(
             vertical: verticalPadding,
             horizontal: horizontalPadding,
           ),
-          backgroundColor: Colors.transparent,
-          shadowColor: Colors.transparent,
-          foregroundColor:
-              isDark ? UIColors.light.secondary : UIColors.dark.secondary,
-          elevation: 3,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(100).r,
-          ),
+          foregroundColor: foregroundColor,
+          backgroundColor: backgroundColor,
         ),
         child: Center(
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              if (prefixIconData != null)
-                Icon(
-                  prefixIconData,
-                  color: Colors.white,
-                  size: 20.sm,
-                ),
-              if (prefixIconData != null) UIDimensions.horizontalSpace(6),
-              Text(
-                text,
-                style: context.h5.copyWith(
-                  color: Colors.white,
-                ),
+              if (prefix != null) prefix!,
+              Padding(
+                padding: UIDimensions.symmetricPaddingGeometry(horizontal: 6),
+                child: child ??
+                    CustomText.titleMedium(
+                      text,
+                    ),
               ),
-              if (suffixIconData != null) UIDimensions.horizontalSpace(6),
-              if (suffixIconData != null)
-                Icon(
-                  suffixIconData,
-                  color: Colors.white,
-                  size: 20.sm,
-                ),
+              if (suffix != null) suffix!,
             ],
           ),
         ),

@@ -1,84 +1,73 @@
-import 'package:flutter_native_splash/flutter_native_splash.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-import '../../../core/device/background_service.dart';
+import '../../../core/app_bootstrapper.dart';
+import '../../../data/data_service_providers.dart';
+import '../../../data/models/result/data_state.dart';
 import '../../../domain/models/user/user.dart';
-import '../../../domain/service_providers.dart';
-import '../../../domain/states/core/app/app_state.dart';
-// import '../../../domain/usecases/storage/jwt/jwt_usecases.dart';
+import '../../../domain/states/core/app_state.dart';
 import '../../../domain/usecases/storage/onboarding/onboarding_usecases.dart';
 import '../../../domain/usecases/user/user_usecases.dart';
 
-final appStateProvider =
-    StateNotifierProvider<AppStateNotifier, AppState>((ref) {
-  return AppStateNotifier(ref);
-});
+part 'app_state_provider.g.dart';
 
-class AppStateNotifier extends StateNotifier<AppState> {
-  AppState get currentState => state;
-  set currentState(AppState appState) {
-    state = appState;
-  }
-
-  final Ref _ref;
-
-  late final ReadUser _readUserUseCase = _ref.read(readUserUseCaseProvider);
+@Riverpod(keepAlive: true)
+class AppStateNotifier extends _$AppStateNotifier {
+  late final ReadUser _readUserUseCase = ref.watch(readUserUseCaseProvider);
   // late final ReadJwt _readJwtUseCase = _read(readJwtTokenUseCaseProvider);
 
-  late final ReadOnboarding _readOnboardingUseCase =
-      _ref.read(readOnboardingUseCaseProvider);
+  // late final ReadOnboarding _readOnboardingUseCase =
+  //     _ref.watch(readOnboardingUseCaseProvider);
   late final WriteOnboarding _writeOnboardingUseCase =
-      _ref.read(writeOnboardingUseCaseProvider);
+      ref.watch(writeOnboardingUseCaseProvider);
 
-  AppStateNotifier(this._ref) : super(const AppState.initial()) {
+  @override
+  AppState build() {
     _init();
+    return const AppStateInitial();
   }
 
   Future<void> _init() async {
-    final isOnboardingDone = await _readOnboardingUseCase();
+    await ref.read(connectivityServiceProvider).checkConnectivity();
 
-    if (isOnboardingDone) {
-      // final jwt = await _readJwtUseCase();
-      // if (jwt != null) {
-      final dataState = await _readUserUseCase();
-      dataState.when(
-        success: (user) {
-          //? is state authenticated and want to do some background task
-          // await _read(backgroundServiceProvider).registerPeriodicTask(
-          //   "periodicTask",
-          //   BackgroundService.periodicTask,
-          // );
-          state = AppState.authenticated(user);
-        },
-        error: (ex) {
-          state = const AppState.unAuthenticated();
-        },
-      );
-    } else {
-      state = const AppState.unAuthenticated();
+    //TODO: Uncomment onboarding and jwt code if require in the app
+    // final isOnboardingDone = await _readOnboardingUseCase();
+
+    // if (isOnboardingDone) {
+    // final jwt = await _readJwtUseCase();
+    // if (jwt != null) {
+    final dataState = await _readUserUseCase();
+
+    switch (dataState) {
+      case DataStateSuccess<User>(data: var user):
+        //? is state authenticated and want to do some background task
+        // await _read(backgroundServiceProvider).registerPeriodicTask(
+        //   "periodicTask",
+        //   BackgroundService.periodicTask,
+        // );
+        state = AppStateAuthenticated(user: user);
+      case DataStateError<User>():
+        state = const AppStateUnAuthenticated();
     }
     // } else {
-    //   state = const AppState.onboarding();
+    //   state = const AppStateUnAuthenticated();
     // }
-    //? For now temporary solution
-    await _ref.read(backgroundServiceProvider).registerPeriodicTask(
-          "periodicTask",
-          BackgroundService.periodicTask,
-        );
+    // } else {
+    //   state = const AppStateOnboarding();
+    // }
 
-    FlutterNativeSplash.remove();
+    SplashFactory.remove();
   }
 
   Future<void> completeOnboarding() async {
     await _writeOnboardingUseCase(true);
-    state = const AppState.unAuthenticated();
+    state = const AppStateUnAuthenticated();
   }
 
   Future<void> authenticateState(User user) async {
-    state = AppState.authenticated(user);
+    state = AppStateAuthenticated(user: user);
   }
 
   Future<void> unAuthenticateState() async {
-    state = const AppState.unAuthenticated();
+    state = const AppStateUnAuthenticated();
   }
 }

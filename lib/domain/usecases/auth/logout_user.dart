@@ -1,8 +1,9 @@
 part of 'auth_usecases.dart';
 
-final logoutUserUseCaseProvider = Provider(
-  (ref) => LogoutUser(ref.read(authRepositoryProvider)),
-);
+@Riverpod(keepAlive: true)
+LogoutUser logoutUserUseCase(LogoutUserUseCaseRef ref) {
+  return LogoutUser(ref.watch(authRepositoryProvider));
+}
 
 class LogoutUser extends UseCase<void, AccountType> {
   final AuthRepository _authRepository;

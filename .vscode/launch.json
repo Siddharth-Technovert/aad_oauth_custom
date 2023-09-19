@@ -1,36 +1,24 @@
 {
     "configurations": [{
             "name": "Flutter Dev",
-            "program": "lib/main/main_dev.dart",
+            "program": "lib/main.dart",
             "request": "launch",
             "flutterMode": "debug",
             "type": "dart",
-            "args": [
-                "--flavor",
-                "dev"
-            ]
         },
         {
             "name": "Flutter Staging",
-            "program": "lib/main/main_staging.dart",
+            "program": "lib/main.dart",
             "request": "launch",
             "flutterMode": "profile",
             "type": "dart",
-            "args": [
-                "--flavor",
-                "staging"
-            ]
         },
         {
             "name": "Flutter Prod",
-            "program": "lib/main/main_prod.dart",
+            "program": "lib/main.dart",
             "request": "launch",
             "flutterMode": "release",
             "type": "dart",
-            "args": [
-                "--flavor",
-                "prod"
-            ]
         }
     ],
 

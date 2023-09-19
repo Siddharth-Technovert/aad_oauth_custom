@@ -1,66 +1,51 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../../../core/utils/extensions/context_extension.dart';
 import '../../../../../core/utils/styles/dimensions/ui_dimensions.dart';
 import '../../../../providers/core/router_provider.dart';
 import '../../../../providers/home/home_provider.dart';
-import '../../../hooks/app_loc_hook.dart';
-import '../../../hooks/is_dark_mode_hook.dart';
 import '../../../widgets/buttons/primary_button.dart';
-import '../../../widgets/buttons/secondary_outlined_button.dart';
+import '../../../widgets/buttons/secondary_button.dart';
+import '../../../widgets/custom_text.dart';
 
-class LogoutBottomSheet extends HookConsumerWidget {
-  const LogoutBottomSheet({Key? key}) : super(key: key);
+@RoutePage(name: "LogoutBottomSheetRoute")
+class LogoutBottomSheet extends ConsumerWidget {
+  const LogoutBottomSheet({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final bool isDarkMode = useIsDarkHook();
-    final appLoc = useAppLoc();
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 24),
-      decoration: BoxDecoration(
-        color: isDarkMode ? const Color(0xff2d2d30) : Colors.white,
-        borderRadius: const BorderRadius.only(
-          topLeft: Radius.circular(25.0),
-          topRight: Radius.circular(25.0),
-        ),
-      ),
-      child: ListView(
-        shrinkWrap: true,
-        physics: const BouncingScrollPhysics(),
+    return UIDimensions.padding(
+      padding: const EdgeInsets.all(16),
+      child: Column(
         children: [
-          UIDimensions.verticalSpaceMedium,
-          UIDimensions.verticalSpaceSmall,
           Center(
-            child: Text(
-              appLoc.logout,
-              style: context.h3,
+            child: CustomText.headlineMedium(
+              context.appLoc.logout,
             ),
           ),
           UIDimensions.verticalSpaceMedium,
           Center(
             child: SizedBox(
-              width: 193,
-              child: Text(
-                appLoc.logoutConfirm,
+              child: CustomText.titleMedium(
+                context.appLoc.logoutConfirmation,
                 textAlign: TextAlign.center,
-                style: context.h6,
+                textOverflow: null,
               ),
             ),
           ),
           UIDimensions.verticalSpaceMedium,
           PrimaryButton(
             onPressed: () async {
-              ref.read(appRouterProvider).pop();
-              ref.read(homeProvider.notifier).logout();
+              await ref.read(homeNotifierProvider.notifier).logout();
             },
-            text: appLoc.logout,
+            text: context.appLoc.logout,
           ),
           UIDimensions.verticalSpaceMedium,
-          SecondaryOutlinedButton(
+          SecondaryButton(
             onPressed: () => ref.read(appRouterProvider).pop(),
-            text: appLoc.cancel,
+            text: context.appLoc.cancel,
           ),
           UIDimensions.verticalSpaceMedium,
         ],

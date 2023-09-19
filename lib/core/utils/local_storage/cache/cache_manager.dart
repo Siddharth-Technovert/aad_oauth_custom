@@ -35,6 +35,11 @@ abstract class CacheManager {
     HiveDto data,
   );
 
+  // Future<List<HiveDto>?> getDataById<HiveDto extends CacheDto>(
+  //   String boxKey, {
+  //   required int id,
+  // });
+
   Future<bool> deleteSingle<HiveDto extends CacheDto>(
     String boxKey,
     String number,

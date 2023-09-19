@@ -2,10 +2,18 @@ import 'package:envied/envied.dart';
 
 part 'env.g.dart';
 
-@Envied(name: 'Env', path: '.env', obfuscate: true)
+@Envied(
+  name: 'Env',
+  path: '.env',
+  obfuscate: true,
+)
 abstract class Env {
   const Env();
 
-  @EnviedField(varName: 'BASE_URL_KEY')
-  static String baseUrlKey = _Env.baseUrlKey;
+  //TODO: Please note this base url should end with "/"
+  @EnviedField(varName: 'BASE_URL')
+  static String baseUrl = _Env.baseUrl;
+
+  @EnviedField(varName: 'API_KEY')
+  static String apiKey = _Env.apiKey;
 }

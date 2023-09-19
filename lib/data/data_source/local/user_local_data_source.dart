@@ -1,4 +1,4 @@
-import '../../../core/utils/constants/app_constants.dart';
+import '../../../core/utils/app_constants.dart';
 import '../../../core/utils/errors/app_exception.dart';
 import '../../../core/utils/errors/cache_exception.dart';
 import '../../../core/utils/local_storage/cache/cache_manager.dart';
@@ -8,46 +8,52 @@ import '../../models/cache/user/user_cache_dto.dart';
 import '../../models/result/data_state.dart';
 
 class UserLocalDataSource {
-  final CacheManager _cacheManager;
   final SecureStorageManager _secureStorageManager;
+  final CacheManager _cacheManager;
 
-  UserLocalDataSource(this._cacheManager, this._secureStorageManager);
+  const UserLocalDataSource(
+    this._secureStorageManager,
+    this._cacheManager,
+  );
 
-  Future<bool> storeJwtToken(String token) async =>
-      _secureStorageManager.putAsync(
-        key: AppConstants.tokenKey,
-        value: token,
-      );
-
-  Future<DataState<User>> createUser(UserCacheDto userCacheDto) async {
-    final isUserAdded = await _cacheManager.insertData<UserCacheDto>(
-      UserCacheDto.boxKey,
-      userCacheDto,
+  Future<DataState<bool>> storeToken(String token) async {
+    final isTokenStored = await _secureStorageManager.putAsync(
+      key: AppConstants.tokenKey,
+      value: token,
     );
-    if (isUserAdded) {
-      return DataState.success(userCacheDto.toModel());
+    if (isTokenStored) {
+      return const DataStateSuccess(true);
     } else {
-      return const DataState.error(
-        AppException.cacheError(CacheException.insertError()),
+      return const DataStateError(
+        AppExceptionCacheError(CacheExceptionInsertError()),
       );
     }
   }
 
-  Future<DataState<User>> readUser() async {
+  Future<DataState<User>> storeUser(UserCacheDto userCacheDto) async {
+    final userCacheDtoResponse = await _cacheManager.insertData<UserCacheDto>(
+      UserCacheDto.boxKey,
+      userCacheDto,
+    );
+    if (userCacheDtoResponse) {
+      return DataStateSuccess(userCacheDto.toModel());
+    } else {
+      return const DataStateError(
+        AppExceptionCacheError(CacheExceptionInsertError()),
+      );
+    }
+  }
+
+  Future<DataState<User>> getUser() async {
     final usersCacheDto =
         await _cacheManager.getAll<UserCacheDto>(UserCacheDto.boxKey);
     return usersCacheDto == null || usersCacheDto.isEmpty
-        ? const DataState.error(
-            AppException.cacheError(CacheException.insertError()),
+        ? const DataStateError(
+            AppExceptionCacheError(CacheExceptionFetchError()),
           )
-        : DataState.success(
+        : DataStateSuccess(
             usersCacheDto.first.toModel(),
           );
-  }
-
-  Future<bool> updateUser() async {
-    // TODO: implement updateUser
-    throw UnimplementedError();
   }
 
   Future<void> removeUser() async {

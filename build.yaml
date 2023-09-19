@@ -1,0 +1,27 @@
+targets:
+  $default:
+    builders:
+      freezed:
+        generate_for:
+          - lib/data/models/api/**_api_dto.dart
+          - lib/domain/models/**.dart
+      json_serializable:
+        generate_for:
+          - lib/data/models/api/**_api_dto.dart
+          - lib/domain/models/**.dart
+      auto_route_generator:auto_route_generator:
+        generate_for:
+          - lib/presentation/ui/screens/**_screen.dart
+          - lib/presentation/ui/modals/bottom_sheets/**_bottom_sheet.dart
+      auto_route_generator:auto_router_generator:
+        generate_for:
+          - lib/core/router/app_router.dart
+      hive_generator:
+        generate_for:
+          - lib/data/models/cache/**_cache_dto.dart
+      riverpod_generator:
+        generate_for:
+          - lib/data/data_service_providers.dart
+          - lib/domain/service_providers.dart
+          - lib/domain/usecases/**_usecases.dart
+          - lib/presentation/providers/**_provider.dart

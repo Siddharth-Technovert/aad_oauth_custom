@@ -1,11 +1,14 @@
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-import '../../../core/router/app_router.gr.dart';
+import '../../../core/router/app_router.dart';
+import '../../../data/data_service_providers.dart';
 
-final appRouterProvider = Provider.autoDispose(
-  (ref) => AppRouter(
-      // routeGuard: RouteGuard(
-      //   ref.read(secureStorageManagerProvider),
-      // ),
-      ),
-);
+part 'router_provider.g.dart';
+
+@riverpod
+Raw<AppRouter> appRouter(AppRouterRef ref) {
+  return AppRouter(
+    ref.watch(secureStorageManagerProvider),
+    ref.watch(loggerServiceProvider),
+  );
+}

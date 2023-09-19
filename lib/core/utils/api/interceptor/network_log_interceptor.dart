@@ -6,33 +6,39 @@ class NetworkLogInterceptor extends Interceptor {
   final LoggerService _log;
   NetworkLogInterceptor(this._log);
   @override
-  Future onRequest(
+  Future<void> onRequest(
     RequestOptions options,
     RequestInterceptorHandler handler,
   ) async {
-    _log.infoLog('REQUEST[${options.method}] => PATH: ${options.path}');
-    return super.onRequest(options, handler);
+    _log.infoLog('REQUEST [${options.method}] => PATH: ${options.path}');
+    super.onRequest(options, handler);
   }
 
   @override
-  Future onResponse(
+  Future<void> onResponse(
     Response response,
     ResponseInterceptorHandler handler,
   ) async {
     _log.infoLog(
-      'RESPONSE[${response.statusCode}] => PATH: ${response.requestOptions.path}',
+      'RESPONSE [${response.statusCode}] => PATH: ${response.requestOptions.path}\nDATA: [${response.data}]',
     );
-    return super.onResponse(response, handler);
+    super.onResponse(response, handler);
   }
 
   @override
-  Future onError(
-    DioError err,
+  Future<void> onError(
+    DioException err,
     ErrorInterceptorHandler handler,
   ) async {
-    _log.infoLog(
-      'ERROR[${err.response?.statusCode}] => PATH: ${err.requestOptions.path}',
-    );
-    return super.onError(err, handler);
+    if (CancelToken.isCancel(err)) {
+      _log.infoLog(
+        'ERROR [Request Cancelled] => PATH: ${err.requestOptions.path}',
+      );
+    } else {
+      _log.infoLog(
+        'ERROR [${err.response?.statusCode}] => PATH: ${err.requestOptions.path}\nDATA: ${err.response?.data}',
+      );
+    }
+    super.onError(err, handler);
   }
 }

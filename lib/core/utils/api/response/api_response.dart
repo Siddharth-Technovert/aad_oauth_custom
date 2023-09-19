@@ -1,12 +1,20 @@
-import 'package:freezed_annotation/freezed_annotation.dart';
-
 import '../../errors/app_exception.dart';
 
-part 'api_response.freezed.dart';
+sealed class ApiResponse<T> {}
 
-@freezed
-class ApiResponse<T> with _$ApiResponse<T> {
-  const ApiResponse._();
-  const factory ApiResponse.success(T data) = _ApiSuccess<T>;
-  const factory ApiResponse.error(AppException exception) = _ApiError;
+class ApiResponseSuccess<T> implements ApiResponse<T> {
+  const ApiResponseSuccess(this.data);
+  final T data;
+}
+
+class ApiResponseError<T> implements ApiResponse<T> {
+  const ApiResponseError(this.ex);
+  final AppException ex;
+}
+
+extension ApiResponseExtension<T> on ApiResponse<T> {
+  T? get data => switch (this) {
+        ApiResponseSuccess(data: T data) => data,
+        _ => null,
+      };
 }

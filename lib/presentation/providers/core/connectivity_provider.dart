@@ -1,9 +1,13 @@
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-import '../../../core/device/connectivity_service.dart';
-import '../../../domain/enums/connectivity_status.dart';
+import '../../../data/data_service_providers.dart';
 
-//check for initial condition
-final connectivityStatusProvider = StreamProvider<ConnectivityStatus>(
-  (ref) => ConnectivityService().connectionStatusController.stream,
-);
+part 'connectivity_provider.g.dart';
+
+@Riverpod(keepAlive: true)
+Stream<bool> connectivityStatus(ConnectivityStatusRef ref) {
+  return ref
+      .watch(connectivityServiceProvider)
+      .connectionStatusController
+      .stream;
+}

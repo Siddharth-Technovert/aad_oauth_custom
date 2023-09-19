@@ -1,22 +1,30 @@
-import 'package:flutter/cupertino.dart';
-import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:flutter/widgets.dart';
 
-import '../l10n/app_loc.dart';
+import '../extensions/context_extension.dart';
 
-part 'cache_exception.freezed.dart';
+sealed class CacheException implements Exception {}
 
-@freezed
-class CacheException with _$CacheException {
-  const CacheException._();
-  const factory CacheException.fetchError() = _FetchError;
-  const factory CacheException.insertError() = _InsertError;
-  const factory CacheException.deleteError() = _DeleteError;
-  const factory CacheException.updateError() = _UpdateError;
+class CacheExceptionFetchError implements CacheException {
+  const CacheExceptionFetchError();
+}
 
-  String msg(BuildContext context) => when(
-        fetchError: () => AppLoc.of(context).fetchCacheError,
-        insertError: () => AppLoc.of(context).insertCacheError,
-        deleteError: () => AppLoc.of(context).deleteCacheError,
-        updateError: () => AppLoc.of(context).updateCacheError,
-      );
+class CacheExceptionInsertError implements CacheException {
+  const CacheExceptionInsertError();
+}
+
+class CacheExceptionDeleteError implements CacheException {
+  const CacheExceptionDeleteError();
+}
+
+class CacheExceptionUpdateError implements CacheException {
+  const CacheExceptionUpdateError();
+}
+
+extension CacheExceptionExtension on CacheException {
+  String msg(BuildContext context) => switch (this) {
+        CacheExceptionFetchError() => context.appLoc.fetchCacheError,
+        CacheExceptionInsertError() => context.appLoc.insertCacheError,
+        CacheExceptionDeleteError() => context.appLoc.deleteCacheError,
+        CacheExceptionUpdateError() => context.appLoc.updateCacheError,
+      };
 }

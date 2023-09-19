@@ -1,10 +1,11 @@
+import '../../core/utils/api/response/api_response.dart';
 import '../../core/utils/errors/app_exception.dart';
-import '../../core/utils/errors/cache_exception.dart';
 import '../../domain/enums/account_type.dart';
 import '../../domain/models/user/user.dart';
 import '../../domain/repositories/user_repository.dart';
 import '../data_source/local/user_local_data_source.dart';
 import '../data_source/remote/user_remote_data_source.dart';
+import '../models/api/user/user_api_dto.dart';
 import '../models/result/data_state.dart';
 
 class UserRepositoryImpl implements UserRepository {
@@ -21,35 +22,34 @@ class UserRepositoryImpl implements UserRepository {
     String token,
     AccountType accountType,
   ) async {
-    final isTokenStored = await _userLocalDataSource.storeJwtToken(token);
-    if (isTokenStored) {
-      final userApiDtoResponse =
-          await _userRemoteDataSource.createUser(accountType);
-      return userApiDtoResponse.when(
-        success: (data) {
-          return _userLocalDataSource.createUser(data.toCacheDto());
-        },
-        error: (ex) => DataState.error(ex),
-      );
-    } else {
-      return const DataState.error(
-        AppException.cacheError(CacheException.insertError()),
-      );
+    final userResponse = await _userRemoteDataSource.createUser(accountType);
+    switch (userResponse) {
+      case ApiResponseSuccess<UserApiDto>(data: UserApiDto data):
+        final tokenStatusState = await _userLocalDataSource.storeToken(token);
+        switch (tokenStatusState) {
+          case DataStateSuccess<bool>():
+            return _userLocalDataSource.storeUser(data.toCacheDto());
+          case DataStateError<bool>(ex: var ex):
+            return DataStateError(ex);
+        }
+      case ApiResponseError<UserApiDto>(ex: AppException ex):
+        return DataStateError(ex);
     }
   }
 
   @override
   Future<DataState<User>> readUser() async {
-    return _userLocalDataSource.readUser();
+    return _userLocalDataSource.getUser();
   }
 
   @override
   Future<void> removeUser() async {
-    _userLocalDataSource.removeUser();
+    return _userLocalDataSource.removeUser();
   }
 
   @override
   Future<bool> updateUser(User user) {
-    return _userLocalDataSource.updateUser();
+    // TODO: implement updateUser
+    throw UnimplementedError();
   }
 }

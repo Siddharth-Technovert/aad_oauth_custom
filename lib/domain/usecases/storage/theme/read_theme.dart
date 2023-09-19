@@ -1,8 +1,9 @@
 part of 'theme_storage_usecases.dart';
 
-final readThemeUseCaseProvider = Provider(
-  (ref) => ReadTheme(ref.read(secureStorageManagerProvider)),
-);
+@Riverpod(keepAlive: true)
+ReadTheme readThemeUseCase(ReadThemeUseCaseRef ref) {
+  return ReadTheme(ref.watch(secureStorageManagerProvider));
+}
 
 class ReadTheme extends NoParamsUseCase<ThemeState> {
   final SecureStorageManager _secureStorageManager;
@@ -13,9 +14,9 @@ class ReadTheme extends NoParamsUseCase<ThemeState> {
       key: AppConstants.themeKey,
     );
     return themeString == 'light'
-        ? const ThemeState.light()
+        ? const ThemeStateLight()
         : themeString == 'dark'
-            ? const ThemeState.dark()
-            : const ThemeState.system();
+            ? const ThemeStateDark()
+            : const ThemeStateSystem();
   }
 }

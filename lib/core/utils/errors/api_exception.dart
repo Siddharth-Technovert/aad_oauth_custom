@@ -1,67 +1,66 @@
 import 'package:dio/dio.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:freezed_annotation/freezed_annotation.dart';
 
-import '../l10n/app_loc.dart';
+sealed class ApiException implements Exception {}
 
-part 'api_exception.freezed.dart';
+class ApiExceptionRequestCancelled implements ApiException {
+  const ApiExceptionRequestCancelled();
+}
 
-@freezed
-class ApiException with _$ApiException {
-  const ApiException._();
-  const factory ApiException.requestCancelled() = _RequestCancelled;
-  const factory ApiException.connectTimeout() = _ConnectTimeout;
-  const factory ApiException.receiveTimeout() = _ReceiveTimeout;
-  const factory ApiException.sendTimeout() = _SendTimeout;
+class ApiExceptionConnectTimeout implements ApiException {
+  const ApiExceptionConnectTimeout();
+}
 
-  const factory ApiException.badRequest() = _BadRequest;
-  const factory ApiException.unAuthorizedRequest() = _UnAuthorizedRequest;
-  const factory ApiException.requestNotFound() = _RequestNotFound;
-  const factory ApiException.internalServerError() = _InternalServerError;
-  const factory ApiException.unexpectedError() = _UnexpectedError;
-  const factory ApiException.defaultError(String error) = _DefaultError;
+class ApiExceptionReceiveTimeout implements ApiException {
+  const ApiExceptionReceiveTimeout();
+}
 
-  factory ApiException.getDioException(DioError error) {
-    switch (error.type) {
-      case DioErrorType.cancel:
-        return const ApiException.requestCancelled();
-      case DioErrorType.connectTimeout:
-        return const ApiException.connectTimeout();
-      case DioErrorType.sendTimeout:
-        return const ApiException.sendTimeout();
-      case DioErrorType.receiveTimeout:
-        return const ApiException.sendTimeout();
-      case DioErrorType.response:
-        switch (error.response!.statusCode) {
-          case 400:
-            return const ApiException.badRequest();
-          case 401:
-            return const ApiException.unAuthorizedRequest();
-          case 404:
-            return const ApiException.requestNotFound();
-          case 500:
-            return const ApiException.internalServerError();
-          default:
-            final responseCode = error.response!.statusCode;
-            return ApiException.defaultError(
-              "Received invalid status code: $responseCode",
-            );
-        }
-      default:
-        return const ApiException.unexpectedError();
-    }
+class ApiExceptionSendTimeout implements ApiException {
+  const ApiExceptionSendTimeout();
+}
+
+class ApiExceptionBadRequest implements ApiException {
+  const ApiExceptionBadRequest();
+}
+
+class ApiExceptionUnAuthorizedRequest implements ApiException {
+  const ApiExceptionUnAuthorizedRequest();
+}
+
+class ApiExceptionRequestNotFound implements ApiException {
+  const ApiExceptionRequestNotFound();
+}
+
+class ApiExceptionInternalServerError implements ApiException {
+  const ApiExceptionInternalServerError();
+}
+
+class ApiExceptionUnexpectedError implements ApiException {
+  const ApiExceptionUnexpectedError();
+}
+
+class ApiExceptionDefaultError implements ApiException {
+  const ApiExceptionDefaultError(this.error);
+  final String error;
+}
+
+extension DioExceptionExtension on DioException {
+  ApiException get dioExceptionToApiException {
+    return switch (type) {
+      DioExceptionType.cancel => const ApiExceptionRequestCancelled(),
+      DioExceptionType.connectionTimeout => const ApiExceptionConnectTimeout(),
+      DioExceptionType.connectionError => const ApiExceptionConnectTimeout(),
+      DioExceptionType.sendTimeout => const ApiExceptionSendTimeout(),
+      DioExceptionType.receiveTimeout => const ApiExceptionReceiveTimeout(),
+      DioExceptionType.badResponse => switch (response!.statusCode) {
+          400 => const ApiExceptionBadRequest(),
+          401 => const ApiExceptionUnAuthorizedRequest(),
+          404 => const ApiExceptionRequestNotFound(),
+          500 => const ApiExceptionInternalServerError(),
+          _ => ApiExceptionDefaultError(
+              "Received invalid status code: ${response!.statusCode}",
+            )
+        },
+      _ => const ApiExceptionUnexpectedError()
+    };
   }
-
-  String msg(BuildContext context) => when(
-        requestCancelled: () => AppLoc.of(context).requestCancelled,
-        connectTimeout: () => AppLoc.of(context).connectTimeout,
-        receiveTimeout: () => AppLoc.of(context).receiveTimeout,
-        sendTimeout: () => AppLoc.of(context).sendTimeout,
-        badRequest: () => AppLoc.of(context).badRequest,
-        unAuthorizedRequest: () => AppLoc.of(context).unAuthorizedRequest,
-        requestNotFound: () => AppLoc.of(context).requestNotFound,
-        internalServerError: () => AppLoc.of(context).internalServerError,
-        unexpectedError: () => AppLoc.of(context).unexpectedError,
-        defaultError: (ex) => "${AppLoc.of(context).defaultError}: $ex",
-      );
 }

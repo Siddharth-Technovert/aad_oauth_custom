@@ -7,4 +7,4 @@ template-arb-file: app_en.arb
 
 output-localization-file: app_localizations.dart
 output-class: AppLocalizations
-# nullable-getter: false
+nullable-getter: false

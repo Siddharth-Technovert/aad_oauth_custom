@@ -1,87 +1,227 @@
-// **************************************************************************
-// AutoRouteGenerator
-// **************************************************************************
-
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
 // **************************************************************************
-// AutoRouteGenerator
+// AutoRouterGenerator
 // **************************************************************************
-//
+
 // ignore_for_file: type=lint
+// coverage:ignore-file
 
-// ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'package:auto_route/auto_route.dart' as _i3;
-import 'package:flutter/material.dart' as _i4;
+part of 'app_router.dart';
 
-import '../../presentation/ui/modals/bottom_sheets/bottom_sheet_factory.dart'
-    as _i5;
-import '../../presentation/ui/modals/bottom_sheets/logout/logout_bottom_sheet.dart'
-    as _i2;
-import '../../presentation/ui/screens/app_start_screen.dart' as _i1;
-
-class AppRouter extends _i3.RootStackRouter {
-  AppRouter([_i4.GlobalKey<_i4.NavigatorState>? navigatorKey])
-      : super(navigatorKey);
+abstract class _$AppRouter extends RootStackRouter {
+  // ignore: unused_element
+  _$AppRouter({super.navigatorKey});
 
   @override
-  final Map<String, _i3.PageFactory> pagesMap = {
-    AppStartRoute.name: (routeData) {
-      return _i3.MaterialPageX<dynamic>(
+  final Map<String, PageFactory> pagesMap = {
+    HomeRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i1.AppStartScreen(),
+        child: const HomeScreen(),
+      );
+    },
+    LandingRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const LandingScreen(),
+      );
+    },
+    LanguageSelectionRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const LanguageSelectionScreen(),
+      );
+    },
+    LoginRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const LoginScreen(),
       );
     },
     LogoutBottomSheetRoute.name: (routeData) {
-      return _i3.CustomPage<dynamic>(
+      return AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i2.LogoutBottomSheet(),
-        customRouteBuilder: _i5.BottomSheetFactory.modalSheetBuilder,
-        opaque: true,
-        barrierDismissible: false,
+        child: const LogoutBottomSheet(),
+      );
+    },
+    NewsDetailRoute.name: (routeData) {
+      final args = routeData.argsAs<NewsDetailRouteArgs>();
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: NewsDetailScreen(
+          article: args.article,
+          key: args.key,
+        ),
+      );
+    },
+    OnboardingRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const OnboardingScreen(),
+      );
+    },
+    SettingsRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const SettingsScreen(),
+      );
+    },
+    SplashRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const SplashScreen(),
       );
     },
   };
-
-  @override
-  List<_i3.RouteConfig> get routes => [
-        _i3.RouteConfig(
-          AppStartRoute.name,
-          path: '/',
-        ),
-        _i3.RouteConfig(
-          LogoutBottomSheetRoute.name,
-          path: '/logout-bottom-sheet',
-        ),
-        _i3.RouteConfig(
-          '*#redirect',
-          path: '*',
-          redirectTo: '/',
-          fullMatch: true,
-        ),
-      ];
 }
 
 /// generated route for
-/// [_i1.AppStartScreen]
-class AppStartRoute extends _i3.PageRouteInfo<void> {
-  const AppStartRoute()
+/// [HomeScreen]
+class HomeRoute extends PageRouteInfo<void> {
+  const HomeRoute({List<PageRouteInfo>? children})
       : super(
-          AppStartRoute.name,
-          path: '/',
+          HomeRoute.name,
+          initialChildren: children,
         );
 
-  static const String name = 'AppStartRoute';
+  static const String name = 'HomeRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
 }
 
 /// generated route for
-/// [_i2.LogoutBottomSheet]
-class LogoutBottomSheetRoute extends _i3.PageRouteInfo<void> {
-  const LogoutBottomSheetRoute()
+/// [LandingScreen]
+class LandingRoute extends PageRouteInfo<void> {
+  const LandingRoute({List<PageRouteInfo>? children})
+      : super(
+          LandingRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'LandingRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [LanguageSelectionScreen]
+class LanguageSelectionRoute extends PageRouteInfo<void> {
+  const LanguageSelectionRoute({List<PageRouteInfo>? children})
+      : super(
+          LanguageSelectionRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'LanguageSelectionRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [LoginScreen]
+class LoginRoute extends PageRouteInfo<void> {
+  const LoginRoute({List<PageRouteInfo>? children})
+      : super(
+          LoginRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'LoginRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [LogoutBottomSheet]
+class LogoutBottomSheetRoute extends PageRouteInfo<void> {
+  const LogoutBottomSheetRoute({List<PageRouteInfo>? children})
       : super(
           LogoutBottomSheetRoute.name,
-          path: '/logout-bottom-sheet',
+          initialChildren: children,
         );
 
   static const String name = 'LogoutBottomSheetRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [NewsDetailScreen]
+class NewsDetailRoute extends PageRouteInfo<NewsDetailRouteArgs> {
+  NewsDetailRoute({
+    required Article article,
+    Key? key,
+    List<PageRouteInfo>? children,
+  }) : super(
+          NewsDetailRoute.name,
+          args: NewsDetailRouteArgs(
+            article: article,
+            key: key,
+          ),
+          initialChildren: children,
+        );
+
+  static const String name = 'NewsDetailRoute';
+
+  static const PageInfo<NewsDetailRouteArgs> page =
+      PageInfo<NewsDetailRouteArgs>(name);
+}
+
+class NewsDetailRouteArgs {
+  const NewsDetailRouteArgs({
+    required this.article,
+    this.key,
+  });
+
+  final Article article;
+
+  final Key? key;
+
+  @override
+  String toString() {
+    return 'NewsDetailRouteArgs{article: $article, key: $key}';
+  }
+}
+
+/// generated route for
+/// [OnboardingScreen]
+class OnboardingRoute extends PageRouteInfo<void> {
+  const OnboardingRoute({List<PageRouteInfo>? children})
+      : super(
+          OnboardingRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'OnboardingRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [SettingsScreen]
+class SettingsRoute extends PageRouteInfo<void> {
+  const SettingsRoute({List<PageRouteInfo>? children})
+      : super(
+          SettingsRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'SettingsRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [SplashScreen]
+class SplashRoute extends PageRouteInfo<void> {
+  const SplashRoute({List<PageRouteInfo>? children})
+      : super(
+          SplashRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'SplashRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
 }

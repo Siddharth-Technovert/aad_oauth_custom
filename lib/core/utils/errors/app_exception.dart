@@ -1,26 +1,29 @@
-import 'package:flutter/cupertino.dart';
-import 'package:freezed_annotation/freezed_annotation.dart';
-
-import '../l10n/app_loc.dart';
+import '../api/response/api_error_response.dart';
 import 'api_exception.dart';
 import 'cache_exception.dart';
 
-part 'app_exception.freezed.dart';
+sealed class AppException implements Exception {}
 
-@freezed
-class AppException with _$AppException {
-  const AppException._();
-  const factory AppException.networkError() = _NetworkError;
-  const factory AppException.cacheError(CacheException error) = _CacheError;
-  const factory AppException.serializationError() = _SerializationError;
-  const factory AppException.apiError(ApiException error) = _ApiError;
-  const factory AppException.unknownError(dynamic error) = _UnknownError;
+class AppExceptionNetworkError implements AppException {
+  const AppExceptionNetworkError();
+}
 
-  String msg(BuildContext context) => when(
-        networkError: () => AppLoc.of(context).networkError,
-        cacheError: (ex) => "${AppLoc.of(context).cacheError} ${ex.msg}",
-        serializationError: () => AppLoc.of(context).serializationError,
-        apiError: (ex) => "${AppLoc.of(context).apiError} ${ex.msg}",
-        unknownError: (ex) => "${AppLoc.of(context).unknownError} $ex",
-      );
+class AppExceptionCacheError implements AppException {
+  const AppExceptionCacheError(this.cacheException);
+  final CacheException cacheException;
+}
+
+class AppExceptionSerializationError implements AppException {
+  const AppExceptionSerializationError();
+}
+
+class AppExceptionApiError implements AppException {
+  const AppExceptionApiError(this.apiErrorResponse, this.apiException);
+  final ApiErrorResponse? apiErrorResponse;
+  final ApiException apiException;
+}
+
+class AppExceptionUnknownError implements AppException {
+  const AppExceptionUnknownError(this.error);
+  final dynamic error;
 }

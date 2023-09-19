@@ -1,12 +1,13 @@
-import 'package:freezed_annotation/freezed_annotation.dart';
-
 import '../../../core/utils/errors/app_exception.dart';
 
-part 'data_state.freezed.dart';
+sealed class DataState<T> {}
 
-@freezed
-class DataState<T> with _$DataState<T> {
-  const DataState._();
-  const factory DataState.success(T data) = _DataSuccess<T>;
-  const factory DataState.error(AppException exception) = _DataError;
+class DataStateSuccess<T> implements DataState<T> {
+  const DataStateSuccess(this.data);
+  final T data;
+}
+
+class DataStateError<T> implements DataState<T> {
+  const DataStateError(this.ex);
+  final AppException ex;
 }

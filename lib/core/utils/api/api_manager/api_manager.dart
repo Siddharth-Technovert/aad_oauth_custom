@@ -10,7 +10,6 @@ abstract class ApiManager {
     Map<String, dynamic>? queryParams,
     Map<String, dynamic>? headers,
     CancelToken? cancelToken,
-    bool requiresAuthToken = true,
   });
 
   Future<ApiResponse<List<T>>> getAsyncList<T extends ToJson>({
@@ -19,17 +18,23 @@ abstract class ApiManager {
     Map<String, dynamic>? queryParams,
     Map<String, dynamic>? headers,
     CancelToken? cancelToken,
-    bool requiresAuthToken = true,
   });
 
-  Future<ApiResponse<bool>> postAsync<T extends ToJson>({
+  Future<ApiResponse<T>> postAsync<T extends ToJson>({
     required String endpoint,
     required dynamic data,
     String? newBaseUrl,
     Map<String, dynamic>? queryParams,
     Map<String, dynamic>? headers,
     CancelToken? cancelToken,
-    bool requiresAuthToken = true,
+  });
+  Future<ApiResponse<List<T>>> postAsyncList<T extends ToJson>({
+    required String endpoint,
+    required dynamic data,
+    String? newBaseUrl,
+    Map<String, dynamic>? queryParams,
+    Map<String, dynamic>? headers,
+    CancelToken? cancelToken,
   });
 
   Future<ApiResponse<T>> putAsync<T extends ToJson>({
@@ -39,17 +44,40 @@ abstract class ApiManager {
     Map<String, dynamic>? queryParams,
     Map<String, dynamic>? headers,
     CancelToken? cancelToken,
-    bool requiresAuthToken = true,
   });
 
-  Future<ApiResponse<bool>> deleteAsync<T extends ToJson>({
+  Future<ApiResponse<T>> deleteAsync<T extends ToJson>({
     required String endpoint,
     dynamic data,
     String? newBaseUrl,
     Map<String, dynamic>? queryParams,
     Map<String, dynamic>? headers,
     CancelToken? cancelToken,
-    bool requiresAuthToken = true,
+  });
+  Future<ApiResponse<List<T>>> deleteAsyncList<T extends ToJson>({
+    required String endpoint,
+    dynamic data,
+    String? newBaseUrl,
+    Map<String, dynamic>? queryParams,
+    Map<String, dynamic>? headers,
+    CancelToken? cancelToken,
+  });
+
+  Future<ApiResponse<Map<String, dynamic>>> getMapAsync({
+    required String endpoint,
+    String? newBaseUrl,
+    Map<String, dynamic>? queryParams,
+    Map<String, dynamic>? headers,
+    CancelToken? cancelToken,
+  });
+
+  // for APIs that give just a string as response
+  Future<ApiResponse<String>> getStringAsync({
+    required String endpoint,
+    String? newBaseUrl,
+    Map<String, dynamic>? queryParams,
+    Map<String, dynamic>? headers,
+    CancelToken? cancelToken,
   });
 
   void cancelRequests({CancelToken? cancelToken});

@@ -1,4 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+
 import '../../../core/utils/mappers/ui_model.dart';
 import '../../../data/models/cache/user/user_cache_dto.dart';
 import '../../enums/account_type.dart';

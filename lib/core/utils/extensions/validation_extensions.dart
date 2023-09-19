@@ -6,27 +6,14 @@ extension ValidationExtension on String {
     return emailRegEx.hasMatch(this);
   }
 
-  bool get isValidPhoneNumber {
-    final phoneNumberRegEx = RegExp(
-      r'^([+]?\d{1,2}[.-\s]?)?(\d{3}[.-]?){2}\d{4}$',
-    );
-    return phoneNumberRegEx.hasMatch(this);
-  }
-
   bool get isValidName {
     final nameRegExp = RegExp(r"^\S+(?: \S+)*$");
     return nameRegExp.hasMatch(this);
   }
 
-  bool get isValidFullName {
-    final fullNameRegExp =
-        RegExp(r"^\s*([A-Za-z]{1,}([\.,] |[-']| ))+[A-Za-z]+\.?\s*$");
-    return fullNameRegExp.hasMatch(this);
-  }
-
   bool get isValidPassword {
     final passwordRegExp = RegExp(
-      r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\><*~]).{8,}/pre>',
+      r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$',
     );
     return passwordRegExp.hasMatch(this);
   }

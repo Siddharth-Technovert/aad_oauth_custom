@@ -1,71 +1,144 @@
-part of 'app_theme.dart';
+import 'dart:io';
 
-class _AppThemeDark {
-  const _AppThemeDark();
-  ThemeData get theme => ThemeData(
-        fontFamily: 'Poppins',
-        colorScheme: ColorScheme.fromSeed(
-          seedColor: UIColors.dark.primary,
-          primary: UIColors.dark.primary,
-          secondary: UIColors.dark.secondary,
-          background: UIColors.dark.scaffoldBackground,
-          brightness: Brightness.dark,
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+
+import '../../utils/assets_gen/fonts.gen.dart';
+import '../../utils/styles/colors/ui_colors.dart';
+import '../../utils/styles/colors/ui_colors_dark.dart';
+import '../../utils/styles/dimensions/ui_dimensions.dart';
+import '../../utils/styles/text_styles/ui_text_styles.dart';
+import '../../utils/styles/text_styles/ui_text_styles_dark.dart';
+
+class AppThemeDark {
+  final UIColors colors = UIColorsDark();
+  final UITextStyles textStyles = UITextStylesDark();
+
+  ThemeData get theme {
+    return ThemeData(
+      useMaterial3: true,
+      fontFamily: FontFamily.poppins,
+      colorScheme: _colorScheme,
+      //?Theme Extensions
+      extensions: [colors.customColors],
+      //?Typography
+      typography: Typography.material2021(
+        platform:
+            Platform.isAndroid ? TargetPlatform.android : TargetPlatform.iOS,
+        colorScheme: const ColorScheme.light(),
+      ),
+      textTheme: _textTheme,
+      primaryTextTheme: _primaryTextTheme,
+      textSelectionTheme: TextSelectionThemeData(cursorColor: colors.primary),
+      //?Shapes Theme
+      iconTheme: _iconTheme,
+      appBarTheme: _appBarTheme,
+      navigationBarTheme: _navigationBarTheme,
+      inputDecorationTheme: _inputDecorationTheme,
+    );
+  }
+
+  ColorScheme get _colorScheme => ColorScheme(
+        brightness: Brightness.dark,
+        primary: colors.primary,
+        onPrimary: colors.onPrimary,
+        primaryContainer: colors.primaryContainer,
+        onPrimaryContainer: colors.onPrimaryContainer,
+        secondary: colors.secondary,
+        onSecondary: colors.onSecondary,
+        secondaryContainer: colors.secondaryContainer,
+        onSecondaryContainer: colors.onSecondaryContainer,
+        tertiary: colors.tertiary,
+        onTertiary: colors.onTertiary,
+        tertiaryContainer: colors.tertiaryContainer,
+        onTertiaryContainer: colors.onTertiaryContainer,
+        error: colors.error,
+        onError: colors.onError,
+        errorContainer: colors.errorContainer,
+        onErrorContainer: colors.onErrorContainer,
+        background: colors.background,
+        onBackground: colors.onBackground,
+        surface: colors.surface,
+        onSurface: colors.onSurface,
+        surfaceVariant: colors.surfaceVariant,
+        onSurfaceVariant: colors.onSurfaceVariant,
+        outline: colors.outline,
+        outlineVariant: colors.outlineVariant,
+        shadow: colors.shadow,
+        scrim: colors.scrim,
+        inverseSurface: colors.inverseSurface,
+        onInverseSurface: colors.onInverseSurface,
+        inversePrimary: colors.inversePrimary,
+        surfaceTint: colors.surfaceTint,
+      );
+
+  IconThemeData get _iconTheme => IconThemeData(
+        size: UIDimensions.icon24,
+        color: colors.onBackground,
+      );
+
+  TextTheme get _textTheme => TextTheme(
+        displayLarge: textStyles.displayLarge,
+        displayMedium: textStyles.displayMedium,
+        displaySmall: textStyles.displaySmall,
+        headlineLarge: textStyles.headlineLarge,
+        headlineMedium: textStyles.headlineMedium,
+        headlineSmall: textStyles.headlineSmall,
+        titleLarge: textStyles.titleLarge,
+        titleMedium: textStyles.titleMedium,
+        titleSmall: textStyles.titleSmall,
+        bodyLarge: textStyles.bodyLarge,
+        bodyMedium: textStyles.bodyMedium,
+        bodySmall: textStyles.bodySmall,
+        labelLarge: textStyles.labelLarge,
+        labelMedium: textStyles.labelMedium,
+        labelSmall: textStyles.labelSmall,
+      ).apply(
+        fontFamily: FontFamily.poppins,
+      );
+
+  TextTheme get _primaryTextTheme => TextTheme(
+        displayLarge: textStyles.displayLarge.copyWith(color: colors.primary),
+        displayMedium: textStyles.displayMedium.copyWith(color: colors.primary),
+        displaySmall: textStyles.displaySmall.copyWith(color: colors.primary),
+        headlineLarge: textStyles.headlineLarge.copyWith(color: colors.primary),
+        headlineMedium:
+            textStyles.headlineMedium.copyWith(color: colors.primary),
+        headlineSmall: textStyles.headlineSmall.copyWith(color: colors.primary),
+        titleLarge: textStyles.titleLarge.copyWith(color: colors.primary),
+        titleMedium: textStyles.titleMedium.copyWith(color: colors.primary),
+        titleSmall: textStyles.titleSmall.copyWith(color: colors.primary),
+        bodyLarge: textStyles.bodyLarge.copyWith(color: colors.primary),
+        bodyMedium: textStyles.bodyMedium.copyWith(color: colors.primary),
+        bodySmall: textStyles.bodySmall.copyWith(color: colors.primary),
+        labelLarge: textStyles.labelLarge.copyWith(color: colors.primary),
+        labelMedium: textStyles.labelMedium.copyWith(color: colors.primary),
+        labelSmall: textStyles.labelSmall.copyWith(color: colors.primary),
+      ).apply(
+        fontFamily: FontFamily.poppins,
+      );
+
+  AppBarTheme get _appBarTheme => AppBarTheme(
+        iconTheme: _iconTheme,
+        systemOverlayStyle: SystemUiOverlayStyle.light.copyWith(
+          statusBarColor: colors.background,
         ),
-        scaffoldBackgroundColor: UIColors.dark.scaffoldBackground,
-        backgroundColor: UIColors.dark.background,
-        drawerTheme: DrawerThemeData(
-          backgroundColor: UIColors.dark.scaffoldBackground,
-        ),
-        appBarTheme: AppBarTheme(
-          color: UIColors.dark.background,
-          iconTheme: IconThemeData(color: UIColors.dark.icon),
-          titleTextStyle: UITextStyles.dark.h3,
-          toolbarTextStyle: UITextStyles.dark.h6,
-          systemOverlayStyle: SystemUiOverlayStyle(
-            statusBarBrightness: Brightness.dark,
-            statusBarColor: UIColors.dark.background,
-            statusBarIconBrightness: Brightness.light,
-          ),
-        ),
-        iconTheme: IconThemeData(
-          color: UIColors.light.icon,
-        ),
-        textTheme: TextTheme(
-          headline1: UITextStyles.dark.h1,
-          headline2: UITextStyles.dark.h2,
-          headline3: UITextStyles.dark.h3,
-          headline4: UITextStyles.dark.h4,
-          headline5: UITextStyles.dark.h5,
-          headline6: UITextStyles.dark.h6,
-          bodyText1: UITextStyles.dark.bodyText1,
-          bodyText2: UITextStyles.dark.bodyText2,
-          button: UITextStyles.defaultButtonStyle(),
-          caption: UITextStyles.dark.caption,
-        ),
-        textSelectionTheme: TextSelectionThemeData(
-          selectionColor: UIColors.dark.textSelection,
-        ),
-        textButtonTheme: TextButtonThemeData(
-          style: ButtonStyle(
-            backgroundColor: UIColors.dark.button,
-          ),
-        ),
-        bottomNavigationBarTheme: BottomNavigationBarThemeData(
-          backgroundColor: UIColors.light.bottomNavBgColor,
-          selectedItemColor: UIColors.dark.bottomNavSelectedItem,
-          unselectedItemColor: UIColors.dark.bottomNavUnSelectedItem,
-          elevation: 8,
-        ),
-        bottomSheetTheme: BottomSheetThemeData(
-          backgroundColor: UIColors.dark.scaffoldBackground,
-        ),
-        switchTheme: SwitchThemeData(
-          thumbColor: MaterialStateProperty.all<Color>(
-            UIColors.dark.primary,
-          ),
-          trackColor: MaterialStateProperty.all<Color>(
-            UIColors.dark.primary.withOpacity(0.5),
-          ),
-        ),
+      );
+
+  NavigationBarThemeData get _navigationBarTheme => NavigationBarThemeData(
+        height: UIDimensions.height(80),
+      );
+
+  InputDecorationTheme get _inputDecorationTheme => InputDecorationTheme(
+        border: UIDimensions.inputDecorationBorder(colors.background),
+        enabledBorder: UIDimensions.inputDecorationBorder(colors.background),
+        focusedBorder: UIDimensions.inputDecorationBorder(colors.primary),
+        disabledBorder: UIDimensions.inputDecorationBorder(colors.background),
+        hintStyle: textStyles.bodyMedium.copyWith(color: colors.onBackground),
+        contentPadding: UIDimensions.allPaddingGeometry(16),
+        filled: true,
+        isDense: true,
+        suffixIconColor: colors.onBackground,
+        prefixIconColor: colors.onBackground,
       );
 }

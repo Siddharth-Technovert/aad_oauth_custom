@@ -6,18 +6,16 @@ import '../../models/api/user/user_api_dto.dart';
 class UserRemoteDataSource {
   // ignore: unused_field
   final ApiManager _apiManager;
+
   UserRemoteDataSource(this._apiManager);
 
   Future<ApiResponse<UserApiDto>> createUser(AccountType accountType) async {
-    final userApiDto = UserApiDto(
-      id: "0",
-      name: "Jon Snow",
-      accountType: accountType,
+    return ApiResponseSuccess(
+      UserApiDto(
+        id: "0",
+        name: "Jon Snow",
+        accountType: accountType,
+      ),
     );
-    return ApiResponse.success(userApiDto);
   }
-
-  Future<void> readUser() async {}
-  Future<void> updateUser() async {}
-  Future<void> removeUser() async {}
 }
