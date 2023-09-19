@@ -5,6 +5,7 @@ class AuthInterceptor extends Interceptor {
   // ignore: unused_field
   final Ref _ref;
   AuthInterceptor(this._ref);
+
   @override
   Future<void> onRequest(
     RequestOptions options,

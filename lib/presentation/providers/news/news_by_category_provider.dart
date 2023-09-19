@@ -1,4 +1,3 @@
-import 'package:dio/dio.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../../core/utils/extensions/ref_extensions.dart';
@@ -34,7 +33,8 @@ class CategorySelectionChipsNotifier extends _$CategorySelectionChipsNotifier {
 
 @riverpod
 class NewsByCategoryNotifier extends _$NewsByCategoryNotifier {
-  late final CancelToken _cancelToken = ref.cancelToken();
+  late final _cancelToken = ref.cancelToken();
+
   late final NewsByCategory _topHeadlines =
       ref.watch(newsByCategoryUseCaseProvider);
 
@@ -51,55 +51,23 @@ class NewsByCategoryNotifier extends _$NewsByCategoryNotifier {
     // }
     // state = NewsByCategoryStateLoading(news: oldNews);
     state = const NewsByCategoryStateLoading();
-    final dataState = await _topHeadlines(
-      NewsByCategoryParam(
-        cancelToken: _cancelToken,
-        category: category == categories[0] ? null : category,
-      ),
-    );
-    switch (dataState) {
-      case DataStateSuccess<List<Article>>(data: var articles):
-        state = NewsByCategoryStateLoaded(news: articles);
-      case DataStateError<List<Article>>(ex: var ex):
-        state = NewsByCategoryStateError(ex);
+    //? Below await was for testing but can be used as debounced also
+    //? await Future.delayed(const Duration(seconds: 5));
+    if (!_cancelToken.isCancelled) {
+      final dataState = await _topHeadlines(
+        NewsByCategoryParam(
+          cancelToken: _cancelToken,
+          category: category == categories[0] ? null : category,
+        ),
+      );
+      if (!_cancelToken.isCancelled) {
+        switch (dataState) {
+          case DataStateSuccess<List<Article>>(data: var articles):
+            state = NewsByCategoryStateLoaded(news: articles);
+          case DataStateError<List<Article>>(ex: var ex):
+            state = NewsByCategoryStateError(ex);
+        }
+      }
     }
   }
 }
-
-// final newsByCategoryProvider = StateNotifierProvider.autoDispose<
-//     NewsByCategoryNotifier, NewsByCategoryState>((ref) {
-//   return NewsByCategoryNotifier(ref);
-// });
-
-// class NewsByCategoryNotifier extends StateNotifier<NewsByCategoryState> {
-//   final Ref _ref;
-//   late final CancelToken _cancelToken = _ref.cancelToken();
-//   late final NewsByCategory _topHeadlines =
-//       _ref.watch(newsByCategoryUseCaseProvider);
-
-//   NewsByCategoryNotifier(this._ref)
-//       : super(const NewsByCategoryStateInitial()) {
-//     getNewsByCategory();
-//   }
-
-//   Future<void> getNewsByCategory({String? category}) async {
-//     // List<Article>? oldNews;
-//     // if (state is NewsByCategoryStateLoaded) {
-//     //   oldNews = (state as NewsByCategoryStateLoaded).news;
-//     // }
-//     // state = NewsByCategoryStateLoading(news: oldNews);
-//     state = const NewsByCategoryStateLoading();
-//     final dataState = await _topHeadlines(
-//       NewsByCategoryParam(
-//         cancelToken: _cancelToken,
-//         category: category == categories[0] ? null : category,
-//       ),
-//     );
-//     switch (dataState) {
-//       case DataStateSuccess<List<Article>>(data: var articles):
-//         state = NewsByCategoryStateLoaded(news: articles);
-//       case DataStateError<List<Article>>(ex: var ex):
-//         state = NewsByCategoryStateError(ex);
-//     }
-//   }
-// }

@@ -20,10 +20,10 @@ class NewsByCategory
 }
 
 class NewsByCategoryParam {
-  final CancelToken cancelToken;
+  final CancelToken? cancelToken;
   final String? category;
   NewsByCategoryParam({
-    required this.cancelToken,
+    this.cancelToken,
     this.category,
   });
 }

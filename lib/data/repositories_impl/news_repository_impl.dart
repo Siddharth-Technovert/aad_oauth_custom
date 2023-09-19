@@ -12,7 +12,7 @@ class NewsRepositoryImpl implements NewsRepository {
   NewsRepositoryImpl(this._newsRemoteDataSource);
   @override
   Future<DataState<List<Article>>> newsByCategory(
-    CancelToken cancelToken,
+    CancelToken? cancelToken,
     String? category,
   ) async {
     final topHeadlineResponse =

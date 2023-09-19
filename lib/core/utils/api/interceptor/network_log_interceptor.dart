@@ -10,7 +10,7 @@ class NetworkLogInterceptor extends Interceptor {
     RequestOptions options,
     RequestInterceptorHandler handler,
   ) async {
-    _log.infoLog('REQUEST[${options.method}] => PATH: ${options.path}');
+    _log.infoLog('REQUEST [${options.method}] => PATH: ${options.path}');
     super.onRequest(options, handler);
   }
 
@@ -20,7 +20,7 @@ class NetworkLogInterceptor extends Interceptor {
     ResponseInterceptorHandler handler,
   ) async {
     _log.infoLog(
-      'RESPONSE[${response.statusCode}] => PATH: ${response.requestOptions.path}',
+      'RESPONSE [${response.statusCode}] => PATH: ${response.requestOptions.path}\nDATA: [${response.data}]',
     );
     super.onResponse(response, handler);
   }
@@ -30,12 +30,15 @@ class NetworkLogInterceptor extends Interceptor {
     DioException err,
     ErrorInterceptorHandler handler,
   ) async {
-    _log.infoLog(
-      'ERROR[${err.response?.statusCode}] => PATH: ${err.requestOptions.path}',
-    );
-    _log.infoLog(
-      'ERROR Log: [${err.response?.data}]',
-    );
+    if (CancelToken.isCancel(err)) {
+      _log.infoLog(
+        'ERROR [Request Cancelled] => PATH: ${err.requestOptions.path}',
+      );
+    } else {
+      _log.infoLog(
+        'ERROR [${err.response?.statusCode}] => PATH: ${err.requestOptions.path}\nDATA: ${err.response?.data}',
+      );
+    }
     super.onError(err, handler);
   }
 }

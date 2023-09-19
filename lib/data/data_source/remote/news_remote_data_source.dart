@@ -11,7 +11,9 @@ class NewsRemoteDataSource {
   NewsRemoteDataSource(this._apiManager);
 
   Future<ApiResponse<ArticleResponseApiDto>> newsByCategory(
-      CancelToken cancelToken, String? category) async {
+    CancelToken? cancelToken,
+    String? category,
+  ) async {
     final param = {
       "country": "in",
       "apiKey": AppConfiguration.apiKey,

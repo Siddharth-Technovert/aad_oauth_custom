@@ -5,7 +5,7 @@ import '../models/article/article.dart';
 
 abstract interface class NewsRepository {
   Future<DataState<List<Article>>> newsByCategory(
-    CancelToken cancelToken,
+    CancelToken? cancelToken,
     String? category,
   );
 }

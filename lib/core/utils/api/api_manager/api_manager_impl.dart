@@ -62,7 +62,7 @@ class ApiManagerImpl extends ApiManager {
       LoggyDioInterceptor(
         errorLevel: LogLevel.all,
       ),
-      // NetworkLogInterceptor(_ref.read(loggerServiceProvider)),
+      // NetworkLogInterceptor(_ref.watch(loggerServiceProvider)),
       AuthInterceptor(_ref),
     ]);
     _cancelToken = CancelToken();
@@ -344,12 +344,16 @@ class ApiManagerImpl extends ApiManager {
     } on DioException catch (ex, stackTrace) {
       // _loggerService.errorLog(ex, s);
 
-      if (ex.requestOptions.cancelToken?.isCancelled == false) {
+      if (!CancelToken.isCancel(ex)) {
         await _ref.read(loggerServiceProvider).dioExceptionLog(
               "${ex.requestOptions.path}/${ex.requestOptions.queryParameters}",
               ex,
               stackTrace,
             );
+      } else {
+        return const ApiResponseError(
+          AppExceptionUnknownError("Request is cancelled."),
+        );
       }
 
       try {
