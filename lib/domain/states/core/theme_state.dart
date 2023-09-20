@@ -1,16 +1,18 @@
 import 'package:flutter/material.dart';
 
-sealed class ThemeState {}
+sealed class ThemeState {
+  const ThemeState();
+}
 
-class ThemeStateLight implements ThemeState {
+final class ThemeStateLight extends ThemeState {
   const ThemeStateLight();
 }
 
-class ThemeStateDark implements ThemeState {
+final class ThemeStateDark extends ThemeState {
   const ThemeStateDark();
 }
 
-class ThemeStateSystem implements ThemeState {
+final class ThemeStateSystem extends ThemeState {
   const ThemeStateSystem();
 }
 

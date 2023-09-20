@@ -1,10 +1,12 @@
-sealed class HomeState {}
+sealed class HomeState {
+  const HomeState();
+}
 
-class HomeStateInitial implements HomeState {
+final class HomeStateInitial extends HomeState {
   const HomeStateInitial();
 }
 
-class HomeStateLoggedOut implements HomeState {
+final class HomeStateLoggedOut extends HomeState {
   const HomeStateLoggedOut();
 }
 
