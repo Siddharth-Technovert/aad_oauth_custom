@@ -2,23 +2,25 @@ import '../../core/utils/errors/app_exception.dart';
 import '../enums/account_type.dart';
 import '../models/user/user.dart';
 
-sealed class SignupState {}
+sealed class SignupState {
+  const SignupState();
+}
 
-class SignupStateInitial implements SignupState {
+final class SignupStateInitial extends SignupState {
   const SignupStateInitial();
 }
 
-class SignupStateLoading implements SignupState {
+final class SignupStateLoading extends SignupState {
   const SignupStateLoading({required this.accountType});
   final AccountType accountType;
 }
 
-class SignupStateSuccess implements SignupState {
+final class SignupStateSuccess extends SignupState {
   const SignupStateSuccess({required this.user});
   final User user;
 }
 
-class SignupStateError implements SignupState {
+final class SignupStateError extends SignupState {
   const SignupStateError({required this.ex});
   final AppException ex;
 }

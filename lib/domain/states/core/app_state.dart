@@ -1,20 +1,22 @@
 import '../../models/user/user.dart';
 
-sealed class AppState {}
+sealed class AppState {
+  const AppState();
+}
 
-class AppStateInitial implements AppState {
+final class AppStateInitial extends AppState {
   const AppStateInitial();
 }
 
-class AppStateOnboarding implements AppState {
+final class AppStateOnboarding extends AppState {
   const AppStateOnboarding();
 }
 
-class AppStateUnAuthenticated implements AppState {
+final class AppStateUnAuthenticated extends AppState {
   const AppStateUnAuthenticated();
 }
 
-class AppStateAuthenticated implements AppState {
+final class AppStateAuthenticated extends AppState {
   final User user;
   const AppStateAuthenticated({required this.user});
 }

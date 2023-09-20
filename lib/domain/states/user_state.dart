@@ -1,14 +1,16 @@
 import '../enums/account_type.dart';
 import '../models/user/user.dart';
 
-sealed class UserState {}
+sealed class UserState {
+  const UserState();
+}
 
-class UserStateAvailable implements UserState {
+final class UserStateAvailable extends UserState {
   const UserStateAvailable({required this.user});
   final User user;
 }
 
-class UserStateNotAvailable implements UserState {
+final class UserStateNotAvailable extends UserState {
   const UserStateNotAvailable();
 }
 

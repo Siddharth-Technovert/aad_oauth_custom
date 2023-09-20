@@ -1,25 +1,27 @@
 import '../enums/account_type.dart';
 import '../models/user/user.dart';
 
-sealed class LoginState {}
+sealed class LoginState {
+  const LoginState();
+}
 
-class LoginStateInitial implements LoginState {
+final class LoginStateInitial extends LoginState {
   const LoginStateInitial();
 }
 
-class LoginStateLoading implements LoginState {
+final class LoginStateLoading extends LoginState {
   const LoginStateLoading({required this.accountType});
 
   final AccountType accountType;
 }
 
-class LoginStateSuccess implements LoginState {
+final class LoginStateSuccess extends LoginState {
   const LoginStateSuccess({required this.user});
 
   final User user;
 }
 
-class LoginStateError implements LoginState {
+final class LoginStateError extends LoginState {
   const LoginStateError({required this.msg});
 
   final String msg;
