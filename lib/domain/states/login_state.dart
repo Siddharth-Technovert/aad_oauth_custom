@@ -1,6 +1,9 @@
+import 'package:flutter/foundation.dart';
+
 import '../enums/account_type.dart';
 import '../models/user/user.dart';
 
+@immutable
 sealed class LoginState {
   const LoginState();
 }
@@ -31,6 +34,11 @@ extension LoginStateExtension on LoginState {
   User? get user => switch (this) {
         LoginStateSuccess(user: var user) => user,
         _ => null,
+      };
+
+  bool get isLogged => switch (this) {
+        LoginStateSuccess() => true,
+        _ => false,
       };
 
   bool get isLoading => switch (this) {

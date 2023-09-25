@@ -1,5 +1,8 @@
+import 'package:flutter/foundation.dart';
+
 import '../../models/user/user.dart';
 
+@immutable
 sealed class AppState {
   const AppState();
 }
