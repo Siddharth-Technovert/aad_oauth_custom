@@ -1,6 +1,9 @@
+import 'package:flutter/foundation.dart';
+
 import '../../core/utils/errors/app_exception.dart';
 import '../models/article/article.dart';
 
+@immutable
 sealed class NewsByCategoryState {
   const NewsByCategoryState();
 }

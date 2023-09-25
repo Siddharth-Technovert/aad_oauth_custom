@@ -1,6 +1,9 @@
+import 'package:flutter/foundation.dart';
+
 import '../enums/account_type.dart';
 import '../models/user/user.dart';
 
+@immutable
 sealed class UserState {
   const UserState();
 }
