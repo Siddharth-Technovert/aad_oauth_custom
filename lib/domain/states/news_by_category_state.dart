@@ -13,8 +13,7 @@ final class NewsByCategoryStateInitial extends NewsByCategoryState {
 }
 
 final class NewsByCategoryStateLoading extends NewsByCategoryState {
-  const NewsByCategoryStateLoading({this.news});
-  final List<Article>? news;
+  const NewsByCategoryStateLoading();
 }
 
 final class NewsByCategoryStateLoaded extends NewsByCategoryState {
