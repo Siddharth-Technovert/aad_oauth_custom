@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 
 import '../../../core/configs/app_configuration.dart';
 import '../../../core/utils/api/api_manager/api_manager.dart';
+import '../../../core/utils/api/request_type.dart';
 import '../../../core/utils/api/response/api_response.dart';
 import '../../enums/endpoints.dart';
 import '../../models/api/article/article_api_dto.dart';
@@ -21,7 +22,8 @@ class NewsRemoteDataSource {
     if (category != null) {
       param.addEntries([MapEntry("category", category)]);
     }
-    return _apiManager.getAsync<ArticleResponseApiDto>(
+    return _apiManager.requestAsync<ArticleResponseApiDto>(
+      requestType: RequestType.get,
       endpoint: EndPoints.topHeadlines.val(),
       queryParams: param,
       cancelToken: cancelToken,

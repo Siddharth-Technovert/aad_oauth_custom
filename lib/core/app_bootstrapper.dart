@@ -3,7 +3,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../data/data_service_providers.dart';
 import 'configs/adapters/cache_dto_adapters.dart';
-import 'configs/app_serializers.dart';
 import 'logger/logger_service.dart';
 import 'utils/local_storage/cache/cache_manager_impl.dart';
 import 'utils/local_storage/secure/secure_storage_manager_impl.dart';
@@ -20,7 +19,6 @@ class AppBootStrapper {
       final widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
       SplashFactory.preserve(widgetsBinding: widgetsBinding);
       LoggerService.init();
-      AppSerializer.init();
       await SecureStorageManagerImpl.init();
       await CacheManagerImpl.init(
         registerAdapterAndOpen: (hive) => CacheDtoAdapters.call(hive),
