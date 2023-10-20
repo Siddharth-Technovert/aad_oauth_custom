@@ -1,5 +1,6 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
+import '../../../core/utils/app_constants.dart';
 import '../../../data/data_service_providers.dart';
 import '../../../data/models/result/data_state.dart';
 import '../../../domain/enums/account_type.dart';
@@ -36,7 +37,7 @@ class LoginNotifier extends _$LoginNotifier {
               className: "Login",
             );
       case DataStateError<User>(ex: var _):
-        SnackbarFactory.showError("Something Went Wrong");
+        SnackbarFactory.showError(AppConstants.somethingWentWrongText);
     }
   }
 }

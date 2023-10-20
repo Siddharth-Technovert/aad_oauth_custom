@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import '../../configs/app_serializers.dart';
+import '../app_constants.dart';
 import '../errors/app_exception.dart';
 import 'response/api_response.dart';
 
@@ -9,7 +10,7 @@ mixin SerializerMixin {
       Map<String, dynamic>? data) async {
     if (data == null) {
       return const ApiResponseError(
-        AppExceptionUnknownError("Api Response is Null"),
+        AppExceptionUnknownError(AppConstants.nullApiResponseText),
       );
     }
     return ApiResponseSuccess(

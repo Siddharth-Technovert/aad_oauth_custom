@@ -10,6 +10,7 @@ import 'package:loggy/loggy.dart';
 import '../../../../data/data_service_providers.dart';
 import '../../../../presentation/providers/core/connectivity_provider.dart';
 import '../../../configs/app_configuration.dart';
+import '../../app_constants.dart';
 import '../../errors/api_exception.dart';
 import '../../errors/app_exception.dart';
 import '../../mappers/api_dto.dart';
@@ -61,9 +62,10 @@ class ApiManagerImpl extends ApiManager with SerializerMixin {
     _dio.transformer = BackgroundTransformer()..jsonDecodeCallback = parseJson;
     _dio.interceptors.addAll([
       // DioCacheInterceptor(options: cacheOptions),
-      LoggyDioInterceptor(
-        errorLevel: LogLevel.all,
-      ),
+      if (kDebugMode)
+        LoggyDioInterceptor(
+          errorLevel: LogLevel.all,
+        ),
       // NetworkLogInterceptor(_ref.watch(loggerServiceProvider)),
       AuthInterceptor(_ref),
     ]);
@@ -232,7 +234,7 @@ class ApiManagerImpl extends ApiManager with SerializerMixin {
             );
       } else {
         return const ApiResponseError(
-          AppExceptionUnknownError("Request is cancelled."),
+          AppExceptionUnknownError(AppConstants.requestCancelledText),
         );
       }
 

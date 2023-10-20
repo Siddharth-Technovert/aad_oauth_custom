@@ -21,13 +21,11 @@ extension ContextExtensions on BuildContext {
   double screenHeightPercentage(int percentage) =>
       (MediaQuery.of(this).size.height / 100) * percentage;
 
-  bool get isDarkMode =>
-      Theme.of(this).colorScheme.brightness == Brightness.dark;
-
   ThemeData get theme => Theme.of(this);
   TextTheme get textTheme => theme.textTheme;
   ColorScheme get colorScheme => theme.colorScheme;
 
+  bool get isDarkMode => theme.colorScheme.brightness == Brightness.dark;
   UICustomColors get customColors => theme.extension<UICustomColors>()!;
 
   TextStyle get displayLarge => textTheme.displayLarge!;

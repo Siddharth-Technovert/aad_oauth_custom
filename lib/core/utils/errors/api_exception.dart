@@ -1,44 +1,49 @@
 import 'package:dio/dio.dart';
+import 'package:flutter/widgets.dart';
 
-sealed class ApiException implements Exception {}
+import '../extensions/context_extension.dart';
 
-class ApiExceptionRequestCancelled implements ApiException {
+sealed class ApiException implements Exception {
+  const ApiException();
+}
+
+final class ApiExceptionRequestCancelled extends ApiException {
   const ApiExceptionRequestCancelled();
 }
 
-class ApiExceptionConnectTimeout implements ApiException {
+final class ApiExceptionConnectTimeout extends ApiException {
   const ApiExceptionConnectTimeout();
 }
 
-class ApiExceptionReceiveTimeout implements ApiException {
+final class ApiExceptionReceiveTimeout extends ApiException {
   const ApiExceptionReceiveTimeout();
 }
 
-class ApiExceptionSendTimeout implements ApiException {
+final class ApiExceptionSendTimeout extends ApiException {
   const ApiExceptionSendTimeout();
 }
 
-class ApiExceptionBadRequest implements ApiException {
+final class ApiExceptionBadRequest extends ApiException {
   const ApiExceptionBadRequest();
 }
 
-class ApiExceptionUnAuthorizedRequest implements ApiException {
+final class ApiExceptionUnAuthorizedRequest extends ApiException {
   const ApiExceptionUnAuthorizedRequest();
 }
 
-class ApiExceptionRequestNotFound implements ApiException {
+final class ApiExceptionRequestNotFound extends ApiException {
   const ApiExceptionRequestNotFound();
 }
 
-class ApiExceptionInternalServerError implements ApiException {
+final class ApiExceptionInternalServerError extends ApiException {
   const ApiExceptionInternalServerError();
 }
 
-class ApiExceptionUnexpectedError implements ApiException {
+final class ApiExceptionUnexpectedError extends ApiException {
   const ApiExceptionUnexpectedError();
 }
 
-class ApiExceptionDefaultError implements ApiException {
+final class ApiExceptionDefaultError extends ApiException {
   const ApiExceptionDefaultError(this.error);
   final String error;
 }
@@ -63,4 +68,21 @@ extension DioExceptionExtension on DioException {
       _ => const ApiExceptionUnexpectedError()
     };
   }
+}
+
+extension ApiExceptionExtension on ApiException {
+  String? msg(BuildContext context) => switch (this) {
+        ApiExceptionRequestCancelled() => context.appLoc.requestCancelledError,
+        ApiExceptionConnectTimeout() => context.appLoc.connectTimeoutError,
+        ApiExceptionReceiveTimeout() => context.appLoc.receiveTimeoutError,
+        ApiExceptionSendTimeout() => context.appLoc.sendTimeoutError,
+        ApiExceptionBadRequest() => context.appLoc.badRequestError,
+        ApiExceptionUnAuthorizedRequest() =>
+          context.appLoc.unAuthorizedRequestError,
+        ApiExceptionRequestNotFound() => context.appLoc.requestNotFoundError,
+        ApiExceptionInternalServerError() => context.appLoc.internalServerError,
+        ApiExceptionUnexpectedError() => context.appLoc.unexpectedError,
+        ApiExceptionDefaultError(error: var ex) =>
+          "${context.appLoc.defaultError}: $ex",
+      };
 }

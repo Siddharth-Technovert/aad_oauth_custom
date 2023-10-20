@@ -1,3 +1,4 @@
+import '../../core/utils/app_constants.dart';
 import '../../core/utils/errors/app_exception.dart';
 import '../../domain/enums/account_type.dart';
 import '../../domain/models/user/user.dart';
@@ -13,11 +14,15 @@ class AuthRepositoryImpl implements AuthRepository {
   Future<DataState<User>> login(AccountType accountType) async {
     switch (accountType) {
       case AccountType.guest:
-        return _userRepository.createUser("local_token", accountType);
+        return _userRepository.createUser(
+          "local_token_123234324324587",
+          accountType,
+        );
       default:
         break;
     }
-    return const DataStateError(AppExceptionUnknownError("Some error"));
+    return const DataStateError(
+        AppExceptionUnknownError(AppConstants.unknownErrorText));
   }
 
   @override

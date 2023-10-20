@@ -2,21 +2,23 @@ import 'package:flutter/widgets.dart';
 
 import '../extensions/context_extension.dart';
 
-sealed class CacheException implements Exception {}
+sealed class CacheException implements Exception {
+  const CacheException();
+}
 
-class CacheExceptionFetchError implements CacheException {
+final class CacheExceptionFetchError extends CacheException {
   const CacheExceptionFetchError();
 }
 
-class CacheExceptionInsertError implements CacheException {
+final class CacheExceptionInsertError extends CacheException {
   const CacheExceptionInsertError();
 }
 
-class CacheExceptionDeleteError implements CacheException {
+final class CacheExceptionDeleteError extends CacheException {
   const CacheExceptionDeleteError();
 }
 
-class CacheExceptionUpdateError implements CacheException {
+final class CacheExceptionUpdateError extends CacheException {
   const CacheExceptionUpdateError();
 }
 

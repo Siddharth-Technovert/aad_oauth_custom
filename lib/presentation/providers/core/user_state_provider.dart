@@ -1,5 +1,6 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
+import '../../../core/utils/app_constants.dart';
 import '../../../domain/states/core/app_state.dart';
 import '../../../domain/states/user_state.dart';
 import '../../../domain/usecases/user/user_usecases.dart';
@@ -28,7 +29,7 @@ class UserStateNotifier extends _$UserStateNotifier {
       if (isUpdated) {
         state = UserStateAvailable(user: updatedUser);
       } else {
-        SnackbarFactory.showError("Unable to update image");
+        SnackbarFactory.showError(AppConstants.unableToUpdateImageText);
       }
     }
   }
@@ -41,7 +42,7 @@ class UserStateNotifier extends _$UserStateNotifier {
       if (isUpdated) {
         state = UserStateAvailable(user: updatedUser);
       } else {
-        SnackbarFactory.showError("Unable to update name");
+        SnackbarFactory.showError(AppConstants.unableToUpdateNameText);
       }
     }
   }

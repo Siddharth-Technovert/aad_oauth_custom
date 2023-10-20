@@ -25,9 +25,12 @@ class AppConstants {
   //?TODO: Add Box Keys
   static const String userBoxKey = "userBox";
 
-  ///Error Messages
-  static const String exception = "exception";
-
   ///Static Messages
-  static const String emptyErrorFieldText = "This field can't be empty";
+  static const String requestCancelledText = "Request is cancelled.";
+  static const String nullApiResponseText = "Api Response is Null";
+  static const String somethingWentWrongText = "Something Went Wrong";
+  static const String unknownErrorText = "Unknown Error";
+  static const String unableToUpdateImageText = "Unable to update image";
+  static const String unableToUpdateNameText = "Unable to update name";
+  static const String emptyErrorFieldText = "This field can't be empty.";
 }
